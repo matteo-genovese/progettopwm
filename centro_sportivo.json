@@ -1,0 +1,350 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+    "name": "Gym Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"newuser\",\n    \"password\": \"password123\",\n    \"email\": \"new@example.com\",\n    \"full_name\": \"New User\",\n    \"phone\": \"1234567890\",\n    \"role\": \"customer\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "register"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get All Trainers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/trainers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "trainers"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Customers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/customers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "customers"]
+            }
+          },
+          "response": []
+        }
+
+      ]
+    },
+    {
+      "name": "Trainer",
+      "item": [
+        {
+          "name": "Trainer Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{trainer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trainer/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trainer", "dashboard"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Schedule",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{trainer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trainer/schedule",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trainer", "schedule"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Slot",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{trainer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"start_time\": \"2023-12-01 10:00:00\",\n    \"end_time\": \"2023-12-01 11:00:00\",\n    \"max_clients\": 3\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trainer/schedule",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trainer", "schedule"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "Customer Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/customer/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "customer", "dashboard"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Trainers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/customer/trainers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "customer", "trainers"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Slots",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/customer/slots?trainer_id=2&date=2023-12-01",
+              "host": ["{{base_url}}"],
+              "path": ["api", "customer", "slots"],
+              "query": [
+                {
+                  "key": "trainer_id",
+                  "value": "2"
+                },
+                {
+                  "key": "date",
+                  "value": "2023-12-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Book Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"slot_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/customer/book",
+              "host": ["{{base_url}}"],
+              "path": ["api", "customer", "book"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Rate Trainer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"trainer_id\": 2,\n    \"rating\": 5,\n    \"review\": \"Great trainer!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/customer/rate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "customer", "rate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Trainer to Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"customer_id\": 1,\n    \"trainer_id\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/assign_trainer",
+              "host": ["{{base_url}}"],
+              "path": ["assign_trainer"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "admin_token",
+      "value": ""
+    },
+    {
+      "key": "trainer_token",
+      "value": ""
+    },
+    {
+      "key": "customer_token",
+      "value": ""
+    }
+  ]
+}

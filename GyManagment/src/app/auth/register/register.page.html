@@ -1,0 +1,127 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+	  <ion-buttons slot="start">
+		<ion-back-button defaultHref="/home"></ion-back-button>
+	  </ion-buttons>
+	  <ion-title>Registrazione</ion-title>
+	</ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" class="ion-padding">
+	<div class="register-container">
+	  <div class="logo-section">
+		<ion-icon name="fitness-outline" size="large"></ion-icon>
+		<h1>Gym Management</h1>
+		<p>Crea il tuo account</p>
+	  </div>
+  
+	  <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+		<ion-list>
+		  <!-- Nome completo -->
+		  <ion-item>
+			<ion-label position="stacked">Nome completo</ion-label>
+			<ion-input 
+			  type="text"
+			  [(ngModel)]="userData.full_name"
+			  name="fullName"
+			  required
+			  [disabled]="isLoading">
+			</ion-input>
+		  </ion-item>
+  
+		  <!-- Username -->
+		  <ion-item>
+			<ion-label position="stacked">Username</ion-label>
+			<ion-input 
+			  type="text"
+			  [(ngModel)]="userData.username"
+			  name="username"
+			  required
+			  [disabled]="isLoading">
+			</ion-input>
+		  </ion-item>
+  
+		  <!-- Email -->
+		  <ion-item>
+			<ion-label position="stacked">Email</ion-label>
+			<ion-input 
+			  type="email"
+			  [(ngModel)]="userData.email"
+			  name="email"
+			  required
+			  [disabled]="isLoading">
+			</ion-input>
+		  </ion-item>
+  
+		  <!-- Telefono -->
+		  <ion-item>
+			<ion-label position="stacked">Telefono</ion-label>
+			<ion-input 
+			  type="tel"
+			  [(ngModel)]="userData.phone"
+			  name="phone"
+			  required
+			  [disabled]="isLoading">
+			</ion-input>
+		  </ion-item>
+  
+		  <!-- Password -->
+		  <ion-item>
+			<ion-label position="stacked">Password</ion-label>
+			<ion-input 
+			  type="password"
+			  [(ngModel)]="userData.password"
+			  name="password"
+			  required
+			  [disabled]="isLoading">
+			</ion-input>
+		  </ion-item>
+  
+		  <!-- Conferma Password -->
+		  <ion-item>
+			<ion-label position="stacked">Conferma Password</ion-label>
+			<ion-input 
+			  type="password"
+			  [(ngModel)]="confirmPassword"
+			  name="confirmPassword"
+			  required
+			  [disabled]="isLoading">
+			</ion-input>
+		  </ion-item>
+  
+		  <!-- Ruolo (opzionale, potresti volerlo nascondere) -->
+		  <ion-item>
+			<ion-label position="stacked">Ruolo</ion-label>
+			<ion-select 
+			  [(ngModel)]="userData.role"
+			  name="role"
+			  [disabled]="isLoading">
+			  <ion-select-option value="customer">Cliente</ion-select-option>
+			  <ion-select-option value="trainer">Allenatore</ion-select-option>
+			</ion-select>
+		  </ion-item>
+		</ion-list>
+  
+		<div class="error-message" *ngIf="errorMessage">
+		  <ion-text color="danger">
+			<p>{{ errorMessage }}</p>
+		  </ion-text>
+		</div>
+  
+		<div class="button-section">
+		  <ion-button 
+			expand="block" 
+			type="submit" 
+			[disabled]="isLoading">
+			<ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+			<span *ngIf="!isLoading">Registrati</span>
+			<span *ngIf="isLoading">Registrazione in corso...</span>
+		  </ion-button>
+  
+		  <div class="login-link">
+			<p>Hai già un account? <a (click)="goToLogin()">Accedi</a></p>
+		  </div>
+		</div>
+	  </form>
+	</div>
+  </ion-content>
