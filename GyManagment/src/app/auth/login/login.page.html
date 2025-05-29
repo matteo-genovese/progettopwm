@@ -45,6 +45,15 @@
           <span *ngIf="isLoading">Accesso in corso...</span>
         </ion-button>
 
+        <!-- Nuovo pulsante per accesso demo -->
+        <ion-button 
+          expand="block" 
+          color="secondary"
+          (click)="demoLogin()"
+          [disabled]="isLoading">
+          ACCESSO DEMO
+        </ion-button>
+
         <ion-button 
           expand="block" 
           fill="clear" 

@@ -133,6 +133,17 @@ export class LoginPage implements OnInit {
     }
   }
 
+  async demoLogin() {
+    // Imposta le credenziali demo
+    this.credentials = {
+      username: 'newuser',
+      password: 'password123'
+    };
+    
+    // Chiamata al metodo di login esistente
+    await this.onLogin();
+  }
+
   goBack() {
     this.router.navigate(['/home']);
   }
