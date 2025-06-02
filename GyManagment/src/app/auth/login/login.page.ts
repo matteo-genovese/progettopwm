@@ -14,7 +14,6 @@ import {
   IonIcon, 
   IonSpinner,
   IonText,
-  LoadingController,
   ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -55,16 +54,17 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private loadingController: LoadingController,
     private toastController: ToastController
   ) {
     addIcons({ fitnessOutline });
   }
 
   ngOnInit() {
-    // Se l'utente è già loggato, reindirizza alle tabs
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/tabs']);
+      if (this.authService.isAdmin())
+		this.router.navigate(['/admin/dashboard']);
+	  else
+        this.router.navigate(['/tabs']);
     }
   }
 
@@ -86,27 +86,23 @@ export class LoginPage implements OnInit {
             console.log('Login response:', response);
             this.isLoading = false;
             
-            // Modifica la condizione per considerare anche response.data esistente
-            if (response.token || response.access_token || 
-                (response.data && (response.data?.status === 'success' || response.data?.username))) {
-              console.log('Login successful, navigating to tabs...');
+            if (response.data && response.status === 'success') {
               await this.showSuccess('Login effettuato con successo!');
               
               setTimeout(() => {
-                console.log('Verifica autenticazione prima del redirect:', this.authService.isLoggedIn());
                 if (this.authService.isLoggedIn()) {
-                  console.log('Navigando alle tabs...');
-                  this.router.navigateByUrl('/tabs', { replaceUrl: true });
+                  if (this.authService.isAdmin()) {
+                    console.log('Admin user detected, navigating to admin dashboard...');
+                    this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
+                  } else {
+                    console.log('Regular user detected, navigating to tabs...');
+                    this.router.navigateByUrl('/tabs', { replaceUrl: true });
+                  }
                 } else {
                   console.log('Autenticazione non rilevata, impossibile navigare');
                 }
               }, 500);
             } else {
-				console.log('value of response.token:', response.token);
-				console.log('value of response.access_token:', response.access_token);
-				console.log('value of response.data:', response.data);
-				console.log('value of response.data.status:', response.data?.status);
-              console.log('Login failed:', response);
               this.showError(response.message || 'Credenziali non valide');
             }
           },
@@ -134,13 +130,11 @@ export class LoginPage implements OnInit {
   }
 
   async demoLogin() {
-    // Imposta le credenziali demo
     this.credentials = {
       username: 'newuser',
       password: 'password123'
     };
     
-    // Chiamata al metodo di login esistente
     await this.onLogin();
   }
 

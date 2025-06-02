@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 interface LoginResponse {
-	token?: string;
-	access_token?: string;
 	user?: any;
-	message?: string;
 	data?: {
-	  status?: string;
 	  email?: string;
 	  full_name?: string;
 	  id?: number;
 	  password?: string;
 	  role?: string;
 	  username?: string;
-	  message?: string;
 	};
+	message?: string;
+	status?: string; 
   }
   
+interface ApiResponse<T> {
+  data: T[];
+  status: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -49,21 +50,9 @@ export class AuthService {
     }).pipe(
       tap(response => {
         console.log('Auth service processing response:', response);
+        if (response.data && response.status === 'success') {
+		  localStorage.setItem('auth_token', 'session_token_' + new Date().getTime());
         
-        // Modificata la condizione per riconoscere un login riuscito
-        if (response.token || response.access_token || 
-            (response.data && (response.data.status === 'success' || response.data.username || response.data.email))) {
-          
-          // Se c'è un token, usalo
-          if (response.token || response.access_token) {
-            const token = response.token || response.access_token;
-            localStorage.setItem('auth_token', token!);
-          } else if (response.data) {
-            // Altrimenti usa un token fittizio per questa sessione
-            localStorage.setItem('auth_token', 'session_token_' + new Date().getTime());
-          }
-          
-          // Salva i dati utente
           if (response.user) {
             localStorage.setItem('user', JSON.stringify(response.user));
           } else if (response.data) {
@@ -71,11 +60,6 @@ export class AuthService {
           }
           
           this.isAuthenticatedSubject.next(true);
-          
-          // Naviga direttamente alle tabs
-          setTimeout(() => {
-            this.router.navigateByUrl('/tabs', { replaceUrl: true });
-          }, 100);
         }
       }),
       catchError((error: HttpErrorResponse) => {
@@ -95,7 +79,6 @@ export class AuthService {
         this.clearAuthData();
       }),
       catchError(error => {
-        // Anche se la chiamata fallisce, pulisci il localStorage
         this.clearAuthData();
         return throwError(() => error);
       })
@@ -119,5 +102,30 @@ export class AuthService {
   getUser(): any {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
+  }
+
+  isAdmin(): boolean {
+    const user = this.getUser();
+    return user && user.role === 'admin';
+  }
+
+  getAllTrainers(): Observable<any[]> {
+    return this.http.get<ApiResponse<any>>(`${this.baseUrl}/admin/trainers`).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('Error fetching trainers:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  getAllCustomers(): Observable<any[]> {
+    return this.http.get<ApiResponse<any>>(`${this.baseUrl}/admin/customers`).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('Error fetching customers:', error);
+        return throwError(() => error);
+      })
+    );
   }
 }

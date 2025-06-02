@@ -9,7 +9,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   console.log('AuthGuard check - isLoggedIn:', authService.isLoggedIn());
   
   if (authService.isLoggedIn()) {
-    console.log('AuthGuard: allowing access to tabs');
+    console.log('AuthGuard: allowing access to', state.url);
     return true;
   } else {
     console.log('AuthGuard: redirecting to home');
