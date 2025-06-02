@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import {
   IonContent,
   IonHeader,
@@ -15,7 +16,10 @@ import {
   IonList,
   IonItem,
   IonIcon,
-  IonLabel
+  IonLabel,
+  IonGrid,
+  IonRow,
+  IonCol
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -46,6 +50,9 @@ import { AuthService } from '../services/auth.service';
     IonItem,
     IonIcon,
     IonLabel,
+    IonGrid,
+    IonRow,
+    IonCol,
     CommonModule,
     FormsModule,
     RouterLink

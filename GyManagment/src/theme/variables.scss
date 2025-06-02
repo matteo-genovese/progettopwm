@@ -1,5 +1,7 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+
 :root {
   // --- Colore Primario (Rosso Intenso) ---
   --ion-color-primary: #D62828;
@@ -25,7 +27,41 @@
   --ion-color-tertiary-shade: #212121;
   --ion-color-tertiary-tint: #3b3b3b;
 
+    // Sfondo dell'applicazione
+  --ion-background-color: #f0f0f0; /* Il grigio chiaro del tuo sfondo */
+  --ion-background-color-rgb: 240, 240, 240;
+
+  // Colore del testo predefinito (scuro)
+  --ion-text-color: #333333; /* Grigio scuro per il testo principale */
+  --ion-text-color-rgb: 51, 51, 51;
+
+    // Colore del testo più chiaro (per descrizioni)
+  --ion-color-medium: #888888; /* Grigio medio per descrizioni */
+  --ion-color-medium-rgb: 136, 136, 136;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #777777;
+  --ion-color-medium-tint: #999999;
+
   // Lascia gli altri colori (success, warning, danger, light, medium, dark)
   // che Ionic genera automaticamente o che puoi personalizzare
   // a seconda delle tue esigenze per messaggi di stato, ecc.
+}
+
+$colors: (
+  primary: var(--ion-color-primary),
+  secondary: var(--ion-color-secondary),
+  tertiary: var(--ion-color-tertiary),
+  medium: var(--ion-color-medium)
+);
+
+@each $color-name, $color-value in $colors {
+  .ion-color-#{$color-name} {
+    --ion-color-base: #{$color-value};
+    --ion-color-base-rgb: var(--ion-color-#{$color-name}-rgb);
+    --ion-color-contrast: var(--ion-color-#{$color-name}-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-#{$color-name}-contrast-rgb);
+    --ion-color-shade: var(--ion-color-#{$color-name}-shade);
+    --ion-color-tint: var(--ion-color-#{$color-name}-tint);
+  }
 }
