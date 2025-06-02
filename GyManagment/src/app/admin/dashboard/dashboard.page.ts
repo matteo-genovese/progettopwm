@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
   IonContent,
   IonCard,
   IonCardHeader,
-  IonCardTitle, 
+  IonCardTitle,
   IonCardContent,
   IonButton,
   IonIcon,
@@ -18,12 +18,12 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { 
-  peopleOutline, 
-  fitnessOutline, 
-  statsChartOutline, 
-  personOutline, 
-  logOutOutline 
+import {
+  peopleOutline,
+  fitnessOutline,
+  statsChartOutline,
+  personOutline,
+  logOutOutline
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
@@ -54,7 +54,7 @@ export class DashboardPage implements OnInit {
   adminData: any;
   trainersCount: number = 0;
   customersCount: number = 0;
-  
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -66,7 +66,7 @@ export class DashboardPage implements OnInit {
     this.adminData = this.authService.getUser();
     this.loadCounts();
   }
-  
+
   loadCounts() {
     // Carica il conteggio di trainers
     this.authService.getAllTrainers().subscribe({
@@ -77,7 +77,7 @@ export class DashboardPage implements OnInit {
         console.error('Error fetching trainers count:', error);
       }
     });
-    
+
     // Carica il conteggio di customers
     this.authService.getAllCustomers().subscribe({
       next: (customers) => {

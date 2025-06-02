@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar, 
-  IonButton, 
-  IonItem, 
-  IonLabel, 
-  IonInput, 
-  IonIcon, 
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonIcon,
   IonSpinner,
   IonText,
   IonSelect,
@@ -23,11 +23,11 @@ import {
   AlertController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { 
-  personOutline, 
-  lockClosedOutline, 
-  mailOutline, 
-  callOutline, 
+import {
+  personOutline,
+  lockClosedOutline,
+  mailOutline,
+  callOutline,
   cardOutline,
   fitnessOutline
 } from 'ionicons/icons';
@@ -39,18 +39,18 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
-    IonButton, 
-    IonItem, 
-    IonLabel, 
-    IonInput, 
-    IonIcon, 
-    IonSpinner, 
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonButton,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonIcon,
+    IonSpinner,
     IonText,
     IonSelect,
     IonSelectOption,
@@ -79,11 +79,11 @@ export class RegisterPage {
     private toastController: ToastController,
     private alertController: AlertController
   ) {
-    addIcons({ 
-      personOutline, 
-      lockClosedOutline, 
-      mailOutline, 
-      callOutline, 
+    addIcons({
+      personOutline,
+      lockClosedOutline,
+      mailOutline,
+      callOutline,
       cardOutline,
       fitnessOutline
     });
@@ -101,7 +101,7 @@ export class RegisterPage {
         next: async (response) => {
           this.isLoading = false;
           console.log('Registration successful:', response);
-          
+
           await this.showSuccessAlert();
           // Redirect to login page
           this.router.navigate(['/login']);
@@ -109,7 +109,7 @@ export class RegisterPage {
         error: (error) => {
           this.isLoading = false;
           console.error('Registration error:', error);
-          
+
           if (error.status === 0) {
             this.errorMessage = 'Impossibile connettersi al server';
           } else if (error.status === 400) {
@@ -126,8 +126,8 @@ export class RegisterPage {
 
   validateForm(): boolean {
     // Check required fields
-    if (!this.userData.username || !this.userData.password || !this.userData.email || 
-        !this.userData.full_name || !this.userData.phone) {
+    if (!this.userData.username || !this.userData.password || !this.userData.email ||
+      !this.userData.full_name || !this.userData.phone) {
       this.errorMessage = 'Tutti i campi sono obbligatori';
       return false;
     }

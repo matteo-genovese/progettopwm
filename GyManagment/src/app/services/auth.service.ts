@@ -6,19 +6,19 @@ import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 interface LoginResponse {
-	user?: any;
-	data?: {
-	  email?: string;
-	  full_name?: string;
-	  id?: number;
-	  password?: string;
-	  role?: string;
-	  username?: string;
-	};
-	message?: string;
-	status?: string; 
-  }
-  
+  user?: any;
+  data?: {
+    email?: string;
+    full_name?: string;
+    id?: number;
+    password?: string;
+    role?: string;
+    username?: string;
+  };
+  message?: string;
+  status?: string;
+}
+
 interface ApiResponse<T> {
   data: T[];
   status: string;
@@ -51,14 +51,14 @@ export class AuthService {
       tap(response => {
         console.log('Auth service processing response:', response);
         if (response.data && response.status === 'success') {
-		  localStorage.setItem('auth_token', 'session_token_' + new Date().getTime());
-        
+          localStorage.setItem('auth_token', 'session_token_' + new Date().getTime());
+
           if (response.user) {
             localStorage.setItem('user', JSON.stringify(response.user));
           } else if (response.data) {
             localStorage.setItem('user', JSON.stringify(response.data));
           }
-          
+
           this.isAuthenticatedSubject.next(true);
         }
       }),

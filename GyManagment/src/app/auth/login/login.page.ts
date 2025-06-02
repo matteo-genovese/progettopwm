@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar, 
-  IonButton, 
-  IonItem, 
-  IonLabel, 
-  IonInput, 
-  IonIcon, 
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonIcon,
   IonSpinner,
   IonText,
   ToastController
@@ -26,18 +26,18 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
-    IonButton, 
-    IonItem, 
-    IonLabel, 
-    IonInput, 
-    IonIcon, 
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonButton,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonIcon,
     IonSpinner,
     IonText,
-    CommonModule, 
+    CommonModule,
     FormsModule,
     RouterLink
   ]
@@ -62,15 +62,15 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       if (this.authService.isAdmin())
-		this.router.navigate(['/admin/dashboard']);
-	  else
+        this.router.navigate(['/admin/dashboard']);
+      else
         this.router.navigate(['/tabs']);
     }
   }
 
   async onLogin() {
     console.log('Login attempt with:', this.credentials);
-    
+
     if (!this.credentials.username || !this.credentials.password) {
       this.showError('Inserisci username e password');
       return;
@@ -85,21 +85,21 @@ export class LoginPage implements OnInit {
           next: async (response) => {
             console.log('Login response:', response);
             this.isLoading = false;
-            
+
             if (response.data && response.status === 'success') {
               await this.showSuccess('Login effettuato con successo!');
-              
-            	if (this.authService.isLoggedIn()) {
-            	  if (this.authService.isAdmin()) {
-            	    console.log('Admin user detected, navigating to admin dashboard...');
-            	    this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
-            	  } else {
-            	    console.log('Regular user detected, navigating to tabs...');
-            	    this.router.navigateByUrl('/tabs', { replaceUrl: true });
-            	  }
-            	} else {
-            	  console.log('Autenticazione non rilevata, impossibile navigare');
-            	}
+
+              if (this.authService.isLoggedIn()) {
+                if (this.authService.isAdmin()) {
+                  console.log('Admin user detected, navigating to admin dashboard...');
+                  this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
+                } else {
+                  console.log('Regular user detected, navigating to tabs...');
+                  this.router.navigateByUrl('/tabs', { replaceUrl: true });
+                }
+              } else {
+                console.log('Autenticazione non rilevata, impossibile navigare');
+              }
             } else {
               this.showError(response.message || 'Credenziali non valide');
             }
@@ -107,7 +107,7 @@ export class LoginPage implements OnInit {
           error: async (error) => {
             console.error('Login error:', error);
             this.isLoading = false;
-            
+
             let errorMsg = 'Errore durante il login';
             if (error.status === 401) {
               errorMsg = 'Username o password non validi';
@@ -116,7 +116,7 @@ export class LoginPage implements OnInit {
             } else if (error.error?.message) {
               errorMsg = error.error.message;
             }
-            
+
             this.showError(errorMsg);
           }
         });
@@ -132,7 +132,7 @@ export class LoginPage implements OnInit {
       username: 'newuser',
       password: 'password123'
     };
-    
+
     await this.onLogin();
   }
 

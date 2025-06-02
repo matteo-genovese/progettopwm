@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar, 
-  IonButton, 
-  IonCard, 
-  IonCardHeader, 
-  IonCardTitle, 
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
   IonCardContent,
   IonList,
   IonItem,
@@ -18,12 +18,12 @@ import {
   IonLabel
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { 
-  fitnessOutline, 
-  personAddOutline, 
-  shieldOutline, 
-  calendarOutline, 
-  peopleOutline 
+import {
+  fitnessOutline,
+  personAddOutline,
+  shieldOutline,
+  calendarOutline,
+  peopleOutline
 } from 'ionicons/icons';
 import { AuthService } from '../services/auth.service';
 
@@ -33,20 +33,20 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
-    IonButton, 
-    IonCard, 
-    IonCardHeader, 
-    IonCardTitle, 
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonButton,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
     IonCardContent,
     IonList,
     IonItem,
     IonIcon,
     IonLabel,
-    CommonModule, 
+    CommonModule,
     FormsModule,
     RouterLink
   ]
@@ -57,22 +57,22 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    addIcons({ 
-      fitnessOutline, 
-      personAddOutline, 
-      shieldOutline, 
-      calendarOutline, 
-      peopleOutline 
+    addIcons({
+      fitnessOutline,
+      personAddOutline,
+      shieldOutline,
+      calendarOutline,
+      peopleOutline
     });
   }
 
   ngOnInit() {
-	if (this.authService.isLoggedIn()) {
-	  if (this.authService.isAdmin())
-		this.router.navigate(['/admin']);
-	  else
-		this.router.navigate(['/tabs']);	  
-	}
+    if (this.authService.isLoggedIn()) {
+      if (this.authService.isAdmin())
+        this.router.navigate(['/admin']);
+      else
+        this.router.navigate(['/tabs']);
+    }
   }
 
   goToLogin() {

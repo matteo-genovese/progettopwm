@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
   IonContent,
   IonCard,
   IonCardHeader,
@@ -31,9 +31,9 @@ import { AuthService } from '../services/auth.service';
   standalone: true,
   imports: [
     CommonModule,
-    IonHeader, 
-    IonToolbar, 
-    IonTitle, 
+    IonHeader,
+    IonToolbar,
+    IonTitle,
     IonContent,
     IonCard,
     IonCardHeader,
@@ -58,12 +58,12 @@ export class Tab3Page implements OnInit {
     private toastController: ToastController,
     private alertController: AlertController
   ) {
-    addIcons({ 
-      logOutOutline, 
-      personCircleOutline, 
-      mailOutline, 
-      keyOutline, 
-      idCardOutline 
+    addIcons({
+      logOutOutline,
+      personCircleOutline,
+      mailOutline,
+      keyOutline,
+      idCardOutline
     });
   }
 
@@ -81,7 +81,7 @@ export class Tab3Page implements OnInit {
   }
 
   getRoleLabel(role: string): string {
-    switch(role?.toLowerCase()) {
+    switch (role?.toLowerCase()) {
       case 'admin': return 'Amministratore';
       case 'trainer': return 'Allenatore';
       case 'customer': return 'Cliente';
@@ -111,7 +111,7 @@ export class Tab3Page implements OnInit {
 
   logout() {
     this.isLoading = true;
-    
+
     this.authService.logout().subscribe({
       next: () => {
         this.isLoading = false;

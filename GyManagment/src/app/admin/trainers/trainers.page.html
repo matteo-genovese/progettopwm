@@ -11,7 +11,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
+
   <div class="loading-container" *ngIf="isLoading">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Caricamento trainers...</p>
@@ -35,7 +35,7 @@
       <ion-item *ngFor="let trainer of trainers" class="trainer-item">
         <div class="trainer-content">
           <h2>{{ trainer.full_name || trainer.username }}</h2>
-          
+
           <div class="trainer-details">
             <p>
               <ion-icon name="mail-outline"></ion-icon>
@@ -50,7 +50,7 @@
               {{ trainer.specialization }}
             </p>
           </div>
-          
+
           <div class="trainer-stats">
             <div class="stat">
               <span class="value">{{ trainer.client_count || 0 }}</span>

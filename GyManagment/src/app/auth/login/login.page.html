@@ -15,53 +15,32 @@
     <form (ngSubmit)="onLogin()" #loginForm="ngForm">
       <ion-item>
         <ion-label position="stacked">Username</ion-label>
-        <ion-input
-          type="text"
-          [(ngModel)]="credentials.username"
-          name="username"
-          required
-          [disabled]="isLoading">
+        <ion-input type="text" [(ngModel)]="credentials.username" name="username" required [disabled]="isLoading">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Password</ion-label>
-        <ion-input
-          type="password"
-          [(ngModel)]="credentials.password"
-          name="password"
-          required
-          [disabled]="isLoading">
+        <ion-input type="password" [(ngModel)]="credentials.password" name="password" required [disabled]="isLoading">
         </ion-input>
       </ion-item>
 
       <div class="button-section">
-        <ion-button 
-          expand="block" 
-          type="submit" 
-          [disabled]="!loginForm.valid || isLoading">
+        <ion-button expand="block" type="submit" [disabled]="!loginForm.valid || isLoading">
           <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
           <span *ngIf="!isLoading">Accedi</span>
           <span *ngIf="isLoading">Accesso in corso...</span>
         </ion-button>
 
         <!-- Nuovo pulsante per accesso demo -->
-        <ion-button 
-          expand="block" 
-          color="secondary"
-          (click)="demoLogin()"
-          [disabled]="isLoading">
+        <ion-button expand="block" color="secondary" (click)="demoLogin()" [disabled]="isLoading">
           ACCESSO DEMO
         </ion-button>
 
-        <ion-button 
-          expand="block" 
-          fill="clear" 
-          (click)="goBack()"
-          [disabled]="isLoading">
+        <ion-button expand="block" fill="clear" (click)="goBack()" [disabled]="isLoading">
           Annulla
         </ion-button>
-        
+
         <div class="register-link">
           <p>Non hai un account? <a [routerLink]="['/register']">Registrati</a></p>
         </div>
