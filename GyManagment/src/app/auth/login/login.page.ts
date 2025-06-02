@@ -89,19 +89,17 @@ export class LoginPage implements OnInit {
             if (response.data && response.status === 'success') {
               await this.showSuccess('Login effettuato con successo!');
               
-              setTimeout(() => {
-                if (this.authService.isLoggedIn()) {
-                  if (this.authService.isAdmin()) {
-                    console.log('Admin user detected, navigating to admin dashboard...');
-                    this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
-                  } else {
-                    console.log('Regular user detected, navigating to tabs...');
-                    this.router.navigateByUrl('/tabs', { replaceUrl: true });
-                  }
-                } else {
-                  console.log('Autenticazione non rilevata, impossibile navigare');
-                }
-              }, 500);
+            	if (this.authService.isLoggedIn()) {
+            	  if (this.authService.isAdmin()) {
+            	    console.log('Admin user detected, navigating to admin dashboard...');
+            	    this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
+            	  } else {
+            	    console.log('Regular user detected, navigating to tabs...');
+            	    this.router.navigateByUrl('/tabs', { replaceUrl: true });
+            	  }
+            	} else {
+            	  console.log('Autenticazione non rilevata, impossibile navigare');
+            	}
             } else {
               this.showError(response.message || 'Credenziali non valide');
             }
