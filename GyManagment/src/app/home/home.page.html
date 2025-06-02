@@ -1,64 +1,101 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Gym Management</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <div class="welcome-container">
-    <div class="logo-section">
-      <ion-icon name="fitness-outline" size="large"></ion-icon>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-justify-content-center ion-text-center ion-padding">
+    <div>
+      <ion-icon name="fitness-outline" size="large" color="primary"></ion-icon>
       <h1>GyManagement</h1>
     </div>
+    <div>
+    <h2>Gestisci la tua palestra, allena i tuoi clienti, raggiungi i tuoi obbiettivi.</h2>
+        <p class="ion-color-medium">Pensato per personal trainer, clienti e amministratori di palestre.</p>
+    </div>
+    <ion-grid class="responsive-70">
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-card class="shadow-material2">
+            <ion-card-header>
+              <ion-card-title>Per i clienti:</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list lines="full">
+                <ion-item>
+                  <ion-label>
+                    <p>Visualizza i tuoi piani di allenamento</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <p>Monitora i tuoi progressi</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <p>Comunica con il tuo trainer</p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-md="4">
+          <ion-card class="shadow-material2">
+            <ion-card-header>
+              <ion-card-title>Per i trainer:</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list lines="full">
+                <ion-item>
+                  <ion-label>
+                    <p>Gestisci i tuoi clienti</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <p>Crea piani di allenamento</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <p>Monitora i progressi</p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-md="4">
+          <ion-card class="shadow-material2">
+            <ion-card-header>
+              <ion-card-title>Per gli amministratori:</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list lines="full">
+                <ion-item>
+                  <ion-label>
+                    <p>Gestisci i tuoi trainer</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <p>Gestisci la clientela</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <p>Monitora le performance della palestra</p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Benvenuto nella piattaforma</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>
-          L'applicazione è pensata come la simulazione di una palestra con più Personal Trainer (PT)
-          e vari clienti (C), oppure admin.
-        </p>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Funzionalità principali</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list lines="none">
-          <ion-item>
-            <ion-icon name="person-add-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>Ogni cliente/trainer può fare il login o registrarsi come PT/C</ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="shield-outline" slot="start" color="danger"></ion-icon>
-            <ion-label>Admin può visualizzare tutti i PT e C</ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="calendar-outline" slot="start" color="success"></ion-icon>
-            <ion-label>PT possono vedere una dashboard, vedere gli allenamenti schedulati o creare un nuovo training
-              slot</ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="people-outline" slot="start" color="tertiary"></ion-icon>
-            <ion-label>Clienti possono vedere una dashboard, vedere i trainers disponibili e i loro slot. Possono
-              prenotare una sessione di allenamento e dare un voto al proprio PT</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-button expand="block" (click)="goToLogin()" class="login-button">
+    <ion-button expand="block" (click)="goToLogin()" class="responsive-70 shadow-material2">
       Accedi
     </ion-button>
 
-    <div class="register-link">
+    <div>
       <p>Non hai un account? <a [routerLink]="['/register']">Registrati</a></p>
     </div>
   </div>

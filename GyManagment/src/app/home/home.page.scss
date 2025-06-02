@@ -1,109 +1,39 @@
-.welcome-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  text-align: center;
-  padding: 1.5rem;
-  max-width: 800px;
-  margin: 0 auto;
 
-  h1 {
-    font-size: 2.5rem;
+.responsive-70 {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .responsive-70 {
+    width: 70%; // Desktop/tablet: 70% larghezza
+  }
+}
+p {
+    color:var(--ion-color-medium);
+    font-size:1.2rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
     font-weight: bold;
     color: var(--ion-color-primary);
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    font-size: 1.1rem;
-    color: var(--ion-color-medium);
-    margin-bottom: 2rem;
-  }
-
-  ion-button {
-    --border-radius: 8px;
-    --padding-start: 2rem;
-    --padding-end: 2rem;
-    font-weight: 500;
-  }
 }
-
-.logo-section {
-  text-align: center;
-  margin-bottom: 2rem;
-
-  ion-icon {
-    font-size: 5rem;
-    color: var(--ion-color-primary);
-  }
+  
+ion-card-content ion-label {
+    --color:var(--ion-color-medium);
+    font-size:1rem;
 }
+.shadow-material2 {
+    box-shadow:
+    0px 3px 6px rgba(0,0,0,0.16),
+    0px 3px 6px rgba(0,0,0,0.23);
+    border-radius:10px;
+    transition: transform 0.15s;
 
-ion-card {
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-ion-card-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--ion-color-dark);
-}
-
-ion-card-content {
-  font-size: 1rem;
-  color: var(--ion-color-medium);
-  width: 100%;
-}
-
-ion-item {
-  --padding-start: 0;
-  margin-bottom: 1rem;
-
-  ion-icon {
-    font-size: 1.5rem;
-  }
-
-  ion-label {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    white-space: normal !important;
-  }
-}
-
-.login-button {
-  margin-top: 1rem;
-  --border-radius: 8px;
-  --padding-start: 2rem;
-  --padding-end: 2rem;
-  font-weight: 500;
-  height: 48px;
-}
-
-.register-link {
-  text-align: center;
-  margin-top: 1rem;
-
-  a {
-    color: var(--ion-color-primary);
-    text-decoration: none;
-    font-weight: 500;
-  }
-}
-
-@media (max-width: 576px) {
-  .welcome-container {
-    padding: 1rem;
-  }
-
-  .logo-section {
-    margin-bottom: 1.5rem;
-
-    h1 {
-      font-size: 2rem;
+    &:hover {
+      transform: translateY(-4px) scale(1.02);
     }
-  }
 }
