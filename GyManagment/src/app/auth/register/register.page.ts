@@ -33,6 +33,18 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
+interface RegistrationData {
+  username: string;
+  password: string;
+  email: string;
+  full_name: string;
+  phone: string;
+  role: string;
+  specialization?: string;  // Proprietà opzionale
+  max_clients_per_slot?: number;  // Proprietà opzionale
+  trainer_id?: number | null;  // Proprietà opzionale
+}
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -60,18 +72,23 @@ import { AuthService } from '../../services/auth.service';
   ]
 })
 export class RegisterPage {
-  userData = {
+  userData: RegistrationData = {
     username: '',
     password: '',
     email: '',
     full_name: '',
     phone: '',
-    role: 'customer' // Default role
+    role: 'customer', // Default role
+    specialization: 'Fitness', // Default specialization per trainer
+    max_clients_per_slot: 1, // Default max clients per slot
+    trainer_id: null // Default trainer_id for customer
   };
 
   confirmPassword = '';
   isLoading = false;
   errorMessage = '';
+  availableTrainers: any[] = [];
+  isLoadingTrainers = false;
 
   constructor(
     private authService: AuthService,
@@ -89,6 +106,28 @@ export class RegisterPage {
     });
   }
 
+  onRoleChange() {
+    // Carica i trainer disponibili se l'utente seleziona "customer"
+    if (this.userData.role === 'customer') {
+      this.loadAvailableTrainers();
+    }
+  }
+
+  loadAvailableTrainers() {
+    this.isLoadingTrainers = true;
+    // Assumiamo che esista un metodo nel servizio per ottenere i trainer
+    this.authService.getAllTrainers().subscribe({
+      next: (trainers) => {
+        this.availableTrainers = trainers;
+        this.isLoadingTrainers = false;
+      },
+      error: (error) => {
+        console.error('Error loading trainers:', error);
+        this.isLoadingTrainers = false;
+      }
+    });
+  }
+
   async onRegister() {
     // Reset error message
     this.errorMessage = '';
@@ -96,8 +135,26 @@ export class RegisterPage {
     // Validate form
     if (this.validateForm()) {
       this.isLoading = true;
+      
+      // Copia i dati di base sempre necessari
+      let registrationData: RegistrationData = {
+        username: this.userData.username,
+        password: this.userData.password,
+        email: this.userData.email,
+        full_name: this.userData.full_name,
+        phone: this.userData.phone,
+        role: this.userData.role
+      };
 
-      this.authService.register(this.userData).subscribe({
+      // Aggiungi le proprietà specifiche in base al ruolo
+      if (this.userData.role === 'trainer') {
+        registrationData.specialization = this.userData.specialization;
+        registrationData.max_clients_per_slot = this.userData.max_clients_per_slot;
+      } else if (this.userData.role === 'customer') {
+        registrationData.trainer_id = this.userData.trainer_id || null;
+      }
+
+      this.authService.register(registrationData).subscribe({
         next: async (response) => {
           this.isLoading = false;
           console.log('Registration successful:', response);
@@ -150,6 +207,18 @@ export class RegisterPage {
     if (!phoneRegex.test(this.userData.phone)) {
       this.errorMessage = 'Formato numero di telefono non valido';
       return false;
+    }
+
+    // Validazione campi specifici per ruolo
+    if (this.userData.role === 'trainer') {
+      if (!this.userData.specialization) {
+        this.errorMessage = 'Seleziona una specializzazione';
+        return false;
+      }
+      if (!this.userData.max_clients_per_slot || this.userData.max_clients_per_slot < 1) {
+        this.errorMessage = 'Inserisci un numero valido di clienti massimi per slot';
+        return false;
+      }
     }
 
     return true;
