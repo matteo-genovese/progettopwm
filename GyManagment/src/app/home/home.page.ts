@@ -67,12 +67,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    // Se l'utente è già loggato, vai alle tabs
-    this.authService.isAuthenticated$.subscribe(isAuth => {
-      if (isAuth) {
-        this.router.navigate(['/tabs']);
-      }
-    });
+	if (this.authService.isLoggedIn()) {
+	  if (this.authService.isAdmin())
+		this.router.navigate(['/admin']);
+	  else
+		this.router.navigate(['/tabs']);	  
+	}
   }
 
   goToLogin() {

@@ -72,7 +72,6 @@ export class Tab3Page implements OnInit {
   }
 
   ionViewWillEnter() {
-    // Ricarica i dati utente ogni volta che la pagina viene visualizzata
     this.loadUserData();
   }
 
@@ -123,8 +122,6 @@ export class Tab3Page implements OnInit {
         this.isLoading = false;
         console.error('Logout error:', error);
         this.showToast('Logout effettuato con successo');
-        // Anche se c'è un errore, il localStorage è già stato pulito,
-        // quindi navighiamo comunque alla home
         this.router.navigate(['/home'], { replaceUrl: true });
       }
     });

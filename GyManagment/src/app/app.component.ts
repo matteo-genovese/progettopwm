@@ -15,7 +15,6 @@ export class AppComponent {
     private router: Router,
     private authService: AuthService
   ) {
-    // Debug: log della navigazione
     this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd)
     ).subscribe(event => {
