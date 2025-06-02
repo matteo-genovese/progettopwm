@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -54,17 +54,15 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private route: ActivatedRoute
   ) {
     addIcons({ fitnessOutline });
   }
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      if (this.authService.isAdmin())
-        this.router.navigate(['/admin/dashboard']);
-      else
-        this.router.navigate(['/tabs']);
+      this.redirectBasedOnRole();
     }
   }
 
@@ -90,13 +88,7 @@ export class LoginPage implements OnInit {
               await this.showSuccess('Login effettuato con successo!');
 
               if (this.authService.isLoggedIn()) {
-                if (this.authService.isAdmin()) {
-                  console.log('Admin user detected, navigating to admin dashboard...');
-                  this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
-                } else {
-                  console.log('Regular user detected, navigating to tabs...');
-                  this.router.navigateByUrl('/tabs', { replaceUrl: true });
-                }
+                this.redirectBasedOnRole();
               } else {
                 console.log('Autenticazione non rilevata, impossibile navigare');
               }
@@ -155,5 +147,27 @@ export class LoginPage implements OnInit {
       position: 'top'
     });
     await toast.present();
+  }
+
+  private redirectBasedOnRole() {
+    // Prendi il returnUrl se presente nei parametri query
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+
+    if (this.authService.isAdmin()) {
+      console.log('Admin user detected, navigating...');
+      this.router.navigateByUrl(returnUrl || '/admin/dashboard', { replaceUrl: true });
+    } else if (this.authService.isCustomer()) {
+      console.log('Customer user detected, navigating...');
+      this.router.navigateByUrl(returnUrl || '/customer/dashboard', { replaceUrl: true });
+    } else if (this.authService.isTrainer()) {
+      console.log('Trainer user detected, navigating...');
+      // Quando avrai creato la dashboard del trainer, usa:
+      // this.router.navigateByUrl(returnUrl || '/trainer/dashboard', { replaceUrl: true });
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.showError('Area Trainer in sviluppo');
+    } else {
+      console.log('Unknown role, navigating to home...');
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+    }
   }
 }

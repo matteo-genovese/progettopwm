@@ -1,0 +1,99 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="welcome-section" *ngIf="userData">
+    <h1>Benvenuto, {{ userData.full_name || userData.username }}</h1>
+    <p>Gestisci i tuoi allenamenti e monitora i tuoi progressi</p>
+  </div>
+
+  <!-- Sezione Prossimi Allenamenti -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="calendar-outline"></ion-icon>
+        Prossimi Allenamenti
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="loading-placeholder" *ngIf="isLoading">
+        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
+      </div>
+
+      <ion-list *ngIf="!isLoading && upcomingBookings.length > 0">
+        <ion-item *ngFor="let booking of upcomingBookings" button detail>
+          <div class="booking-item">
+            <div class="booking-info">
+              <h2>{{ booking.trainer_name }}</h2>
+              <p>
+                <ion-icon name="time-outline"></ion-icon>
+                {{ booking.date | date:'dd/MM/yyyy' }} - {{ booking.time_slot }}
+              </p>
+              <p *ngIf="booking.specialization">
+                <ion-icon name="fitness-outline"></ion-icon>
+                {{ booking.specialization }}
+              </p>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+
+      <div class="empty-state" *ngIf="!isLoading && upcomingBookings.length === 0">
+        <p>Non hai allenamenti programmati</p>
+        <ion-button expand="block" (click)="viewAllTrainers()">
+          Trova un trainer
+        </ion-button>
+      </div>
+      
+      <ion-button expand="block" fill="clear" *ngIf="!isLoading && upcomingBookings.length > 0" (click)="viewAllBookings()">
+        Vedi tutti gli allenamenti
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sezione Il Tuo Trainer -->
+  <ion-card *ngIf="myTrainer">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="person-outline"></ion-icon>
+        Il Tuo Personal Trainer
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="trainer-profile">
+        <div class="trainer-info">
+          <h2>{{ myTrainer.full_name }}</h2>
+          <p>{{ myTrainer.specialization }}</p>
+          <div class="trainer-rating" *ngIf="myTrainer.rating">
+            <ion-icon name="star-outline"></ion-icon>
+            <span>{{ myTrainer.rating }} / 5</span>
+          </div>
+        </div>
+        <ion-button (click)="rateTrainer(myTrainer.id)">Valuta</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sezione Trainers -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="fitness-outline"></ion-icon>
+        Trainers Disponibili
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="viewAllTrainers()">
+        Sfoglia tutti i trainers
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

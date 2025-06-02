@@ -1,0 +1,98 @@
+.welcome-section {
+  padding-bottom: 1rem;
+  
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+ion-card-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  
+  ion-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+.booking-item {
+  width: 100%;
+  padding: 0.5rem 0;
+  
+  h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  p {
+    display: flex;
+    align-items: center;
+    margin: 0.25rem 0;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    
+    ion-icon {
+      margin-right: 0.5rem;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 1rem;
+  
+  p {
+    color: var(--ion-color-medium);
+    margin-bottom: 1rem;
+  }
+}
+
+.trainer-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .trainer-info {
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 0 0 0.25rem 0;
+    }
+    
+    p {
+      color: var(--ion-color-medium);
+      margin: 0 0 0.5rem 0;
+    }
+    
+    .trainer-rating {
+      display: flex;
+      align-items: center;
+      
+      ion-icon {
+        color: #ffca28;
+        margin-right: 0.25rem;
+      }
+      
+      span {
+        color: var(--ion-color-medium);
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.loading-placeholder {
+  padding: 0.5rem 0;
+}

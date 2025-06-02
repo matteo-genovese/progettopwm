@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
   IonHeader,
@@ -16,18 +17,23 @@ import {
   IonList,
   IonSpinner,
   IonAvatar,
-  ToastController,
-  AlertController
+  AlertController,
+  ToastController
 } from '@ionic/angular/standalone';
-import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { logOutOutline, personCircleOutline, mailOutline, keyOutline, idCardOutline } from 'ionicons/icons';
-import { AuthService } from '../services/auth.service';
+import { 
+  logOutOutline, 
+  personCircleOutline, 
+  mailOutline, 
+  callOutline,
+  idCardOutline 
+} from 'ionicons/icons';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -48,21 +54,21 @@ import { AuthService } from '../services/auth.service';
     IonAvatar
   ]
 })
-export class Tab3Page implements OnInit {
+export class ProfilePage implements OnInit {
   userData: any = null;
   isLoading = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController
   ) {
     addIcons({
       logOutOutline,
       personCircleOutline,
       mailOutline,
-      keyOutline,
+      callOutline,
       idCardOutline
     });
   }

@@ -1,26 +1,32 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { customerGuard } from '../guards/customer.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: TabsPage,
+    canActivate: [customerGuard],
     children: [
       {
-        path: 'tab1',
-        loadComponent: () => import('../tab1/tab1.page').then(m => m.Tab1Page)
+        path: 'dashboard',
+        loadComponent: () => import('../customer/dashboard/dashboard.page').then(m => m.DashboardPage),
       },
       {
-        path: 'tab2',
-        loadComponent: () => import('../tab2/tab2.page').then(m => m.Tab2Page)
+        path: 'trainers',
+        loadComponent: () => import('../customer/trainers/trainers.page').then(m => m.TrainersPage),
       },
       {
-        path: 'tab3',
-        loadComponent: () => import('../tab3/tab3.page').then(m => m.Tab3Page)
+        path: 'bookings',
+        loadComponent: () => import('../customer/bookings/bookings.page').then(m => m.BookingsPage),
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('../customer/profile/profile.page').then(m => m.ProfilePage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/customer/dashboard',
         pathMatch: 'full'
       }
     ]

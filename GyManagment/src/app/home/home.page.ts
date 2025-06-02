@@ -70,8 +70,9 @@ export class HomePage implements OnInit {
     if (this.authService.isLoggedIn()) {
       if (this.authService.isAdmin())
         this.router.navigate(['/admin']);
-      else
-        this.router.navigate(['/tabs']);
+      else if (this.authService.isCustomer())
+        this.router.navigate(['/customer']);
+      // Aggiungere qui il caso per trainer quando sarà implementato
     }
   }
 

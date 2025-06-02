@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Trainers Disponibili</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="search-filter-container">
+    <ion-searchbar
+      placeholder="Cerca trainer"
+      (ionInput)="onSearchChange($event)"
+      [debounce]="300"
+      animated="true"
+      showCancelButton="focus">
+    </ion-searchbar>
+    
+    <div class="specialization-filters">
+      <ion-chip [color]="filters.specialization === 'all' ? 'primary' : 'medium'" (click)="setSpecializationFilter('all')">
+        <ion-label>Tutti</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filters.specialization === 'Fitness' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Fitness')">
+        <ion-label>Fitness</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filters.specialization === 'Yoga' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Yoga')">
+        <ion-label>Yoga</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filters.specialization === 'Cardio' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Cardio')">
+        <ion-label>Cardio</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filters.specialization === 'Crossfit' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Crossfit')">
+        <ion-label>Crossfit</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <ion-skeleton-text animated style="width: 100%; height: 120px; margin-bottom: 20px;"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 100%; height: 120px; margin-bottom: 20px;"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && filteredTrainers.length === 0">
+    <ion-icon name="fitness-outline" size="large"></ion-icon>
+    <h3>Nessun trainer trovato</h3>
+    <p>Prova a modificare i filtri di ricerca</p>
+  </div>
+
+  <div class="trainers-grid" *ngIf="!isLoading">
+    <ion-card *ngFor="let trainer of filteredTrainers" class="trainer-card" (click)="viewTrainerDetail(trainer.id)">
+      <div class="trainer-avatar">
+        <ion-icon name="person-outline" size="large"></ion-icon>
+      </div>
+      <ion-card-content>
+        <h2 class="trainer-name">{{ trainer.full_name }}</h2>
+        
+        <div class="trainer-specialization">
+          <ion-icon name="fitness-outline"></ion-icon>
+          <span>{{ trainer.specialization }}</span>
+        </div>
+        
+        <div class="trainer-rating" *ngIf="trainer.rating">
+          <ion-icon name="star-outline"></ion-icon>
+          <span>{{ trainer.rating }} / 5</span>
+        </div>
+        
+        <ion-button expand="block" size="small" class="view-slots-btn">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          Vedi disponibilità
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

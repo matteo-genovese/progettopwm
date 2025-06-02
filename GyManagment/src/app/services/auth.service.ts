@@ -109,6 +109,16 @@ export class AuthService {
     return user && user.role === 'admin';
   }
 
+  isCustomer(): boolean {
+    const user = this.getUser();
+    return user && user.role === 'customer';
+  }
+
+  isTrainer(): boolean {
+    const user = this.getUser();
+    return user && user.role === 'trainer';
+  }
+
   getAllTrainers(): Observable<any[]> {
     return this.http.get<ApiResponse<any>>(`${this.baseUrl}/admin/trainers`).pipe(
       map(response => response.data),
