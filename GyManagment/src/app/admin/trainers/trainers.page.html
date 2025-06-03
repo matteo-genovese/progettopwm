@@ -31,11 +31,10 @@
       <p>Non ci sono trainer registrati nel sistema.</p>
     </div>
 
-    <ion-list *ngIf="trainers.length > 0">
-      <ion-item *ngFor="let trainer of trainers" class="trainer-item">
+    <div class="trainers-grid" *ngIf="trainers.length > 0">
+      <div class="trainer-card" *ngFor="let trainer of trainers">
         <div class="trainer-content">
           <h2>{{ trainer.full_name || trainer.username }}</h2>
-
           <div class="trainer-details">
             <p>
               <ion-icon name="mail-outline"></ion-icon>
@@ -50,7 +49,6 @@
               {{ trainer.specialization }}
             </p>
           </div>
-
           <div class="trainer-stats">
             <div class="stat">
               <span class="value">{{ trainer.client_count || 0 }}</span>
@@ -61,8 +59,16 @@
               <span class="label">Max per slot</span>
             </div>
           </div>
+          <div class="trainer-actions">
+            <ion-button color="medium" fill="outline" size="small">
+              <ion-icon slot="start" name="people-outline"></ion-icon>
+              Assegna Cliente
+            </ion-button>
+          </div>
         </div>
-      </ion-item>
-    </ion-list>
+      </div>
+    </div>
   </div>
+  
 </ion-content>
+
