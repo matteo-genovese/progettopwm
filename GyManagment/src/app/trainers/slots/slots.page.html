@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestione Slot</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Crea nuovo slot</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="addSlot()">
+        <ion-item>
+          <ion-label position="stacked">Inizio</ion-label>
+          <ion-datetime
+            display-format="yyyy-MM-dd HH:mm"
+            [(ngModel)]="newSlot.start_time"
+            name="start_time"
+            required>
+          </ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Fine</ion-label>
+          <ion-datetime
+            display-format="yyyy-MM-dd HH:mm"
+            [(ngModel)]="newSlot.end_time"
+            name="end_time"
+            required>
+          </ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Max clienti</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="newSlot.max_clients"
+            name="max_clients"
+            min="1"
+            required>
+          </ion-input>
+        </ion-item>
+        <ion-button expand="block" type="submit" [disabled]="isLoading">Aggiungi slot</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="isLoading" class="loading-container ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Caricamento slot...</p>
+  </div>
+
+  <ion-card *ngIf="error" color="danger">
+    <ion-card-content>
+      <p>{{ error }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Slot disponibili</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let slot of slots">
+      <ion-label>
+        <h3>{{ slot.start_time }} - {{ slot.end_time }}</h3>
+        <p>Max clienti: {{ slot.max_clients }}</p>
+        <p>Prenotati: {{ slot.booked_clients }}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="slots.length === 0 && !isLoading">
+      <ion-label>Nessuno slot disponibile</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -59,14 +59,18 @@ export class LoginPage implements OnInit {
     addIcons({ fitnessOutline });
   }
 
-  ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      if (this.authService.isAdmin())
-        this.router.navigate(['/admin/dashboard']);
-      else
-        this.router.navigate(['/tabs']);
+ngOnInit() {
+  if (this.authService.isLoggedIn()) {
+    const user = this.authService.getUser();
+    if (this.authService.isAdmin()) {
+      this.router.navigate(['/admin/dashboard']);
+    } else if (user?.role === 'trainer') {
+      this.router.navigate(['/trainers-tabs/dashboard'], { replaceUrl: true });
+    } else {
+      this.router.navigate(['/tabs']);
     }
   }
+}
 
   async onLogin() {
     console.log('Login attempt with:', this.credentials);
@@ -90,9 +94,13 @@ export class LoginPage implements OnInit {
               await this.showSuccess('Login effettuato con successo!');
 
               if (this.authService.isLoggedIn()) {
+                const user = this.authService.getUser();
                 if (this.authService.isAdmin()) {
                   console.log('Admin user detected, navigating to admin dashboard...');
                   this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
+                } else if (user?.role === 'trainer') {
+                  console.log('Trainer user detected, navigating to trainer dashboard...');
+                  this.router.navigate(['/trainers-tabs/dashboard'], { replaceUrl: true });
                 } else {
                   console.log('Regular user detected, navigating to tabs...');
                   this.router.navigateByUrl('/tabs', { replaceUrl: true });

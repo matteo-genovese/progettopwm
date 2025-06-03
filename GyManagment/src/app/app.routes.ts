@@ -28,5 +28,31 @@ export const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
     canActivate: [authGuard]
+  },
+  {
+    path: 'trainers/sessions',
+    loadComponent: () => import('./trainers/sessions/sessions.page').then( m => m.SessionsPage)
+  },
+  {
+    path: 'trainers/slots',
+    loadComponent: () => import('./trainers/slots/slots.page').then( m => m.SlotsPage)
+  },
+  {
+    path: 'trainers/dashboard',
+    loadComponent: () => import('./trainers/dashboard/dashboard.page').then( m => m.DashboardPage)
+  },
+  {
+    path: 'trainers-tabs',
+    loadComponent: () => import('./trainers-tabs/trainers-tabs.page').then( m => m.TrainersTabsPage)
+  },
+  {
+    path: 'trainers-tabs',
+    loadChildren: () => import('./trainers-tabs/trainers-tabs.routes').then(m => m.routes)
+  },  {
+    path: 'profile',
+    loadComponent: () => import('./trainers/profile/profile.page').then( m => m.ProfilePage)
   }
+
+
+
 ];
