@@ -3,7 +3,7 @@ import { TrainerService } from '../../services/trainer.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonButton, IonIcon, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonButton, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -14,7 +14,7 @@ import {
   imports: [
     CommonModule,
     FormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonButton, IonIcon, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime
+    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonButton, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime
   ]
 })
 export class SlotsPage implements OnInit {

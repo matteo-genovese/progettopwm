@@ -4,9 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonItem,
   IonLabel,
@@ -27,9 +24,6 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonButton,
     IonItem,
     IonLabel,
@@ -150,7 +144,6 @@ export class LoginPage implements OnInit {
   }
 
   private redirectBasedOnRole() {
-    // Prendi il returnUrl se presente nei parametri query
     const returnUrl = this.route.snapshot.queryParams['returnUrl'];
 
     if (this.authService.isAdmin()) {
@@ -161,10 +154,7 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl(returnUrl || '/customer/dashboard', { replaceUrl: true });
     } else if (this.authService.isTrainer()) {
       console.log('Trainer user detected, navigating...');
-      // Quando avrai creato la dashboard del trainer, usa:
-      // this.router.navigateByUrl(returnUrl || '/trainer/dashboard', { replaceUrl: true });
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-      this.showError('Area Trainer in sviluppo');
+      this.router.navigateByUrl(returnUrl || '/trainer/dashboard', { replaceUrl: true });
     } else {
       console.log('Unknown role, navigating to home...');
       this.router.navigateByUrl('/home', { replaceUrl: true });

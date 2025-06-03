@@ -12,7 +12,6 @@ import {
   IonButton,
   IonIcon,
   IonItem,
-  IonList,
   IonLabel,
   IonButtons
 } from '@ionic/angular/standalone';
@@ -24,9 +23,7 @@ import {
   statsChartOutline,
   personOutline,
   logOutOutline,
-  barbellOutline,
   barbell,
-  barbellSharp
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
@@ -48,7 +45,6 @@ import { AuthService } from '../../services/auth.service';
     IonButton,
     IonIcon,
     IonItem,
-    IonList,
     IonLabel,
     IonButtons
   ]

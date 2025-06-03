@@ -5,9 +5,6 @@ import { Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonCard,
   IonCardHeader,
@@ -38,9 +35,6 @@ import { AuthService } from '../services/auth.service';
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonButton,
     IonCard,
     IonCardHeader,
@@ -79,7 +73,10 @@ export class HomePage implements OnInit {
         this.router.navigate(['/admin']);
       else if (this.authService.isCustomer())
         this.router.navigate(['/customer']);
-      // Aggiungere qui il caso per trainer quando sarà implementato
+      else if (this.authService.isTrainer())
+        this.router.navigate(['/trainer']);
+    } else {
+      this.goToLogin();
     }
   }
 

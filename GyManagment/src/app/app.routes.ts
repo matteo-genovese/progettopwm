@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 import { customerGuard } from './guards/customer.guard';
+import { trainerGuard } from './guards/trainer.guard';
 
 export const routes: Routes = [
   {
@@ -28,13 +29,12 @@ export const routes: Routes = [
   },
   {
     path: 'customer',
-    loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
+    loadChildren: () => import('./customer/tabs/tabs.routes').then((m) => m.routes),
     canActivate: [authGuard, customerGuard]
   },
-  // Preparazione per la sezione trainer
-  // {
-  //   path: 'trainer',
-  //   loadChildren: () => import('./trainer/trainer.routes').then((m) => m.routes),
-  //   canActivate: [authGuard, trainerGuard]
-  // }
+  {
+    path: 'trainer',
+    loadChildren: () => import('./trainer/tabs/trainer-tabs.routes').then((m) => m.routes),
+    canActivate: [authGuard, trainerGuard]
+  }
 ];

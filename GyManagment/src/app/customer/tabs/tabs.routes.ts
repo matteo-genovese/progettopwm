@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { customerGuard } from '../guards/customer.guard';
+import { customerGuard } from '../../guards/customer.guard';
 
 export const routes: Routes = [
   {
@@ -10,19 +10,19 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => import('../customer/dashboard/dashboard.page').then(m => m.DashboardPage),
+        loadComponent: () => import('../dashboard/dashboard.page').then(m => m.DashboardPage),
       },
       {
         path: 'trainers',
-        loadComponent: () => import('../customer/trainers/trainers.page').then(m => m.TrainersPage),
+        loadComponent: () => import('../trainers/trainers.page').then(m => m.TrainersPage),
       },
       {
         path: 'bookings',
-        loadComponent: () => import('../customer/bookings/bookings.page').then(m => m.BookingsPage),
+        loadComponent: () => import('../bookings/bookings.page').then(m => m.BookingsPage),
       },
       {
         path: 'profile',
-        loadComponent: () => import('../customer/profile/profile.page').then(m => m.ProfilePage),
+        loadComponent: () => import('../profile/profile.page').then(m => m.ProfilePage),
       },
       {
         path: '',

@@ -16,7 +16,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, starOutline, star } from 'ionicons/icons';
-import { CustomerService } from '../../services/customer.service';
+import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-rating-modal',

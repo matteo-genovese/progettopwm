@@ -26,9 +26,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, calendarOutline, timeOutline, star } from 'ionicons/icons';
-import { CustomerService } from '../../services/customer.service';
-import { forkJoin, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-slots-modal',

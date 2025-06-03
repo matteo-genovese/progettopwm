@@ -54,9 +54,6 @@ interface RegistrationData {
     CommonModule,
     FormsModule,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonButton,
     IonItem,
     IonLabel,
@@ -66,9 +63,7 @@ interface RegistrationData {
     IonText,
     IonSelect,
     IonSelectOption,
-    IonList,
-    IonBackButton,
-    IonButtons
+    IonList  
   ]
 })
 export class RegisterPage {

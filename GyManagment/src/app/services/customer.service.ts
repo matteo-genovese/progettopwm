@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular/standalone';
-import { RatingModalComponent } from '../components/rating-modal/rating-modal.component';
+import { RatingModalComponent } from '../customer/components/rating-modal/rating-modal.component';
 
 interface ApiResponse<T> {
   data: T;

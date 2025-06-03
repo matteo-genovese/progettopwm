@@ -7,8 +7,6 @@ import {
   IonTitle,
   IonContent,
   IonSearchbar,
-  IonList,
-  IonItem,
   IonCard,
   IonCardContent,
   IonButton,
@@ -29,7 +27,7 @@ import {
   personOutline,
   searchOutline
 } from 'ionicons/icons';
-import { CustomerService } from '../services/customer.service';
+import { CustomerService } from '../../services/customer.service';
 import { SlotsModalComponent } from '../components/slots-modal/slots-modal.component';
 
 @Component({
@@ -45,8 +43,6 @@ import { SlotsModalComponent } from '../components/slots-modal/slots-modal.compo
     IonTitle,
     IonContent,
     IonSearchbar,
-    IonList,
-    IonItem,
     IonCard,
     IonCardContent,
     IonButton,

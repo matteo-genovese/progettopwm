@@ -13,7 +13,6 @@ import {
   IonItem,
   IonList,
   IonIcon,
-  IonLabel,
   IonRefresher,
   IonRefresherContent,
   IonSkeletonText
@@ -27,7 +26,7 @@ import {
   personOutline
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { CustomerService } from '../services/customer.service';
+import { CustomerService } from '../..//services/customer.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -49,7 +48,6 @@ import { AuthService } from '../../services/auth.service';
     IonItem,
     IonList,
     IonIcon,
-    IonLabel,
     IonRefresher,
     IonRefresherContent,
     IonSkeletonText
