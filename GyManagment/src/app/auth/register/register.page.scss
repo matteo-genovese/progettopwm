@@ -32,13 +32,14 @@
 }
 
 ion-item {
-	--border-radius: 8px;
+	box-shadow:
+    0px 3px 6px rgba(0,0,0,0.16),
+    0px 3px 6px rgba(0,0,0,0.23);
+	border-radius: 10px;
 	--background: var(--ion-color-light);
 	margin-bottom: 1rem;
-	--inner-padding-end: 16px;
-	--inner-padding-start: 16px;
-	--padding-start: 0;
-	--padding-end: 0;
+	margin-left:1rem;
+	margin-right: 1rem;
 }
 
 .button-section {
