@@ -4,6 +4,11 @@
       <ion-back-button defaultHref="/admin/dashboard"></ion-back-button>
     </ion-buttons>
     <ion-title>Tutti i Clienti</ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="opacity:0; pointer-events:none;">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -31,11 +36,34 @@
       <p>Non ci sono clienti registrati nel sistema.</p>
     </div>
 
-    <ion-list *ngIf="customers.length > 0">
-      <ion-item *ngFor="let customer of customers" class="customer-item">
+    <div class="customers-grid" *ngIf="customers.length > 0">
+      <div class="customer-card" *ngFor="let customer of customers">
         <div class="customer-content">
-          <h2>{{ customer.full_name || customer.username }}</h2>
-
+          <div class="customer-header">
+            <h2>{{ customer.full_name || customer.username }}</h2>
+            <div class="customer-actions">
+              <ion-button color="medium" fill="outline" size="small" (click)="showTrainerList(customer.id)">
+                <ion-icon slot="start" name="barbell"></ion-icon>
+                Assegna Trainer
+              </ion-button>
+              <div 
+                class="customer-dropdown" 
+                *ngIf="selectedCustomerId === customer.id">
+                <div class="close-dropdown" (click)="hideTrainerList()">
+                  <span class="close-x"></span>
+                </div>
+                <ion-list>
+                  <ion-item 
+                    button 
+                    detail 
+                    (click)="assignTrainerToCustomer(customer.id, trainer)"
+                    *ngFor="let trainer of trainers">
+                    {{ trainer.full_name || trainer.username }}
+                  </ion-item>
+                </ion-list>
+              </div>
+            </div>
+          </div>
           <div class="customer-details">
             <p>
               <ion-icon name="mail-outline"></ion-icon>
@@ -50,21 +78,25 @@
               Iscritto il: {{ customer.join_date | date:'dd/MM/yyyy' }}
             </p>
           </div>
-
-          <div class="trainer-info" *ngIf="customer.trainer_name">
-            <p>
-              <ion-icon name="fitness-outline"></ion-icon>
-              Trainer: {{ customer.trainer_name }}
-            </p>
+          <div class="customer-stats">
+            <div class="stat">
+              <span class="value">{{ customer.subscription_type || '/' }}</span>
+              <span class="label">
+                Abbonamento
+              </span>
+            </div>
+            <div class="stat">
+              <span class="value">{{ customer.trainer_name || '/' }}</span>
+              <span class="label">
+                Trainer
+              </span>
+            </div>
           </div>
-          <div class="trainer-info" *ngIf="!customer.trainer_name">
-            <p class="no-trainer">
-              <ion-icon name="alert-circle-outline"></ion-icon>
-              Nessun trainer assegnato
-            </p>
+          <div class="customer-photo-placeholder">
+            Foto
           </div>
         </div>
-      </ion-item>
-    </ion-list>
+      </div>
+    </div>
   </div>
 </ion-content>
