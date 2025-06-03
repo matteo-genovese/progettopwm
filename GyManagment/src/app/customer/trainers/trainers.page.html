@@ -67,7 +67,7 @@
           <span>{{ trainer.rating }} / 5</span>
         </div>
         
-        <ion-button expand="block" size="small" class="view-slots-btn">
+        <ion-button expand="block" size="small" class="view-slots-btn" (click)="$event.stopPropagation(); openSlotsModal(trainer)">
           <ion-icon name="calendar-outline" slot="start"></ion-icon>
           Vedi disponibilità
         </ion-button>

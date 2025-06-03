@@ -15,10 +15,10 @@ import {
   IonIcon,
   IonRefresher,
   IonRefresherContent,
-  IonBadge,
   IonChip,
   IonLabel,
-  IonSkeletonText
+  IonSkeletonText,
+  ModalController
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
@@ -30,6 +30,7 @@ import {
   searchOutline
 } from 'ionicons/icons';
 import { CustomerService } from '../services/customer.service';
+import { SlotsModalComponent } from '../components/slots-modal/slots-modal.component';
 
 @Component({
   selector: 'app-trainers',
@@ -52,7 +53,6 @@ import { CustomerService } from '../services/customer.service';
     IonIcon,
     IonRefresher,
     IonRefresherContent,
-    IonBadge,
     IonChip,
     IonLabel,
     IonSkeletonText
@@ -69,7 +69,8 @@ export class TrainersPage implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private router: Router
+    private router: Router,
+    private modalCtrl: ModalController
   ) {
     addIcons({ fitnessOutline, starOutline, calendarOutline, personOutline, searchOutline });
   }
@@ -125,5 +126,16 @@ export class TrainersPage implements OnInit {
   setSpecializationFilter(specialization: string) {
     this.filters.specialization = specialization;
     this.applyFilters();
+  }
+
+  async openSlotsModal(trainer: any) {
+    const modal = await this.modalCtrl.create({
+      component: SlotsModalComponent,
+      componentProps: {
+        trainer: trainer
+      }
+    });
+
+    await modal.present();
   }
 }

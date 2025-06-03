@@ -65,7 +65,6 @@ export class CustomerService {
     );
   }
 
-  // ✓ API valida: POST /api//rate
   rateTrainer(trainerId: number, rating: number, review: string = ''): Observable<any> {
     return this.http.post<ApiResponse<any>>(`${this.baseUrl}/customer/rate`, { 
       trainer_id: trainerId,
