@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dashboard PT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="isLoading" class="loading-container ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Caricamento dashboard...</p>
+  </div>
+
+  <ion-card *ngIf="dashboardData">
+    <ion-card-header>
+      <ion-card-title>Benvenuto, {{ dashboardData.trainer_info.full_name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Specializzazione: {{ dashboardData.trainer_info.specialization }}</p>
+      <p>Max clienti per slot: {{ dashboardData.trainer_info.max_clients_per_slot }}</p>
+      <p>Slot futuri: {{ dashboardData.upcoming_sessions.length }}</p>
+      <p>Clienti totali: {{ dashboardData.clients.length }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length > 0">
+    <ion-card-header>
+      <ion-card-title>Prossimi slot</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let slot of dashboardData.upcoming_sessions">
+          <ion-label>
+            <h3>{{ slot.start_time }} - {{ slot.end_time }}</h3>
+            <p>Max clienti: {{ slot.max_clients }}</p>
+            <p>Prenotati: {{ slot.booked_clients }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="error" color="danger">
+    <ion-card-content>
+      <p>{{ error }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" routerLink="/trainers-tabs/sessions" color="primary">
+    Visualizza allenamenti schedulati
+  </ion-button>
+  <ion-button expand="block" routerLink="/trainers-tabs/slots" color="secondary">
+    Gestisci slot
+  </ion-button>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Allenamenti Schedulati</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="isLoading" class="loading-container ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Caricamento allenamenti...</p>
+  </div>
+
+  <ion-card *ngIf="error" color="danger">
+    <ion-card-content>
+      <p>{{ error }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="!isLoading && sessions.length > 0">
+    <ion-item *ngFor="let session of sessions">
+      <ion-label>
+        <h3>{{ session.start_time }} - {{ session.end_time }}</h3>
+        <p>Max clienti: {{ session.max_clients }}</p>
+        <p>Prenotati: {{ session.booked_clients }}</p>
+        <p>Clienti: {{ session.client_names || 'Nessuno' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="!isLoading && sessions.length === 0" class="ion-text-center">
+    <p>Nessun allenamento schedulato.</p>
+  </div>
+</ion-content>
