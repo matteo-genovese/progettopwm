@@ -113,6 +113,10 @@ export class RegisterPage {
     }
   }
 
+  goBack() {
+    this.router.navigate(['/home']);
+  }
+
   loadAvailableTrainers() {
     this.isLoadingTrainers = true;
     // Assumiamo che esista un metodo nel servizio per ottenere i trainer

@@ -5,9 +5,20 @@
         margin-right: auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1366px) {
   .responsive-70 {
     width: 70%; // Desktop/tablet: 70% larghezza
+  }
+}
+.responsive-25 {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+}
+
+@media (min-width: 992px) {
+  .responsive-18 {
+    width: 18%; // Desktop/tablet: 70% larghezza
   }
 }
 p {
@@ -26,7 +37,7 @@ ion-card-content ion-label {
     --color:var(--ion-color-medium);
     font-size:1rem;
 }
-.shadow-material2 {
+ion-card {
     box-shadow:
     0px 3px 6px rgba(0,0,0,0.16),
     0px 3px 6px rgba(0,0,0,0.23);
@@ -37,3 +48,83 @@ ion-card-content ion-label {
       transform: translateY(-4px) scale(1.02);
     }
 }
+.icon-margin-right {
+  margin-right: 15px;
+}
+.titolo-lista {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.descrizione-lista {
+  color: var(--ion-color-medium);
+  font-size: 0.92em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+ion-content {
+  --background: none;
+  background-color: #fff;
+  background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+.highlight-text {
+  background: rgba(255,255,255,0.95);
+  display: inline-block;
+  box-shadow: none;
+  max-width: 90vw;
+}
+
+ion-row {
+  display: flex;
+  align-items: stretch; // tutte le colonne stessa altezza
+}
+
+ion-col {
+  display: flex;
+  flex-direction: column;
+}
+
+ion-card {
+  flex: 1 1 auto; // il card riempie tutta l'altezza della colonna
+  display: flex;
+  flex-direction: column;
+}
+
+.bottoni-auth {
+  display: flex;
+  justify-content: center;
+  margin: 1.5em 0;
+}
+
+.bottoni-auth ion-button {
+  margin-left:5px; // nessun margine tra i bottoni
+  margin-right:5px; // nessun margine tra i bottoni
+}
+
+@media (max-width: 992px) {
+  .bottoni-auth {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.landing-card-admin {
+  border:2px solid var(--ion-color-secondary);
+}
+
+.landing-card-trainer {
+  border:2px solid var(--ion-color-primary);
+}
+
+.landing-card-client {
+  border:2px solid var(--ion-color-tertiary);
+}
+
+	ion-button {
+		--border-radius: 8px;
+		margin-bottom: 1rem;
+		font-weight: 500;
+	}
