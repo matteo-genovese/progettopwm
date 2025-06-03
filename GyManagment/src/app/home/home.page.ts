@@ -75,8 +75,6 @@ export class HomePage implements OnInit {
         this.router.navigate(['/customer']);
       else if (this.authService.isTrainer())
         this.router.navigate(['/trainer']);
-    } else {
-      this.goToLogin();
     }
   }
 
