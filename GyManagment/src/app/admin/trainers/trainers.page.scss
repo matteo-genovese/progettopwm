@@ -142,3 +142,49 @@
     color: var(--ion-color-medium);
   }
 }
+
+.trainer-actions ion-button {
+  --padding-start: 8px;
+  --padding-end: 4px;
+  min-width: 80px;
+  font-size: 13px;
+  justify-content: center;
+  margin-left: 12rem;
+}
+
+
+
+.trainers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: flex-start;
+  padding: 1rem;
+  
+}
+
+.trainer-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  width: 400px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #222;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.trainer-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.trainer-content {
+  padding: 1rem;
+}
+
+
+
+
