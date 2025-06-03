@@ -53,8 +53,9 @@ import { CustomerService } from '../../services/customer.service';
 export class SlotsModalComponent implements OnInit {
   @Input() trainer: any;
   
-  selectedDate: string;
-  minDate: string;
+  // Inizializzare le proprietà con valori di default
+  selectedDate: string = '';
+  minDate: string = '';
   availableSlots: any[] = [];
   isLoading = false;
   
@@ -63,12 +64,20 @@ export class SlotsModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private toastController: ToastController
   ) {
-    this.selectedDate = new Date().toISOString();
-    this.minDate = new Date().toISOString();
+    // Inizializza le date dopo che il browser è pronto
+    setTimeout(() => {
+      this.selectedDate = new Date().toISOString();
+      this.minDate = new Date().toISOString();
+    });
     addIcons({ closeOutline, calendarOutline, timeOutline, star });
   }
 
   ngOnInit() {
+    // Assicurati che le date siano inizializzate
+    if (!this.selectedDate) {
+      this.selectedDate = new Date().toISOString();
+      this.minDate = new Date().toISOString();
+    }
     this.loadSlots();
   }
 
