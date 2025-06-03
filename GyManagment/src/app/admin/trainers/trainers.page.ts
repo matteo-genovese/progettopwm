@@ -18,7 +18,7 @@ import {
   IonRefresherContent
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { mailOutline, callOutline, fitnessOutline } from 'ionicons/icons';
+import { peopleOutline } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -47,11 +47,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class TrainersPage implements OnInit {
   trainers: any[] = [];
+  customers: any[] = [];
   isLoading = false;
   error = '';
+  showCustomers: boolean = false;
+  selectedTrainerId: number | null = null;
+  
 
   constructor(private authService: AuthService) {
-    addIcons({ mailOutline, callOutline, fitnessOutline });
+    addIcons({ peopleOutline });
   }
 
   ngOnInit() {
@@ -81,5 +85,44 @@ export class TrainersPage implements OnInit {
     setTimeout(() => {
       event.target.complete();
     }, 1000);
+  }
+
+  getAllCustomers() {
+    this.authService.getAllCustomers().subscribe({
+      next: (data) => {
+        this.customers = data;
+        this.showCustomers = true;
+      },
+      error: (error) => {
+        console.error('Errore nel caricamento clienti:', error);
+      }
+    });
+  }
+
+  showCustomerList(trainerId: number) {
+    if (this.selectedTrainerId === trainerId) {
+      // Se già aperto, chiudi
+      this.selectedTrainerId = null;
+      return;
+    }
+    // Altrimenti apri e carica clienti
+    this.authService.getAllCustomers().subscribe({
+      next: (data) => {
+        this.customers = data;
+        this.selectedTrainerId = trainerId;
+      },
+      error: (error) => {
+        console.error('Errore nel caricamento clienti:', error);
+      }
+    });
+  }
+
+  hideCustomerList() {
+    this.selectedTrainerId = null;
+  }
+
+  assignCustomerToTrainer(trainerId: number, customer: any) {
+    // Qui aggiungi la logica per assegnare il customer al trainer
+    console.log('Assegna', customer, 'al trainer', trainerId);
   }
 }

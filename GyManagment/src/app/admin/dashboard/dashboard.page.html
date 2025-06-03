@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button style="opacity:0; pointer-events:none;">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Dashboard Admin</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">
+      <ion-button color="tertiary" (click)="logout()">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -24,7 +29,7 @@
   <div class="stats-container">
     <ion-card class="stat-card">
       <ion-card-header>
-        <ion-icon name="fitness-outline"></ion-icon>
+        <ion-icon name="barbell"></ion-icon>
         <ion-card-title>{{ trainersCount }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
@@ -45,7 +50,7 @@
 
   <div class="actions-row">
     <ion-item button detail (click)="goToTrainers()" class="action-item">
-      <ion-icon name="fitness-outline" slot="start" color="primary"></ion-icon>
+      <ion-icon name="barbell" slot="start" color="primary"></ion-icon>
       <ion-label class="ion-text-center">
         <h2>Gestione Trainer</h2>
         <p>Visualizza e gestisci i trainer</p>

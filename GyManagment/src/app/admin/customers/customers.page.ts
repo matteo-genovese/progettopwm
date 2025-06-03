@@ -18,7 +18,7 @@ import {
   IonRefresherContent
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { mailOutline, callOutline, personOutline } from 'ionicons/icons';
+import { fitnessOutline, mailOutline, callOutline, calendarOutline, barbell } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -47,15 +47,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class CustomersPage implements OnInit {
   customers: any[] = [];
+  trainers: any[] = [];
   isLoading = false;
   error = '';
+  selectedCustomerId: number | null = null;
 
   constructor(private authService: AuthService) {
-    addIcons({ mailOutline, callOutline, personOutline });
+    addIcons({ fitnessOutline, mailOutline, callOutline, calendarOutline, barbell });
   }
 
   ngOnInit() {
     this.loadCustomers();
+    this.loadTrainers();
   }
 
   loadCustomers() {
@@ -76,10 +79,35 @@ export class CustomersPage implements OnInit {
     });
   }
 
+  loadTrainers() {
+    this.authService.getAllTrainers().subscribe({
+      next: (data) => {
+        this.trainers = data;
+      },
+      error: (error) => {
+        // gestisci errore se vuoi
+      }
+    });
+  }
+
   doRefresh(event: any) {
     this.loadCustomers();
+    this.loadTrainers();
     setTimeout(() => {
       event.target.complete();
     }, 1000);
+  }
+
+  showTrainerList(customerId: number) {
+    this.selectedCustomerId = this.selectedCustomerId === customerId ? null : customerId;
+  }
+
+  hideTrainerList() {
+    this.selectedCustomerId = null;
+  }
+
+  assignTrainerToCustomer(customerId: number, trainer: any) {
+    // Qui aggiungi la logica per assegnare il trainer al cliente
+    console.log('Assegna', trainer, 'al cliente', customerId);
   }
 }

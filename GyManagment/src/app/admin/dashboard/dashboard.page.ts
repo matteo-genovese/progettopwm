@@ -23,7 +23,10 @@ import {
   fitnessOutline,
   statsChartOutline,
   personOutline,
-  logOutOutline
+  logOutOutline,
+  barbellOutline,
+  barbell,
+  barbellSharp
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
@@ -59,7 +62,7 @@ export class DashboardPage implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    addIcons({ peopleOutline, fitnessOutline, statsChartOutline, personOutline, logOutOutline });
+    addIcons({ peopleOutline, fitnessOutline, statsChartOutline, personOutline, logOutOutline,barbell });
   }
 
   ngOnInit() {
