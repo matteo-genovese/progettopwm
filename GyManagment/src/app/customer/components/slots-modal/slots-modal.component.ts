@@ -17,12 +17,18 @@ import {
   IonModal,
   IonSpinner,
   IonText,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
   ModalController,
   ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, calendarOutline, timeOutline, star } from 'ionicons/icons';
 import { CustomerService } from '../../services/customer.service';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-slots-modal',
@@ -47,16 +53,23 @@ import { CustomerService } from '../../services/customer.service';
     IonDatetimeButton,
     IonModal,
     IonSpinner,
-    IonText
+    IonText,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent
   ]
 })
 export class SlotsModalComponent implements OnInit {
   @Input() trainer: any;
   
-  // Inizializzare le proprietà con valori di default
   selectedDate: string = '';
   minDate: string = '';
-  availableSlots: any[] = [];
+  
+  // Struttura per raggruppare gli slot per data
+  slotsByDate: { [date: string]: any[] } = {};
+  allDates: string[] = [];
+  
   isLoading = false;
   
   constructor(
@@ -64,36 +77,66 @@ export class SlotsModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private toastController: ToastController
   ) {
-    // Inizializza le date dopo che il browser è pronto
-    setTimeout(() => {
-      this.selectedDate = new Date().toISOString();
-      this.minDate = new Date().toISOString();
-    });
     addIcons({ closeOutline, calendarOutline, timeOutline, star });
   }
 
   ngOnInit() {
-    // Assicurati che le date siano inizializzate
-    if (!this.selectedDate) {
-      this.selectedDate = new Date().toISOString();
-      this.minDate = new Date().toISOString();
-    }
-    this.loadSlots();
+    // Inizializza le date
+    const today = new Date();
+    
+    this.selectedDate = today.toISOString();
+    this.minDate = today.toISOString();
+    
+    this.loadAllFutureSlots();
   }
 
   close() {
     this.modalCtrl.dismiss();
   }
 
-  loadSlots() {
+  // Carica gli slot futuri a partire dalla data selezionata senza limitazioni di giorni
+  loadAllFutureSlots() {
     if (!this.trainer || !this.trainer.id) return;
     
     this.isLoading = true;
-    const formattedDate = this.formatDate(this.selectedDate);
+    this.slotsByDate = {};
+    this.allDates = [];
     
-    this.customerService.getAvailableSlots(this.trainer.id, formattedDate).subscribe({
+    // Ottieni la data selezionata come oggetto Date
+    const startDate = new Date(this.selectedDate);
+    
+    // Carica gli slot disponibili per il trainer usando l'endpoint corretto
+    this.customerService.getAvailableSlots(this.trainer.id, this.formatDate(startDate.toISOString())).subscribe({
       next: (slots) => {
-        this.availableSlots = slots;
+        console.log('Slot ricevuti:', slots);
+        
+        if (slots && Array.isArray(slots)) {
+          // Raggruppa gli slot per data
+          slots.forEach(slot => {
+            if (!slot.start_time) {
+              console.error('Slot senza start_time:', slot);
+              return;
+            }
+            
+            try {
+              // Estrai la data dallo slot
+              const slotDate = this.formatDate(slot.start_time);
+              
+              if (!this.slotsByDate[slotDate]) {
+                this.slotsByDate[slotDate] = [];
+                this.allDates.push(slotDate);
+              }
+              
+              this.slotsByDate[slotDate].push(slot);
+            } catch (e) {
+              console.error('Errore nel parsare la data:', slot.start_time, e);
+            }
+          });
+          
+          // Ordina le date
+          this.allDates.sort();
+        }
+        
         this.isLoading = false;
       },
       error: (error) => {
@@ -106,7 +149,7 @@ export class SlotsModalComponent implements OnInit {
 
   onDateChange(event: any) {
     this.selectedDate = event.detail.value;
-    this.loadSlots();
+    this.loadAllFutureSlots();
   }
 
   bookSlot(slotId: number) {
@@ -116,7 +159,7 @@ export class SlotsModalComponent implements OnInit {
       next: (response) => {
         this.isLoading = false;
         this.showToast('Prenotazione effettuata con successo!', 'success');
-        this.loadSlots(); // Ricarica gli slot per aggiornare la disponibilità
+        this.loadAllFutureSlots(); // Ricarica gli slot per aggiornare la disponibilità
       },
       error: (error) => {
         this.isLoading = false;
@@ -126,9 +169,22 @@ export class SlotsModalComponent implements OnInit {
     });
   }
 
+  // Formatta una data ISO in formato YYYY-MM-DD per l'API
   private formatDate(isoString: string): string {
     const date = new Date(isoString);
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  }
+
+  // Formatta una data per la visualizzazione
+  formatDateForDisplay(dateString: string): string {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric' 
+    };
+    return date.toLocaleDateString('it-IT', options);
   }
 
   private async showToast(message: string, color: string = 'success') {

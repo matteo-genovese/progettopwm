@@ -20,9 +20,10 @@
     </div>
   </div>
 
+  <!-- Selettore di data standard come data di inizio -->
   <div class="date-selector">
     <ion-item lines="none">
-      <ion-label>Seleziona data</ion-label>
+      <ion-label>Mostra slot a partire da</ion-label>
       <ion-datetime-button datetime="date-select"></ion-datetime-button>
     </ion-item>
     
@@ -40,36 +41,47 @@
   </div>
 
   <div class="slots-container">
-    <h3>Orari disponibili per {{ selectedDate | date:'dd/MM/yyyy' }}</h3>
+    <h3>Slot disponibili a partire dal {{ selectedDate | date:'dd/MM/yyyy' }}</h3>
     
     <div class="loading-container" *ngIf="isLoading">
       <ion-spinner name="dots"></ion-spinner>
       <p>Caricamento slot disponibili...</p>
     </div>
     
-    <div class="empty-slots" *ngIf="!isLoading && availableSlots.length === 0">
+    <div class="empty-slots" *ngIf="!isLoading && allDates.length === 0">
       <ion-text color="medium">
-        <p>Nessuno slot disponibile per la data selezionata</p>
+        <p>Nessuno slot disponibile a partire dalla data selezionata</p>
       </ion-text>
     </div>
     
-    <ion-list *ngIf="!isLoading && availableSlots.length > 0">
-      <ion-item *ngFor="let slot of availableSlots" class="slot-item">
-        <div class="slot-info">
-          <div class="slot-time">
-            <ion-icon name="time-outline"></ion-icon>
-            <span>{{ slot.start_time | date:'HH:mm' }} - {{ slot.end_time | date:'HH:mm' }}</span>
-          </div>
-          
-          <div class="slot-availability">
-            <span>Posti disponibili: {{ slot.available_spots }} / {{ slot.max_clients }}</span>
-          </div>
-        </div>
+    <!-- Mostra slot raggruppati per data -->
+    <div *ngIf="!isLoading && allDates.length > 0">
+      <ion-card *ngFor="let date of allDates" class="date-card">
+        <ion-card-header>
+          <ion-card-title>{{ formatDateForDisplay(date) }}</ion-card-title>
+        </ion-card-header>
         
-        <ion-button slot="end" [disabled]="slot.available_spots === 0" (click)="bookSlot(slot.id)">
-          Prenota
-        </ion-button>
-      </ion-item>
-    </ion-list>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let slot of slotsByDate[date]" class="slot-item">
+              <div class="slot-info">
+                <div class="slot-time">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <span>{{ slot.start_time | date:'HH:mm' }} - {{ slot.end_time | date:'HH:mm' }}</span>
+                </div>
+                
+                <div class="slot-availability">
+                  <span>Posti disponibili: {{ slot.available_spots }} / {{ slot.max_clients }}</span>
+                </div>
+              </div>
+              
+              <ion-button slot="end" [disabled]="slot.available_spots === 0" (click)="bookSlot(slot.id)">
+                Prenota
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

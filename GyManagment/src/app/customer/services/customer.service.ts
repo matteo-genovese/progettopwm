@@ -43,7 +43,7 @@ export class CustomerService {
 
   getAvailableSlots(trainerId: number, date: string): Observable<any[]> {
     return this.http.get<ApiResponse<any[]>>(
-      `${this.baseUrl}/customer/slots?trainer_id=${trainerId}&date=${date}`
+      `${this.baseUrl}/customer/slots?trainer_id=${trainerId}`
     ).pipe(
       map(response => response.data || []),
       catchError(error => {
