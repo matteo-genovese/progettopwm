@@ -56,7 +56,7 @@
                   <ion-item 
                     button 
                     detail 
-                    (click)="assignCustomerToTrainer(trainer.id, customer)"
+                    (click)="assignTrainerToCustomer(trainer.id, customer)"
                     *ngFor="let customer of customers">
                     {{ customer.full_name || customer.username }}
                   </ion-item>

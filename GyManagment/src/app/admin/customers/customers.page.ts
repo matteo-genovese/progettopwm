@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { 
   IonHeader, 
   IonToolbar, 
@@ -54,6 +55,7 @@ export class CustomersPage implements OnInit {
 
   constructor(private authService: AuthService) {
     addIcons({ fitnessOutline, mailOutline, callOutline, calendarOutline, barbell });
+    
   }
 
   ngOnInit() {
@@ -106,8 +108,12 @@ export class CustomersPage implements OnInit {
     this.selectedCustomerId = null;
   }
 
-  assignTrainerToCustomer(customerId: number, trainer: any) {
-    // Qui aggiungi la logica per assegnare il trainer al cliente
-    console.log('Assegna', trainer, 'al cliente', customerId);
+ assignTrainerToCustomer(trainerId: number, customer: any) {
+    this.authService.assignTrainerToCustomer(customer.id, trainerId).subscribe({
+      next: (response) => { /* ... */ },
+      error: (error) => { /* ... */ }
+    });
   }
+
+
 }

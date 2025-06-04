@@ -53,11 +53,8 @@
                   <span class="close-x"></span>
                 </div>
                 <ion-list>
-                  <ion-item 
-                    button 
-                    detail 
-                    (click)="assignTrainerToCustomer(customer.id, trainer)"
-                    *ngFor="let trainer of trainers">
+                  <ion-item button detail (click)="assignTrainerToCustomer(customer.id, trainer)" 
+                  *ngFor="let trainer of trainers">
                     {{ trainer.full_name || trainer.username }}
                   </ion-item>
                 </ion-list>
