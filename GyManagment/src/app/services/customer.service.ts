@@ -98,10 +98,6 @@ export class CustomerService {
     return false;
   }
 
- 
-
-  
-
   getAllBookings(): Observable<any[]> {
     return this.getCustomerDashboard().pipe(
       map(data => data.upcoming_bookings || [])
