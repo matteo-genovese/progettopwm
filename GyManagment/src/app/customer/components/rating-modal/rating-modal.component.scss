@@ -14,15 +14,44 @@
 .stars-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin: 20px 0;
+  pointer-events: auto !important;
+  z-index: 10;
+}
+
+.star {
+  cursor: pointer;
+  padding: 10px;
+  z-index: 100; // Assicura che sia sopra altri elementi
+  position: relative;
   
-  .star {
-    padding: 0.5rem;
-    cursor: pointer;
-    
-    ion-icon {
-      font-size: 2.5rem;
-    }
+  ion-icon {
+    font-size: 32px; // Aumenta la dimensione delle icone
+    visibility: visible !important; // Forza la visibilità
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  // Override per gli stati filled e outline
+  &.filled ion-icon {
+    color: var(--ion-color-warning);
+  }
+  
+  &.outline ion-icon {
+    color: var(--ion-color-medium);
+  }
+}
+
+.star-symbol {
+  font-size: 32px;
+  cursor: pointer;
+  
+  &.filled {
+    color: #FFC107; // Colore warning di Ionic
+  }
+  
+  &:not(.filled) {
+    color: #888888; // Colore medium di Ionic
   }
 }
 

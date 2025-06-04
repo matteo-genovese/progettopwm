@@ -50,7 +50,7 @@
   </div>
 
   <div class="trainers-grid" *ngIf="!isLoading">
-    <ion-card *ngFor="let trainer of filteredTrainers" class="trainer-card" (click)="viewTrainerDetail(trainer.id)">
+    <ion-card *ngFor="let trainer of filteredTrainers" class="trainer-card">
       <div class="trainer-avatar">
         <ion-icon name="person-outline" size="large"></ion-icon>
       </div>
@@ -62,9 +62,9 @@
           <span>{{ trainer.specialization }}</span>
         </div>
         
-        <div class="trainer-rating" *ngIf="trainer.rating">
+        <div class="trainer-rating" *ngIf="trainer.avg_rating">
           <ion-icon name="star-outline"></ion-icon>
-          <span>{{ trainer.rating }} / 5</span>
+          <span>{{ trainer.avg_rating }} / 5</span>
         </div>
         
         <ion-button expand="block" size="small" class="view-slots-btn" (click)="$event.stopPropagation(); openSlotsModal(trainer)">

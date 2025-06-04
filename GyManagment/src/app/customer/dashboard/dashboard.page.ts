@@ -26,7 +26,7 @@ import {
   personOutline
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { CustomerService } from '../..//services/customer.service';
+import { CustomerService } from '../../services/customer.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -78,6 +78,23 @@ export class DashboardPage implements OnInit {
 
   loadDashboardData() {
     this.isLoading = true;
+    
+    this.customerService.getCustomerDashboard().subscribe({
+      next: (data) => {
+        console.log('Dashboard data received:', data);
+        this.upcomingBookings = (data.upcoming_bookings || []).sort((a: any, b: any) => {
+          return new Date(a.start_time).getTime() - new Date(b.start_time).getTime();
+        });
+        this.myTrainer = data.trainer || null;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading dashboard data:', error);
+        this.upcomingBookings = [];
+        this.myTrainer = null;
+        this.isLoading = false;
+      }
+    });
   }
 
   doRefresh(event: any) {

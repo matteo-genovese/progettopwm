@@ -97,10 +97,6 @@ export class TrainersPage implements OnInit {
     }, 1000);
   }
 
-  viewTrainerDetail(trainerId: number) {
-    this.router.navigate(['/customer/trainers', trainerId]);
-  }
-
   applyFilters() {
     this.filteredTrainers = this.trainers.filter(trainer => {
       const matchesSearch = this.searchTerm ? 

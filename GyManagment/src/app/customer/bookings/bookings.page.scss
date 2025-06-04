@@ -1,0 +1,56 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+ion-segment {
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  
+  ion-icon {
+    font-size: 64px;
+    margin-bottom: 1rem;
+    color: var(--ion-color-medium);
+  }
+  
+  h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  p {
+    margin: 0.5rem 0 1.5rem;
+    color: var(--ion-color-medium);
+  }
+}
+
+.booking-details {
+  margin-bottom: 1rem;
+  
+  p {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    
+    ion-icon {
+      margin-right: 0.5rem;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+ion-card {
+  margin-bottom: 1rem;
+}

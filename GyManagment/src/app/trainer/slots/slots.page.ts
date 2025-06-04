@@ -69,7 +69,6 @@ export class SlotsPage implements OnInit {
     });
   }
 
-// Inserisci questa funzione DENTRO la classe SlotsPage
   private formatDate(dateStr: string): string {
     const d = new Date(dateStr);
     const pad = (n: number) => n < 10 ? '0' + n : n;

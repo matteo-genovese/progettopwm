@@ -15,7 +15,9 @@
     
     <div class="stars-container">
       <div class="star" *ngFor="let star of getStars()" (click)="setRating(star.value)">
-        <ion-icon [name]="star.filled ? 'star' : 'star-outline'" [color]="star.filled ? 'warning' : 'medium'"></ion-icon>
+        <span class="star-symbol" [ngClass]="{'filled': star.filled}">
+          {{ star.filled ? '★' : '☆' }}
+        </span>
       </div>
     </div>
     

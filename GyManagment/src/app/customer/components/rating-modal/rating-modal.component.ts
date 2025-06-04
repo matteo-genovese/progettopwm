@@ -11,12 +11,12 @@ import {
   IonItem,
   IonLabel,
   IonTextarea,
-  ModalController,
   IonIcon
 } from '@ionic/angular/standalone';
+import { ModalController } from '@ionic/angular/standalone';
+import { CustomerService } from '../../../services/customer.service';
 import { addIcons } from 'ionicons';
 import { closeOutline, starOutline, star } from 'ionicons/icons';
-import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-rating-modal',
@@ -63,27 +63,27 @@ export class RatingModalComponent {
     }
 
     this.isSubmitting = true;
-	this.customerService.rateTrainer(this.trainerId, this.rating, this.comment).subscribe({
-      next: (response) => {
-        this.isSubmitting = false;
-        this.modalCtrl.dismiss({
-          rated: true,
-          rating: this.rating
-        });
-      },
-      error: (error) => {
-        this.isSubmitting = false;
-        console.error('Error submitting rating:', error);
-      }
-    });
+    this.customerService.rateTrainer(this.trainerId, this.rating, this.comment).subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          this.modalCtrl.dismiss({
+            rated: true,
+            rating: this.rating
+          });
+        },
+        error: (error) => {
+          this.isSubmitting = false;
+          console.error('Error submitting rating:', error);
+        }
+      });
   }
 
   getStars() {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push({
-        filled: i <= this.rating,
-        value: i
+        value: i,
+        filled: i <= this.rating
       });
     }
     return stars;
