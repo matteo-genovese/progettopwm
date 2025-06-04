@@ -38,6 +38,7 @@ import { closeOutline, starOutline, star } from 'ionicons/icons';
     IonIcon
   ]
 })
+
 export class RatingModalComponent {
   @Input() trainerId!: number;
   rating: number = 0;
