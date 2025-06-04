@@ -3,7 +3,7 @@ import { TrainerService } from '../../services/trainer.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonButton, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime, IonIcon
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -12,39 +12,30 @@ import {
   styleUrls: ['./slots.page.scss'],
   standalone: true,
   imports: [
+    IonIcon,
     CommonModule,
     FormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonButton, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime
+    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime
   ]
 })
 export class SlotsPage implements OnInit {
-  slots: any[] = [];
+  slotDate: string = '';
+  startTime: string = '';
+  endTime: string = '';
   newSlot = { start_time: '', end_time: '', max_clients: 1 };
   isLoading = false;
   error: string | null = null;
+  minDate = new Date().toISOString();
 
   constructor(private trainerService: TrainerService) {}
 
-  ngOnInit() {
-    this.loadSlots();
-  }
-
-  loadSlots() {
-    this.isLoading = true;
-    this.error = null;
-    this.trainerService.getSchedule().subscribe({
-      next: (data) => {
-        this.slots = data;
-        this.isLoading = false;
-      },
-      error: () => {
-        this.error = 'Errore nel caricamento degli slot';
-        this.isLoading = false;
-      }
-    });
-  }
+  ngOnInit() {}
 
   addSlot() {
+    // Componi le date/ore in formato ISO
+    this.newSlot.start_time = this.combineDateTime(this.slotDate, this.startTime);
+    this.newSlot.end_time = this.combineDateTime(this.slotDate, this.endTime);
+
     if (!this.newSlot.start_time || !this.newSlot.end_time || !this.newSlot.max_clients) return;
     this.isLoading = true;
     this.error = null;
@@ -57,7 +48,9 @@ export class SlotsPage implements OnInit {
 
     this.trainerService.createSlot(slotToSend).subscribe({
       next: () => {
-        this.loadSlots();
+        this.slotDate = '';
+        this.startTime = '';
+        this.endTime = '';
         this.newSlot = { start_time: '', end_time: '', max_clients: 1 };
         this.isLoading = false;
       },
@@ -69,7 +62,16 @@ export class SlotsPage implements OnInit {
     });
   }
 
-// Inserisci questa funzione DENTRO la classe SlotsPage
+  // Combina data e ora in una stringa ISO
+  private combineDateTime(date: string, time: string): string {
+    if (!date || !time) return '';
+    const d = new Date(date);
+    const t = new Date(time);
+    d.setHours(t.getHours(), t.getMinutes(), 0, 0);
+    return d.toISOString();
+  }
+
+  // Formatta la data per il backend (YYYY-MM-DD HH:mm:00)
   private formatDate(dateStr: string): string {
     const d = new Date(dateStr);
     const pad = (n: number) => n < 10 ? '0' + n : n;
