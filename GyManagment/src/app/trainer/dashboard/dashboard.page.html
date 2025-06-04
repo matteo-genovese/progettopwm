@@ -10,32 +10,75 @@
     <p>Caricamento dashboard...</p>
   </div>
 
-  <ion-card *ngIf="dashboardData">
+  <ion-card class="welcome-card" *ngIf="dashboardData">
     <ion-card-header>
-      <ion-card-title>Benvenuto, {{ dashboardData.trainer_info.full_name }}</ion-card-title>
+      <div class="welcome-header">
+        <ion-avatar class="welcome-avatar">
+          <ion-icon name="person-circle-outline" size="large" color="primary"></ion-icon>
+        </ion-avatar>
+        <div>
+          <ion-card-title>
+            Benvenuto, {{ dashboardData.trainer_info.full_name }}
+          </ion-card-title>
+          <p class="welcome-role">
+            Allenatore • {{ dashboardData.trainer_info.specialization }}
+          </p>
+        </div>
+      </div>
     </ion-card-header>
     <ion-card-content>
-      <p>Specializzazione: {{ dashboardData.trainer_info.specialization }}</p>
-      <p>Max clienti per slot: {{ dashboardData.trainer_info.max_clients_per_slot }}</p>
-      <p>Slot futuri: {{ dashboardData.upcoming_sessions.length }}</p>
-      <p>Clienti totali: {{ dashboardData.clients.length }}</p>
+      <div class="welcome-message">
+        <ion-icon name="barbell" color="secondary"></ion-icon>
+        <span>Pronto a motivare i tuoi clienti oggi?</span>
+      </div>
+      <div class="welcome-stats">
+        <div class="stat">
+          <ion-icon name="calendar-outline" color="primary"></ion-icon>
+          <span>{{ dashboardData.upcoming_sessions.length }}</span>
+          <p>Slot futuri</p>
+        </div>
+        <div class="stat">
+          <ion-icon name="people-outline" color="secondary"></ion-icon>
+          <span>{{ dashboardData.clients.length }}</span>
+          <p>Clienti totali</p>
+        </div>
+        <div class="stat">
+          <ion-icon name="people-outline" color="tertiary"></ion-icon>
+          <span>{{ dashboardData.trainer_info.max_clients_per_slot }}</span>
+          <p>Max clienti/slot</p>
+        </div>
+      </div>
     </ion-card-content>
   </ion-card>
 
   <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length > 0">
     <ion-card-header>
-      <ion-card-title>Prossimi slot</ion-card-title>
+      <ion-card-title>
+        <ion-icon name="calendar-outline" style="margin-right: 8px;"></ion-icon>
+        Prossimi slot
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let slot of dashboardData.upcoming_sessions">
-          <ion-label>
-            <h3>{{ slot.start_time }} - {{ slot.end_time }}</h3>
-            <p>Max clienti: {{ slot.max_clients }}</p>
-            <p>Prenotati: {{ slot.booked_clients }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+      <div class="scrollable-slots-list">
+        <ion-list lines="none">
+          <ion-item *ngFor="let slot of dashboardData.upcoming_sessions">
+            <ion-label>
+              <h3 style="margin-bottom: 4px;">
+                <ion-icon name="time-outline" style="vertical-align: middle; margin-right: 4px;" color="primary"></ion-icon>
+                {{ slot.start_time | date:'dd/MM/yyyy HH:mm' }} - {{ slot.end_time | date:'HH:mm' }}
+              </h3>
+              <p>
+                <ion-icon name="people-outline" style="vertical-align: middle; margin-right: 4px;" color="secondary"></ion-icon>
+                Max clienti: {{ slot.max_clients }}
+              </p>
+              <p>
+                <ion-icon name="person-add-outline" style="vertical-align: middle; margin-right: 4px;" color="tertiary"></ion-icon>
+                Prenotati: {{ slot.booked_clients }}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-card-content>
   </ion-card>
 

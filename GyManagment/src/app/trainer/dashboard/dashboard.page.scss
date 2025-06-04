@@ -1,0 +1,108 @@
+.scrollable-slots-list {
+  max-height: 270px; // circa 3 slot, regola se necessario
+  overflow-y: auto;
+  margin-bottom: 0.5rem;
+
+  ion-item {
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    background: var(--ion-background-color, #fff);
+    transition: box-shadow 0.2s;
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ion-color-primary);
+    }
+    p {
+      margin: 0.15rem 0;
+      color: var(--ion-color-medium);
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.welcome-card {
+  margin-bottom: 24px;
+  border-radius: 14px;
+  background: var(--ion-color-secondary-tint);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  color: #111;
+
+  ion-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ion-color-primary);
+    margin-bottom: 0.2rem;
+  }
+
+  .welcome-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .welcome-avatar {
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .welcome-role {
+    font-size: 0.95rem;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+
+  .welcome-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--ion-color-dark);
+  }
+
+  .welcome-stats {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.7rem 1.1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      min-width: 80px;
+
+      ion-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.2rem;
+      }
+      span {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--ion-color-primary);
+      }
+      p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--ion-color-medium);
+      }
+    }
+  }
+}
