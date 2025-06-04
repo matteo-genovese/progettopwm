@@ -138,4 +138,13 @@ export class AuthService {
       })
     );
   }
+
+  assignTrainerToCustomer(customerId: number, trainerId: number) {
+    return this.http.post<any>('http://localhost:5000/assign_trainer', {
+      customer_id: customerId,
+      trainer_id: trainerId
+    });
+  }
+
+  
 }

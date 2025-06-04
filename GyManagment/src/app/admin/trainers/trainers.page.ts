@@ -19,7 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { peopleOutline } from 'ionicons/icons';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-trainers',
@@ -121,8 +121,11 @@ export class TrainersPage implements OnInit {
     this.selectedTrainerId = null;
   }
 
-  assignCustomerToTrainer(trainerId: number, customer: any) {
-    // Qui aggiungi la logica per assegnare il customer al trainer
-    console.log('Assegna', customer, 'al trainer', trainerId);
+  assignTrainerToCustomer(trainerId: number, customer: any) {
+    this.authService.assignTrainerToCustomer(customer.id, trainerId).subscribe({
+      next: (response) => { /* ... */ },
+      error: (error) => { /* ... */ }
+    });
   }
+
 }

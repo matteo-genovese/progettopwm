@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular/standalone';
 import { RatingModalComponent } from '../customer/components/rating-modal/rating-modal.component';
 
+
 interface ApiResponse<T> {
   data: T;
   status: string;
@@ -18,7 +19,8 @@ export class CustomerService {
 
   constructor(
     private http: HttpClient,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    
   ) { }
 
   getCustomerDashboard(): Observable<any> {
@@ -95,6 +97,10 @@ export class CustomerService {
     }
     return false;
   }
+
+ 
+
+  
 
   getAllBookings(): Observable<any[]> {
     return this.getCustomerDashboard().pipe(
