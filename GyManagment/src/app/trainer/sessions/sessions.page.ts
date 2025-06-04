@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainerService } from '../../services/trainer.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonCard, IonCardContent, IonIcon, IonListHeader } from '@ionic/angular/standalone';
+  IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonCard, IonCardContent, IonIcon, IonListHeader, IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonButton, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-sessions',
   templateUrl: './sessions.page.html',
   styleUrls: ['./sessions.page.scss'],
   standalone: true,
-  imports: [IonListHeader, 
-    IonIcon,
+  imports: [IonCardTitle, 
     CommonModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonCard, IonCardContent
+    FormsModule,
+    IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonCard, IonCardContent,
+    IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonListHeader, IonButton, IonCardHeader, IonCardSubtitle
   ]
 })
 export class SessionsPage implements OnInit {
@@ -21,6 +23,7 @@ export class SessionsPage implements OnInit {
   sessions: any[] = [];
   upcomingSessions: any[] = [];
   pastSessions: any[] = [];
+  selectedTab: 'upcoming' | 'past' = 'upcoming';
 
   constructor(private trainerService: TrainerService) {}
 
@@ -37,10 +40,10 @@ export class SessionsPage implements OnInit {
         const now = new Date();
         this.upcomingSessions = this.sessions.filter(
           s => new Date(s.end_time) >= now
-        );
+        ).sort((a, b) => new Date(a.start_time).getTime() - new Date(b.start_time).getTime());
         this.pastSessions = this.sessions.filter(
           s => new Date(s.end_time) < now
-        );
+        ).sort((a, b) => new Date(b.start_time).getTime() - new Date(a.start_time).getTime());
         this.isLoading = false;
       },
       error: () => {
@@ -48,5 +51,16 @@ export class SessionsPage implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  segmentChanged() {
+    // Placeholder per eventuali azioni future
+  }
+
+  doRefresh(event: any) {
+    this.loadSessions();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
 }

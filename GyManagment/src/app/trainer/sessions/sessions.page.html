@@ -1,84 +1,111 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Allenamenti Schedulati</ion-title>
+    <ion-title>Le Mie Sessioni</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div *ngIf="isLoading" class="loading-container ion-text-center">
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="loadSessions(); $event.target.complete();">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-segment [(ngModel)]="selectedTab" (ionChange)="segmentChanged()">
+    <ion-segment-button value="upcoming">
+      <ion-label>Prossime</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="past">
+      <ion-label>Passate</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="isLoading" class="loading-container">
     <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento allenamenti...</p>
+    <p>Caricamento sessioni...</p>
   </div>
 
-  <ion-card *ngIf="error" color="danger">
-    <ion-card-content>
-      <p>{{ error }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Allenamenti futuri/disponibili -->
-  <ion-list *ngIf="!isLoading && upcomingSessions.length > 0">
-    <ion-list-header>
-      <ion-label>
-        <ion-icon name="calendar-outline" color="primary" style="margin-right: 6px;"></ion-icon>
-        Allenamenti futuri
-      </ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let session of upcomingSessions">
-      <ion-label>
-        <h3>
-          <ion-icon name="time-outline" color="primary" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          {{ session.start_time | date:'dd/MM/yyyy HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
-        </h3>
-        <p>
-          <ion-icon name="people-outline" color="secondary" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          Max clienti: {{ session.max_clients }}
-        </p>
-        <p>
-          <ion-icon name="person-add-outline" color="tertiary" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          Prenotati: {{ session.booked_clients }}
-        </p>
-        <p>
-          <ion-icon name="person-outline" color="primary" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          Clienti: {{ session.client_names || 'Nessuno' }}
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <div *ngIf="!isLoading && upcomingSessions.length === 0" class="ion-text-center">
-    <p>Nessun allenamento futuro.</p>
+  <div *ngIf="error" class="empty-state">
+    <ion-icon name="alert-circle-outline" size="large"></ion-icon>
+    <h3>{{ error }}</h3>
   </div>
 
-  <!-- Allenamenti passati -->
-  <ion-list *ngIf="!isLoading && pastSessions.length > 0">
-    <ion-list-header>
-      <ion-label>
-        <ion-icon name="time-outline" color="medium" style="margin-right: 6px;"></ion-icon>
-        Allenamenti passati
-      </ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let session of pastSessions">
-      <ion-label>
-        <h3>
-          <ion-icon name="time-outline" color="medium" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          {{ session.start_time | date:'dd/MM/yyyy HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
-        </h3>
-        <p>
-          <ion-icon name="people-outline" color="secondary" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          Max clienti: {{ session.max_clients }}
-        </p>
-        <p>
-          <ion-icon name="person-add-outline" color="tertiary" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          Prenotati: {{ session.booked_clients }}
-        </p>
-        <p>
-          <ion-icon name="person-outline" color="primary" style="vertical-align: middle; margin-right: 4px;"></ion-icon>
-          Clienti: {{ session.client_names || 'Nessuno' }}
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <div *ngIf="!isLoading && pastSessions.length === 0" class="ion-text-center">
-    <p>Nessun allenamento passato.</p>
+  <div *ngIf="!isLoading" [ngSwitch]="selectedTab">
+    <!-- Prossime sessioni -->
+    <div *ngSwitchCase="'upcoming'">
+      <div class="empty-state" *ngIf="upcomingSessions.length === 0">
+        <ion-icon name="calendar-outline" size="large"></ion-icon>
+        <h3>Nessuna sessione futura</h3>
+        <p>Crea uno slot per visualizzarlo qui</p>
+        <ion-button expand="block" routerLink="../slots">
+          Crea slot
+        </ion-button>
+      </div>
+
+      <ion-card *ngFor="let session of upcomingSessions">
+        <ion-card-header>
+          <ion-card-title>
+            {{ session.client_names || 'Nessun cliente' }}
+          </ion-card-title>
+          <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="booking-details">
+            <p>
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
+            </p>
+            <p>
+              <ion-icon name="time-outline"></ion-icon>
+              {{ session.start_time | date:'HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
+            </p>
+            <p>
+              <ion-icon name="people-outline"></ion-icon>
+              Max clienti: {{ session.max_clients }}
+            </p>
+            <p>
+              <ion-icon name="person-add-outline"></ion-icon>
+              Prenotati: {{ session.booked_clients }}
+            </p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Sessioni passate -->
+    <div *ngSwitchCase="'past'">
+      <div class="empty-state" *ngIf="pastSessions.length === 0">
+        <ion-icon name="time-outline" size="large"></ion-icon>
+        <h3>Nessuna sessione passata</h3>
+        <p>Le sessioni passate saranno visualizzate qui</p>
+      </div>
+
+      <ion-card *ngFor="let session of pastSessions">
+        <ion-card-header>
+          <ion-card-title>
+            {{ session.client_names || 'Nessun cliente' }}
+          </ion-card-title>
+          <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="booking-details">
+            <p>
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
+            </p>
+            <p>
+              <ion-icon name="time-outline"></ion-icon>
+              {{ session.start_time | date:'HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
+            </p>
+            <p>
+              <ion-icon name="people-outline"></ion-icon>
+              Max clienti: {{ session.max_clients }}
+            </p>
+            <p>
+              <ion-icon name="person-add-outline"></ion-icon>
+              Prenotati: {{ session.booked_clients }}
+            </p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
