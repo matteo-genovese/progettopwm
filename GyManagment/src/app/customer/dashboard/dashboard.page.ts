@@ -113,7 +113,6 @@ export class DashboardPage implements OnInit {
   }
 
   rateTrainer(trainerId: number) {
-    // Implementeremo questa funzione più avanti
     this.customerService.openRatingModal(trainerId);
   }
 }
