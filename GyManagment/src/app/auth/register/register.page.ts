@@ -236,14 +236,4 @@ export class RegisterPage {
 
     await alert.present();
   }
-
-  private async showToast(message: string, color: string = 'success') {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      color: color,
-      position: 'top'
-    });
-    await toast.present();
-  }
 }
