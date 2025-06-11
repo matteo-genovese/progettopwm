@@ -39,4 +39,14 @@ export class DashboardPage implements OnInit {
       }
     });
   }
+  
+  calculateAverageRating(data: { ratings: { rating: number }[] }): number {
+    const ratings = data.ratings;
+    if (!ratings || ratings.length === 0) return 0;
+
+    const somma = ratings.reduce((acc, curr) => acc + curr.rating, 0);
+    const media = somma / ratings.length;
+    return parseFloat(media.toFixed(1));
+}
+
 }
