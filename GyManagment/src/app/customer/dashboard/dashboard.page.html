@@ -94,6 +94,30 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      <div class="loading-placeholder" *ngIf="isLoading">
+        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
+      </div>
+
+      <!-- Usa la stessa struttura booking-container/booking-item per i trainer -->
+      <div class="booking-container2" *ngIf="!isLoading && trainers && trainers.length > 0">
+        <div class="booking-item" *ngFor="let trainer of trainers.slice(0, 6)">
+          <h2>{{ trainer.full_name }}</h2>
+          <p>
+            <ion-icon name="fitness-outline"></ion-icon>
+            {{ trainer.specialization }}
+          </p>
+          <p>
+            <ion-icon name="star-outline"></ion-icon>
+            {{ trainer.rating || 'N/A' }}
+          </p>
+        </div>
+      </div>
+
+      <div class="empty-state" *ngIf="!isLoading && (!trainers || trainers.length === 0)">
+        <p>Nessun trainer disponibile</p>
+      </div>
+      
       <ion-button expand="block" class="view-all" (click)="viewAllTrainers()">
         <div class="button-content">
           <div class="main-text">Sfoglia tutti i trainers</div>

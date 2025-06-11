@@ -58,6 +58,7 @@ export class DashboardPage implements OnInit {
   upcomingBookings: any[] = [];
   isLoading = false;
   myTrainer: any = null;
+  trainers: any[] = [];
 
   constructor(
     private authService: AuthService,
@@ -93,6 +94,16 @@ export class DashboardPage implements OnInit {
         this.upcomingBookings = [];
         this.myTrainer = null;
         this.isLoading = false;
+      }
+    });
+
+    this.customerService.getAvailableTrainers().subscribe({
+      next: (data) => {
+        this.trainers = data.slice(0, 6); // Mostra solo i primi 6 trainer
+      },
+      error: (err) => {
+        console.error('Errore nel caricamento dei trainer:', err);
+        this.trainers = [];
       }
     });
   }
