@@ -1,3 +1,14 @@
+::ng-deep ion-modal {
+  --border-radius: 20px;
+  --box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  
+  &.rating-modal-class .modal-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+}
+
+
 .trainer-info {
   margin-bottom: 1.5rem;
   text-align: center;
