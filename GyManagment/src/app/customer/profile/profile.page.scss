@@ -35,6 +35,7 @@ ion-card {
   overflow: hidden;
   margin: 0 auto 1.5rem;
   
+  
   width: 80%;
 
   &:hover {
@@ -62,8 +63,9 @@ ion-item {
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   width: 28%;
   min-width: 140px; 
-  max-width: 180px; 
+  max-width: 320px; 
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1.8px solid #5f5555;
 
   &::part(native) {
     border-radius: 8px;
