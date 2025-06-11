@@ -1,10 +1,12 @@
 .trainer-info {
   margin-bottom: 1.5rem;
+  text-align: center;
   
   h2 {
     font-size: 1.4rem;
     font-weight: 600;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.5rem 0;
+    color: #111;
   }
   
   p {
@@ -15,9 +17,11 @@
   .rating {
     display: flex;
     align-items: center;
+    justify-content: center;
     
     ion-icon {
       margin-right: 0.25rem;
+      color: #FFC107;
     }
     
     span {
@@ -28,14 +32,58 @@
 
 .date-selector {
   margin-bottom: 1.5rem;
-  border: 1px solid var(--ion-color-light);
+  border: 2px solid #5f5555;
   border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 12px 15px;
+  
+
+  ion-label, .date-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+ 
+  .date-value, ion-datetime-button, ion-datetime {
+    cursor: pointer;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.2s ease;
+    
+
+    &:after {
+      content: "📅";
+      margin-left: 8px;
+      font-size: 14px;
+    }
+    
+
+    &:hover {
+      border-color: #dc3545;
+      transform: translateY(-2px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
 }
 
 h3 {
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0.5rem 0 1rem;
+  text-align: center;
+  color: #111;
 }
 
 .loading-container {
@@ -46,31 +94,48 @@ h3 {
   
   ion-spinner {
     margin-bottom: 1rem;
+    color: var(--ion-color-primary);
   }
   
   p {
     color: var(--ion-color-medium);
+    font-weight: 500;
   }
 }
 
 .empty-slots {
   text-align: center;
   padding: 2rem 0;
+  
+  p {
+    color: var(--ion-color-medium);
+    font-weight: 500;
+  }
 }
 
 .date-card {
   margin-bottom: 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border: 1.5px solid var(--ion-color-secondary-shade);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
   
   ion-card-header {
     padding-bottom: 0.5rem;
+    background-color: rgba(255, 193, 7, 0.1);
   }
   
   ion-card-title {
     font-size: 1.1rem;
     font-weight: 600;
     text-transform: capitalize;
+    color: #dc3545;
   }
   
   ion-card-content {
@@ -82,9 +147,16 @@ h3 {
   --padding-start: 0;
   --inner-padding-end: 0;
   margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: background-color 0.2s ease;
   
   &:last-child {
     margin-bottom: 0;
+  }
+  
+  &:hover {
+    --background: rgba(255, 193, 7, 0.05);
   }
   
   .slot-info {
@@ -107,5 +179,100 @@ h3 {
       color: var(--ion-color-medium);
       margin-top: 0.25rem;
     }
+  }
+}
+
+.slots-container {
+  display: flex;
+  flex-direction: column;
+  border: 2.5px solid #5f5555;
+  border-radius: 12px; 
+  background-color: #ffffff;
+  margin: 0.5rem;
+  padding: 1.5rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 650px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ion-header ion-toolbar {
+  --background: #dc3545 !important; 
+  background: #dc3545 !important;
+  color: #fff !important;
+  
+  ion-title {
+    color: #fff !important;
+    text-align: center !important;
+    width: 100%;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+}
+
+ion-button {
+  --border-radius: 8px;
+  font-weight: 600;
+  height: 42px;
+  margin: 0.5rem auto;
+  --box-shadow: 0 3px 8px rgba(220, 53, 69, 0.3);
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    --box-shadow: 0 5px 12px rgba(220, 53, 69, 0.4);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+ion-content {
+  .slots-container {
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  .date-card {
+    animation: fadeIn 0.4s ease-out;
+    animation-fill-mode: both;
+  }
+}
+
+@media (max-width: 576px) {
+  .slots-container {
+    margin: 0.5rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .date-card {
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (min-height: 700px) {
+  .slots-container {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-height: 550px) {
+  .slots-container {
+    padding: 1rem;
+  }
+  
+  h3 {
+    margin: 0.2rem 0 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .trainer-info h2 {
+    font-size: 1.2rem;
+  }
+  
+  .date-selector {
+    margin-bottom: 1rem;
   }
 }

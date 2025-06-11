@@ -75,35 +75,31 @@
 }
 
 .bookings-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem;
-  justify-content: center; 
-  padding: 1rem;
-  background: transparent;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); // Crea una griglia con colonne adattive
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  background: var(--ion-color-secondary-tint);
+  border-radius: 8px;
   width: 95%;
-  margin: 0 auto;
+  margin: 1rem auto;
+  border: 2px solid #e0aa06; // Aggiunto bordo giallo scuro come in dashboard
 }
 
 .booking-card {
-  background: var(--ion-color-secondary-tint);
+  background: #ffffff;
   color: #111;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  width: 400px;
-  max-width: 100%;
+  width: 100%; // Invece di 90% per adattarsi alla griglia
   padding: 0;
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--ion-color-secondary-shade);
-  transition: box-shadow 0.3s, transform 0.3s;
+  border: 2.5px solid #5f5555; // Bordo più spesso per maggiore visibilità
   position: relative;
-  overflow: hidden;
-
-  &:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    transform: translateY(-4px) scale(1.02);
-  }
+  overflow: visible;
+  height: 100%; // Assicura che le card abbiano la stessa altezza in una riga
 }
 
 .booking-content {
@@ -121,9 +117,10 @@
 
   h2 {
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #111;
+    color: #dc3545;
+    text-transform: uppercase;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -165,19 +162,20 @@
 }
 
 .booking-details {
-  margin-bottom: 0.9rem;
+  margin: 0.5rem 0;
 
   p {
     display: flex;
     align-items: center;
     margin: 0.4rem 0;
-    color: var(--ion-color-medium);
-    font-size: 0.95rem;
-
+    color: #333;
+    font-size: 1.05rem;
+    font-weight: 500;
+    
     ion-icon {
       margin-right: 0.5rem;
       color: var(--ion-color-primary);
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       min-width: 20px;
     }
   }
@@ -258,10 +256,29 @@ ion-content {
   background-size: 14px 14px;
 }
 
+/* Stile specifico per il pulsante Valuta Trainer */
+ion-button[expand="block"] {
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  height: 38px; 
+  
+
+  display: flex;
+  justify-content: center;
+  
+
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
   .bookings-grid {
-    justify-content: center;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;
+    padding: 15px;
   }
   
   .booking-card {
@@ -270,6 +287,11 @@ ion-content {
 }
 
 @media (max-width: 480px) {
+  .bookings-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
   .booking-card {
     width: 100%;
   }
@@ -291,5 +313,46 @@ ion-content {
   
   .booking-stats {
     width: 100%;
+  }
+}
+
+ion-card-content {
+  padding: 15px;
+}
+
+ion-card-header {
+  padding: 15px 15px 0 15px;
+  
+  ion-card-title {
+    color: #dc3545;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  ion-card-subtitle {
+    color: #333;
+    font-weight: 600;
+  }
+}
+
+ion-button {
+  --background: var(--ion-color-primary); 
+  --color: #ffffff;
+  --border-color: var(--ion-color-primary);
+  --border-radius: 8px;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  --box-shadow: 0 2px 4px rgba(var(--ion-color-primary-rgb), 0.15);
+  transition: all 0.2s ease;
+
+  
+  
+  &:hover {
+    --background: var(--ion-color-primary);
+    --color: #fff;
+    --box-shadow: 0 4px 8px rgba(var(--ion-color-primary-rgb), 0.25);
+    transform: translateY(-2px);
+    
   }
 }
