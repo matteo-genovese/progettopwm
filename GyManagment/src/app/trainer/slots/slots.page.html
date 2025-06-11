@@ -21,40 +21,35 @@
               Data slot
             </label>
             <ion-datetime
+              class="minimal-calendar"
               presentation="date"
               [(ngModel)]="slotDate"
               name="slotDate"
               required
-              [min]="minDate">
+              [min]="minDate"
+              locale="it-IT"
+              showAdjacentDays="true"
+              firstDayOfWeek="1">
             </ion-datetime>
-            <div class="slot-times-row">
-              <div class="slot-time-group">
-                <label class="slot-label">
-                  <ion-icon name="time-outline" color="primary"></ion-icon>
-                  Ora inizio
-                </label>
-                <ion-datetime
-                  presentation="time"
-                  [(ngModel)]="startTime"
-                  name="startTime"
-                  required>
-                </ion-datetime>
+            
+            <!-- Orario inizio -->
+            <div class="time-field">
+              <div class="time-label">Orario Inizio:</div>
+              <div class="time-value" (click)="openStartTimePicker()">
+                {{ formatTime(startTime) }}
               </div>
-              <div class="slot-time-group">
-                <label class="slot-label">
-                  <ion-icon name="time-outline" color="secondary"></ion-icon>
-                  Ora fine
-                </label>
-                <ion-datetime
-                  presentation="time"
-                  [(ngModel)]="endTime"
-                  name="endTime"
-                  required>
-                </ion-datetime>
+            </div>
+            
+            <!-- Orario fine -->
+            <div class="time-field">
+              <div class="time-label">Orario Fine:</div>
+              <div class="time-value" (click)="openEndTimePicker()">
+                {{ formatTime(endTime) }}
               </div>
             </div>
           </div>
         </div>
+        
         <ion-item lines="none" class="max-clienti-item">
           <ion-icon name="people-outline" slot="start" color="tertiary"></ion-icon>
           <ion-label position="stacked">Max clienti</ion-label>
@@ -66,6 +61,7 @@
             required>
           </ion-input>
         </ion-item>
+        
         <ion-button expand="block" type="submit" [disabled]="isLoading">
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Aggiungi slot
@@ -84,4 +80,48 @@
       <p>{{ error }}</p>
     </ion-card-content>
   </ion-card>
+  
+  <!-- Popup per selezionare l'orario di inizio -->
+  <ion-modal 
+    [isOpen]="showStartTimePicker" 
+    [backdropDismiss]="true"
+    class="time-picker-modal">
+    <ng-template>
+      <div class="time-picker-container">
+        <ion-datetime
+          presentation="time"
+          [(ngModel)]="startTime"
+          locale="it-IT"
+          hourCycle="h23"
+          class="centered-time-picker"
+          preferWheel="true">
+        </ion-datetime>
+        <div class="time-picker-footer">
+          <ion-button fill="clear" (click)="showStartTimePicker = false">Conferma</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+  
+  <!-- Popup per selezionare l'orario di fine -->
+  <ion-modal 
+    [isOpen]="showEndTimePicker" 
+    [backdropDismiss]="true"
+    class="time-picker-modal">
+    <ng-template>
+      <div class="time-picker-container">
+        <ion-datetime
+          presentation="time"
+          [(ngModel)]="endTime"
+          locale="it-IT"
+          hourCycle="h23"
+          class="centered-time-picker"
+          preferWheel="true">
+        </ion-datetime>
+        <div class="time-picker-footer">
+          <ion-button fill="clear" (click)="showEndTimePicker = false">Conferma</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>

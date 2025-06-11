@@ -21,7 +21,7 @@
             Benvenuto, {{ dashboardData.trainer_info.full_name }}
           </ion-card-title>
           <p class="welcome-role">
-            Allenatore • {{ dashboardData.trainer_info.specialization }}
+            Trainer • {{ dashboardData.trainer_info.specialization }}
           </p>
         </div>
       </div>
@@ -38,14 +38,19 @@
           <p>Slot futuri</p>
         </div>
         <div class="stat">
-          <ion-icon name="people-outline" color="secondary"></ion-icon>
+          <ion-icon name="people-outline" color="tertiary"></ion-icon>
           <span>{{ dashboardData.clients.length }}</span>
           <p>Clienti totali</p>
         </div>
         <div class="stat">
-          <ion-icon name="people-outline" color="tertiary"></ion-icon>
+          <ion-icon name="happy-outline" color="tertiary"></ion-icon>
           <span>{{ dashboardData.trainer_info.max_clients_per_slot }}</span>
-          <p>Max clienti/slot</p>
+          <p>Max clienti</p>
+        </div>
+        <div class="stat">
+          <ion-icon name="star-outline" color="tertiary"></ion-icon>
+          <span>{{ calculateAverageRating(dashboardData) }}</span>
+          <p>Media Ratings</p>
         </div>
       </div>
     </ion-card-content>
