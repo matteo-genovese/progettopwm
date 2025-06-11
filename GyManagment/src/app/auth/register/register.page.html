@@ -70,7 +70,8 @@
                 <ng-container *ngIf="userData.role === 'trainer'">
                     <div class="informazioni">
                         <h4>Informazioni trainer</h4>
-                        <!-- Ruolo -->
+                        
+                        <!-- Scelta ruolo (per trainer)-->
                         <ion-item>
                             <ion-label position="stacked">Ruolo</ion-label>
                             <ion-select [(ngModel)]="userData.role" interface="alert" 
@@ -81,7 +82,9 @@
                                 <ion-select-option value="trainer">Trainer</ion-select-option>
                             </ion-select>
                         </ion-item>
+
                         <div class="fields-row">
+
                             <!-- Specializzazione -->
                             <ion-item>
                                 <ion-label position="stacked">Specializzazione</ion-label>
@@ -99,7 +102,7 @@
                             </ion-item>
                             
                             <!-- Max clienti per trainer -->
-                            <ion-item class="zero-margin-bottom">
+                            <ion-item>
                                 <ion-label position="stacked">Clienti massimi per trainer</ion-label>
                                 <ion-input type="number" [(ngModel)]="userData.max_clients_per_slot" name="maxClients" min="1" max="10" [disabled]="isLoading"></ion-input>
                             </ion-item>
@@ -107,13 +110,15 @@
                     </div>
                 </ng-container>
                 
-                <!-- CAMPI AGGIUNTIVI PER CUSTOMER -->
+                <!-- CAMPI AGGIUNTIVI PER CLIENTE -->
                 <ng-container *ngIf="userData.role === 'customer'">
 
                     <div class="informazioni">
                         <h4>Informazioni cliente</h4>
                         <ion-item>
                             <ion-label position="stacked">Ruolo</ion-label>
+
+                            <!-- Scelta ruolo (per cliente)-->
                             <ion-select [(ngModel)]="userData.role" interface="alert" 
                             okText="Conferma"
                             cancelText="Annulla"
@@ -123,7 +128,7 @@
                             </ion-select>
                         </ion-item>
 
-                        <!-- Trainer -->
+                        <!-- Scelta trainer -->
                         <ion-item>
                             <ion-label position="stacked">Trainer (opzionale)</ion-label>
                             <ion-select [(ngModel)]="userData.trainer_id" interface="alert" 
@@ -135,7 +140,7 @@
                                     {{ trainer.full_name }} ({{ trainer.specialization }})
                                 </ion-select-option>
                             </ion-select>
-                            <ion-spinner name="dots" *ngIf="isLoadingTrainers" class="trainer-spinner"></ion-spinner>
+                            <ion-spinner name="dots" *ngIf="isLoadingTrainers"></ion-spinner>
                         </ion-item>
                     </div>
 
