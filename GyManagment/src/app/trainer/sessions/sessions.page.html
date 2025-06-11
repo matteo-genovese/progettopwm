@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Le Mie Sessioni</ion-title>
+    <ion-title>Allenamenti</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,16 +11,16 @@
 
   <ion-segment [(ngModel)]="selectedTab" (ionChange)="segmentChanged()">
     <ion-segment-button value="upcoming">
-      <ion-label>Prossime</ion-label>
+      <ion-label>Prossimi</ion-label>
     </ion-segment-button>
     <ion-segment-button value="past">
-      <ion-label>Passate</ion-label>
+      <ion-label>Passati</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <div *ngIf="isLoading" class="loading-container">
     <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento sessioni...</p>
+    <p>Caricamento allenamenti...</p>
   </div>
 
   <div *ngIf="error" class="empty-state">
@@ -33,7 +33,7 @@
     <div *ngSwitchCase="'upcoming'">
       <div class="empty-state" *ngIf="upcomingSessions.length === 0">
         <ion-icon name="calendar-outline" size="large"></ion-icon>
-        <h3>Nessuna sessione futura</h3>
+        <h3>Nessun allenamento futuro</h3>
         <p>Crea uno slot per visualizzarlo qui</p>
         <ion-button expand="block" routerLink="../slots">
           Crea slot
@@ -74,8 +74,8 @@
     <div *ngSwitchCase="'past'">
       <div class="empty-state" *ngIf="pastSessions.length === 0">
         <ion-icon name="time-outline" size="large"></ion-icon>
-        <h3>Nessuna sessione passata</h3>
-        <p>Le sessioni passate saranno visualizzate qui</p>
+        <h3>Nessun allenamento passato</h3>
+        <p>Gli allenamenti passati saranno visualizzati qui</p>
       </div>
 
       <ion-card *ngFor="let session of pastSessions">
