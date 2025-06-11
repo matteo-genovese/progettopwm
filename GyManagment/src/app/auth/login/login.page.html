@@ -19,6 +19,12 @@
         </ion-input>
       </ion-item>
 
+      <div class="error-message" *ngIf="errorMessage">
+        <ion-text color="danger">
+          <p>{{ errorMessage }}</p>
+        </ion-text>
+      </div>
+
       <div class="button-section">
         <ion-button expand="block" type="submit" [disabled]="!loginForm.valid || isLoading">
           <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
@@ -38,12 +44,6 @@
         <div class="register-link">
           <p>Non hai un account? <a [routerLink]="['/register']">Registrati</a></p>
         </div>
-      </div>
-
-      <div class="error-message" *ngIf="errorMessage">
-        <ion-text color="danger">
-          <p>{{ errorMessage }}</p>
-        </ion-text>
       </div>
     </form>
   </div>
