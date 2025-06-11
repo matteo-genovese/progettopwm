@@ -1,56 +1,82 @@
-
-.responsive-70 {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-}
-
-@media (min-width: 1366px) {
-  .responsive-70 {
-    width: 70%; // Desktop/tablet: 70% larghezza
+.sezione-logo {
+  ion-icon {
+    color: var(--ion-color-primary);
+    margin-bottom: 1rem;
   }
-}
-.responsive-25 {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-}
 
-@media (min-width: 992px) {
-  .responsive-18 {
-    width: 18%; // Desktop/tablet: 70% larghezza
-  }
-}
-p {
-    color:var(--ion-color-medium);
-    font-size:1.2rem;
-}
-
-h1 {
+  h1 {
     margin: 0;
     font-size: 2rem;
     font-weight: bold;
     color: var(--ion-color-primary);
-}
-  
-ion-card-content ion-label {
-    --color:var(--ion-color-medium);
-    font-size:1rem;
-}
-ion-card {
-    box-shadow:
-    0px 3px 6px rgba(0,0,0,0.16),
-    0px 3px 6px rgba(0,0,0,0.23);
-    border-radius:10px;
-    transition: transform 0.15s;
+  }
 
-    &:hover {
-      transform: translateY(-4px) scale(1.02);
-    }
+  h2 {
+      font-size: 1.3rem;
+  }
+
+  p {
+    margin: 0.5rem 0 0 0;
+    color: var(--ion-color-medium);
+    font-size: 1rem;
+  }
 }
+
+// --- Riduce alcune dimensioni (e cambia padding) quando lo schermo è troppo piccolo ---
+@media (max-width: 992px) {
+	.sezione-logo {
+		h1 {
+			font-size: 1.5rem;
+		}
+    
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+	}
+}
+
+// --- Diminuisce lo spazio orizzontale a disposizione per schermi più larghi di 1366px ---
+@media (min-width: 1366px) {
+  .responsive-70 {
+    width: 70%;
+  }
+}
+
+// --- Diminuisce lo spazio orizzontale a disposizione per schermi più larghi di 992px ---
+@media (min-width: 992px) {
+  .responsive-18 {
+    width: 18%;
+  }
+}
+
+ion-card {
+  box-shadow:
+  0px 3px 6px rgba(0,0,0,0.16),
+  0px 3px 6px rgba(0,0,0,0.23);
+  border-radius:10px;
+  transition: transform 0.15s;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+}
+
+ion-card-content ion-label {
+  --color:var(--ion-color-medium);
+  font-size:1rem;
+}
+
 .icon-margin-right {
   margin-right: 15px;
 }
+
 .titolo-lista {
   font-weight: bold;
   font-size: 1em;
@@ -70,6 +96,7 @@ ion-content {
   background-size: 14px 14px;
 }
 
+// --- Sfondo bianco per il testo su sfondo a puà rosso ---
 .highlight-text {
   background: rgba(255,255,255,0.95);
   display: inline-block;
@@ -77,9 +104,10 @@ ion-content {
   max-width: 90vw;
 }
 
+// --- Rende tutte le landing card della stessa altezza a prescindere dal contenuto ---
 ion-row {
   display: flex;
-  align-items: stretch; // tutte le colonne stessa altezza
+  align-items: stretch;
 }
 
 ion-col {
@@ -87,10 +115,12 @@ ion-col {
   flex-direction: column;
 }
 
-ion-card {
-  flex: 1 1 auto; // il card riempie tutta l'altezza della colonna
-  display: flex;
-  flex-direction: column;
+ion-button {
+	--border-radius: 8px;
+	margin-bottom: 1rem;
+	font-weight: 500;
+  margin-left:5px;
+  margin-right:5px;
 }
 
 .bottoni-auth {
@@ -99,11 +129,7 @@ ion-card {
   margin: 1.5em 0;
 }
 
-.bottoni-auth ion-button {
-  margin-left:5px; // nessun margine tra i bottoni
-  margin-right:5px; // nessun margine tra i bottoni
-}
-
+// --- Mette i bottoni in colonna anzichè in fila se lo schermo è più piccolo di 922px ---
 @media (max-width: 992px) {
   .bottoni-auth {
     flex-direction: column;
@@ -122,9 +148,3 @@ ion-card {
 .landing-card-client {
   border:2px solid var(--ion-color-tertiary);
 }
-
-	ion-button {
-		--border-radius: 8px;
-		margin-bottom: 1rem;
-		font-weight: 500;
-	}

@@ -1,50 +1,61 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="login-container">
-    <div class="logo-section">
+  <div class="container-login">
+
+    <!-- Sezione logo -->
+    <div class="sezione-logo">
       <ion-icon name="barbell" size="large"></ion-icon>
       <h1>GyManagement</h1>
       <p>Accedi al tuo account</p>
     </div>
 
     <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+
+      <!-- Username -->
       <ion-item>
         <ion-label position="stacked">Username</ion-label>
         <ion-input type="text" [(ngModel)]="credentials.username" name="username" required [disabled]="isLoading">
         </ion-input>
       </ion-item>
 
+      <!-- Password -->
       <ion-item>
         <ion-label position="stacked">Password</ion-label>
         <ion-input type="password" [(ngModel)]="credentials.password" name="password" required [disabled]="isLoading">
         </ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="errorMessage">
+      <!-- Messaggio di errore -->
+      <div class="errore" *ngIf="errorMessage">
         <ion-text color="danger">
           <p>{{ errorMessage }}</p>
         </ion-text>
       </div>
 
-      <div class="button-section">
-        <ion-button expand="block" type="submit" [disabled]="!loginForm.valid || isLoading">
+      <div>
+        <!-- Tasto Accedi -->
+        <ion-button expand="block" color="primary" type="submit" [disabled]="!loginForm.valid || isLoading">
           <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
           <span *ngIf="!isLoading">Accedi</span>
           <span *ngIf="isLoading">Accesso in corso...</span>
         </ion-button>
 
-        <!-- Nuovo pulsante per accesso demo -->
+        <!-- Tasto Acccesso DEMO -->
         <ion-button expand="block" color="secondary" (click)="demoLogin()" [disabled]="isLoading">
           ACCESSO DEMO
         </ion-button>
 
+        <!-- Tasto Annulla -->
         <ion-button expand="block" fill="clear" (click)="goBack()" [disabled]="isLoading">
           Annulla
         </ion-button>
 
-        <div class="register-link">
+        <!-- Alternativa register -->
+        <div class="testo-register">
           <p>Non hai un account? <a [routerLink]="['/register']">Registrati</a></p>
         </div>
       </div>
+
     </form>
+
   </div>
 </ion-content>

@@ -36,9 +36,21 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 /* @import '@ionic/angular/css/palettes/dark.system.css'; */
 
+// --- Nasconde un elemento in schermi più piccoli di 768px ---
 .ion-hide-md-down {
   @media (max-width: 768px) {
     display: none !important;
   }
 }
 
+// --- Alert con bordi arrotondati ---
+ion-alert .alert-wrapper {
+  border-radius: 16px !important;
+}
+
+// -- Forza il colore rosso scuro per l'hover dei bottoni rossi ---
+ion-button[color="primary"] {
+  &:hover::part(native) {
+    background: var(--ion-color-primary-shade) !important;
+  }
+}

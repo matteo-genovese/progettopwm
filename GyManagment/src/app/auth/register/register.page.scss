@@ -1,4 +1,4 @@
-.register-container {
+.container-register {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -8,7 +8,14 @@
 	padding: 2rem 1rem;
 }
 
-.logo-section {
+// --- Riduce il padding quando lo schermo è più piccolo di 576px ---
+@media (max-width: 576px) {
+	.container-register {
+		padding: 1rem;
+	}
+}
+
+.sezione-logo {
 	text-align: center;
 	margin-bottom: 3rem;
 
@@ -31,10 +38,27 @@
 	}
 }
 
+// --- Riduce margin inferiore e dimensione di h1 quando lo schermo è più piccolo di 576px ---
+@media (max-width: 576px) {
+	.sezione-logo {
+		margin-bottom: 2rem;
+
+		h1 {
+			font-size: 1.5rem;
+		}
+	}
+}
+
+ion-button {
+	--border-radius: 8px;
+	margin-bottom: 1rem;
+	font-weight: 500;
+}
+
 ion-item {
 	box-shadow:
-    0px 3px 6px rgba(0,0,0,0.16),
-    0px 3px 6px rgba(0,0,0,0.23);
+    	0px 3px 6px rgba(0,0,0,0.16),
+    	0px 3px 6px rgba(0,0,0,0.23);
 	border-radius: 10px;
 	--background: var(--ion-color-light);
 	margin-bottom: 1rem;
@@ -42,21 +66,7 @@ ion-item {
 	margin-right: 1rem;
 }
 
-.button-section {
-	margin-top: 2rem;
-
-	ion-button {
-		--border-radius: 8px;
-		margin-bottom: 1rem;
-		font-weight: 500;
-	}
-
-	ion-button[fill="clear"] {
-		--color: var(--ion-color-medium);
-	}
-}
-
-.error-message {
+.errore {
 	margin-top: 1rem;
 	text-align: center;
 
@@ -70,32 +80,21 @@ ion-spinner {
 	margin-right: 8px;
 }
 
-ion-list {
-	background-color: transparent;
-}
-
-.login-link {
+.testo-login {
 	text-align: center;
 	margin-top: 1rem;
-
+	
 	a {
 		color: var(--ion-color-primary);
 		text-decoration: none;
 		font-weight: 500;
+		cursor: pointer;
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 }
 
-// Responsive design
-@media (max-width: 576px) {
-	.register-container {
-		padding: 1rem;
-	}
-
-	.logo-section {
-		margin-bottom: 2rem;
-
-		h1 {
-			font-size: 1.5rem;
-		}
-	}
+ion-list {
+	background-color: transparent;
 }
