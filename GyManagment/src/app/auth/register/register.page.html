@@ -10,100 +10,119 @@
 
         <form (ngSubmit)="onRegister()" #registerForm="ngForm">
             <h4>Dati account</h4>
-            <ion-list>
+            <div class="colonne-form">
+                <ion-list>
 
-                <!-- Nome completo -->
-                <ion-item>
-                    <ion-label position="stacked">Nome completo</ion-label>
-                    <ion-input type="text" [(ngModel)]="userData.full_name" name="fullName" required
-                        [disabled]="isLoading">
-                    </ion-input>
-                </ion-item>
+                    <!-- Username -->
+                    <ion-item>
+                        <ion-label position="stacked">Username</ion-label>
+                        <ion-input type="text" [(ngModel)]="userData.username" name="username" required
+                            [disabled]="isLoading">
+                        </ion-input>
+                    </ion-item>
 
-                <!-- Username -->
-                <ion-item>
-                    <ion-label position="stacked">Username</ion-label>
-                    <ion-input type="text" [(ngModel)]="userData.username" name="username" required
-                        [disabled]="isLoading">
-                    </ion-input>
-                </ion-item>
+                    <!-- Password -->
+                    <ion-item>
+                        <ion-label position="stacked">Password</ion-label>
+                        <ion-input type="password" [(ngModel)]="userData.password" name="password" required
+                            [disabled]="isLoading">
+                        </ion-input>
+                    </ion-item>
 
-                <!-- Email -->
-                <ion-item>
-                    <ion-label position="stacked">Email</ion-label>
-                    <ion-input type="email" [(ngModel)]="userData.email" name="email" required [disabled]="isLoading">
-                    </ion-input>
-                </ion-item>
-
-                <!-- Telefono -->
-                <ion-item>
-                    <ion-label position="stacked">Telefono</ion-label>
-                    <ion-input type="tel" [(ngModel)]="userData.phone" name="phone" required [disabled]="isLoading">
-                    </ion-input>
-                </ion-item>
-
-                <!-- Password -->
-                <ion-item>
-                    <ion-label position="stacked">Password</ion-label>
-                    <ion-input type="password" [(ngModel)]="userData.password" name="password" required
-                        [disabled]="isLoading">
-                    </ion-input>
-                </ion-item>
-
-                <!-- Conferma Password -->
-                <ion-item>
-                    <ion-label position="stacked">Conferma Password</ion-label>
-                    <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required
-                        [disabled]="isLoading">
-                    </ion-input>
-                </ion-item>
-
-                <!-- Ruolo -->
-                <ion-item>
-                    <ion-label position="stacked">Ruolo</ion-label>
-                    <ion-select [(ngModel)]="userData.role" interface="alert" 
-                    okText="Conferma"
-                    cancelText="Annulla"
-                    name="role" [disabled]="isLoading" (ionChange)="onRoleChange()">
-                        <ion-select-option value="customer">Cliente</ion-select-option>
-                        <ion-select-option value="trainer">Trainer</ion-select-option>
-                    </ion-select>
-                </ion-item>
+                    <!-- Conferma Password -->
+                    <ion-item>
+                        <ion-label position="stacked">Conferma Password</ion-label>
+                        <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required
+                            [disabled]="isLoading">
+                        </ion-input>
+                    </ion-item>
+                    
+                </ion-list>
                 
+                <ion-list>
+
+                    <!-- Email -->
+                    <ion-item>
+                        <ion-label position="stacked">Email</ion-label>
+                        <ion-input type="email" [(ngModel)]="userData.email" name="email" required [disabled]="isLoading">
+                        </ion-input>
+                    </ion-item>
+
+                    <!-- Nome completo -->
+                    <ion-item>
+                        <ion-label position="stacked">Nome completo</ion-label>
+                        <ion-input type="text" [(ngModel)]="userData.full_name" name="fullName" required
+                            [disabled]="isLoading">
+                        </ion-input>
+                    </ion-item>
+
+                    <!-- Telefono -->
+                    <ion-item>
+                        <ion-label position="stacked">Telefono</ion-label>
+                        <ion-input type="tel" [(ngModel)]="userData.phone" name="phone" required [disabled]="isLoading">
+                        </ion-input>
+                    </ion-item>
+
+                </ion-list>
+            </div>
+            
                 <!-- CAMPI AGGIUNTIVI PER TRAINER -->
                 <ng-container *ngIf="userData.role === 'trainer'">
-                    <div class="role-specific-fields">
+                    <div class="informazioni">
                         <h4>Informazioni trainer</h4>
-                        
-                        <!-- Specializzazione -->
+                        <!-- Ruolo -->
                         <ion-item>
-                            <ion-label position="stacked">Specializzazione</ion-label>
-                            <ion-select [(ngModel)]="userData.specialization" interface="alert"
+                            <ion-label position="stacked">Ruolo</ion-label>
+                            <ion-select [(ngModel)]="userData.role" interface="alert" 
                             okText="Conferma"
-                            cancelText="Annulla" 
-                            name="specialization" [disabled]="isLoading">
-                                <ion-select-option value="Fitness">Fitness</ion-select-option>
-                                <ion-select-option value="Bodybuilding">Bodybuilding</ion-select-option>
-                                <ion-select-option value="Yoga">Yoga</ion-select-option>
-                                <ion-select-option value="Pilates">Pilates</ion-select-option>
-                                <ion-select-option value="Cardio">Cardio</ion-select-option>
-                                <ion-select-option value="Crossfit">Crossfit</ion-select-option>
+                            cancelText="Annulla"
+                            name="role" [disabled]="isLoading" (ionChange)="onRoleChange()">
+                                <ion-select-option value="customer">Cliente</ion-select-option>
+                                <ion-select-option value="trainer">Trainer</ion-select-option>
                             </ion-select>
                         </ion-item>
-                        
-                        <!-- Max clienti per trainer -->
-                        <ion-item>
-                            <ion-label position="stacked">Clienti massimi per trainer</ion-label>
-                            <ion-input type="number" [(ngModel)]="userData.max_clients_per_slot" name="maxClients" min="1" max="10" [disabled]="isLoading"></ion-input>
-                        </ion-item>
+                        <div class="fields-row">
+                            <!-- Specializzazione -->
+                            <ion-item>
+                                <ion-label position="stacked">Specializzazione</ion-label>
+                                <ion-select [(ngModel)]="userData.specialization" interface="alert"
+                                okText="Conferma"
+                                cancelText="Annulla" 
+                                name="specialization" [disabled]="isLoading">
+                                    <ion-select-option value="Fitness">Fitness</ion-select-option>
+                                    <ion-select-option value="Bodybuilding">Bodybuilding</ion-select-option>
+                                    <ion-select-option value="Yoga">Yoga</ion-select-option>
+                                    <ion-select-option value="Pilates">Pilates</ion-select-option>
+                                    <ion-select-option value="Cardio">Cardio</ion-select-option>
+                                    <ion-select-option value="Crossfit">Crossfit</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            
+                            <!-- Max clienti per trainer -->
+                            <ion-item class="zero-margin-bottom">
+                                <ion-label position="stacked">Clienti massimi per trainer</ion-label>
+                                <ion-input type="number" [(ngModel)]="userData.max_clients_per_slot" name="maxClients" min="1" max="10" [disabled]="isLoading"></ion-input>
+                            </ion-item>
+                        </div>
                     </div>
                 </ng-container>
                 
                 <!-- CAMPI AGGIUNTIVI PER CUSTOMER -->
                 <ng-container *ngIf="userData.role === 'customer'">
-                    <div class="role-specific-fields">
+
+                    <div class="informazioni">
                         <h4>Informazioni cliente</h4>
-                        
+                        <ion-item>
+                            <ion-label position="stacked">Ruolo</ion-label>
+                            <ion-select [(ngModel)]="userData.role" interface="alert" 
+                            okText="Conferma"
+                            cancelText="Annulla"
+                            name="role" [disabled]="isLoading" (ionChange)="onRoleChange()">
+                                <ion-select-option value="customer">Cliente</ion-select-option>
+                                <ion-select-option value="trainer">Trainer</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
                         <!-- Trainer -->
                         <ion-item>
                             <ion-label position="stacked">Trainer (opzionale)</ion-label>
@@ -119,8 +138,9 @@
                             <ion-spinner name="dots" *ngIf="isLoadingTrainers" class="trainer-spinner"></ion-spinner>
                         </ion-item>
                     </div>
+
                 </ng-container>
-            </ion-list>
+            
 
             <!-- Messaggio di errore -->
             <div class="errore" *ngIf="errorMessage">
