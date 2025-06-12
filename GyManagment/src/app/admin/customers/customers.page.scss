@@ -135,8 +135,10 @@
   }
 }
 
+/*
 .customer-stats {
-  background: var(--ion-color-tertiary);
+  background: var(--ion-color-secondary-shade);
+  border: 2px solid var(--ion-color-primary);
   border-radius: 8px;
   padding: 0.5rem 0.2rem;
   margin: 0.75rem auto 0 auto;
@@ -179,6 +181,7 @@
     }
   }
 }
+*/
 
 .customer-dropdown {
   position: absolute;
@@ -306,26 +309,6 @@
     font-size: 0.8rem;
     color: var(--ion-color-medium);
   }
-}
-
-.customer-photo-placeholder {
-  position: absolute;
-  bottom: 18px;
-  right: 18px;
-  width: 120px;
-  height: 120px;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  color: #111;
-  font-weight: 500;
-  border: 2px dashed #bbb;
-  z-index: 2;
-  user-select: none;
 }
 
 ion-header ion-toolbar {

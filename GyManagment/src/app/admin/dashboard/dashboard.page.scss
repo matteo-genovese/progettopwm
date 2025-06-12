@@ -1,9 +1,10 @@
 .welcome-card {
   margin-bottom: 32px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   background: var(--ion-color-secondary-tint) !important;
-  color: #111;
+  border: 2px solid var(--ion-color-secondary-shade);
+  transition: box-shadow 0.3s, transform 0.3s;
 
   ion-card-title,
   p {
@@ -26,6 +27,8 @@
     min-width: 0;
     min-height: 140px;
     display: flex;
+    border: 2px solid var(--ion-color-secondary-shade);
+    background: var(--ion-color-secondary-tint) !important;
     flex-direction: column;
     justify-content: center;
     border-radius: 12px;
@@ -69,6 +72,7 @@
   margin-top: 24px;
   margin-left: auto;
   margin-right: auto;
+  
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -82,11 +86,10 @@
     min-height: 48px; 
     padding: 0px;
     display: flex;
+    border: 2px solid var(--ion-color-secondary-shade);
+    background: var(--ion-color-secondary-tint) !important;
     align-items: center;
     transition: box-shadow 0.15s, transform 0.15s, background 0.2s, border-radius 0.2s;
-    --background: #fff !important;
-    background: var(--background) !important;
-    border: none !important;
     --inner-border-width: 0 !important;
     overflow: hidden; 
     box-shadow:
@@ -100,9 +103,10 @@
       transform: translateY(-4px) scale(1.02);
       border-radius: 12px !important;
       --border-radius: 12px !important;
-      border: none !important;
       --inner-border-width: 0 !important;
       transition: background 0.2s, border-radius 0.15s;
+      border: 2px solid var(--ion-color-secondary-shade);
+
     }
 
     ion-icon {
