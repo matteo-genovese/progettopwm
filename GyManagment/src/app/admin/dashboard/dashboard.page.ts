@@ -13,7 +13,8 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
-  IonButtons
+  IonButtons,
+  AlertController
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -26,6 +27,7 @@ import {
   barbell,
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -56,7 +58,8 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController,
   ) {
     addIcons({ peopleOutline, fitnessOutline, statsChartOutline, personOutline, logOutOutline,barbell });
   }
@@ -96,15 +99,36 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/admin/customers']);
   }
 
-  logout() {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.router.navigate(['/home'], { replaceUrl: true });
-      },
-      error: (error) => {
-        console.error('Logout error:', error);
-        this.router.navigate(['/home'], { replaceUrl: true });
-      }
+  async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Conferma logout',
+      message: 'Sei sicuro di voler effettuare il logout?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Logout',
+          cssClass: 'danger',
+          handler: () => {
+            // Esegui il logout tramite il servizio AuthService
+            this.authService.logout().subscribe({
+              next: () => {
+                // Naviga alla pagina di login
+                window.location.href = '/login';
+              },
+              error: (err) => {
+                console.error('Errore durante il logout:', err);
+                // In caso di errore, esegui comunque il logout lato client
+                window.location.href = '/login';
+              }
+            });
+          }
+        }
+      ]
     });
+
+    await alert.present();
   }
 }
