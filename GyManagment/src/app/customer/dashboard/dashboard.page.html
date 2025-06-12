@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Dashboard Cliente</ion-title>
@@ -5,10 +6,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Refresher mobile -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <!-- Sezione di benvenuto -->
   <div class="welcome-section" *ngIf="userData">
     <h1>Benvenuto, {{ userData.full_name || userData.username }}</h1>
     <p>Gestisci i tuoi allenamenti e monitora i tuoi progressi</p>
@@ -16,19 +19,23 @@
 
   <!-- Sezione Prossimi Allenamenti -->
   <ion-card>
+
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="calendar-outline"></ion-icon>
         Prossimi Allenamenti
       </ion-card-title>
     </ion-card-header>
+    
     <ion-card-content>
+
       <div class="loading-placeholder" *ngIf="isLoading">
         <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
         <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
       </div>
 
-      <div class="booking-container" *ngIf="!isLoading && upcomingBookings.length > 0">
+      <!-- Mostrato se ci sono allenamenti prenotati -->
+      <div class="booking-container tall" *ngIf="!isLoading && upcomingBookings.length > 0">
         <div class="booking-item" *ngFor="let booking of upcomingBookings.slice(0, 9)">
           <h2>{{ booking.trainer_name }}</h2>
           <p>
@@ -46,23 +53,23 @@
         </div>
       </div>
 
+      <!-- Mostrato se non ci sono allenamenti prenotati -->
       <div class="empty-state" *ngIf="!isLoading && upcomingBookings.length === 0">
         <p>Non hai allenamenti programmati</p>
-        <ion-button expand="block" (click)="viewAllTrainers()">
-          Trova un trainer
+        <ion-button expand="block" class="view-all" (click)="viewAllTrainers()">
+          Prenota uno slot da un trainer
         </ion-button>
       </div>
-      
-      <ion-button expand="block" fill="clear" class="view-all" *ngIf="!isLoading && upcomingBookings.length > 0" (click)="viewAllBookings()">
-        <div class="button-content">
-          <div class="main-text">Tutti gli allenamenti</div>
 
-        </div>
+      <ion-button expand="block" fill="clear" class="view-all" *ngIf="!isLoading && upcomingBookings.length > 0" (click)="viewAllBookings()">
+        Tutti gli allenamenti
       </ion-button>
+
     </ion-card-content>
+
   </ion-card>
 
-  <!-- Sezione Il Tuo Trainer -->
+  <!-- Sezione Il Tuo Trainer (non utilizzato)
   <ion-card *ngIf="myTrainer">
     <ion-card-header>
       <ion-card-title>
@@ -84,23 +91,26 @@
       </div>
     </ion-card-content>
   </ion-card>
+                              -->
 
-  <!-- Sezione Trainers -->
+  <!-- Sezione trainers disponibili -->
   <ion-card>
+
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="fitness-outline"></ion-icon>
         Trainers Disponibili
       </ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
       <div class="loading-placeholder" *ngIf="isLoading">
         <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
         <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
       </div>
 
-      <!-- Usa la stessa struttura booking-container/booking-item per i trainer -->
-      <div class="booking-container2" *ngIf="!isLoading && trainers && trainers.length > 0">
+      <!-- Mostrato se ci sono trainers disponibili -->
+      <div class="booking-container short" *ngIf="!isLoading && trainers && trainers.length > 0">
         <div class="booking-item" *ngFor="let trainer of trainers.slice(0, 6)">
           <h2>{{ trainer.full_name }}</h2>
           <p>
@@ -114,16 +124,17 @@
         </div>
       </div>
 
+      <!-- Mostrato se non ci sono trainers disponibili -->
       <div class="empty-state" *ngIf="!isLoading && (!trainers || trainers.length === 0)">
         <p>Nessun trainer disponibile</p>
       </div>
       
       <ion-button expand="block" class="view-all" (click)="viewAllTrainers()">
-        <div class="button-content">
-          <div class="main-text">Sfoglia tutti i trainers</div>
-        </div>
+          Sfoglia tutti i trainers
       </ion-button>
+
     </ion-card-content>
+
   </ion-card>
 
 </ion-content>
