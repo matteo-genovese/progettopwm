@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Valuta il tuo trainer</ion-title>
@@ -10,9 +11,12 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <!-- Container rating -->
   <div class="rating-container">
     <h2>Come valuteresti la tua esperienza?</h2>
     
+    <!-- Scelta n. di stelle -->
     <div class="stars-container">
       <div class="star" *ngFor="let star of getStars()" (click)="setRating(star.value)">
         <span class="star-symbol" [ngClass]="{'filled': star.filled}">
@@ -29,6 +33,7 @@
          rating === 4 ? 'Molto buono' : 'Eccellente' }}
     </p>
     
+    <!-- Box di testo per il commento -->
     <ion-item>
       <ion-label position="stacked">Commento (opzionale)</ion-label>
       <ion-textarea 
@@ -38,10 +43,12 @@
       </ion-textarea>
     </ion-item>
     
+    <!-- Bottone per invio -->
     <div class="button-container">
       <ion-button expand="block" [disabled]="rating === 0 || isSubmitting" (click)="submitRating()">
         Invia valutazione
       </ion-button>
     </div>
+
   </div>
 </ion-content>

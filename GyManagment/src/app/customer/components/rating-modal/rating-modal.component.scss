@@ -8,7 +8,6 @@
   }
 }
 
-
 .rating-container {
   display: flex;
   flex-direction: column;
@@ -32,7 +31,6 @@
   }
 }
 
-
 ion-header ion-toolbar {
   --background: #dc3545;
   color: #fff;
@@ -46,7 +44,6 @@ ion-header ion-toolbar {
   }
 }
 
-
 .stars-container {
   display: flex;
   justify-content: center;
@@ -54,7 +51,6 @@ ion-header ion-toolbar {
   pointer-events: auto !important;
   z-index: 10;
 }
-
 
 .star {
   cursor: pointer;
@@ -81,7 +77,6 @@ ion-header ion-toolbar {
   }
 }
 
-
 .rating-label {
   text-align: center;
   margin: 0.5rem 0 1rem; 
@@ -97,7 +92,6 @@ ion-header ion-toolbar {
     height: 42px !important;
   }
 }
-
 
 ion-textarea {
   height: 80px !important;
@@ -116,15 +110,10 @@ ion-content {
   }
 }
 
-// Miglioramenti responsive
 @media (max-width: 576px) {
   .rating-container {
     margin: 0.5rem;
     padding: 1.5rem 1rem;
-  }
-  
-  .star ion-icon {
-    font-size: 32px;
   }
   
   .button-container ion-button {
@@ -141,10 +130,6 @@ ion-content {
   .stars-container {
     margin: 20px 0;
   }
-  
-  .star ion-icon {
-    font-size: 36px;
-  }
 }
 
 @media (max-height: 550px) {
@@ -158,10 +143,6 @@ ion-content {
   
   .star {
     padding: 5px;
-  }
-  
-  .star ion-icon {
-    font-size: 28px;
   }
   
   h2 {
