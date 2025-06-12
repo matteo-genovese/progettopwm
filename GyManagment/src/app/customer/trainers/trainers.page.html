@@ -62,9 +62,9 @@
           <span>{{ trainer.specialization }}</span>
         </div>
         
-        <div class="trainer-rating" *ngIf="trainer.avg_rating">
+        <div class="trainer-rating">
           <ion-icon name="star-outline"></ion-icon>
-          <span>{{ trainer.avg_rating }} / 5</span>
+          <span>{{ trainer.avg_rating ? (trainer.avg_rating | number:'1.1-1') : 'N/D' }} {{ trainer.avg_raiting ? '/5' : '' }}</span>
         </div>
         
         <ion-button expand="block" size="small" class="view-slots-btn" (click)="$event.stopPropagation(); openSlotsModal(trainer)">

@@ -109,7 +109,7 @@
           </p>
           <p>
             <ion-icon name="star-outline"></ion-icon>
-            {{ trainer.rating || 'N/A' }}
+            {{ trainer.avg_rating ? (trainer.avg_rating | number:'1.1-1') : 'N/D' }}
           </p>
         </div>
       </div>

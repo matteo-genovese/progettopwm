@@ -11,7 +11,8 @@ import {
   IonItem,
   IonLabel,
   IonTextarea,
-  IonIcon
+  IonIcon,
+  ToastController
 } from '@ionic/angular/standalone';
 import { ModalController } from '@ionic/angular/standalone';
 import { CustomerService } from '../../../services/customer.service';
@@ -35,7 +36,7 @@ import { closeOutline, starOutline, star } from 'ionicons/icons';
     IonItem,
     IonLabel,
     IonTextarea,
-    IonIcon
+    IonIcon  
   ]
 })
 
@@ -47,6 +48,7 @@ export class RatingModalComponent {
 
   constructor(
     private modalCtrl: ModalController,
+    private toastController: ToastController,
     private customerService: CustomerService
   ) {
     addIcons({ closeOutline, starOutline, star });
@@ -71,12 +73,23 @@ export class RatingModalComponent {
             rated: true,
             rating: this.rating
           });
+          this.showToast('Valutazione salvata con successo', 'success');
         },
         error: (error) => {
           this.isSubmitting = false;
           console.error('Error submitting rating:', error);
         }
       });
+  }
+
+  private async showToast(message: string, color: string = 'success') {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+      color: color
+    });
+    toast.present();
   }
 
   getStars() {
