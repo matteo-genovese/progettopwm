@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Gestione Slot</ion-title>
+    <ion-title>Slots</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -85,6 +85,7 @@
   <ion-modal 
     [isOpen]="showStartTimePicker" 
     [backdropDismiss]="true"
+    (didDismiss)="onTimePickerDismiss('start')"
     class="time-picker-modal">
     <ng-template>
       <div class="time-picker-container">
@@ -97,7 +98,7 @@
           preferWheel="true">
         </ion-datetime>
         <div class="time-picker-footer">
-          <ion-button fill="clear" (click)="showStartTimePicker = false">Conferma</ion-button>
+          <ion-button fill="clear" (click)="closeStartTimePicker()">Conferma</ion-button>
         </div>
       </div>
     </ng-template>
@@ -107,6 +108,7 @@
   <ion-modal 
     [isOpen]="showEndTimePicker" 
     [backdropDismiss]="true"
+    (didDismiss)="onTimePickerDismiss('end')"
     class="time-picker-modal">
     <ng-template>
       <div class="time-picker-container">
@@ -119,7 +121,7 @@
           preferWheel="true">
         </ion-datetime>
         <div class="time-picker-footer">
-          <ion-button fill="clear" (click)="showEndTimePicker = false">Conferma</ion-button>
+          <ion-button fill="clear" (click)="closeEndTimePicker()">Conferma</ion-button>
         </div>
       </div>
     </ng-template>
