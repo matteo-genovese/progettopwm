@@ -33,6 +33,9 @@ export class SlotsPage implements OnInit {
   slotDate: string = '';
   startTime: string = '';
   endTime: string = '';
+  // Nuove variabili per i time picker
+  startTimePicker: string = '';
+  endTimePicker: string = '';
   newSlot = { start_time: '', end_time: '', max_clients: 1 };
   isLoading = false;
   error: string | null = null;
@@ -81,11 +84,19 @@ export class SlotsPage implements OnInit {
   
   // Apre il picker per l'orario di inizio
   openStartTimePicker() {
+    // Prepara il valore corretto per il picker aggiungendo 2 ore per compensare il fuso orario
+    const date = new Date(this.startTime);
+    date.setHours(date.getHours() + 2);
+    this.startTimePicker = date.toISOString();
     this.showStartTimePicker = true;
   }
   
   // Apre il picker per l'orario di fine
   openEndTimePicker() {
+    // Prepara il valore corretto per il picker aggiungendo 2 ore per compensare il fuso orario
+    const date = new Date(this.endTime);
+    date.setHours(date.getHours() + 2);
+    this.endTimePicker = date.toISOString();
     this.showEndTimePicker = true;
   }
 
@@ -102,7 +113,7 @@ export class SlotsPage implements OnInit {
           String(d.getDate()).padStart(2, '0') + ' ' + 
           String(d.getHours()).padStart(2, '0') + ':' + 
           String(d.getMinutes()).padStart(2, '0') + ':00';
-}
+  }
   
   // Mostra un messaggio toast
   async presentToast(message: string, color: string = 'success') {
@@ -146,23 +157,40 @@ export class SlotsPage implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
+        this.error = err.error?.message || 'Errore durante la creazione dello slot';
         this.presentToast(this.error || 'Errore sconosciuto', 'danger');
       }
     });
   }
 
   closeStartTimePicker() {
+    // Quando confermiamo la selezione, sottraiamo 2 ore per tornare all'orario corretto
+    const date = new Date(this.startTimePicker);
+    date.setHours(date.getHours() - 2);
+    this.startTime = date.toISOString();
     this.showStartTimePicker = false;
   }
 
   closeEndTimePicker() {
+    // Quando confermiamo la selezione, sottraiamo 2 ore per tornare all'orario corretto
+    const date = new Date(this.endTimePicker);
+    date.setHours(date.getHours() - 2);
+    this.endTime = date.toISOString();
     this.showEndTimePicker = false;
   }
 
   onTimePickerDismiss(pickerType: 'start' | 'end') {
     if (pickerType === 'start') {
+      // Applica anche qui la correzione del fuso orario
+      const date = new Date(this.startTimePicker);
+      date.setHours(date.getHours() - 2);
+      this.startTime = date.toISOString();
       this.showStartTimePicker = false;
     } else {
+      // Applica anche qui la correzione del fuso orario
+      const date = new Date(this.endTimePicker);
+      date.setHours(date.getHours() - 2);
+      this.endTime = date.toISOString();
       this.showEndTimePicker = false;
     }
   }
