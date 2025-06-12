@@ -21,8 +21,9 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { logOutOutline, personCircleOutline, mailOutline, keyOutline, idCardOutline } from 'ionicons/icons';
+import { logOutOutline, personCircleOutline, mailOutline, keyOutline, idCardOutline, fitnessOutline, peopleOutline } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+import { TrainerService } from '../../services/trainer.service';
 
 @Component({
   selector: 'app-profile',
@@ -50,9 +51,12 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProfilePage implements OnInit {
   trainerData: any = null;
+  userData: any = null;
   isLoading = true;
+  error: string | null = null;
 
   constructor(
+    private trainerService: TrainerService,
     private authService: AuthService,
     private router: Router,
     private toastController: ToastController,
@@ -63,7 +67,9 @@ export class ProfilePage implements OnInit {
       personCircleOutline,
       mailOutline,
       keyOutline,
-      idCardOutline
+      idCardOutline,
+      fitnessOutline,
+      peopleOutline
     });
   }
 
@@ -76,9 +82,25 @@ export class ProfilePage implements OnInit {
   }
 
   loadUserData() {
-    this.trainerData = this.authService.getUser();
-    console.log('User data loaded:', this.trainerData);
-    this.isLoading = false;
+    this.isLoading = true;
+    this.error = null;
+    
+    // Get basic user data from AuthService
+    this.userData = this.authService.getUser();
+    
+    // Get trainer-specific data from TrainerService
+    this.trainerService.getDashboard().subscribe({
+      next: (dashboardData) => {
+        this.trainerData = dashboardData;
+        console.log('Dashboard data:', this.trainerData);
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading dashboard data:', err);
+        this.error = 'Errore nel caricamento dei dati';
+        this.isLoading = false;
+      }
+    });
   }
 
   async confirmLogout() {
