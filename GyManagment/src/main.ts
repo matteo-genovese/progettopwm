@@ -5,6 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
@@ -16,6 +17,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
     importProvidersFrom(BrowserModule),
-    { provide: DOCUMENT, useValue: document }
+    { provide: DOCUMENT, useValue: document },
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { timezone: 'UTC' } }
   ],
 });

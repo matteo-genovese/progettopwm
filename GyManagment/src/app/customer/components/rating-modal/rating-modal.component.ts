@@ -66,6 +66,7 @@ export class RatingModalComponent {
     }
 
     this.isSubmitting = true;
+    console.log("trainer id " + this.trainerId);
     this.customerService.rateTrainer(this.trainerId, this.rating, this.comment).subscribe({
         next: (response) => {
           this.isSubmitting = false;
