@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Allenamenti</ion-title>
+    <ion-title>Allenamenti PT</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -139,34 +139,44 @@
         <p>Gli allenamenti passati saranno visualizzati qui</p>
       </div>
 
-      <ion-card *ngFor="let session of pastSessions">
-        <ion-card-header>
-          <ion-card-title>
-            {{ session.client_names || 'Nessun cliente' }}
-          </ion-card-title>
-          <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="booking-details">
-            <p>
-              <ion-icon name="calendar-outline"></ion-icon>
-              {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
-            </p>
-            <p>
-              <ion-icon name="time-outline"></ion-icon>
-              {{ session.start_time | date:'HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
-            </p>
-            <p>
-              <ion-icon name="people-outline"></ion-icon>
-              Max clienti: {{ session.max_clients }}
-            </p>
-            <p>
-              <ion-icon name="person-add-outline"></ion-icon>
-              Prenotati: {{ session.booked_clients }}
-            </p>
-          </div>
-        </ion-card-content>
-      </ion-card>
+      <div *ngIf="pastSessions.length > 0">
+        <div class="session-category-title">
+          <ion-icon name="time-outline" color="danger"></ion-icon>
+          PASSATI
+        </div>
+
+        <div class="past-sessions-container">
+          <!-- Utilizzo ion-card per mantenere la stessa struttura dei dati originale -->
+          <ion-card class="past-session-card" *ngFor="let session of pastSessions">
+            <ion-card-header>
+              <ion-card-title>
+                {{ session.client_names || 'Nessun cliente' }}
+              </ion-card-title>
+              <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="booking-details">
+                <p>
+                  <ion-icon name="calendar-outline" color="danger"></ion-icon>
+                  {{ session.start_time | date:'dd/MM/yyyy' }}
+                </p>
+                <p>
+                  <ion-icon name="time-outline" color="danger"></ion-icon>
+                  {{ session.start_time | date:'HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
+                </p>
+                <p>
+                  <ion-icon name="people-outline" color="danger"></ion-icon>
+                  Max: {{ session.max_clients }}
+                </p>
+                <p>
+                  <ion-icon name="person-add-outline" color="danger"></ion-icon>
+                  Prenotati: {{ session.booked_clients }}
+                </p>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>
