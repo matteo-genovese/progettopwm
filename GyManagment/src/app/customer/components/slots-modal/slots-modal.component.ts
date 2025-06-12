@@ -102,6 +102,8 @@ export class SlotsModalComponent implements OnInit {
     
     // Ottieni la data selezionata come oggetto Date
     const startDate = new Date(this.selectedDate);
+    // Resetta le ore a mezzanotte per un confronto corretto
+    startDate.setHours(0, 0, 0, 0);
     
     // Carica gli slot disponibili per il trainer usando l'endpoint corretto
     this.customerService.getAvailableSlots(this.trainer.id, this.formatDate(startDate.toISOString())).subscribe({
@@ -109,7 +111,7 @@ export class SlotsModalComponent implements OnInit {
         console.log('Slot ricevuti:', slots);
         
         if (slots && Array.isArray(slots)) {
-          // Raggruppa gli slot per data
+          // Raggruppa gli slot per data e filtra quelli precedenti alla data selezionata
           slots.forEach(slot => {
             if (!slot.start_time) {
               console.error('Slot senza start_time:', slot);
@@ -119,13 +121,18 @@ export class SlotsModalComponent implements OnInit {
             try {
               // Estrai la data dallo slot
               const slotDate = this.formatDate(slot.start_time);
+              const slotDateTime = new Date(slotDate);
+              slotDateTime.setHours(0, 0, 0, 0);
               
-              if (!this.slotsByDate[slotDate]) {
-                this.slotsByDate[slotDate] = [];
-                this.allDates.push(slotDate);
+              // Verifica che la data dello slot sia >= alla data selezionata
+              if (slotDateTime >= startDate) {
+                if (!this.slotsByDate[slotDate]) {
+                  this.slotsByDate[slotDate] = [];
+                  this.allDates.push(slotDate);
+                }
+                
+                this.slotsByDate[slotDate].push(slot);
               }
-              
-              this.slotsByDate[slotDate].push(slot);
             } catch (e) {
               console.error('Errore nel parsare la data:', slot.start_time, e);
             }

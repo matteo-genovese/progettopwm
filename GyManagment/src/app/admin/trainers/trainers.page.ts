@@ -121,11 +121,10 @@ export class TrainersPage implements OnInit {
     this.selectedTrainerId = null;
   }
 
-  assignTrainerToCustomer(trainerId: number, customer: any) {
-    this.authService.assignTrainerToCustomer(customer.id, trainerId).subscribe({
-      next: (response) => { /* ... */ },
-      error: (error) => { /* ... */ }
-    });
-  }
-
+  // assignTrainerToCustomer(trainerId: number, customer: any) {
+  //   this.authService.assignTrainerToCustomer(customer.id, trainerId).subscribe({
+  //     next: (response) => { /* ... */ },
+  //     error: (error) => { /* ... */ }
+  //   });
+  // }
 }
