@@ -26,7 +26,7 @@ import { TrainerService } from '../../services/trainer.service';
     IonHeader, IonToolbar, IonTitle, IonContent, 
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
     IonButton, IonItem, IonLabel, IonSpinner, 
-    IonInput, IonDatetime, IonIcon, IonButtons, IonModal
+    IonInput, IonDatetime, IonIcon, IonModal
   ]
 })
 export class SlotsPage implements OnInit {
@@ -149,5 +149,21 @@ export class SlotsPage implements OnInit {
         this.presentToast(this.error || 'Errore sconosciuto', 'danger');
       }
     });
+  }
+
+  closeStartTimePicker() {
+    this.showStartTimePicker = false;
+  }
+
+  closeEndTimePicker() {
+    this.showEndTimePicker = false;
+  }
+
+  onTimePickerDismiss(pickerType: 'start' | 'end') {
+    if (pickerType === 'start') {
+      this.showStartTimePicker = false;
+    } else {
+      this.showEndTimePicker = false;
+    }
   }
 }
