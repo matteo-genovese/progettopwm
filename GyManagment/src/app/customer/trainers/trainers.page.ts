@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -65,7 +64,6 @@ export class TrainersPage implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private router: Router,
     private modalCtrl: ModalController
   ) {
     addIcons({ fitnessOutline, starOutline, calendarOutline, personOutline, searchOutline });

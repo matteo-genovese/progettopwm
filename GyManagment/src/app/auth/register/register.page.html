@@ -78,7 +78,7 @@
                                 <ion-select [(ngModel)]="userData.role" interface="alert" 
                                 okText="Conferma"
                                 cancelText="Annulla"
-                                name="role" [disabled]="isLoading" (ionChange)="onRoleChange()">
+                                name="role" [disabled]="isLoading">
                                     <ion-select-option value="customer">Cliente</ion-select-option>
                                     <ion-select-option value="trainer">Trainer</ion-select-option>
                                 </ion-select>
@@ -114,9 +114,9 @@
 
                             <!-- Scelta ruolo (per cliente)-->
                             <ion-select [(ngModel)]="userData.role" interface="alert" 
-                            okText="Conferma"
-                            cancelText="Annulla"
-                            name="role" [disabled]="isLoading" (ionChange)="onRoleChange()">
+                                okText="Conferma"
+                                cancelText="Annulla"
+                                name="role" [disabled]="isLoading">
                                 <ion-select-option value="customer">Cliente</ion-select-option>
                                 <ion-select-option value="trainer">Trainer</ion-select-option>
                             </ion-select>

@@ -94,15 +94,6 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  getRoleLabel(role: string): string {
-    switch (role?.toLowerCase()) {
-      case 'admin': return 'Amministratore';
-      case 'trainer': return 'Allenatore';
-      case 'customer': return 'Cliente';
-      default: return role || 'Utente';
-    }
-  }
-
   async confirmLogout() {
     const alert = await this.alertController.create({
       header: 'Conferma logout',

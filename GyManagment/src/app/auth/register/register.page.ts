@@ -96,30 +96,8 @@ export class RegisterPage {
     });
   }
 
-  onRoleChange() {
-    // Carica i trainer disponibili se l'utente seleziona "customer"
-    if (this.userData.role === 'customer') {
-      this.loadAvailableTrainers();
-    }
-  }
-
   goBack() {
     this.router.navigate(['/home']);
-  }
-
-  loadAvailableTrainers() {
-    this.isLoadingTrainers = true;
-    // Assumiamo che esista un metodo nel servizio per ottenere i trainer
-    this.authService.getAllTrainers().subscribe({
-      next: (trainers) => {
-        this.availableTrainers = trainers;
-        this.isLoadingTrainers = false;
-      },
-      error: (error) => {
-        console.error('Error loading trainers:', error);
-        this.isLoadingTrainers = false;
-      }
-    });
   }
 
   async onRegister() {
