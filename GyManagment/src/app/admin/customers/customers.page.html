@@ -41,11 +41,14 @@
         <div class="customer-content">
           <div class="customer-header">
             <h2>{{ customer.full_name || customer.username }}</h2>
+            <!--
             <div class="customer-actions">
               <ion-button color="medium" fill="outline" size="small" (click)="showTrainerList(customer.id)">
+
                 <ion-icon slot="start" name="barbell"></ion-icon>
                 Assegna Trainer
               </ion-button>
+
               <div 
                 class="customer-dropdown" 
                 *ngIf="selectedCustomerId === customer.id">
@@ -60,6 +63,8 @@
                 </ion-list>
               </div>
             </div>
+            -->
+
           </div>
           <div class="customer-details">
             <p>
