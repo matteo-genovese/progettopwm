@@ -3,16 +3,16 @@ import { TrainerService } from '../../services/trainer.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router'
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonList, IonItem, IonLabel, IonSpinner, IonIcon, IonAvatar } from '@ionic/angular/standalone';
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonSpinner, IonIcon } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [IonAvatar, IonIcon, 
+  imports: [IonIcon, 
     CommonModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonList, IonItem, IonLabel, IonSpinner, RouterLink
+    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink
   ]
 })
 export class DashboardPage implements OnInit {
