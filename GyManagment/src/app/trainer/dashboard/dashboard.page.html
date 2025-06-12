@@ -10,59 +10,45 @@
     <p>Caricamento dashboard...</p>
   </div>
 
-  <ion-card class="welcome-card" *ngIf="dashboardData">
-    <ion-card-header>
-      <div class="welcome-header">
-        <ion-avatar class="welcome-avatar">
-          <ion-icon name="person-circle-outline" size="large" color="primary"></ion-icon>
-        </ion-avatar>
-        <div>
-          <ion-card-title>
-            Benvenuto, {{ dashboardData.trainer_info.full_name }}
-          </ion-card-title>
-          <p class="welcome-role">
-            Trainer • {{ dashboardData.trainer_info.specialization }}
-          </p>
+  <!-- Box principale stile admin -->
+  <div class="dashboard-wrapper" *ngIf="dashboardData">
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title>Benvenuto, {{ dashboardData.trainer_info.full_name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="welcome-content">
+          <div class="left-content">
+            <div class="welcome-message">
+              <ion-icon name="barbell" color="primary"></ion-icon>
+              <span>Pronto a motivare i tuoi clienti oggi?</span>
+            </div>
+            <p class="trainer-role">Trainer • {{ dashboardData.trainer_info.specialization }}</p>
+          </div>
+          
+          <div class="welcome-stats">
+            <div class="stat2">
+              <ion-icon name="calendar-outline" color="danger"></ion-icon>
+              <span>{{ dashboardData.upcoming_sessions.length }}</span>
+              <p>Slot futuri</p>
+            </div>
+            <div class="stat2">
+              <ion-icon name="star-outline" color="danger"></ion-icon>
+              <span>{{ calculateAverageRating(dashboardData) }}</span>
+              <p>Media Ratings</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="welcome-message">
-        <ion-icon name="barbell" color="secondary"></ion-icon>
-        <span>Pronto a motivare i tuoi clienti oggi?</span>
-      </div>
-      <div class="welcome-stats">
-        <div class="stat">
-          <ion-icon name="calendar-outline" color="primary"></ion-icon>
-          <span>{{ dashboardData.upcoming_sessions.length }}</span>
-          <p>Slot futuri</p>
-        </div>
-        <!--
-        <div class="stat">
-          <ion-icon name="people-outline" color="tertiary"></ion-icon>
-          <span>{{ dashboardData.clients.length }}</span>
-          <p>Clienti totali</p>
-        </div>
-        <div class="stat">
-          <ion-icon name="happy-outline" color="tertiary"></ion-icon>
-          <span>{{ dashboardData.trainer_info.max_clients_per_slot }}</span>
-          <p>Max clienti</p>
-        </div>
-      -->
-        <div class="stat">
-          <ion-icon name="star-outline" color="tertiary"></ion-icon>
-          <span>{{ calculateAverageRating(dashboardData) }}</span>
-          <p>Media Ratings</p>
-        </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
+  <!-- Prossimi allenamenti -->
   <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length > 0">
     <ion-card-header>
       <ion-card-title>
-        <ion-icon name="calendar-outline"></ion-icon>
-        Prossimi Allenamenti
+        <ion-icon name="calendar-outline" color="primary"></ion-icon>
+        Prossimi Allenamenti <small>(max 9)</small>
       </ion-card-title>
     </ion-card-header>
     
@@ -85,22 +71,25 @@
         </div>
       </div>
       
-      <ion-button expand="block" routerLink="../sessions" class="view-all">
-        TUTTI GLI ALLENAMENTI
-      </ion-button>
+
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="error" color="danger">
-    <ion-card-content>
-      <p>{{ error }}</p>
-    </ion-card-content>
-  </ion-card>
+  <div class="actions-row">
+    <ion-item button detail routerLink="../sessions" class="action-item">
+      <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+      <ion-label class="ion-text-center">
+        <h2>Visualizza allenamenti</h2>
+        <p>Tutti gli allenamenti schedulati</p>
+      </ion-label>
+    </ion-item>
 
-  <ion-button expand="block" routerLink="../sessions" color="primary">
-    Visualizza allenamenti schedulati
-  </ion-button>
-  <ion-button expand="block" routerLink="../slots" color="secondary">
-    Crea uno slot
-  </ion-button>
+    <ion-item button detail routerLink="../slots" class="action-item">
+      <ion-icon name="add-circle-outline" slot="start" color="primary"></ion-icon>
+      <ion-label class="ion-text-center">
+        <h2>Crea uno slot</h2>
+        <p>Aggiungi nuovi slot disponibili</p>
+      </ion-label>
+    </ion-item>
+  </div>
 </ion-content>
