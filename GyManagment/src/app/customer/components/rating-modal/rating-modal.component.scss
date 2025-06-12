@@ -8,7 +8,6 @@
   }
 }
 
-
 .rating-container {
   display: flex;
   flex-direction: column;
@@ -32,11 +31,9 @@
   }
 }
 
-
 ion-header ion-toolbar {
-  --background: #dc3545 !important; 
-  background: #dc3545 !important;
-  color: #fff !important;
+  --background: #dc3545;
+  color: #fff;
   
   ion-title {
     color: #fff !important;
@@ -47,7 +44,6 @@ ion-header ion-toolbar {
   }
 }
 
-
 .stars-container {
   display: flex;
   justify-content: center;
@@ -55,7 +51,6 @@ ion-header ion-toolbar {
   pointer-events: auto !important;
   z-index: 10;
 }
-
 
 .star {
   cursor: pointer;
@@ -66,21 +61,6 @@ ion-header ion-toolbar {
   
   &:hover {
     transform: scale(1.15);
-  }
-  
-  ion-icon {
-    font-size: 32px; 
-    transition: color 0.2s ease;
-  }
-  
-  
-  &.filled ion-icon {
-    color: #FFC107;
-    filter: drop-shadow(0 0 3px rgba(255, 193, 7, 0.5));
-  }
-  
-  &.outline ion-icon {
-    color: var(--ion-color-medium);
   }
 }
 
@@ -96,7 +76,6 @@ ion-header ion-toolbar {
     color: #888888;
   }
 }
-
 
 .rating-label {
   text-align: center;
@@ -114,25 +93,11 @@ ion-header ion-toolbar {
   }
 }
 
-
 ion-textarea {
   height: 80px !important;
   margin-top: 8px !important; 
   min-height: 60px !important; 
 }
-
-
-ion-item ion-textarea::part(native),
-ion-item ion-textarea .native-textarea,
-ion-item.item-has-focus ion-textarea,
-.textarea-wrapper,
-.input-wrapper,
-.item-inner {
-  background: transparent !important;
-  background-color: transparent !important;
-  --background: transparent !important;
-}
-
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
@@ -145,15 +110,10 @@ ion-content {
   }
 }
 
-// Miglioramenti responsive
 @media (max-width: 576px) {
   .rating-container {
     margin: 0.5rem;
     padding: 1.5rem 1rem;
-  }
-  
-  .star ion-icon {
-    font-size: 32px;
   }
   
   .button-container ion-button {
@@ -170,10 +130,6 @@ ion-content {
   .stars-container {
     margin: 20px 0;
   }
-  
-  .star ion-icon {
-    font-size: 36px;
-  }
 }
 
 @media (max-height: 550px) {
@@ -187,10 +143,6 @@ ion-content {
   
   .star {
     padding: 5px;
-  }
-  
-  .star ion-icon {
-    font-size: 28px;
   }
   
   h2 {
