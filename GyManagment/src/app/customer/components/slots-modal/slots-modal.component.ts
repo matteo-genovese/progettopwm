@@ -167,7 +167,7 @@ export class SlotsModalComponent implements OnInit {
       error: (error) => {
         this.isLoading = false;
         console.error('Error booking slot:', error);
-        this.showToast('Errore durante la prenotazione. Riprova più tardi.', 'danger');
+        this.showToast(error, 'danger');
       }
     });
   }

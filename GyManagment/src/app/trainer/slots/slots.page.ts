@@ -183,13 +183,13 @@ export class SlotsPage implements OnInit {
     if (pickerType === 'start') {
       // Applica anche qui la correzione del fuso orario
       const date = new Date(this.startTimePicker);
-      date.setHours(date.getHours() - 2);
+      date.setHours(date.getHours());
       this.startTime = date.toISOString();
       this.showStartTimePicker = false;
     } else {
       // Applica anche qui la correzione del fuso orario
       const date = new Date(this.endTimePicker);
-      date.setHours(date.getHours() - 2);
+      date.setHours(date.getHours());
       this.endTime = date.toISOString();
       this.showEndTimePicker = false;
     }
