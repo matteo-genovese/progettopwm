@@ -6,8 +6,6 @@ import {
   IonToolbar, 
   IonTitle, 
   IonContent,
-  IonList,
-  IonItem,
   IonBackButton,
   IonButtons,
   IonIcon,
@@ -33,11 +31,9 @@ import { AuthService } from '../../services/auth.service';
     IonToolbar, 
     IonTitle, 
     IonContent,
-    IonList,
-    IonItem,
     IonBackButton,
     IonButtons,
-	IonButton,
+	  IonButton,
     IonIcon,
     IonSpinner,
     IonCard,
@@ -55,12 +51,11 @@ export class CustomersPage implements OnInit {
 
   constructor(private authService: AuthService) {
     addIcons({ fitnessOutline, mailOutline, callOutline, calendarOutline, barbell });
-    
   }
 
   ngOnInit() {
     this.loadCustomers();
-    this.loadTrainers();
+    // this.loadTrainers();
   }
 
   loadCustomers() {
@@ -81,32 +76,34 @@ export class CustomersPage implements OnInit {
     });
   }
 
-  loadTrainers() {
-    this.authService.getAllTrainers().subscribe({
-      next: (data) => {
-        this.trainers = data;
-      },
-      error: (error) => {
-        // gestisci errore se vuoi
-      }
-    });
-  }
+  // loadTrainers() {
+  //   this.authService.getAllTrainers().subscribe({
+  //     next: (data) => {
+  //       this.trainers = data;
+  //     },
+  //     error: (error) => {
+  //       console.error('Raw error:', error);
+  //       this.error = 'Impossibile caricare i trainer. Riprova più tardi.';
+  //       this.isLoading = false;
+  //     }
+  //   });
+  // }
 
   doRefresh(event: any) {
     this.loadCustomers();
-    this.loadTrainers();
+    // this.loadTrainers();
     setTimeout(() => {
       event.target.complete();
     }, 1000);
   }
 
-  showTrainerList(customerId: number) {
-    this.selectedCustomerId = this.selectedCustomerId === customerId ? null : customerId;
-  }
+  // showTrainerList(customerId: number) {
+  //   this.selectedCustomerId = this.selectedCustomerId === customerId ? null : customerId;
+  // }
 
-  hideTrainerList() {
-    this.selectedCustomerId = null;
-  }
+  // hideTrainerList() {
+  //   this.selectedCustomerId = null;
+  // }
 
 //  assignTrainerToCustomer(trainerId: number, customer: any) {
 //     this.authService.assignTrainerToCustomer(customer.id, trainerId).subscribe({

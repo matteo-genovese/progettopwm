@@ -8,7 +8,6 @@ import {
   IonToolbar, 
   IonRefresher, 
   IonRefresherContent,
-  IonCard, 
   IonCardHeader, 
   IonCardTitle, 
   IonCardSubtitle, 
@@ -19,7 +18,6 @@ import {
   IonLabel,
   IonIcon,
   IonSpinner,
-  AlertController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -55,7 +53,6 @@ interface Booking {
     IonToolbar,
     IonRefresher,
     IonRefresherContent,
-    IonCard,
     IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
@@ -78,7 +75,6 @@ export class BookingsPage implements OnInit {
   constructor(
     private customerService: CustomerService,
     private router: Router,
-    private alertController: AlertController
   ) {
     addIcons({ calendarOutline, timeOutline, closeCircleOutline, starOutline });
   }

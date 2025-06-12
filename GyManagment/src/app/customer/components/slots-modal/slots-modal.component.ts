@@ -100,9 +100,7 @@ export class SlotsModalComponent implements OnInit {
     this.slotsByDate = {};
     this.allDates = [];
     
-    // Ottieni la data selezionata come oggetto Date
     const startDate = new Date(this.selectedDate);
-    // Resetta le ore a mezzanotte per un confronto corretto
     startDate.setHours(0, 0, 0, 0);
     
     // Carica gli slot disponibili per il trainer usando l'endpoint corretto

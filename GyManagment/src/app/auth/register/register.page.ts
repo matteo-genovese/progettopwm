@@ -4,9 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonItem,
   IonLabel,
@@ -17,8 +14,6 @@ import {
   IonSelect,
   IonSelectOption,
   IonList,
-  IonBackButton,
-  IonButtons,
   ToastController,
   AlertController
 } from '@ionic/angular/standalone';

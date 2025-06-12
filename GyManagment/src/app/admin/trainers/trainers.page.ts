@@ -5,8 +5,6 @@ import {
   IonToolbar, 
   IonTitle, 
   IonContent,
-  IonList,
-  IonItem,
   IonBackButton,
   IonButtons,
   IonIcon,
@@ -32,8 +30,6 @@ import { AuthService } from 'src/app/services/auth.service';
     IonToolbar, 
     IonTitle, 
     IonContent,
-    IonList,
-    IonItem,
     IonBackButton,
     IonButtons,
     IonIcon,
@@ -41,7 +37,7 @@ import { AuthService } from 'src/app/services/auth.service';
     IonCard,
     IonCardContent,
     IonRefresher,
-	IonButton,
+	  IonButton,
     IonRefresherContent
   ]
 })
@@ -87,39 +83,39 @@ export class TrainersPage implements OnInit {
     }, 1000);
   }
 
-  getAllCustomers() {
-    this.authService.getAllCustomers().subscribe({
-      next: (data) => {
-        this.customers = data;
-        this.showCustomers = true;
-      },
-      error: (error) => {
-        console.error('Errore nel caricamento clienti:', error);
-      }
-    });
-  }
+  // getAllCustomers() {
+  //   this.authService.getAllCustomers().subscribe({
+  //     next: (data) => {
+  //       this.customers = data;
+  //       this.showCustomers = true;
+  //     },
+  //     error: (error) => {
+  //       console.error('Errore nel caricamento clienti:', error);
+  //     }
+  //   });
+  // }
 
-  showCustomerList(trainerId: number) {
-    if (this.selectedTrainerId === trainerId) {
-      // Se già aperto, chiudi
-      this.selectedTrainerId = null;
-      return;
-    }
-    // Altrimenti apri e carica clienti
-    this.authService.getAllCustomers().subscribe({
-      next: (data) => {
-        this.customers = data;
-        this.selectedTrainerId = trainerId;
-      },
-      error: (error) => {
-        console.error('Errore nel caricamento clienti:', error);
-      }
-    });
-  }
+  // showCustomerList(trainerId: number) {
+  //   if (this.selectedTrainerId === trainerId) {
+  //     // Se già aperto, chiudi
+  //     this.selectedTrainerId = null;
+  //     return;
+  //   }
+  //   // Altrimenti apri e carica clienti
+  //   this.authService.getAllCustomers().subscribe({
+  //     next: (data) => {
+  //       this.customers = data;
+  //       this.selectedTrainerId = trainerId;
+  //     },
+  //     error: (error) => {
+  //       console.error('Errore nel caricamento clienti:', error);
+  //     }
+  //   });
+  // }
 
-  hideCustomerList() {
-    this.selectedTrainerId = null;
-  }
+  // hideCustomerList() {
+  //   this.selectedTrainerId = null;
+  // }
 
   // assignTrainerToCustomer(trainerId: number, customer: any) {
   //   this.authService.assignTrainerToCustomer(customer.id, trainerId).subscribe({
