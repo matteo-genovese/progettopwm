@@ -78,6 +78,7 @@ export class RatingModalComponent {
         error: (error) => {
           this.isSubmitting = false;
           console.error('Error submitting rating:', error);
+          this.showToast(error, 'danger');
         }
       });
   }

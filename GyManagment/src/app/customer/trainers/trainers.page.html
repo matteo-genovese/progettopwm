@@ -25,13 +25,19 @@
       <ion-chip [color]="filters.specialization === 'Fitness' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Fitness')">
         <ion-label>Fitness</ion-label>
       </ion-chip>
+      <ion-chip [color]="filters.specialization === 'Bodybuilding' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Bodybuilding')">
+        <ion-label>Bodybuilding</ion-label>
+      </ion-chip>
       <ion-chip [color]="filters.specialization === 'Yoga' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Yoga')">
         <ion-label>Yoga</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filters.specialization === 'Pilates' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Pilates')">
+        <ion-label>Pilates</ion-label>
       </ion-chip>
       <ion-chip [color]="filters.specialization === 'Cardio' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Cardio')">
         <ion-label>Cardio</ion-label>
       </ion-chip>
-      <ion-chip [color]="filters.specialization === 'Crossfit' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Crossfit')">
+        <ion-chip [color]="filters.specialization === 'Crossfit' ? 'primary' : 'medium'" (click)="setSpecializationFilter('Crossfit')">
         <ion-label>Crossfit</ion-label>
       </ion-chip>
     </div>

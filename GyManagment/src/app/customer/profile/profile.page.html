@@ -17,11 +17,13 @@
         <ion-avatar class="profile-avatar">
           <ion-icon name="person-circle-outline" size="large"></ion-icon>
         </ion-avatar>
-        <ion-card-title class="ion-text-center">{{ userData?.full_name || userData?.username || 'Utente' }}</ion-card-title>
+        <ion-card-title class="ion-text-center">{{ userData?.full_name }}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
+        
         <ion-list lines="none">
+       
           <ion-item>
             <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
             <ion-label>
@@ -38,13 +40,6 @@
             </ion-label>
           </ion-item>
 
-          <ion-item>
-            <ion-icon name="id-card-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <p>Ruolo</p>
-              <h3>{{ getRoleLabel(userData?.role) }}</h3>
-            </ion-label>
-          </ion-item>
         </ion-list>
       </ion-card-content>
     </ion-card>

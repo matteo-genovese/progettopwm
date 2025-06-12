@@ -29,6 +29,7 @@ import {
   idCardOutline 
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-profile',
@@ -60,6 +61,7 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private customerService: CustomerService,
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController
@@ -82,8 +84,14 @@ export class ProfilePage implements OnInit {
   }
 
   loadUserData() {
-    this.userData = this.authService.getUser();
-    console.log('User data loaded:', this.userData);
+    this.customerService.getCustomerDashboard().subscribe({
+      next: (data) => {
+        this.userData = data.customer_info;
+      },
+      error: (err) => {
+        console.error('Error loading profile data:', err);
+      }
+    });
   }
 
   getRoleLabel(role: string): string {

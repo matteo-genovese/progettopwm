@@ -113,15 +113,6 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async demoLogin() {
-    this.credentials = {
-      username: 'newuser',
-      password: 'password123'
-    };
-
-    await this.onLogin();
-  }
-
   goBack() {
     this.router.navigate(['/home']);
   }
