@@ -83,9 +83,15 @@ export class DashboardPage implements OnInit {
     this.customerService.getCustomerDashboard().subscribe({
       next: (data) => {
         console.log('Dashboard data received:', data);
-        this.upcomingBookings = (data.upcoming_bookings || []).sort((a: any, b: any) => {
-          return new Date(a.start_time).getTime() - new Date(b.start_time).getTime();
-        });
+        
+        //filtro per escludere gli allenamenti passati 
+        const now = new Date();
+        this.upcomingBookings = (data.upcoming_bookings || [])
+          .filter((booking: any) => new Date(booking.start_time) > now)
+          .sort((a: any, b: any) => {
+            return new Date(a.start_time).getTime() - new Date(b.start_time).getTime();
+          });
+        
         this.myTrainer = data.trainer || null;
         this.isLoading = false;
       },
