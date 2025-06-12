@@ -34,9 +34,8 @@
 
 
 ion-header ion-toolbar {
-  --background: #dc3545 !important; 
-  background: #dc3545 !important;
-  color: #fff !important;
+  --background: #dc3545;
+  color: #fff;
   
   ion-title {
     color: #fff !important;
@@ -66,21 +65,6 @@ ion-header ion-toolbar {
   
   &:hover {
     transform: scale(1.15);
-  }
-  
-  ion-icon {
-    font-size: 32px; 
-    transition: color 0.2s ease;
-  }
-  
-  
-  &.filled ion-icon {
-    color: #FFC107;
-    filter: drop-shadow(0 0 3px rgba(255, 193, 7, 0.5));
-  }
-  
-  &.outline ion-icon {
-    color: var(--ion-color-medium);
   }
 }
 
@@ -120,19 +104,6 @@ ion-textarea {
   margin-top: 8px !important; 
   min-height: 60px !important; 
 }
-
-
-ion-item ion-textarea::part(native),
-ion-item ion-textarea .native-textarea,
-ion-item.item-has-focus ion-textarea,
-.textarea-wrapper,
-.input-wrapper,
-.item-inner {
-  background: transparent !important;
-  background-color: transparent !important;
-  --background: transparent !important;
-}
-
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
