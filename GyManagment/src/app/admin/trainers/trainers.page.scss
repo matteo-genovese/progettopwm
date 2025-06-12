@@ -49,13 +49,13 @@
   color: #111;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  width: 400px;
+  width: calc(25% - 1.125rem); 
   padding: 0;
   display: flex;
   flex-direction: column;
   border: 2px solid var(--ion-color-secondary-shade);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
-  position: relative; // Assicurati che il posizionamento funzioni
+  position: relative; 
 
   &:hover {
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
@@ -135,6 +135,8 @@
   }
 }
 
+
+/*
 .trainer-stats {
   background: var(--ion-color-tertiary);
   border-radius: 8px;
@@ -180,6 +182,8 @@
     }
   }
 }
+*/
+
 
 .trainer-dropdown {
   position: absolute;
@@ -269,7 +273,7 @@
 .trainers-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 2.5rem;
+  gap: 1.5rem; 
   justify-content: flex-start;
   padding: 1rem;
   background: transparent;
@@ -309,25 +313,7 @@
   }
 }
 
-.trainer-photo-placeholder {
-  position: absolute;
-  bottom: 18px;
-  right: 18px;
-  width: 120px;
-  height: 120px;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  color: #111;
-  font-weight: 500;
-  border: 2px dashed #bbb;
-  z-index: 2;
-  user-select: none;
-}
+
 
 ion-header ion-toolbar {
   --background: var(--ion-color-primary) !important;
@@ -354,6 +340,25 @@ ion-title {
   display: flex;
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+
+@media (max-width: 1200px) {
+  .trainer-card {
+    width: calc(33.33% - 1rem); 
+  }
+}
+
+@media (max-width: 992px) {
+  .trainer-card {
+    width: calc(50% - 0.75rem);
+  }
+}
+
+@media (max-width: 576px) {
+  .trainer-card {
+    width: 100%; 
+  }
 }
 
 
