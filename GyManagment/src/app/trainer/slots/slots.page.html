@@ -91,9 +91,10 @@
       <div class="time-picker-container">
         <ion-datetime
           presentation="time"
-          [(ngModel)]="startTime"
+          [(ngModel)]="startTimePicker"
           locale="it-IT"
           hourCycle="h23"
+          timezone="Europe/Rome"
           class="centered-time-picker"
           preferWheel="true">
         </ion-datetime>
@@ -114,9 +115,10 @@
       <div class="time-picker-container">
         <ion-datetime
           presentation="time"
-          [(ngModel)]="endTime"
+          [(ngModel)]="endTimePicker"
           locale="it-IT"
           hourCycle="h23"
+          timezone="Europe/Rome"
           class="centered-time-picker"
           preferWheel="true">
         </ion-datetime>
