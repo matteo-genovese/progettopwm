@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Le Mie Prenotazioni</ion-title>
@@ -5,10 +6,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Refresher mobile -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
+  <!-- Selezione tab -->
   <ion-segment [(ngModel)]="selectedTab" (ionChange)="segmentChanged()">
     <ion-segment-button value="upcoming">
       <ion-label>Prossimi</ion-label>
@@ -18,31 +22,38 @@
     </ion-segment-button>
   </ion-segment>
 
+  <!-- Caricamento prenotazioni -->
   <div *ngIf="isLoading" class="loading-container">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Caricamento prenotazioni...</p>
   </div>
 
   <div *ngIf="!isLoading" [ngSwitch]="selectedTab">
-    <!-- Upcoming bookings -->
+
+    <!-- Tab "PROSSIMI" -->
     <div *ngSwitchCase="'upcoming'">
+
+      <!-- Mostrato se non ci sono prenotazioni future -->
       <div class="empty-state" *ngIf="upcomingBookings.length === 0">
         <ion-icon name="calendar-outline" size="large"></ion-icon>
         <h3>Nessuna prenotazione futura</h3>
         <p>Prenota una sessione con un trainer per visualizzarla qui</p>
+
         <ion-button expand="block" (click)="goToTrainers()">
           Trova un trainer
         </ion-button>
       </div>
 
-
+      <!-- Mostrato se ci sono prenotazioni future -->
       <div class="bookings-grid" *ngIf="upcomingBookings.length > 0">
+
         <div class="booking-card" *ngFor="let booking of upcomingBookings">
+
+          <!-- Card prenotazione -->
           <ion-card-header>
             <ion-card-title>{{ booking.trainer_name }}</ion-card-title>
             <ion-card-subtitle *ngIf="booking.specialization">{{ booking.specialization }}</ion-card-subtitle>
           </ion-card-header>
-
           <ion-card-content>
             <div class="booking-details">
               <p>
@@ -55,25 +66,32 @@
               </p>
             </div>
           </ion-card-content>
+
         </div>
+
       </div>
+
     </div>
 
-    <!-- Past bookings -->
+    <!-- Tab "PASSATI"  -->
     <div *ngSwitchCase="'past'">
+
+      <!-- Mostrato se non ci sono prenotazioni passate -->
       <div class="empty-state" *ngIf="pastBookings.length === 0">
         <ion-icon name="time-outline" size="large"></ion-icon>
         <h3>Nessuna prenotazione passata</h3>
         <p>Le prenotazioni passate saranno visualizzate qui</p>
       </div>
 
+      <!-- Mostrato se ci sono prenotazioni passate -->
       <div class="bookings-grid" *ngIf="pastBookings.length > 0">
         <div class="booking-card" *ngFor="let booking of pastBookings">
+
+          <!-- Card prenotazione -->
           <ion-card-header>
             <ion-card-title>{{ booking.trainer_name }}</ion-card-title>
             <ion-card-subtitle *ngIf="booking.specialization">{{ booking.specialization }}</ion-card-subtitle>
           </ion-card-header>
-
           <ion-card-content>
             <div class="booking-details">
               <p>
@@ -86,11 +104,14 @@
               </p>
             </div>
 
+            <!-- Tasto valutazione -->
             <ion-button expand="block" *ngIf="!booking.rated" (click)="rateTrainer(booking.trainer_id)">
               <ion-icon name="star-outline" slot="start"></ion-icon>
               Valuta Trainer
             </ion-button>
+
           </ion-card-content>
+
         </div>
       </div>
     </div>

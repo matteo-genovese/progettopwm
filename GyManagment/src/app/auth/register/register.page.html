@@ -38,7 +38,6 @@
                     </ion-item>
                     
                 </ion-list>
-                
                 <ion-list>
 
                     <!-- Email -->
@@ -70,20 +69,20 @@
                 <ng-container *ngIf="userData.role === 'trainer'">
                     <div class="informazioni">
                         <h4>Informazioni trainer</h4>
-                        
-                        <!-- Scelta ruolo (per trainer)-->
-                        <ion-item>
-                            <ion-label position="stacked">Ruolo</ion-label>
-                            <ion-select [(ngModel)]="userData.role" interface="alert" 
-                            okText="Conferma"
-                            cancelText="Annulla"
-                            name="role" [disabled]="isLoading" (ionChange)="onRoleChange()">
-                                <ion-select-option value="customer">Cliente</ion-select-option>
-                                <ion-select-option value="trainer">Trainer</ion-select-option>
-                            </ion-select>
-                        </ion-item>
 
                         <div class="fields-row">
+                            
+                            <!-- Scelta ruolo (per trainer)-->
+                             <ion-item>
+                                <ion-label position="stacked">Ruolo</ion-label>
+                                <ion-select [(ngModel)]="userData.role" interface="alert" 
+                                okText="Conferma"
+                                cancelText="Annulla"
+                                name="role" [disabled]="isLoading" (ionChange)="onRoleChange()">
+                                    <ion-select-option value="customer">Cliente</ion-select-option>
+                                    <ion-select-option value="trainer">Trainer</ion-select-option>
+                                </ion-select>
+                            </ion-item>
 
                             <!-- Specializzazione -->
                             <ion-item>
@@ -100,12 +99,7 @@
                                     <ion-select-option value="Crossfit">Crossfit</ion-select-option>
                                 </ion-select>
                             </ion-item>
-                            
-                            <!-- Max clienti per trainer -->
-                            <ion-item>
-                                <ion-label position="stacked">Clienti massimi per trainer</ion-label>
-                                <ion-input type="number" [(ngModel)]="userData.max_clients_per_slot" name="maxClients" min="1" max="10" [disabled]="isLoading"></ion-input>
-                            </ion-item>
+
                         </div>
                     </div>
                 </ng-container>
@@ -126,26 +120,11 @@
                                 <ion-select-option value="customer">Cliente</ion-select-option>
                                 <ion-select-option value="trainer">Trainer</ion-select-option>
                             </ion-select>
-                        </ion-item>
 
-                        <!-- Scelta trainer -->
-                        <ion-item>
-                            <ion-label position="stacked">Trainer (opzionale)</ion-label>
-                            <ion-select [(ngModel)]="userData.trainer_id" interface="alert" 
-                            okText="Conferma"
-                            cancelText="Annulla"
-                            name="trainerId" [disabled]="isLoading || isLoadingTrainers">
-                                <ion-select-option [value]="null">Nessun trainer</ion-select-option>
-                                <ion-select-option *ngFor="let trainer of availableTrainers" [value]="trainer.id">
-                                    {{ trainer.full_name }} ({{ trainer.specialization }})
-                                </ion-select-option>
-                            </ion-select>
-                            <ion-spinner name="dots" *ngIf="isLoadingTrainers"></ion-spinner>
                         </ion-item>
                     </div>
 
                 </ng-container>
-            
 
             <!-- Messaggio di errore -->
             <div class="errore" *ngIf="errorMessage">
@@ -155,7 +134,7 @@
             </div>
 
             <div>
-                
+
                 <!-- Tasto Registrati -->
                 <ion-button expand="block" color="primary" type="submit" [disabled]="isLoading">
                     <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
@@ -172,8 +151,9 @@
                 <div class="testo-login">
                     <p>Hai già un account? <a (click)="goToLogin()">Accedi</a></p>
                 </div>
-
+                
             </div>
+
         </form>
     </div>
 </ion-content>
