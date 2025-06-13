@@ -208,16 +208,9 @@ ion-button[color="tertiary"] {
   justify-content: center;
 }
 
-ion-button[color="tertiary"] ion-icon {
-  color: var(--ion-color-tertiary) !important;
-}
 
-ion-button[color="tertiary"]:hover,
-ion-button[color="tertiary"]:focus {
-  --background: var(--ion-color-secondary-tint) !important;
-  background: var(--ion-color-secondary-tint) !important;
-  transition: background 0.2s;
-}
+
+
 
 ion-content {
   --background: none;

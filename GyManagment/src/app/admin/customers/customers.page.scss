@@ -117,6 +117,13 @@
   --color: #fff;
 }
 
+ion-button[color="tertiary"]:hover,
+ion-button[color="tertiary"]:focus {
+  --background: var(--ion-color-secondary-tint) !important;
+  background: var(--ion-color-secondary-tint) !important;
+  transition: background 0.2s;
+}
+
 .customer-details {
   margin-bottom: 0.75rem;
 
