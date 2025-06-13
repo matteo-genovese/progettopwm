@@ -112,12 +112,14 @@ export class RegisterPage {
 
   validateForm(): boolean {
 
+    /*
     // Controllo se tutti i dati sono stati inseriti
     if (!this.userData.username || !this.userData.password || !this.userData.email ||
       !this.userData.full_name || !this.userData.phone) {
       this.errorMessage = 'Tutti i campi sono obbligatori';
       return false;
     }
+    */
 
     // Controllo se le password sono corrette
     if (this.userData.password !== this.confirmPassword) {
