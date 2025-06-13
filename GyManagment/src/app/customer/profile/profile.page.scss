@@ -112,29 +112,6 @@ ion-list {
   gap: 10px; 
 }
 
-.logout-button-container {
-  margin-top: 2rem;
-  padding: 0 1rem;
-  display: flex;         
-  justify-content: center; 
-  width: 100%;            
-  
-  ion-button {
-    height: 48px;
-    --border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    --box-shadow: 0 4px 8px rgba(var(--ion-color-primary-rgb), 0.25);
-    transition: filter 0.3s;
-    width: 50%;
-    max-width: 250px;  
-    
-    &:hover {
-      --box-shadow: 0 6px 12px rgba(var(--ion-color-primary-rgb), 0.35);
-      filter: brightness(1.05);
-    }
-  }
-}
 
 .loading-container {
   display: flex;

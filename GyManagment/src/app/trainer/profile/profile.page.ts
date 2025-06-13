@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -12,6 +13,7 @@ import {
   IonItem,
   IonLabel,
   IonButton,
+  IonButtons,
   IonIcon,
   IonList,
   IonSpinner,
@@ -46,7 +48,8 @@ import { TrainerService } from '../../services/trainer.service';
     IonIcon,
     IonList,
     IonSpinner,
-    IonAvatar
+    IonAvatar,
+    IonButtons
   ]
 })
 export class ProfilePage implements OnInit {
