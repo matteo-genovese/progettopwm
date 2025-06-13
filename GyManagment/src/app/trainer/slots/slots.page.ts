@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,  
   IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal, IonButtons, ToastController, IonCardTitle, IonBackButton
+  IonIcon, IonModal, IonButtons, IonCardTitle, IonBackButton
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -16,7 +16,8 @@ import {
 } from 'ionicons/icons';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
-  
+import { UiService } from 'src/app/services/ui.service';
+
 @Component({
   selector: 'app-slots',
   templateUrl: './slots.page.html',
@@ -49,7 +50,7 @@ export class SlotsPage implements OnInit {
   constructor(
     private trainerService: TrainerService,
     private authService: AuthService,
-    private toastController: ToastController,
+    private uiService: UiService,
     private dateTimeService: DateTimeService
   ) {
     // Registra le icone ionicons
@@ -106,7 +107,7 @@ export class SlotsPage implements OnInit {
     if (new Date(this.newSlot.end_time) <= new Date(this.newSlot.start_time)) {
       this.isLoading = false;
       this.error = "L'orario di fine deve essere successivo all'orario di inizio";
-      this.presentToast(this.error || 'Errore sconosciuto', 'danger');
+      this.uiService.showToast(this.error || 'Errore sconosciuto', 2000, 'top', 'danger');
       return;
     }
     
@@ -114,8 +115,8 @@ export class SlotsPage implements OnInit {
     this.trainerService.createSlot(this.newSlot).subscribe({
       next: () => {
         this.isLoading = false;
-        this.presentToast('Slot creato con successo');
-        
+        this.uiService.showToast('Slot creato con successo', 2000, 'top', 'success');
+
         // Reset dei campi
         const now = new Date();
         this.startTime = now.toISOString();
@@ -126,7 +127,7 @@ export class SlotsPage implements OnInit {
       error: (err) => {
         this.isLoading = false;
         this.error = err.error?.message || 'Errore durante la creazione dello slot';
-        this.presentToast(this.error || 'Errore sconosciuto', 'danger');
+        this.uiService.showToast(this.error || 'Errore sconosciuto', 2000, 'top', 'danger');
       }
     });
   }
@@ -157,17 +158,6 @@ export class SlotsPage implements OnInit {
       this.endTime = date.toISOString();
       this.showEndTimePicker = false;
     }
-  }
-
-  // Mostra un messaggio toast
-  async presentToast(message: string, color: string = 'success') {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      color: color,
-      position: 'bottom'
-    });
-    toast.present();
   }
 
   onLogout() {

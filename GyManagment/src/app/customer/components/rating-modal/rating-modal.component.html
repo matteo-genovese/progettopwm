@@ -25,13 +25,7 @@
       </div>
     </div>
     
-    <p class="rating-label">
-      {{ rating === 0 ? 'Seleziona una valutazione' : 
-         rating === 1 ? 'Scarso' :
-         rating === 2 ? 'Sufficiente' :
-         rating === 3 ? 'Buono' :
-         rating === 4 ? 'Molto buono' : 'Eccellente' }}
-    </p>
+    <p class="rating-label">{{ getRatingLabel() }}</p>
     
     <!-- Box di testo per il commento -->
     <ion-item>

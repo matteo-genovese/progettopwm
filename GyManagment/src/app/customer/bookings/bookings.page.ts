@@ -60,19 +60,6 @@ export class BookingsPage implements OnInit {
     this.loadBookings();
   }
 
-  // Metodi wrapper che utilizzano il servizio
-  formatDateTime(dateString: string): string {
-    return this.dateTimeService.formatDateTime(dateString);
-  }
-
-  formatDate(dateString: string): string {
-    return this.dateTimeService.formatDate(dateString);
-  }
-
-  formatTime(dateString: string): string {
-    return this.dateTimeService.formatTime(dateString);
-  }
-
   loadBookings() {
     this.isLoading = true;
     
@@ -83,15 +70,15 @@ export class BookingsPage implements OnInit {
         
         // Sistemo gli orari del booking 
         this.upcomingBookings.forEach(booking => {
-          booking.adjustedStartDate = this.formatDate(booking.start_time);
-          booking.adjustedStartTimeOnly = this.formatTime(booking.start_time);
-          booking.adjustedEndTimeOnly = this.formatTime(booking.end_time);
+          booking.adjustedStartDate = this.dateTimeService.formatDate(booking.start_time);
+          booking.adjustedStartTimeOnly = this.dateTimeService.formatTime(booking.start_time);
+          booking.adjustedEndTimeOnly = this.dateTimeService.formatTime(booking.end_time);
         });
         
         this.pastBookings.forEach(booking => {
-          booking.adjustedStartDate = this.formatDate(booking.start_time);
-          booking.adjustedStartTimeOnly = this.formatTime(booking.start_time);
-          booking.adjustedEndTimeOnly = this.formatTime(booking.end_time);
+          booking.adjustedStartDate = this.dateTimeService.formatDate(booking.start_time);
+          booking.adjustedStartTimeOnly = this.dateTimeService.formatTime(booking.start_time);
+          booking.adjustedEndTimeOnly = this.dateTimeService.formatTime(booking.end_time);
         });
         
         this.isLoading = false;

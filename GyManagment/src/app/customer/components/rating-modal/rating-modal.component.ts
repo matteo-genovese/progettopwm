@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonButton, ModalController,
-  IonButtons, IonItem, IonLabel, IonTextarea, IonIcon, ToastController
+  IonButtons, IonItem, IonLabel, IonTextarea, IonIcon
 } from '@ionic/angular/standalone';
 import { CustomerService } from '../../../services/customer.service';
 import { addIcons } from 'ionicons';
 import { closeOutline, starOutline, star } from 'ionicons/icons';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-rating-modal',
@@ -28,8 +29,8 @@ export class RatingModalComponent {
 
   constructor(
     private modalCtrl: ModalController,
-    private toastController: ToastController,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private uiService: UiService
   ) {
     addIcons({ closeOutline, starOutline, star });
   }
@@ -53,24 +54,14 @@ export class RatingModalComponent {
             rated: true,
             rating: this.rating
           });
-          this.showToast('Valutazione salvata con successo', 'success');
+          this.uiService.showToast('Valutazione salvata con successo', 2000, 'top', 'success');
         },
         error: (error) => {
           this.isSubmitting = false;
           console.error('Error submitting rating:', error);
-          this.showToast(error, 'danger');
+          this.uiService.showToast(error, 2000, 'top', 'danger');
         }
       });
-  }
-
-  private async showToast(message: string, color: string = 'success') {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'top',
-      color: color
-    });
-    toast.present();
   }
 
   getStars() {
@@ -86,5 +77,17 @@ export class RatingModalComponent {
 
   setRating(value: number) {
     this.rating = value;
+  }
+
+  getRatingLabel(): string {
+    const labels = [
+      'Seleziona una valutazione',
+      'Scarso',
+      'Sufficiente', 
+      'Buono',
+      'Molto buono',
+      'Eccellente'
+    ];
+    return labels[this.rating] || labels[0];
   }
 }
