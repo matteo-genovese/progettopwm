@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-  IonCardContent, IonButton, IonItem, IonLabel, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonButtons, IonModal, ToastController 
+  IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
+  IonIcon, IonModal, ToastController 
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -22,10 +21,9 @@ import { TrainerService } from '../../services/trainer.service';
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule,
     IonHeader, IonToolbar, IonTitle, IonContent, 
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-    IonButton, IonItem, IonLabel, IonSpinner, 
+    IonButton, IonSpinner, 
     IonInput, IonDatetime, IonIcon, IonModal
   ]
 })
