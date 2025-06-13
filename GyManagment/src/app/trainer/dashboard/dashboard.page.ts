@@ -9,6 +9,7 @@ import {
   IonRefresher, IonRefresherContent, IonCardContent, IonItem, IonLabel, IonSpinner, 
   IonIcon, IonButtons, IonButton
 } from '@ionic/angular/standalone';
+import { AppHeaderComponent } from '../../shared/components/app-header/app-header.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,11 +17,10 @@ import {
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [IonIcon, 
-    CommonModule,
-    IonRefresher,
-    IonRefresherContent, 
+    CommonModule, IonRefresher, IonRefresherContent, 
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle,
-    IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink, IonButtons, IonButton
+    IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink, IonButtons, IonButton,
+    AppHeaderComponent
   ]
 })
 export class DashboardPage implements OnInit {

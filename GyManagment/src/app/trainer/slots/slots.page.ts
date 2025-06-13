@@ -14,7 +14,8 @@ import {
   calendarOutline, timeOutline, peopleOutline, addOutline, 
   addCircleOutline, closeOutline, chevronForward, chevronBack
 } from 'ionicons/icons';
-
+import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+  
 @Component({
   selector: 'app-slots',
   templateUrl: './slots.page.html',
@@ -24,7 +25,8 @@ import {
     CommonModule, FormsModule, IonButton, IonSpinner, 
     IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-    IonInput, IonDatetime, IonIcon, IonModal, IonButtons
+    IonInput, IonDatetime, IonIcon, IonModal, IonButtons,
+    AppHeaderComponent
   ]
 })
 export class SlotsPage implements OnInit {

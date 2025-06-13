@@ -1,0 +1,13 @@
+ion-header ion-toolbar {
+ --background: var(--ion-color-primary) !important;
+}
+
+ion-title {
+  color: #fff !important;
+  text-align: center !important;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

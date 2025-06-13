@@ -1,17 +1,7 @@
-<!-- Header -->
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Le Mie Prenotazioni</ion-title>
-        <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Le Mie Prenotazioni"
+  [backHref]="'customer/dashboard'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 

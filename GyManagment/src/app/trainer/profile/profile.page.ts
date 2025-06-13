@@ -12,6 +12,7 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 import { TrainerService } from '../../services/trainer.service';
+import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,7 @@ import { TrainerService } from '../../services/trainer.service';
   imports: [
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
     IonCardTitle, IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, 
-    IonSpinner, IonAvatar, IonButtons, IonBackButton
+    IonSpinner, IonAvatar, IonButtons, IonBackButton, AppHeaderComponent
   ]
 })
 export class ProfilePage implements OnInit {
