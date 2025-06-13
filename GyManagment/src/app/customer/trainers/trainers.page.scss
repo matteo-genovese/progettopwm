@@ -207,7 +207,7 @@
 
 ion-header ion-toolbar {
   --background: var(--ion-color-primary);
-  color: #fff !important;
+  color: #fff;
 }
 
 ion-header ion-title,
@@ -236,8 +236,8 @@ ion-content {
   }
   
   .trainer-avatar {
-    height: 80px !important;
-    width: 80px !important;
+    height: 80px;
+    width: 80px;
   }
 }
 
@@ -249,7 +249,7 @@ ion-content {
   }
   
   .trainer-name {
-    font-size: 1.1rem !important;
+    font-size: 1.1rem;
   }
   
   .trainer-avatar {

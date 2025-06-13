@@ -20,6 +20,7 @@
 
   <!-- Selettore di data di inizio -->
   <div class="date-selector">
+    
     <ion-item lines="none">
       <ion-label>Mostra slot a partire da</ion-label>
       <ion-datetime-button datetime="date-select">
@@ -37,8 +38,9 @@
         </ion-datetime>
       </ng-template>
     </ion-modal>
+
   </div>
-  
+
   <div class="slots-container">
     <h3>Slot disponibili a partire dal {{ selectedDate | date:'dd/MM/yyyy' }}</h3>
     

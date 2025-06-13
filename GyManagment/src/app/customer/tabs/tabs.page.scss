@@ -14,15 +14,14 @@ ion-tab-button {
   letter-spacing: 0.03em;
   transition: transform 0.3s;
   overflow: hidden;
-  
-  --border-radius: 16px;
   border-radius: 16px;
-  
+  margin: 2px 2px;
+
   &:hover {
     --background: rgba(255, 255, 255, 0.15);
     transform: translateY(-0.5px); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 2px 2px; 
+    
   }
 
   &.tab-selected {
@@ -49,4 +48,3 @@ ion-tab-button {
     font-size: 20px;
   }
 }
-

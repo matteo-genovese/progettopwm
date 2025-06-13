@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-  IonCardContent, IonItem, IonLabel, IonSpinner, IonIcon 
+  IonRefresher, IonRefresherContent, IonCardContent, IonItem, IonLabel, IonSpinner, IonIcon 
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -15,6 +15,8 @@ import {
   standalone: true,
   imports: [IonIcon, 
     CommonModule,
+    IonRefresher,
+    IonRefresherContent, 
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink
   ]
 })
@@ -69,6 +71,13 @@ export class DashboardPage implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  doRefresh(event: any) {
+    this.loadDashboard();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
   
   calculateAverageRating(data: { ratings: { rating: number }[] }): number {
