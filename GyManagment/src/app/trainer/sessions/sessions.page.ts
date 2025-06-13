@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainerService } from '../../services/trainer.service';
+import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router'
+import { RouterLink } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonCard, IonCardContent, IonIcon, IonListHeader, IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonButton, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
+  IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCard, IonCardContent,
+  IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-sessions',
@@ -28,48 +31,26 @@ export class SessionsPage implements OnInit {
   pastSessions: any[] = [];
   selectedTab: 'upcoming' | 'past' = 'upcoming';
 
-  constructor(private trainerService: TrainerService) {}
+  constructor(
+    private trainerService: TrainerService,
+    private dateTimeService: DateTimeService
+  ) {}
 
   ngOnInit() {
     this.loadSessions();
   }
 
-  // Helper method to adjust timezone by adding 2 hours
-  adjustTimeZone(dateString: string): Date {
-    const date = new Date(dateString);
-    date.setHours(date.getHours() + 2);
-    return date;
-  }
-
-  // Format date for display with timezone correction
+  // Utilizzo i metodi del servizio centralizzato
   formatDateTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatDateTime(dateString);
   }
 
-  // Format only the date part
   formatDate(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleDateString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
+    return this.dateTimeService.formatDate(dateString);
   }
 
-  // Format only the time part
   formatTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleTimeString('it-IT', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatTime(dateString);
   }
 
   loadSessions() {
@@ -83,7 +64,7 @@ export class SessionsPage implements OnInit {
 
         // Process sessions to add adjusted time properties for display
         this.sessions.forEach(session => {
-          // Add adjusted time properties that can be used in the template
+          // Aggiungi proprietà formattate per orari
           session.adjustedStartTime = this.formatDateTime(session.start_time);
           session.adjustedStartDate = this.formatDate(session.start_time);
           session.adjustedStartTimeOnly = this.formatTime(session.start_time);
@@ -92,8 +73,9 @@ export class SessionsPage implements OnInit {
         });
 
         this.upcomingSessions = this.sessions.filter(
-          s => this.adjustTimeZone(s.start_time) > now
-        ).sort((a, b) => this.adjustTimeZone(a.start_time).getTime() - this.adjustTimeZone(b.start_time).getTime());
+          s => new Date(this.dateTimeService.adjustTimeZone(s.start_time)) > now
+        ).sort((a, b) => new Date(this.dateTimeService.adjustTimeZone(a.start_time)).getTime() - 
+                          new Date(this.dateTimeService.adjustTimeZone(b.start_time)).getTime());
 
         this.upcomingFullSessions = this.upcomingSessions.filter(
           session => session.booked_clients === session.max_clients
@@ -104,10 +86,9 @@ export class SessionsPage implements OnInit {
         );
 
         this.pastSessions = this.sessions.filter(
-          s => this.adjustTimeZone(s.start_time) <= now
-        ).sort((a, b) => this.adjustTimeZone(b.start_time).getTime() - this.adjustTimeZone(a.start_time).getTime());
-        
-        // console.log('upcomingAvailableSessions test: ' + this.formatDateTime(this.upcomingAvailableSessions[0].start_time));
+          s => new Date(this.dateTimeService.adjustTimeZone(s.start_time)) <= now
+        ).sort((a, b) => new Date(this.dateTimeService.adjustTimeZone(b.start_time)).getTime() - 
+                         new Date(this.dateTimeService.adjustTimeZone(a.start_time)).getTime());
         
         this.isLoading = false;
       },

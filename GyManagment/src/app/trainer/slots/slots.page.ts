@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { TrainerService } from '../../services/trainer.service';
+import { ToastController } from '@ionic/angular/standalone';
+import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
   IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal, ToastController 
+  IonIcon, IonModal 
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
   calendarOutline, timeOutline, peopleOutline, addOutline, 
   addCircleOutline, closeOutline, chevronForward, chevronBack
 } from 'ionicons/icons';
-import { TrainerService } from '../../services/trainer.service';
 
 @Component({
   selector: 'app-slots',
@@ -45,7 +47,8 @@ export class SlotsPage implements OnInit {
 
   constructor(
     private trainerService: TrainerService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private dateTimeService: DateTimeService
   ) {
     // Registra le icone ionicons
     addIcons({
@@ -64,20 +67,10 @@ export class SlotsPage implements OnInit {
     this.endTime = end.toISOString();
   }
   
-  // Arrotonda l'ora
-  roundToNextHour(date: Date, hoursToAdd: number = 1): Date {
-    const result = new Date(date);
-    result.setHours(result.getHours() + hoursToAdd);
-    result.setMinutes(0, 0, 0);
-    return result;
-  }
-  
-  // Formatta l'ora nel formato HH:MM
+  // Usa i metodi dal servizio invece delle funzioni locali
   formatTime(isoString: string): string {
     if (!isoString) return '';
-    const date = new Date(isoString);
-    return date.getHours().toString().padStart(2, '0') + ':' + 
-           date.getMinutes().toString().padStart(2, '0');
+    return this.dateTimeService.formatTime(isoString);
   }
   
   // Apre il picker per l'orario di inizio
@@ -98,39 +91,13 @@ export class SlotsPage implements OnInit {
     this.showEndTimePicker = true;
   }
 
-  private combineDateTime(date: string | null, time: string | null): string {
-    if (!date || !time) return '';
-    const d = new Date(date);
-    const t = new Date(time);
-    
-    d.setHours(t.getHours() - 2, t.getMinutes(), 0, 0);
-    
-    // Formato semplice senza timezone (come la prenotazione ID 9)
-    return d.getFullYear() + '-' + 
-          String(d.getMonth() + 1).padStart(2, '0') + '-' + 
-          String(d.getDate()).padStart(2, '0') + ' ' + 
-          String(d.getHours()).padStart(2, '0') + ':' + 
-          String(d.getMinutes()).padStart(2, '0') + ':00';
-  }
-  
-  // Mostra un messaggio toast
-  async presentToast(message: string, color: string = 'success') {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      color: color,
-      position: 'bottom'
-    });
-    toast.present();
-  }
-
   addSlot() {
     this.isLoading = true;
     this.error = null;
     
-    // Combina data e ora
-    this.newSlot.start_time = this.combineDateTime(this.slotDate, this.startTime);
-    this.newSlot.end_time = this.combineDateTime(this.slotDate, this.endTime);
+    // Combina data e ora usando il servizio
+    this.newSlot.start_time = this.dateTimeService.combineDateTime(this.slotDate, this.startTime);
+    this.newSlot.end_time = this.dateTimeService.combineDateTime(this.slotDate, this.endTime);
     
     // Controlla che l'orario di fine sia successivo all'orario di inizio
     if (new Date(this.newSlot.end_time) <= new Date(this.newSlot.start_time)) {
@@ -189,5 +156,16 @@ export class SlotsPage implements OnInit {
       this.endTime = date.toISOString();
       this.showEndTimePicker = false;
     }
+  }
+
+  // Mostra un messaggio toast
+  async presentToast(message: string, color: string = 'success') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color,
+      position: 'bottom'
+    });
+    toast.present();
   }
 }

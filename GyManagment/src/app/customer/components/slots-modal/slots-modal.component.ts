@@ -1,32 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DateTimeService } from '../../../services/date-time.service';
+import { CustomerService } from '../../../services/customer.service';
 import { 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
-  IonContent,
-  IonButtons,
-  IonButton,
-  IonIcon,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonDatetime,
-  IonDatetimeButton,
-  IonModal,
-  IonSpinner,
-  IonText,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  ModalController,
-  ToastController
+  IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon,
+  IonList, IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal,
+  IonSpinner, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+  ModalController, ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, calendarOutline, timeOutline, star } from 'ionicons/icons';
-import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-slots-modal',
@@ -37,25 +21,9 @@ import { CustomerService } from '../../../services/customer.service';
     CommonModule,
     FormsModule,
     DatePipe,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButtons,
-    IonButton,
-    IonIcon,
-    IonList,
-    IonItem,
-    IonLabel,
-    IonDatetime,
-    IonDatetimeButton,
-    IonModal,
-    IonSpinner,
-    IonText,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent
+    IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon,
+    IonList, IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal,
+    IonSpinner, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent
   ]
 })
 export class SlotsModalComponent implements OnInit {
@@ -73,7 +41,8 @@ export class SlotsModalComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private modalCtrl: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private dateTimeService: DateTimeService
   ) {
     addIcons({ closeOutline, calendarOutline, timeOutline, star });
   }
@@ -88,42 +57,17 @@ export class SlotsModalComponent implements OnInit {
     this.loadAllFutureSlots();
   }
 
-  // Helper method to adjust timezone by adding 2 hours
-  adjustTimeZone(dateString: string): Date {
-    const date = new Date(dateString);
-    date.setHours(date.getHours() + 2);
-    return date;
-  }
-
-  // Format date for display with timezone correction
+  // Metodi wrapper che utilizzano il servizio
   formatDateTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatDateTime(dateString);
   }
 
-  // Format only the date part
   formatDate(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleDateString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
+    return this.dateTimeService.formatDate(dateString);
   }
 
-  // Format only the time part
   formatTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleTimeString('it-IT', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatTime(dateString);
   }
 
   close() {
@@ -142,7 +86,7 @@ export class SlotsModalComponent implements OnInit {
     startDate.setHours(0, 0, 0, 0);
     
     // Carica gli slot disponibili per il trainer usando l'endpoint corretto
-    this.customerService.getAvailableSlots(this.trainer.id, this.formatDateForAPI(startDate.toISOString())).subscribe({
+    this.customerService.getAvailableSlots(this.trainer.id, this.dateTimeService.formatDateForAPI(startDate.toISOString())).subscribe({
       next: (slots) => {
         console.log('Slot ricevuti:', slots);
         
@@ -156,7 +100,7 @@ export class SlotsModalComponent implements OnInit {
             
             try {
               // Estrai la data dallo slot
-              const slotDate = this.formatDateForAPI(slot.start_time);
+              const slotDate = this.dateTimeService.formatDateForAPI(slot.start_time);
               const slotDateTime = new Date(slotDate);
               slotDateTime.setHours(0, 0, 0, 0);
               
@@ -225,22 +169,9 @@ export class SlotsModalComponent implements OnInit {
     });
   }
 
-  // Formatta una data ISO in formato YYYY-MM-DD per l'API
-  private formatDateForAPI(isoString: string): string {
-    const date = new Date(isoString);
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-  }
-
-  // Formatta una data per la visualizzazione
+  // Utilizza il metodo del servizio
   formatDateForDisplay(dateString: string): string {
-    const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'long', 
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
-    };
-    return date.toLocaleDateString('it-IT', options);
+    return this.dateTimeService.formatDateForDisplay(dateString);
   }
 
   private async showToast(message: string, color: string = 'success') {

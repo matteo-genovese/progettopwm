@@ -1,33 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from '../../services/customer.service';
+import { DateTimeService } from '../../services/date-time.service';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar, 
-  IonRefresher, 
-  IonRefresherContent,
-  IonCardHeader, 
-  IonCardTitle, 
-  IonCardSubtitle, 
-  IonCardContent,
-  IonButton,
-  IonSegment,
-  IonSegmentButton,
-  IonLabel,
-  IonIcon,
-  IonSpinner,
-} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { 
-  calendarOutline, 
-  timeOutline, 
-  closeCircleOutline, 
-  starOutline
-} from 'ionicons/icons';
-import { Router } from '@angular/router';
-import { CustomerService } from '../../services/customer.service';
+import { calendarOutline, timeOutline, closeCircleOutline, starOutline } from 'ionicons/icons';
+import {
+  IonContent, IonHeader, IonTitle, IonToolbar,
+  IonRefresher, IonRefresherContent, IonCardHeader, IonCardTitle, IonCardSubtitle, 
+  IonCardContent, IonButton, IonSegment, IonSegmentButton, IonLabel, IonIcon, IonSpinner
+} from '@ionic/angular/standalone';
 
 interface Booking {
   id: number;
@@ -80,6 +63,7 @@ export class BookingsPage implements OnInit {
   constructor(
     private customerService: CustomerService,
     private router: Router,
+    private dateTimeService: DateTimeService
   ) {
     addIcons({ calendarOutline, timeOutline, closeCircleOutline, starOutline });
   }
@@ -88,42 +72,17 @@ export class BookingsPage implements OnInit {
     this.loadBookings();
   }
 
-  // Helper method to adjust timezone by adding 2 hours
-  adjustTimeZone(dateString: string): Date {
-    const date = new Date(dateString);
-    date.setHours(date.getHours() + 2);
-    return date;
-  }
-
-  // Format date for display with timezone correction
+  // Metodi wrapper che utilizzano il servizio
   formatDateTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatDateTime(dateString);
   }
 
-  // Format only the date part
   formatDate(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleDateString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
+    return this.dateTimeService.formatDate(dateString);
   }
 
-  // Format only the time part
   formatTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleTimeString('it-IT', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatTime(dateString);
   }
 
   loadBookings() {

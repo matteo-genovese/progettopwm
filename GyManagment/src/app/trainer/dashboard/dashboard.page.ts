@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainerService } from '../../services/trainer.service';
+import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router'
+import { RouterLink } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonSpinner, IonIcon } from '@ionic/angular/standalone';
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
+  IonCardContent, IonItem, IonLabel, IonSpinner, IonIcon 
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,48 +23,26 @@ export class DashboardPage implements OnInit {
   isLoading = false;
   error: string | null = null;
 
-  constructor(private trainerService: TrainerService) {}
+  constructor(
+    private trainerService: TrainerService,
+    private dateTimeService: DateTimeService
+  ) {}
 
   ngOnInit() {
     this.loadDashboard();
   }
 
-  // Helper method to adjust timezone by adding 2 hours
-  adjustTimeZone(dateString: string): Date {
-    const date = new Date(dateString);
-    date.setHours(date.getHours() + 2);
-    return date;
-  }
-
-  // Format date for display with timezone correction
+  // Metodi wrapper che utilizzano il servizio
   formatDateTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatDateTime(dateString);
   }
 
-  // Format only the date part
   formatDate(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleDateString('it-IT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
+    return this.dateTimeService.formatDate(dateString);
   }
 
-  // Format only the time part
   formatTime(dateString: string): string {
-    const date = this.adjustTimeZone(dateString);
-    return date.toLocaleTimeString('it-IT', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.dateTimeService.formatTime(dateString);
   }
 
   loadDashboard() {
