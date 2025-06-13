@@ -105,7 +105,7 @@ export class SlotsPage implements OnInit {
     const d = new Date(date);
     const t = new Date(time);
     
-    d.setHours(t.getHours(), t.getMinutes(), 0, 0);
+    d.setHours(t.getHours() - 2, t.getMinutes(), 0, 0);
     
     // Formato semplice senza timezone (come la prenotazione ID 9)
     return d.getFullYear() + '-' + 

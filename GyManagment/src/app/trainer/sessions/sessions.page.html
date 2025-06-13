@@ -9,7 +9,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-segment [(ngModel)]="selectedTab" (ionChange)="segmentChanged()">
+  <ion-segment [(ngModel)]="selectedTab">
     <ion-segment-button value="upcoming">
       <ion-label>Prossimi</ion-label>
     </ion-segment-button>
@@ -69,7 +69,7 @@
                     </p>
                     <p>
                       <ion-icon name="time-outline"></ion-icon>
-                      {{ session.start_time | date:'HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
+                      {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
                     </p>
                     <p>
                       <ion-icon name="people-outline"></ion-icon>
@@ -112,7 +112,7 @@
                     </p>
                     <p>
                       <ion-icon name="time-outline"></ion-icon>
-                      {{ session.start_time | date:'HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
+                      {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
                     </p>
                     <p>
                       <ion-icon name="people-outline"></ion-icon>
@@ -162,7 +162,7 @@
                 </p>
                 <p>
                   <ion-icon name="time-outline" color="danger"></ion-icon>
-                  {{ session.start_time | date:'HH:mm' }} - {{ session.end_time | date:'HH:mm' }}
+                  {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
                 </p>
                 <p>
                   <ion-icon name="people-outline" color="danger"></ion-icon>
