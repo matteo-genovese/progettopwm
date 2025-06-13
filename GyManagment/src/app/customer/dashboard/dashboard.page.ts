@@ -14,8 +14,7 @@ import {
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
+    CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
     IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText
   ]
 })
@@ -57,7 +56,6 @@ export class DashboardPage implements OnInit {
         console.log('Dashboard data received:', data);
         this.userData = data.user_info;
         this.upcomingBookings = (data.upcoming_bookings || []);
-        this.trainers = data.available_trainers || [];
         
         // Aggiungi le proprietà formattate per il fuso orario
         this.upcomingBookings.forEach(booking => {
@@ -68,17 +66,22 @@ export class DashboardPage implements OnInit {
           booking.adjustedEndTimeOnly = this.formatTime(booking.end_time);
         });
         
-        // Se l'utente ha un trainer assegnato
-        if (data.my_trainer) {
-          this.myTrainer = data.my_trainer;
-        }
-        
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading dashboard data:', error);
         this.upcomingBookings = [];
         this.isLoading = false;
+      }
+    });
+
+    this.customerService.getAvailableTrainers().subscribe({
+      next: (data) => {
+        this.trainers = data.slice(0, 6);
+      },
+      error: (err) => {
+        console.error('Errore nel caricamento dei trainer:', err);
+        this.trainers = [];
       }
     });
   }
