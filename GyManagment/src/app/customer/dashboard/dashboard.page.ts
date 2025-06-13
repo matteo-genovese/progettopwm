@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
-  IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText
+  IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText, 
+  IonButtons, AlertController, ToastController
 } from '@ionic/angular/standalone';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +17,7 @@ import {
   standalone: true,
   imports: [
     CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
-    IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText
+    IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText, IonButtons
   ]
 })
 export class DashboardPage implements OnInit {
@@ -27,7 +29,10 @@ export class DashboardPage implements OnInit {
   constructor(
     private customerService: CustomerService,
     private router: Router,
-    private dateTimeService: DateTimeService
+    private dateTimeService: DateTimeService,
+    private authService: AuthService,
+    private alertController: AlertController,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -103,4 +108,53 @@ export class DashboardPage implements OnInit {
   rateTrainer(trainerId: number) {
     this.customerService.openRatingModal(trainerId);
   }
+
+async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Conferma logout',
+      message: 'Sei sicuro di voler effettuare il logout?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel'
+        }, {
+          text: 'Logout',
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+    logout() {
+    this.isLoading = true;
+
+    this.authService.logout().subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Logout error:', error);
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      }
+    });
+  }
+
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+      color: 'success'
+    });
+    toast.present();
+  }
+
 }
