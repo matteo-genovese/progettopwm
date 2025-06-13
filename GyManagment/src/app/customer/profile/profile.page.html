@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Profilo</ion-title>
@@ -5,14 +6,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+
   <div *ngIf="isLoading" class="loading-container ion-text-center">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Caricamento...</p>
   </div>
 
   <div *ngIf="!isLoading">
+
     <!-- Sezione profilo -->
     <ion-card>
+
+      <!-- Avatar e nome utente -->
       <ion-card-header>
         <ion-avatar class="profile-avatar">
           <ion-icon name="person-circle-outline" size="large"></ion-icon>
@@ -23,7 +28,8 @@
       <ion-card-content>
         
         <ion-list lines="none">
-       
+          
+          <!-- Email -->
           <ion-item>
             <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
             <ion-label>
@@ -32,6 +38,7 @@
             </ion-label>
           </ion-item>
 
+          <!-- N. telefono -->
           <ion-item>
             <ion-icon name="call-outline" slot="start" color="primary"></ion-icon>
             <ion-label>
@@ -51,5 +58,7 @@
         Logout
       </ion-button>
     </div>
+    
   </div>
+
 </ion-content>
