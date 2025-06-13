@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,  
   IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal, IonButtons, ToastController, IonCardTitle
+  IonIcon, IonModal, IonButtons, ToastController, IonCardTitle, IonBackButton
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -22,7 +22,7 @@ import {
   standalone: true,
   imports: [
     CommonModule, FormsModule, IonButton, IonSpinner, 
-    IonHeader, IonToolbar, IonTitle, IonContent, 
+    IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
     IonInput, IonDatetime, IonIcon, IonModal, IonButtons
   ]

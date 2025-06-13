@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
   IonCardTitle, IonCardContent, IonItem, IonLabel, IonButton, IonButtons, 
-  IonIcon, IonList, IonSpinner, IonAvatar,
+  IonIcon, IonList, IonSpinner, IonAvatar, IonBackButton
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -21,7 +21,7 @@ import { TrainerService } from '../../services/trainer.service';
   imports: [
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
     IonCardTitle, IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, 
-    IonSpinner, IonAvatar, IonButtons
+    IonSpinner, IonAvatar, IonButtons, IonBackButton
   ]
 })
 export class ProfilePage implements OnInit {
