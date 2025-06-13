@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 interface LoginResponse {
   user?: any;
@@ -74,21 +75,33 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${this.baseUrl}/logout`, {}).pipe(
-      tap(() => {
-        this.clearAuthData();
-      }),
-      catchError(error => {
-        this.clearAuthData();
-        return throwError(() => error);
-      })
-    );
+    // Store token before clearing for the API call
+    const token = this.getToken();
+    
+    // Clear user data immediately
+    this.clearAuthData();
+    
+    // Add this: trigger app reset
+    this.resetAppState();
+    
+    // Then make the logout API call
+    return this.http.post<any>(`${this.baseUrl}/logout`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
 
   private clearAuthData(): void {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.isAuthenticatedSubject.next(false);
+  }
+
+  // Add this new method
+  private resetAppState() {
+    // This will broadcast to any listening services that they should reset their state
+    window.dispatchEvent(new CustomEvent('app:reset'));
   }
 
   isLoggedIn(): boolean {

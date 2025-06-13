@@ -16,12 +16,13 @@ interface ApiResponse<T> {
 })
 export class CustomerService {
   private baseUrl = 'http://localhost:5000/api';
+  private cacheData: any = {};
 
   constructor(
     private http: HttpClient,
     private modalCtrl: ModalController,
     
-  ) { }
+  ) { window.addEventListener('app:reset', () => this.resetService());}
 
   getCustomerDashboard(): Observable<any> {
     return this.http.get<ApiResponse<any>>(`${this.baseUrl}/customer/dashboard`).pipe(
@@ -102,5 +103,13 @@ export class CustomerService {
     return this.getCustomerDashboard().pipe(
       map(data => data.upcoming_bookings || [])
     );
+  }
+
+  // Add a method to reset the service state
+  resetService() {
+    this.cacheData = {};
+    // Reset any BehaviorSubjects or other state
+    // For example:
+    // this.dashboardData.next(null);
   }
 }

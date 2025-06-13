@@ -115,14 +115,19 @@ export class LoginPage implements OnInit {
   private redirectBasedOnRole() {
     const returnUrl = this.route.snapshot.queryParams['returnUrl'];
 
+    // Determine the destination based on role
+    let destination: string;
     if (this.authService.isAdmin()) {
-      this.router.navigateByUrl(returnUrl || '/admin/dashboard', { replaceUrl: true });
+      destination = returnUrl || '/admin/dashboard';
     } else if (this.authService.isCustomer()) {
-      this.router.navigateByUrl(returnUrl || '/customer/dashboard', { replaceUrl: true });
+      destination = returnUrl || '/customer/dashboard';
     } else if (this.authService.isTrainer()) {
-      this.router.navigateByUrl(returnUrl || '/trainer/dashboard', { replaceUrl: true });
+      destination = returnUrl || '/trainer/dashboard';
     } else {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      destination = '/home';
     }
+
+    // Navigate with page reload to ensure a clean state
+    window.location.href = destination;
   }
 }
