@@ -73,6 +73,43 @@ export class DashboardPage implements OnInit {
     this.userData = this.authService.getUser();
   }
 
+  adjustTimeZone(dateString: string): Date {
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + 2);
+    return date;
+  }
+
+  // Format date for display with timezone correction
+  formatDateTime(dateString: string): string {
+    const date = this.adjustTimeZone(dateString);
+    return date.toLocaleString('it-IT', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  // Format only the date part
+  formatDate(dateString: string): string {
+    const date = this.adjustTimeZone(dateString);
+    return date.toLocaleDateString('it-IT', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  }
+
+  // Format only the time part
+  formatTime(dateString: string): string {
+    const date = this.adjustTimeZone(dateString);
+    return date.toLocaleTimeString('it-IT', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
   loadDashboardData() {
     this.isLoading = true;
     
@@ -80,6 +117,16 @@ export class DashboardPage implements OnInit {
       next: (data) => {
         console.log('Dashboard data received:', data);
         this.upcomingBookings = (data.upcoming_bookings || []);
+        
+        // Aggiungi le proprietà formattate per il fuso orario
+        this.upcomingBookings.forEach(booking => {
+          booking.adjustedStartTime = this.formatDateTime(booking.start_time);
+          booking.adjustedStartDate = this.formatDate(booking.start_time);
+          booking.adjustedStartTimeOnly = this.formatTime(booking.start_time);
+          booking.adjustedEndTime = this.formatDateTime(booking.end_time);
+          booking.adjustedEndTimeOnly = this.formatTime(booking.end_time);
+        });
+        
         this.isLoading = false;
       },
       error: (error) => {

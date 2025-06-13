@@ -13,7 +13,7 @@
   </ion-refresher>
   
   <!-- Selezione tab -->
-  <ion-segment [(ngModel)]="selectedTab" (ionChange)="segmentChanged()">
+  <ion-segment [(ngModel)]="selectedTab">
     <ion-segment-button value="upcoming">
       <ion-label>Prossimi</ion-label>
     </ion-segment-button>
@@ -62,7 +62,7 @@
               </p>
               <p>
                 <ion-icon name="time-outline"></ion-icon>
-                {{ booking.start_time | date:'HH:mm' }} - {{ booking.end_time | date:'HH:mm' }}
+                {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
               </p>
             </div>
           </ion-card-content>
@@ -100,7 +100,7 @@
               </p>
               <p>
                 <ion-icon name="time-outline"></ion-icon>
-                {{ booking.start_time | date:'HH:mm' }} - {{ booking.end_time | date:'HH:mm' }}
+                {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
               </p>
             </div>
 

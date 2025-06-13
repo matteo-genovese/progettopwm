@@ -88,6 +88,44 @@ export class SlotsModalComponent implements OnInit {
     this.loadAllFutureSlots();
   }
 
+  // Helper method to adjust timezone by adding 2 hours
+  adjustTimeZone(dateString: string): Date {
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + 2);
+    return date;
+  }
+
+  // Format date for display with timezone correction
+  formatDateTime(dateString: string): string {
+    const date = this.adjustTimeZone(dateString);
+    return date.toLocaleString('it-IT', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  // Format only the date part
+  formatDate(dateString: string): string {
+    const date = this.adjustTimeZone(dateString);
+    return date.toLocaleDateString('it-IT', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  }
+
+  // Format only the time part
+  formatTime(dateString: string): string {
+    const date = this.adjustTimeZone(dateString);
+    return date.toLocaleTimeString('it-IT', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
   close() {
     this.modalCtrl.dismiss();
   }
@@ -104,7 +142,7 @@ export class SlotsModalComponent implements OnInit {
     startDate.setHours(0, 0, 0, 0);
     
     // Carica gli slot disponibili per il trainer usando l'endpoint corretto
-    this.customerService.getAvailableSlots(this.trainer.id, this.formatDate(startDate.toISOString())).subscribe({
+    this.customerService.getAvailableSlots(this.trainer.id, this.formatDateForAPI(startDate.toISOString())).subscribe({
       next: (slots) => {
         console.log('Slot ricevuti:', slots);
         
@@ -118,7 +156,7 @@ export class SlotsModalComponent implements OnInit {
             
             try {
               // Estrai la data dallo slot
-              const slotDate = this.formatDate(slot.start_time);
+              const slotDate = this.formatDateForAPI(slot.start_time);
               const slotDateTime = new Date(slotDate);
               slotDateTime.setHours(0, 0, 0, 0);
               
@@ -128,6 +166,12 @@ export class SlotsModalComponent implements OnInit {
                   this.slotsByDate[slotDate] = [];
                   this.allDates.push(slotDate);
                 }
+                
+                // Aggiungi proprietà con orari corretti
+                slot.adjustedStartTime = this.formatDateTime(slot.start_time);
+                slot.adjustedStartTimeOnly = this.formatTime(slot.start_time);
+                slot.adjustedEndTime = this.formatDateTime(slot.end_time);
+                slot.adjustedEndTimeOnly = this.formatTime(slot.end_time);
                 
                 this.slotsByDate[slotDate].push(slot);
               }
@@ -182,7 +226,7 @@ export class SlotsModalComponent implements OnInit {
   }
 
   // Formatta una data ISO in formato YYYY-MM-DD per l'API
-  private formatDate(isoString: string): string {
+  private formatDateForAPI(isoString: string): string {
     const date = new Date(isoString);
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   }

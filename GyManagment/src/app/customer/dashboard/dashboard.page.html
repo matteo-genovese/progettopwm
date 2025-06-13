@@ -41,11 +41,11 @@
           <h2>{{ booking.trainer_name }}</h2>
           <p>
             <ion-icon name="calendar-outline"></ion-icon>
-            {{ booking.start_time | date:'dd/MM/yyyy' }}
+            {{ booking.adjustedStartDate }}
           </p>
           <p>
             <ion-icon name="time-outline"></ion-icon>
-            {{ booking.start_time | date:'HH:mm' }} - {{ booking.end_time | date:'HH:mm' }}
+            {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
           </p>
           <p *ngIf="booking.specialization">
             <ion-icon name="fitness-outline"></ion-icon>
