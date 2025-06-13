@@ -55,7 +55,6 @@ export class CustomersPage implements OnInit {
 
   ngOnInit() {
     this.loadCustomers();
-    // this.loadTrainers();
   }
 
   loadCustomers() {
@@ -76,39 +75,10 @@ export class CustomersPage implements OnInit {
     });
   }
 
-  // loadTrainers() {
-  //   this.authService.getAllTrainers().subscribe({
-  //     next: (data) => {
-  //       this.trainers = data;
-  //     },
-  //     error: (error) => {
-  //       console.error('Raw error:', error);
-  //       this.error = 'Impossibile caricare i trainer. Riprova più tardi.';
-  //       this.isLoading = false;
-  //     }
-  //   });
-  // }
-
   doRefresh(event: any) {
     this.loadCustomers();
-    // this.loadTrainers();
     setTimeout(() => {
       event.target.complete();
     }, 1000);
   }
-
-  // showTrainerList(customerId: number) {
-  //   this.selectedCustomerId = this.selectedCustomerId === customerId ? null : customerId;
-  // }
-
-  // hideTrainerList() {
-  //   this.selectedCustomerId = null;
-  // }
-
-//  assignTrainerToCustomer(trainerId: number, customer: any) {
-//     this.authService.assignTrainerToCustomer(customer.id, trainerId).subscribe({
-//       next: (response) => { /* ... */ },
-//       error: (error) => { /* ... */ }
-//     });
-//   }
 }

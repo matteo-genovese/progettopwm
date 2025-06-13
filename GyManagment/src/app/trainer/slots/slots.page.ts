@@ -68,9 +68,11 @@ export class SlotsPage implements OnInit {
   }
   
   // Usa i metodi dal servizio invece delle funzioni locali
-  formatTime(isoString: string): string {
+  formatTimeLocal(isoString: string): string {
     if (!isoString) return '';
-    return this.dateTimeService.formatTime(isoString);
+    const date = new Date(isoString);
+    return date.getHours().toString().padStart(2, '0') + ':' + 
+           date.getMinutes().toString().padStart(2, '0');
   }
   
   // Apre il picker per l'orario di inizio
