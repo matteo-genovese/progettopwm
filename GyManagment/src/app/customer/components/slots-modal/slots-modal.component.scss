@@ -2,12 +2,12 @@
   --border-radius: 20px;
   --box-shadow: 0 5px 15px rgba(0,0,0,0.15);
   
-  &.rating-modal-class .modal-wrapper {
+  // --- Per il wrapper del calendario ---
+  .modal-wrapper {
     border-radius: 20px;
     overflow: hidden;
   }
 }
-
 
 .trainer-info {
   margin-bottom: 1.5rem;
@@ -23,21 +23,6 @@
   p {
     color: var(--ion-color-medium);
     margin: 0 0 0.5rem 0;
-  }
-  
-  .rating {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    ion-icon {
-      margin-right: 0.25rem;
-      color: #FFC107;
-    }
-    
-    span {
-      font-size: 0.9rem;
-    }
   }
 }
 
@@ -57,8 +42,7 @@
     margin-bottom: 8px;
   }
   
- 
-  .date-value, ion-datetime-button, ion-datetime {
+  ion-datetime-button, ion-datetime {
     cursor: pointer;
     padding: 6px 10px;
     border: 1px solid #ddd;
@@ -69,14 +53,12 @@
     position: relative;
     transition: all 0.2s ease;
     
-
     &:after {
       content: "📅";
       margin-left: 8px;
       font-size: 14px;
     }
     
-
     &:hover {
       border-color: #dc3545;
       transform: translateY(-2px);
@@ -130,7 +112,8 @@ h3 {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   border: 1.5px solid var(--ion-color-secondary-shade);
   overflow: hidden;
-  transition: transform 0.2s ease;
+  animation: fadeIn 0.4s ease-out;
+  animation-fill-mode: both;
   
   &:hover {
     transform: translateY(-3px);
@@ -206,16 +189,16 @@ h3 {
   max-width: 650px; 
   margin-left: auto;
   margin-right: auto;
+  animation: fadeIn 0.4s ease-out;
 }
 
 ion-header ion-toolbar {
-  --background: #dc3545 !important; 
-  background: #dc3545 !important;
-  color: #fff !important;
+  --background: #dc3545;
+  color: #fff;
   
   ion-title {
-    color: #fff !important;
-    text-align: center !important;
+    color: #fff;
+    text-align: center;
     width: 100%;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -239,17 +222,6 @@ ion-button {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-ion-content {
-  .slots-container {
-    animation: fadeIn 0.4s ease-out;
-  }
-  
-  .date-card {
-    animation: fadeIn 0.4s ease-out;
-    animation-fill-mode: both;
-  }
 }
 
 @media (max-width: 576px) {
