@@ -30,10 +30,14 @@
   </app-loading-spinner>
 
   <!-- Mostrato in caso di errore -->
-  <div *ngIf="error" class="empty-state">
-    <ion-icon name="alert-circle-outline" size="large"></ion-icon>
-    <h3>{{ error }}</h3>
-  </div>
+  <app-empty-state 
+    *ngIf="error"
+    icon="alert-circle-outline"
+    title="{{ error }}"
+    description="Riprova a caricare gli allenamenti"
+    buttonText="Riprova"
+    (buttonClicked)="loadSessions()">
+  </app-empty-state>
 
   <div *ngIf="!isLoading" [ngSwitch]="selectedTab">
 
@@ -41,15 +45,16 @@
     <div *ngSwitchCase="'upcoming'">
 
       <!-- Mostrato se non ci sono allenamenti futuri -->
-      <app-empty-state 
-        *ngIf="upcomingSessions.length === 0"
-        icon="calendar-outline"
-        title="Nessun allenamento futuro"
-        description="Crea uno slot per visualizzarlo qui"
-        buttonText="Crea slot"
-        buttonLink="../slots">
-      </app-empty-state>
-      
+      <ion-card *ngIf="upcomingSessions.length === 0"> 
+        <app-empty-state 
+          *ngIf="upcomingSessions.length === 0"
+          icon="calendar-outline"
+          title="Nessun allenamento futuro"
+          description="Crea uno slot per visualizzarlo qui"
+          buttonText="Crea slot"
+          buttonLink="../slots">
+        </app-empty-state>
+      </ion-card>
       <!-- Mostrato se ci sono allenamenti futuri -->
       <ion-grid *ngIf="upcomingSessions.length > 0">
         <ion-row>
@@ -64,9 +69,14 @@
               </h4>
               
               <!-- Mostrato se non ci sono allenamenti futuri con posti disponibili -->
-              <div class="empty-column-state" *ngIf="upcomingAvailableSessions.length === 0">
-                <p>Nessun allenamento con posti disponibili</p>
-              </div>
+              <app-empty-state
+                *ngIf="upcomingAvailableSessions.length === 0"
+                icon="calendar-outline"
+                title="Nessun allenamento con posti disponibili"
+                description="Crea uno slot per visualizzarlo qui"
+                buttonText="Crea slot"
+                buttonLink="../slots">
+              </app-empty-state>
               
               <!-- Mostra tutti gli allenamenti futuri con posti disponibili -->
               <ion-card *ngFor="let session of upcomingAvailableSessions">
@@ -127,10 +137,12 @@
               </h4>
               
               <!-- Mostrato se non ci sono allenamenti futuri al completo -->
-              <div class="empty-column-state" *ngIf="upcomingFullSessions.length === 0">
-                <p>Nessun allenamento al completo</p>
-              </div>
-              
+              <app-empty-state
+                *ngIf="upcomingFullSessions.length === 0"
+                icon="calendar-outline"
+                title="Nessun allenamento al completo">
+              </app-empty-state>
+
               <!-- Mostra tutti gli allenamenti futuri al completo -->
               <ion-card *ngFor="let session of upcomingFullSessions">
 
@@ -188,11 +200,13 @@
     <div *ngSwitchCase="'past'">
 
       <!-- Mostrato se non ci sono allenamenti passati -->
-      <div class="empty-state" *ngIf="pastSessions.length === 0">
-        <ion-icon name="time-outline" size="large"></ion-icon>
-        <h3>Nessun allenamento passato</h3>
-        <p>Gli allenamenti passati saranno visualizzati qui</p>
-      </div>
+       <ion-card *ngIf="pastSessions.length === 0">
+        <app-empty-state 
+          icon="time-outline"
+          title="Nessun allenamento passato"
+          description="Gli allenamenti passati saranno visualizzati qui">
+        </app-empty-state>
+      </ion-card>
 
       <!-- Mostrato se ci sono allenamenti passati -->
       <div *ngIf="pastSessions.length > 0">

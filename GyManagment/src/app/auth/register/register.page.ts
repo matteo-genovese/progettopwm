@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  IonContent, IonButton, IonItem, IonLabel, IonInput, IonIcon, IonSpinner, 
-  IonText, IonSelect, IonSelectOption, IonList
+  IonContent, IonButton, IonItem, IonLabel, IonInput, IonIcon,  
+  IonSpinner, IonText, IonSelect, IonSelectOption, IonList
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
