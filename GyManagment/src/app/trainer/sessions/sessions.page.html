@@ -1,17 +1,7 @@
-<!-- Header -->
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Allenamenti Trainer</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Allenamenti"
+  [backHref]="'trainer/dashboard'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
@@ -34,10 +24,10 @@
   </ion-segment>
 
   <!-- Mostrato durante il caricamento -->
-  <div *ngIf="isLoading" class="loading-container">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento allenamenti...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento allenamenti...'">
+  </app-loading-spinner>
 
   <!-- Mostrato in caso di errore -->
   <div *ngIf="error" class="empty-state">
@@ -51,17 +41,14 @@
     <div *ngSwitchCase="'upcoming'">
 
       <!-- Mostrato se non ci sono allenamenti futuri -->
-      <div class="empty-state" *ngIf="upcomingSessions.length === 0">
-
-        <ion-icon name="calendar-outline" size="large"></ion-icon>
-        <h3>Nessun allenamento futuro</h3>
-        <p>Crea uno slot per visualizzarlo qui</p>
-
-        <ion-button expand="block" routerLink="../slots">
-          Crea slot
-        </ion-button>
-
-      </div>
+      <app-empty-state 
+        *ngIf="upcomingSessions.length === 0"
+        icon="calendar-outline"
+        title="Nessun allenamento futuro"
+        description="Crea uno slot per visualizzarlo qui"
+        buttonText="Crea slot"
+        buttonLink="../slots">
+      </app-empty-state>
       
       <!-- Mostrato se ci sono allenamenti futuri -->
       <ion-grid *ngIf="upcomingSessions.length > 0">

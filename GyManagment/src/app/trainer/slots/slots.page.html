@@ -1,17 +1,7 @@
-<!-- Header -->
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/trainer/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Slots</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Slots"
+  [backHref]="'trainer/dashboard'">
+</app-header>
 
 <ion-content class="ion-padding">
 
@@ -104,10 +94,10 @@
   </ion-card>
 
   <!-- Mostrato durante il caricamento -->
-  <div *ngIf="isLoading" class="loading-container ion-text-center">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento slot...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento slot...'">
+  </app-loading-spinner>
 
   <!-- Popup per selezionare l'orario di inizio -->
   <ion-modal 

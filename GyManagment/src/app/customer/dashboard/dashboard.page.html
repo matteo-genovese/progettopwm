@@ -1,19 +1,7 @@
-<!-- Header -->
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button style="opacity:0; pointer-events:none;">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Dashboard Cliente</ion-title>
-        <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Dashboard Cliente"
+  [backHref]="'.'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   
@@ -41,8 +29,7 @@
     <ion-card-content>
 
       <div class="loading-placeholder" *ngIf="isLoading">
-        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
+        <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
       </div>
 
       <!-- Mostrato se ci sono allenamenti prenotati -->
@@ -92,8 +79,7 @@
 
     <ion-card-content>
       <div class="loading-placeholder" *ngIf="isLoading">
-        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 100%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
+        <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
       </div>
 
       <!-- Mostrato se ci sono trainers disponibili -->

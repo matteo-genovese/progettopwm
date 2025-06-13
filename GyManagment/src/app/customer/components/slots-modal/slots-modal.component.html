@@ -11,7 +11,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
   <!-- Informazioni sul trainer -->
   <div class="trainer-info" *ngIf="trainer">
     <h2>{{ trainer.full_name }}</h2>
@@ -44,10 +43,10 @@
     <h3>Slot disponibili a partire dal {{ selectedDate | date:'dd/MM/yyyy' }}</h3>
     
     <!-- Mostrato durante il caricamento -->
-    <div class="loading-container" *ngIf="isLoading">
-      <ion-spinner name="dots"></ion-spinner>
-      <p>Caricamento slot disponibili...</p>
-    </div>
+    <app-loading-spinner 
+      *ngIf="isLoading" 
+      [message]="'Caricamento slot disponibili...'">
+    </app-loading-spinner>
     
     <!-- Mostrato se non ci sono slot disponibili -->
     <div class="empty-slots" *ngIf="!isLoading && allDates.length === 0">

@@ -6,9 +6,11 @@ import { CommonModule } from '@angular/common';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
   IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText, 
-  IonButtons, AlertController, ToastController
+  IonButtons
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
+import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +19,8 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [
     CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
-    IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText, IonButtons
+    IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText, IonButtons,
+    AppHeaderComponent, LoadingSpinnerComponent
   ]
 })
 export class DashboardPage implements OnInit {

@@ -1,26 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/admin/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Tutti i Trainer</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Tutti i Trainer"
+  [backHref]="'admin/dashboard'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="loading-container" *ngIf="isLoading">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento trainers...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento trainers...'">
+  </app-loading-spinner>
 
   <ion-card *ngIf="error" class="error-card">
     <ion-card-content>

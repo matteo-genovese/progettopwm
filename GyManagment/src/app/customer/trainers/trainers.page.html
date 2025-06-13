@@ -1,17 +1,7 @@
-<!-- Header -->
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Trainer Disponibili</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Trainer Disponibili"
+  [backHref]="'customer/dashboard'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
@@ -20,7 +10,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="search-filter-container">`
+  <div class="search-filter-container">
 
     <!-- Barra di ricerca -->
     <ion-searchbar
@@ -56,13 +46,12 @@
       </ion-chip>
     </div>
   </div>
-`
-  <!-- Mostrato durante il caricamento -->
-  <div class="loading-container" *ngIf="isLoading">
-    <ion-skeleton-text animated style="width: 100%; height: 120px; margin-bottom: 20px;"></ion-skeleton-text>
-    <ion-skeleton-text animated style="width: 100%; height: 120px; margin-bottom: 20px;"></ion-skeleton-text>
-    <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
-  </div>
+
+  <!-- Nota: questo caso è speciale perché usa skeleton text invece di spinner -->
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento trainer...'">
+  </app-loading-spinner>
 
   <!-- Mostrato se non ci sono trainers -->
   <div class="empty-state" *ngIf="!isLoading && filteredTrainers.length === 0">

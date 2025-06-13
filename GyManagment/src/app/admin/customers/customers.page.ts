@@ -8,6 +8,9 @@ import { addIcons } from 'ionicons';
 import { fitnessOutline, mailOutline, callOutline, calendarOutline, barbell } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 import { AdminService } from '../../services/admin.service';
+import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-customers',
@@ -16,7 +19,8 @@ import { AdminService } from '../../services/admin.service';
   standalone: true,
   imports: [
     CommonModule,IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, 
-    IonButton, IonIcon, IonSpinner, IonCard, IonCardContent, IonRefresher, IonRefresherContent
+    IonButton, IonIcon, IonSpinner, IonCard, IonCardContent, IonRefresher, IonRefresherContent,
+    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })
 

@@ -1,19 +1,8 @@
 <!-- Header -->
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button color="tertiary" style="opacity:0; pointer-events:none;">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Dashboard Trainer</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Dashboard Trainer"
+  [backHref]="'.'">
+</app-header>
 
 <ion-content class="ion-padding">
 
@@ -23,10 +12,10 @@
   </ion-refresher>
 
   <!-- Mostrato durante il caricamento -->
-  <div *ngIf="isLoading" class="loading-container ion-text-center">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento dashboard...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento dashboard...'">
+  </app-loading-spinner>
 
   <!-- Sezione benvenuto -->
   <div class="dashboard-wrapper" *ngIf="dashboardData">
@@ -75,7 +64,6 @@
 
   <!-- Sezione prossimi allenamenti -->
   <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length > 0">
-
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="calendar-outline" color="primary"></ion-icon>
@@ -111,10 +99,15 @@
 
         </div>
       </div>
-      
-
     </ion-card-content>
+  </ion-card>
 
+  <ion-card>
+    <app-empty-state 
+      *ngIf="dashboardData && dashboardData.upcoming_sessions.length === 0"
+      message="Nessun allenamento programmato"
+      description="Non hai allenamenti futuri programmati. Crea un nuovo slot per iniziare.">
+    </app-empty-state>
   </ion-card>
 
   <!-- Collegamenti -->
@@ -135,6 +128,15 @@
       <ion-label class="ion-text-center">
         <h2>Crea uno slot</h2>
         <p>Aggiungi nuovi slot disponibili</p>
+      </ion-label>
+    </ion-item>
+
+    <!-- Collegamento a "Profilo" -->
+    <ion-item button detail routerLink="../profile" class="action-item">
+      <ion-icon name="star-outline" slot="start" color="primary"></ion-icon>
+      <ion-label class="ion-text-center">
+        <h2>Visualizza recensioni</h2>
+        <p>Tutte le recensioni ricevute dai clienti</p>
       </ion-label>
     </ion-item>
 

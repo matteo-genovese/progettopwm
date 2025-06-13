@@ -1,26 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/admin/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Tutti i Clienti</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Tutti i Clienti"
+  [backHref]="'admin/dashboard'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="loading-container" *ngIf="isLoading">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento clienti...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento clienti...'">
+  </app-loading-spinner>
 
   <ion-card *ngIf="error" class="error-card">
     <ion-card-content>
@@ -30,11 +21,11 @@
   </ion-card>
 
   <div *ngIf="!isLoading && !error">
-    <div *ngIf="customers.length === 0" class="empty-state">
-      <ion-icon name="person-outline"></ion-icon>
-      <h2>Nessun cliente disponibile</h2>
-      <p>Non ci sono clienti registrati nel sistema.</p>
-    </div>
+    <app-empty-state 
+      *ngIf="customers.length === 0"
+      icon="person-outline"
+      title="Nessun cliente disponibile">
+    </app-empty-state>
   
     <div class="customers-grid" *ngIf="customers.length > 0">
       <div class="customer-card" *ngFor="let customer of customers">
@@ -60,8 +51,5 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </ion-content>

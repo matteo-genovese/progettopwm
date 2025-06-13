@@ -11,6 +11,7 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 import { AdminService } from '../../services/admin.service';
+import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,8 +19,9 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
-    IonCardTitle, IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons
+    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,
+    IonCardTitle, IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons,
+    AppHeaderComponent
   ]
 })
 export class DashboardPage implements OnInit {

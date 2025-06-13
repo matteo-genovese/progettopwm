@@ -10,6 +10,8 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 import { CustomerService } from '../../services/customer.service';
+import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-profile',
@@ -17,8 +19,9 @@ import { CustomerService } from '../../services/customer.service';
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-    IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, IonButtons, IonBackButton
+    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, AppHeaderComponent,
+    IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, IonButtons, IonBackButton,
+    LoadingSpinnerComponent
   ]
 })
 export class ProfilePage implements OnInit {

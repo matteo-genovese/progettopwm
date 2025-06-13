@@ -1,17 +1,7 @@
-<!-- Header -->
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Le Mie Prenotazioni</ion-title>
-        <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Le Mie Prenotazioni"
+  [backHref]="'customer/dashboard'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
@@ -31,10 +21,10 @@
   </ion-segment>
 
   <!-- Caricamento prenotazioni -->
-  <div *ngIf="isLoading" class="loading-container">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento prenotazioni...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento prenotazioni...'">
+  </app-loading-spinner>
 
   <div *ngIf="!isLoading" [ngSwitch]="selectedTab">
 
@@ -42,15 +32,14 @@
     <div *ngSwitchCase="'upcoming'">
 
       <!-- Mostrato se non ci sono prenotazioni future -->
-      <div class="empty-state" *ngIf="upcomingBookings.length === 0">
-        <ion-icon name="calendar-outline" size="large"></ion-icon>
-        <h3>Nessuna prenotazione futura</h3>
-        <p>Prenota una sessione con un trainer per visualizzarla qui</p>
-
-        <ion-button expand="block" (click)="goToTrainers()">
-          Trova un trainer
-        </ion-button>
-      </div>
+      <app-empty-state 
+        *ngIf="upcomingBookings.length === 0"
+        icon="calendar-outline"
+        title="Nessuna prenotazione futura"
+        description="Prenota una sessione con un trainer per visualizzarla qui"
+        buttonText="Trova un trainer"
+        (buttonClicked)="goToTrainers()">
+      </app-empty-state>
 
       <!-- Mostrato se ci sono prenotazioni future -->
       <div class="bookings-grid" *ngIf="upcomingBookings.length > 0">

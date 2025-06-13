@@ -6,11 +6,12 @@ import { CustomerService } from '../../../services/customer.service';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon,
   IonList, IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal,
-  IonSpinner, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+  IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
   ModalController, ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, calendarOutline, timeOutline, star } from 'ionicons/icons';
+import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-slots-modal',
@@ -20,8 +21,9 @@ import { closeOutline, calendarOutline, timeOutline, star } from 'ionicons/icons
   imports: [
     CommonModule, FormsModule, DatePipe, IonHeader, IonToolbar, 
     IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonList, 
-    IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal, IonSpinner, 
-    IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent
+    IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal,
+    IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+    LoadingSpinnerComponent
   ]
 })
 
@@ -148,11 +150,9 @@ export class SlotsModalComponent implements OnInit {
         this.isLoading = false;
         console.error('Error booking slot:', error);
         
-        // Estrai il messaggio di errore specifico dal server
         let errorMessage = 'Errore durante la prenotazione. Riprova più tardi.';
         
         if (error.error && error.error.message) {
-          // Usa esattamente il messaggio restituito dal server
           errorMessage = error.error.message;
         }
         

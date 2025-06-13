@@ -12,6 +12,8 @@ import {
 import { CustomerService } from '../../services/customer.service';
 import { SlotsModalComponent } from '../components/slots-modal/slots-modal.component';
 import { AuthService } from '../../services/auth.service';
+import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-trainers',
@@ -21,7 +23,8 @@ import { AuthService } from '../../services/auth.service';
   imports: [
     CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, 
     IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, IonRefresher, 
-    IonRefresherContent, IonChip, IonLabel, IonSkeletonText, IonButtons, IonBackButton
+    IonRefresherContent, IonChip, IonLabel, IonSkeletonText, IonButtons, IonBackButton,
+    AppHeaderComponent, LoadingSpinnerComponent
   ]
 })
 export class TrainersPage implements OnInit {

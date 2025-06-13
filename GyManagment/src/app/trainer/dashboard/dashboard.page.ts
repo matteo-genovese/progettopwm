@@ -9,18 +9,19 @@ import {
   IonRefresher, IonRefresherContent, IonCardContent, IonItem, IonLabel, IonSpinner, 
   IonIcon, IonButtons, IonButton
 } from '@ionic/angular/standalone';
-
+import { AppHeaderComponent } from '../../shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [IonIcon, 
-    CommonModule,
-    IonRefresher,
-    IonRefresherContent, 
+    CommonModule, IonRefresher, IonRefresherContent, 
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle,
-    IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink, IonButtons, IonButton
+    IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink, IonButtons, IonButton,
+    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })
 export class DashboardPage implements OnInit {

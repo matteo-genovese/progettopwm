@@ -213,17 +213,12 @@ ion-toolbar ion-button[color="tertiary"] ion-icon {
   color: var(--ion-color-tertiary) !important; 
 }
 
-
-
-
-
 ion-content {
   --background: none;
   background-color: #fff;
   background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
   background-size: 14px 14px;
 }
-
 
 ion-title {
   text-align: center !important;

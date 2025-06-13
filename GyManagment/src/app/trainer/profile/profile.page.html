@@ -1,24 +1,14 @@
-<!-- Header -->
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Profilo</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header 
+  title="Profilo"
+  [backHref]="'trainer/dashboard'">
+</app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <div *ngIf="isLoading" class="loading-container ion-text-center">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento...'">
+  </app-loading-spinner>
 
   <div *ngIf="error" class="error-container">
     <ion-card color="danger">
@@ -73,6 +63,49 @@
           </ion-item>
 
         </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Sezione recensioni -->
+    <ion-card *ngIf="trainerData && trainerData.ratings">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="star-outline" color="danger"></ion-icon>
+          Le tue recensioni
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Mostrato se non ci sono recensioni -->
+        <div *ngIf="!trainerData.ratings || trainerData.ratings.length === 0" class="empty-reviews">
+          <ion-icon name="star-outline" size="large"></ion-icon>
+          <h3>Nessuna recensione</h3>
+          <p>Non hai ancora ricevuto recensioni dai tuoi clienti.</p>
+        </div>
+
+        <!-- Lista delle recensioni -->
+        <div *ngIf="trainerData.ratings && trainerData.ratings.length > 0" class="reviews-list">
+          <div class="review-card" *ngFor="let review of trainerData.ratings">
+            <div class="review-header">
+              <div class="customer-name"><strong>Cliente:</strong> {{ review.customer_name }}</div>
+              <div class="review-date">{{ formatDate(review.date) }}</div>
+            </div>
+            
+            <div class="rating">
+              <div class="stars">
+                <ion-icon *ngFor="let star of generateStars(review.rating)" 
+                          [name]="star.filled ? 'star' : 'star-outline'" 
+                          color="warning">
+                </ion-icon>
+              </div>
+              <span class="rating-text"><strong>Rating:</strong> {{ review.rating }}/5</span>
+            </div>
+            
+            <div class="review-comment" *ngIf="review.review">
+              <p><strong>Review:</strong> {{ review.review }}</p>
+            </div>
+          </div>
+        </div>
       </ion-card-content>
     </ion-card>
 
