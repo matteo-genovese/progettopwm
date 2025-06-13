@@ -102,9 +102,8 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length === 0">
     <app-empty-state 
-      *ngIf="dashboardData && dashboardData.upcoming_sessions.length === 0"
       message="Nessun allenamento programmato"
       description="Non hai allenamenti futuri programmati. Crea un nuovo slot per iniziare.">
     </app-empty-state>
