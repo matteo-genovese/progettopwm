@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start" *ngIf="showBackButton">
-      <ion-back-button [defaultHref]="backHref"></ion-back-button>
+      <ion-back-button class="button" [defaultHref]="backHref"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
     <ion-buttons slot="end" *ngIf="showLogout">
-      <ion-button color="tertiary" (click)="onLogout()">
+      <ion-button color="tertiary" class="button" (click)="onLogout()">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
