@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular/standalone';
 import { RatingModalComponent } from '../customer/components/rating-modal/rating-modal.component';
@@ -105,11 +105,7 @@ export class CustomerService {
     );
   }
 
-  // Add a method to reset the service state
   resetService() {
     this.cacheData = {};
-    // Reset any BehaviorSubjects or other state
-    // For example:
-    // this.dashboardData.next(null);
   }
 }

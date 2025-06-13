@@ -11,20 +11,19 @@ export class TrainerService {
   private cacheData: any = {};
 
   constructor(private http: HttpClient) {
-    // Listen for app reset events
     window.addEventListener('app:reset', () => this.resetService());
   }
 
   getDashboard(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/dashboard`).pipe(
-      map(res => res.data), // <-- usa sempre .data
+      map(res => res.data),
       catchError(this.handleError)
     );
   }
 
   getSchedule(): Observable<any[]> {
     return this.http.get<any>(`${this.baseUrl}/schedule`).pipe(
-      map(res => res.data), // <-- usa sempre .data
+      map(res => res.data),
       catchError(this.handleError)
     );
   }
@@ -40,11 +39,7 @@ export class TrainerService {
     return throwError(() => error);
   }
 
-  // Add a method to reset the service state
   resetService() {
     this.cacheData = {};
-    // Reset any BehaviorSubjects or other state
-    // For example:
-    // this.dashboardData.next(null);
   }
 }
