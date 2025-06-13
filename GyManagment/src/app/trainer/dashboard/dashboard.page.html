@@ -64,7 +64,6 @@
 
   <!-- Sezione prossimi allenamenti -->
   <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length > 0">
-
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="calendar-outline" color="primary"></ion-icon>
@@ -100,10 +99,15 @@
 
         </div>
       </div>
-      
-
     </ion-card-content>
+  </ion-card>
 
+  <ion-card>
+    <app-empty-state 
+      *ngIf="dashboardData && dashboardData.upcoming_sessions.length === 0"
+      message="Nessun allenamento programmato"
+      description="Non hai allenamenti futuri programmati. Crea un nuovo slot per iniziare.">
+    </app-empty-state>
   </ion-card>
 
   <!-- Collegamenti -->

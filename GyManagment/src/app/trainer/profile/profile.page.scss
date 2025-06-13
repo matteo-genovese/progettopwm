@@ -112,35 +112,6 @@ ion-list {
   gap: 10px; 
 }
 
-
-
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-
-  p {
-    margin-top: 1rem;
-    color: var(--ion-color-medium);
-  }
-}
-
-ion-header ion-toolbar {
-  --background: var(--ion-color-primary);
-  color: #fff;
-}
-
-ion-header ion-title,
-ion-header ion-toolbar ion-title {
-  color: #fff;
-  text-align: center;
-  width: 100%;
-  justify-content: center;
-  display: flex;
-}
-
 ion-content {
   --background: none;
   background-color: #fff;

@@ -31,63 +31,6 @@
   }
 }
 
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 0;
-
-  ion-skeleton-text {
-    margin-bottom: 1.2rem;
-  }
-  
-  p {
-    margin-top: 1rem;
-    color: var(--ion-color-medium);
-    font-weight: 500;
-  }
-}
-
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 1rem;
-  
-  ion-icon {
-    font-size: 4rem;
-    color: var(--ion-color-primary);
-    margin-bottom: 1rem;
-  }
-  
-  h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-    color: #333;
-    position: relative;
-    
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 3px;
-      background-color: var(--ion-color-primary);
-      border-radius: 4px;
-    }
-  }
-  
-  p {
-    color: var(--ion-color-medium);
-    text-align: center;
-    font-size: 1rem;
-  }
-}
 
 .trainers-grid {
   display: grid;
@@ -203,22 +146,6 @@
       filter: brightness(1.05);
     }
   }
-}
-
-ion-header ion-toolbar {
-  --background: var(--ion-color-primary);
-  color: #fff;
-}
-
-ion-header ion-title,
-ion-header ion-toolbar ion-title {
-  color: #fff;
-  text-align: center;
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  margin-left: 0;
-  margin-right: 0;
 }
 
 ion-content {

@@ -5,20 +5,6 @@ ion-content {
   background-size: 14px 14px;
 }
 
-ion-header ion-toolbar {
-  --background: var(--ion-color-primary);
-  color: #fff;
-}
-
-ion-header ion-title,
-ion-header ion-toolbar ion-title {
-  color: #fff;
-  text-align: center;
-  width: 100%;
-  justify-content: center;
-  display: flex;
-}
-
 .scrollable-slots-list {
   max-height: 270px;
   overflow-y: auto;
@@ -48,65 +34,6 @@ ion-header ion-toolbar ion-title {
 
 ion-segment {
   margin-bottom: 10px;
-}
-
-
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  
-  p {
-    margin-top: 1rem;
-    color: var(--ion-color-medium);
-  }
-  
-  ion-spinner {
-    width: 48px;
-    height: 48px;
-    color: var(--ion-color-primary);
-  }
-}
-
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem ;
-  
-  ion-icon {
-    font-size: 3rem;
-    color: var(--ion-color-primary);
-    margin-bottom: 1rem;
-  }
-  
-  h3 {
-    margin: 0;
-    font-weight: 500;
-    color: var(--ion-color-dark);
-    position: relative;
-    
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 3px;
-      background-color: var(--ion-color-primary);
-      border-radius: 4px;
-    }
-  }
-  
-  p {
-    color: var(--ion-color-medium);
-    margin: 0.5rem 0 1.5rem;
-    text-align: center;
-  }
 }
 
 .session-category-title {
@@ -308,7 +235,6 @@ ion-card.past-session-card {
   }
 }
 
-
 @media (max-width: 768px) {
   ion-col:first-child {
     margin-bottom: 1rem;
@@ -332,5 +258,3 @@ ion-card.past-session-card {
     font-size: 0.9rem;
   }
 }
-
-
