@@ -1,264 +1,285 @@
-// Stili per la card di creazione slot
-.create-slot-card {
-  margin-bottom: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+ion-header ion-toolbar {
+  --background: var(--ion-color-primary);
+  color: #fff;
+}
 
-  ion-card-header {
-    padding-bottom: 0;
+ion-header ion-title {
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+ion-content {
+  --background: none;
+  background-color: #fff;
+  background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+
+.create-slot-card {
+  background: var(--ion-color-secondary-tint);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid var(--ion-color-secondary-shade);
+  transition: box-shadow 0.3s, transform 0.3s;
+  margin: 1rem auto 1.5rem;
+  width: 90%;
+  max-width: 600px;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px) scale(1.01);
   }
 
   ion-card-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
+    
+    ion-icon {
+      margin-right: 8px;
+    }
   }
 }
 
-// Stili per il layout dei campi
-.slot-fields-row-centered {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.slot-date-group {
-  display: flex;
-  flex-direction: column;
+// Form container
+.slot-form {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
+// Data e ora
+.slot-date-container {
+  background-color: #ffe9a6;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--ion-color-secondary-shade);
+}
+
 .slot-label {
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: var(--ion-color-dark);
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
   display: flex;
   align-items: center;
-  font-size: 0.95rem;
 
   ion-icon {
-    margin-right: 6px;
+    margin-right: 8px;
+    font-size: 1.1rem;
+    color: #dc3545;
   }
 }
 
-// Stile per il campo max clienti
-.max-clienti-item {
-  --padding-start: 0;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
-  --background: transparent;
-
-  ion-label {
-    font-weight: 500;
-    color: var(--ion-color-dark);
-  }
-  
-  ion-input {
-    --padding-start: 16px;
-    --background: #f5f5f5;
-    --border-radius: 8px;
-    --padding-top: 10px;
-    --padding-bottom: 10px;
-    margin-top: 8px;
-  }
-}
-
-// Campi orario sotto il calendario
+// Campo orario
 .time-field {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f4f5f8;
-  padding: 12px 15px;
+  background-color: white;
+  padding: 12px;
   margin-top: 10px;
-  width: 100%;
+  border-radius: 8px;
+  border: 1.5px solid #5f5555;
 }
 
 .time-label {
-  color: #000;
-  font-size: 0.95rem;
-  flex: 1;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .time-value {
-  color: #000;
+  color: #333;
   font-size: 1rem;
   padding: 5px 10px;
-  min-width: 60px;
+  min-width: 70px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(220, 53, 69, 0.1);
   border-radius: 4px;
   
   &:hover {
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: rgba(220, 53, 69, 0.2);
   }
 }
 
-// Contenitore per il time picker
-.time-picker-container {
+
+.max-clients-field {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  align-items: center;
+  background-color: white;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1.5px solid #5f5555;
+  justify-content: space-between;
+
+  .max-clients-label {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+
+    
+    ion-icon {
+      margin-right: 8px;
+      font-size: 1.1rem;
+      color: #dc3545;
+    }
+  }
+
+  ion-input {
+    --padding-start: 10px;
+    --background: rgba(220, 53, 69, 0.1);
+    --border-radius: 4px;
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+    --padding-end: 10px;
+    --color: #333;
+    font-weight: 600;
+    text-align: center;
+    max-width: 70px;
+    min-width: 70px;
+    --highlight-color-valid: #dc3545;
+
+    
+    &:hover {
+      --background: rgba(220, 53, 69, 0.2);
+    }
+  }
 }
 
-// Stile modale per il time picker centrato
+
+ion-button[type="submit"] {
+  --background: var(--ion-color-primary);
+  --color: #ffffff;
+  margin: 1rem auto;
+  --border-radius: 8px;
+  font-weight: 600;
+  height: 48px;
+  display: block;
+  max-width: 280px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+
 .time-picker-modal {
   --width: 250px;
   --height: 250px;
-  --border-radius: 8px;
+  --border-radius: 12px;
   --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  
-  &::part(content) {
-    border-radius: 8px;
-  }
 }
 
-// Stile per il datetime centrato
+
 .centered-time-picker {
   --background: white;
   
-  // Stile delle rotelle (wheel)
   &::part(wheel-item) {
-    color: #333; // Colore più scuro (era #888)
+    color: #333;
     font-size: 16px;
-    opacity: 0.9; // Opacità aumentata (era 0.7)
-    font-weight: 500; // Aggiunto peso font per migliore leggibilità
   }
   
-  // Stile dell'elemento selezionato
   &::part(wheel-item.active) {
-    color: #0040c0; // Blu più scuro e ricco (era #0d6efd)
+    color: #dc3545;
     font-size: 18px;
-    font-weight: 600; // Aumentato il peso del font (era normal)
-    opacity: 1;
+    font-weight: 600;
   }
-
-  // Nascondere titoli e pulsanti
-  &::part(header),
-  &::part(footer) {
-    display: none;
-  }
-  
-  // Rimuovere i bordi
-  --border-style: none;
-  --inner-border-width: 0;
 }
 
-// Stile per il footer del time picker
+
 .time-picker-footer {
   display: flex;
   justify-content: center;
   padding: 8px 0;
   
   ion-button {
-    --color: #0040c0; // Colore più scuro che si abbina all'elemento attivo
+    --color: #dc3545;
     font-weight: 600;
-    margin: 0;
   }
 }
 
-// Stili per il loading
+
 .loading-container {
-  padding: 2rem;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+
+  ion-spinner {
+    width: 48px;
+    height: 48px;
+  }
+
   p {
-    margin-top: 1rem;
     color: var(--ion-color-medium);
-  }
-}
-
-// Stile del calendario minimalista
-.minimal-calendar {
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  --background: #f4f5f8;
-  
-  // Intestazione con mese e anno
-  &::part(header) {
-    background-color: #f4f5f8;
-    color: #000;
-    font-weight: normal;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
     font-size: 0.95rem;
-  }
-  
-  // Pulsanti di navigazione
-  &::part(navigation) {
-    color: #4080ff;
-  }
-  
-  // Giorni della settimana
-  &::part(calendar-week-days) {
-    color: #999;
-    font-weight: normal;
-    font-size: 0.8rem;
-    padding: 10px 0 5px;
-    text-transform: uppercase;
-    background-color: #f4f5f8;
-  }
-  
-  // Griglia del calendario
-  &::part(calendar-body) {
-    padding: 5px;
-    background-color: #f4f5f8;
-  }
-  
-  // Giorni normali
-  &::part(calendar-day) {
-    color: #000;
-    font-weight: normal;
-    font-size: 1rem;
-    border-radius: 0;
-    width: 40px;
-    height: 40px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  // Giorno selezionato
-  &::part(calendar-day.calendar-day-active) {
-    background-color: transparent;
-    color: #000;
-    font-weight: bold;
-  }
-  
-  // Giorno attuale
-  &::part(calendar-day.calendar-day-today) {
-    border: none;
-    font-weight: bold;
-  }
-  
-  // Giorni dei mesi adiacenti
-  &::part(calendar-day.calendar-day-adjacent) {
-    color: #999;
-    opacity: 1;
-  }
-  
-  // Rimuovere bordi e ombre
-  border-radius: 0;
-  box-shadow: none;
-
-  // Footer con Time e orario
-  &::part(footer) {
-    display: none;
+    margin: 1rem 0;
   }
 }
 
-// Stili per bottoni form
-ion-button[type="submit"] {
-  margin-top: 1rem;
-  --border-radius: 10px;
-  font-weight: 600;
-  height: 48px;
+
+ion-datetime.minimal-calendar {
+  border: 2px solid #5f5555;
+  border-radius: 12px;
+  background-color: white;
+  margin: 10px auto; 
+  padding: 10px;
+  display: block;
+  width: 100%;
+  max-width: 420px; 
+  
+  &::part(calendar) {
+    border-radius: 8px;
+    background-color: white;
+  }
+
+  &::part(calendar-day) {
+    border-radius: 4px;
+    margin: 2px;
+  }
+
+  &::part(calendar-day):hover {
+    background-color: rgba(220, 53, 69, 0.1);
+  }
+  
+  &::part(calendar-day selected) {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  &::part(calendar-day today) {
+    border: 1px solid #dc3545;
+  }
+
+  &::part(header) {
+    padding: 10px 0;
+  }
+  
+  &::part(navigation) {
+    color: #dc3545;
+  }
+}
+
+
+@media (max-width: 768px) {
+  ion-datetime.minimal-calendar {
+    margin: 5px 0;
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
 }
