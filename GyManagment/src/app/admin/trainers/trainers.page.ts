@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, IonIcon, 
-  IonSpinner, IonCard, IonCardContent, IonRefresher, IonButton, IonRefresherContent
+  IonSpinner, IonCard, IonCardContent, IonRefresher, IonButton, IonRefresherContent, AlertController, ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { peopleOutline } from 'ionicons/icons';
@@ -23,8 +24,14 @@ export class TrainersPage implements OnInit {
   isLoading = false;
   error = '';
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastController: ToastController,
+    private alertController: AlertController,
+  ) {
     addIcons({ peopleOutline });
+    
   }
 
   ngOnInit() {
@@ -55,4 +62,54 @@ export class TrainersPage implements OnInit {
       event.target.complete();
     }, 1000);
   }
+async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Conferma logout',
+      message: 'Sei sicuro di voler effettuare il logout?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel'
+        }, {
+          text: 'Logout',
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+    logout() {
+    this.isLoading = true;
+
+    this.authService.logout().subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Logout error:', error);
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      }
+    });
+  }
+
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+      color: 'success'
+    });
+    toast.present();
+  }
+
 }
+
+

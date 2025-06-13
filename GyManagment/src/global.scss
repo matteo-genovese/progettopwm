@@ -54,3 +54,13 @@ ion-button[color="primary"] {
     background: var(--ion-color-primary-shade) !important;
   }
 }
+
+ion-button[color="tertiary"] {
+  &:hover::part(native) {
+    background: var(--ion-color-secondary-tint) !important;
+  }
+  
+  &:focus::part(native) {
+    background: var(--ion-color-secondary-tint) !important;
+  }
+}
