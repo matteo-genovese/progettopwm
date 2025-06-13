@@ -8,8 +8,12 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class TrainerService {
   private baseUrl = 'http://localhost:5000/api/trainer';
+  private cacheData: any = {};
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // Listen for app reset events
+    window.addEventListener('app:reset', () => this.resetService());
+  }
 
   getDashboard(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/dashboard`).pipe(
@@ -34,5 +38,13 @@ export class TrainerService {
   private handleError(error: HttpErrorResponse) {
     console.error('TrainerService error:', error);
     return throwError(() => error);
+  }
+
+  // Add a method to reset the service state
+  resetService() {
+    this.cacheData = {};
+    // Reset any BehaviorSubjects or other state
+    // For example:
+    // this.dashboardData.next(null);
   }
 }
