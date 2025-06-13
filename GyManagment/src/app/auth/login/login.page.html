@@ -33,14 +33,14 @@
 
       <div>
         <!-- Tasto Accedi -->
-        <ion-button expand="block" color="primary" type="submit" [disabled]="!loginForm.valid || isLoading">
+        <ion-button class="app-button" expand="block" color="primary" type="submit" [disabled]="!loginForm.valid || isLoading">
           <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
           <span *ngIf="!isLoading">Accedi</span>
           <span *ngIf="isLoading">Accesso in corso...</span>
         </ion-button>
 
         <!-- Tasto Annulla -->
-        <ion-button expand="block" fill="clear" (click)="goBack()" [disabled]="isLoading">
+        <ion-button class="app-button" expand="block" fill="clear" (click)="goBack()" [disabled]="isLoading">
           Annulla
         </ion-button>
 

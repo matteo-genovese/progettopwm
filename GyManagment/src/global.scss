@@ -64,3 +64,141 @@ ion-button[color="tertiary"] {
     background: var(--ion-color-secondary-tint) !important;
   }
 }
+
+.app-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    transform: translateY(-3px) scale(1.01);
+  }
+  
+  &.primary-border {
+    border: 2px solid var(--ion-color-primary);
+  }
+  
+  &.secondary-border {
+    border: 2px solid var(--ion-color-secondary);
+  }
+  
+  &.tertiary-border {
+    border: 2px solid var(--ion-color-tertiary);
+  }
+  
+  &.dark-border {
+    border: 2px solid #5f5555;
+  }
+}
+
+/* Custom Scrollbars */
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(220, 53, 69, 0.8);
+    border-radius: 4px;
+    
+    &:hover {
+      background-color: rgba(220, 53, 69, 0.7);
+    }
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+  }
+}
+
+/* Buttons */
+ion-button.app-button {
+  --border-radius: 8px;
+  font-weight: 500;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --box-shadow: 0 2px 4px rgba(var(--ion-color-primary-rgb), 0.15);
+  transition: all 0.2s ease;
+  margin-bottom:0.5rem;
+}
+
+/* Logo Sections */
+.sezione-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  ion-icon {
+    color: var(--ion-color-primary);
+    margin-bottom: 1rem;
+    font-size: 48px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+  }
+
+  h2 {
+      font-size: 1.3rem;
+  }
+  
+  p {
+    margin: 0.5rem 0 0 0;
+    color: var(--ion-color-medium);
+    font-size: 1rem;
+  }
+}
+
+/* Empty States */
+.app-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  
+  ion-icon {
+    font-size: 48px;
+    color: var(--ion-color-medium);
+    margin-bottom: 1rem;
+  }
+  
+  h3 {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+  }
+  
+  p {
+    margin: 0 0 1.5rem;
+    color: var(--ion-color-medium);
+  }
+}
+
+/* Scrollable Containers */
+.app-scrollable-container {
+  overflow-y: auto;
+  max-height: 300px;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 1rem 0;
+  
+  &.tall {
+    height: 300px;
+  }
+  
+  &.short {
+    height: 140px;
+  }
+  
+  @extend .custom-scrollbar;
+}
+

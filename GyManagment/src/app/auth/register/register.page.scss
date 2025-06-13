@@ -15,40 +15,6 @@
 	}
 }
 
-.sezione-logo {
-	text-align: center;
-	margin-bottom: 3rem;
-
-	ion-icon {
-		color: var(--ion-color-primary);
-		margin-bottom: 1rem;
-	}
-
-	h1 {
-		margin: 0;
-		font-size: 2rem;
-		font-weight: bold;
-		color: var(--ion-color-primary);
-	}
-
-	p {
-		margin: 0.5rem 0 0 0;
-		color: var(--ion-color-medium);
-		font-size: 1rem;
-	}
-}
-
-// --- Riduce margin inferiore e dimensione di h1 quando lo schermo è più piccolo di 576px ---
-@media (max-width: 576px) {
-	.sezione-logo {
-		margin-bottom: 2rem;
-		
-		h1 {
-			font-size: 1.5rem;
-		}
-	}
-}
-
 // --- Stile dei campi form ---
 ion-item {
 	border-radius: 10px;
@@ -60,9 +26,6 @@ ion-item {
 }
 
 ion-button {
-	--border-radius: 8px;
-	margin-bottom: 1rem;
-	font-weight: 500;
 	width:50%;
 	margin-left: auto;
 	margin-right: auto;
