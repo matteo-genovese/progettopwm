@@ -1,20 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonButton,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonButtons,
-  AlertController
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
+  IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons, AlertController
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -35,20 +23,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonButton,
-    IonIcon,
-    IonItem,
-    IonLabel,
-    IonButtons
+    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
+    IonCardTitle, IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons
   ]
 })
 export class DashboardPage implements OnInit {
@@ -70,7 +46,6 @@ export class DashboardPage implements OnInit {
   }
 
   loadCounts() {
-    // Carica il conteggio di trainers
     this.authService.getAllTrainers().subscribe({
       next: (trainers) => {
         this.trainersCount = trainers.length;
@@ -80,7 +55,6 @@ export class DashboardPage implements OnInit {
       }
     });
 
-    // Carica il conteggio di customers
     this.authService.getAllCustomers().subscribe({
       next: (customers) => {
         this.customersCount = customers.length;
@@ -112,15 +86,12 @@ export class DashboardPage implements OnInit {
           text: 'Logout',
           cssClass: 'danger',
           handler: () => {
-            // Esegui il logout tramite il servizio AuthService
             this.authService.logout().subscribe({
               next: () => {
-                // Naviga alla pagina di login
                 window.location.href = '/login';
               },
               error: (err) => {
                 console.error('Errore durante il logout:', err);
-                // In caso di errore, esegui comunque il logout lato client
                 window.location.href = '/login';
               }
             });

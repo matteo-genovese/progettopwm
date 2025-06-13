@@ -3,28 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  IonContent,
-  IonButton,
-  IonItem,
-  IonLabel,
-  IonInput,
-  IonIcon,
-  IonSpinner,
-  IonText,
-  IonSelect,
-  IonSelectOption,
-  IonList,
-  ToastController,
-  AlertController
+  IonContent, IonButton, IonItem, IonLabel, IonInput, IonIcon, IonSpinner, 
+  IonText, IonSelect, IonSelectOption, IonList, ToastController, AlertController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
-  personOutline,
-  lockClosedOutline,
-  mailOutline,
-  callOutline,
-  cardOutline,
-  fitnessOutline
+  personOutline, lockClosedOutline, mailOutline, callOutline, cardOutline, fitnessOutline
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
@@ -35,9 +19,9 @@ interface RegistrationData {
   full_name: string;
   phone: string;
   role: string;
-  specialization?: string;  // Proprietà opzionale
-  max_clients_per_slot?: number;  // Proprietà opzionale
-  trainer_id?: number | null;  // Proprietà opzionale
+  specialization?: string;
+  max_clients_per_slot?: number;
+  trainer_id?: number | null;
 }
 
 @Component({
@@ -46,21 +30,11 @@ interface RegistrationData {
   styleUrls: ['./register.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonContent,
-    IonButton,
-    IonItem,
-    IonLabel,
-    IonInput,
-    IonIcon,
-    IonSpinner,
-    IonText,
-    IonSelect,
-    IonSelectOption,
-    IonList  
+    CommonModule, FormsModule, IonContent, IonButton, IonItem, IonLabel, 
+    IonInput, IonIcon, IonSpinner, IonText, IonSelect, IonSelectOption, IonList  
   ]
 })
+
 export class RegisterPage {
   userData: RegistrationData = {
     username: '',
@@ -68,31 +42,23 @@ export class RegisterPage {
     email: '',
     full_name: '',
     phone: '',
-    role: 'customer', // Default role
-    specialization: 'Fitness', // Default specialization per trainer
-    max_clients_per_slot: 1, // Default max clients per slot
-    trainer_id: null // Default trainer_id for customer
+    role: 'customer', 
+    specialization: 'Fitness', 
+    max_clients_per_slot: 1, 
+    trainer_id: null 
   };
 
   confirmPassword = '';
   isLoading = false;
   errorMessage = '';
-  availableTrainers: any[] = [];
-  isLoadingTrainers = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController,
     private alertController: AlertController
   ) {
     addIcons({
-      personOutline,
-      lockClosedOutline,
-      mailOutline,
-      callOutline,
-      cardOutline,
-      fitnessOutline
+      personOutline, lockClosedOutline, mailOutline, callOutline, cardOutline, fitnessOutline
     });
   }
 
@@ -101,14 +67,11 @@ export class RegisterPage {
   }
 
   async onRegister() {
-    // Reset error message
     this.errorMessage = '';
 
-    // Validate form
     if (this.validateForm()) {
       this.isLoading = true;
       
-      // Copia i dati di base sempre necessari
       let registrationData: RegistrationData = {
         username: this.userData.username,
         password: this.userData.password,
@@ -118,21 +81,15 @@ export class RegisterPage {
         role: this.userData.role
       };
 
-      // Aggiungi le proprietà specifiche in base al ruolo
       if (this.userData.role === 'trainer') {
         registrationData.specialization = this.userData.specialization;
-        registrationData.max_clients_per_slot = this.userData.max_clients_per_slot;
-      } else if (this.userData.role === 'customer') {
-        registrationData.trainer_id = this.userData.trainer_id || null;
       }
 
       this.authService.register(registrationData).subscribe({
         next: async (response) => {
           this.isLoading = false;
-          console.log('Registration successful:', response);
 
           await this.showSuccessAlert();
-          // Redirect to login page
           this.router.navigate(['/login']);
         },
         error: (error) => {
@@ -154,45 +111,33 @@ export class RegisterPage {
   }
 
   validateForm(): boolean {
-    // Check required fields
+
+    // Controllo se tutti i dati sono stati inseriti
     if (!this.userData.username || !this.userData.password || !this.userData.email ||
       !this.userData.full_name || !this.userData.phone) {
       this.errorMessage = 'Tutti i campi sono obbligatori';
       return false;
     }
 
-    // Check password
+    // Controllo se le password sono corrette
     if (this.userData.password !== this.confirmPassword) {
       this.errorMessage = 'Le password non corrispondono';
       return false;
     }
 
-    // Check email format
+    // Controlla il formato della mail
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.userData.email)) {
       this.errorMessage = 'Formato email non valido';
       return false;
     }
 
-    // Check phone format (simple validation for numbers and common separators)
+    // Controlla il formato del numero di telefono
     const phoneRegex = /^[0-9\+\-\s\(\)\.]+$/;
     if (!phoneRegex.test(this.userData.phone)) {
       this.errorMessage = 'Formato numero di telefono non valido';
       return false;
     }
-
-    // Validazione campi specifici per ruolo
-    if (this.userData.role === 'trainer') {
-      if (!this.userData.specialization) {
-        this.errorMessage = 'Seleziona una specializzazione';
-        return false;
-      }
-      if (!this.userData.max_clients_per_slot || this.userData.max_clients_per_slot < 1) {
-        this.errorMessage = 'Inserisci un numero valido di clienti massimi per slot';
-        return false;
-      }
-    }
-
     return true;
   }
 

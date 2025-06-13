@@ -18,21 +18,19 @@ import { closeOutline, calendarOutline, timeOutline, star } from 'ionicons/icons
   styleUrls: ['./slots-modal.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    DatePipe,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon,
-    IonList, IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal,
-    IonSpinner, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent
+    CommonModule, FormsModule, DatePipe, IonHeader, IonToolbar, 
+    IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonList, 
+    IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal, IonSpinner, 
+    IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent
   ]
 })
+
 export class SlotsModalComponent implements OnInit {
   @Input() trainer: any;
   
   selectedDate: string = '';
   minDate: string = '';
   
-  // Struttura per raggruppare gli slot per data
   slotsByDate: { [date: string]: any[] } = {};
   allDates: string[] = [];
   
@@ -48,7 +46,6 @@ export class SlotsModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Inizializza le date
     const today = new Date();
     
     this.selectedDate = today.toISOString();
@@ -88,7 +85,6 @@ export class SlotsModalComponent implements OnInit {
     // Carica gli slot disponibili per il trainer usando l'endpoint corretto
     this.customerService.getAvailableSlots(this.trainer.id, this.dateTimeService.formatDateForAPI(startDate.toISOString())).subscribe({
       next: (slots) => {
-        console.log('Slot ricevuti:', slots);
         
         if (slots && Array.isArray(slots)) {
           // Raggruppa gli slot per data e filtra quelli precedenti alla data selezionata

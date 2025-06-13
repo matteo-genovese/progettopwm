@@ -33,24 +33,9 @@ interface Booking {
   styleUrls: ['./bookings.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule,
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar,
-    IonRefresher,
-    IonRefresherContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-    IonButton,
-    IonSegment,
-    IonSegmentButton,
-    IonLabel,
-    IonIcon,
-    IonSpinner
+    CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher, IonRefresherContent,
+    IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, IonSegmentButton, 
+    IonLabel, IonIcon, IonSpinner
   ]
 })
 export class BookingsPage implements OnInit {
@@ -90,11 +75,10 @@ export class BookingsPage implements OnInit {
     
     this.customerService.getCustomerDashboard().subscribe({
       next: (data) => {
-        console.log('Dashboard data received:', data);
         this.upcomingBookings = data.upcoming_bookings || [];
         this.pastBookings = data.past_bookings || [];
         
-        // Process bookings to add adjusted time properties for display
+        // Sistemo gli orari del booking 
         this.upcomingBookings.forEach(booking => {
           booking.adjustedStartTime = this.formatDateTime(booking.start_time);
           booking.adjustedStartDate = this.formatDate(booking.start_time);

@@ -2,17 +2,8 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
-  IonContent,
-  IonButton,
-  IonButtons,
-  IonItem,
-  IonLabel,
-  IonTextarea,
-  IonIcon,
-  ToastController
+  IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
+  IonButtons, IonItem, IonLabel, IonTextarea, IonIcon, ToastController
 } from '@ionic/angular/standalone';
 import { ModalController } from '@ionic/angular/standalone';
 import { CustomerService } from '../../../services/customer.service';
@@ -25,18 +16,8 @@ import { closeOutline, starOutline, star } from 'ionicons/icons';
   styleUrls: ['./rating-modal.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButton,
-    IonButtons,
-    IonItem,
-    IonLabel,
-    IonTextarea,
-    IonIcon  
+    CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, 
+    IonButton, IonButtons, IonItem, IonLabel, IonTextarea, IonIcon  
   ]
 })
 
@@ -66,7 +47,6 @@ export class RatingModalComponent {
     }
 
     this.isSubmitting = true;
-    console.log("trainer id " + this.trainerId);
     this.customerService.rateTrainer(this.trainerId, this.rating, this.comment).subscribe({
         next: (response) => {
           this.isSubmitting = false;
