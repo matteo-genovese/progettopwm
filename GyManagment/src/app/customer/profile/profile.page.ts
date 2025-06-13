@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-  IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, AlertController, ToastController, IonButtons
+  IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, IonButtons
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -29,9 +28,6 @@ export class ProfilePage implements OnInit {
   constructor(
     private authService: AuthService,
     private customerService: CustomerService,
-    private router: Router,
-    private alertController: AlertController,
-    private toastController: ToastController
   ) { 
     addIcons({ logOutOutline, personCircleOutline, mailOutline, callOutline, idCardOutline });
   }
@@ -55,51 +51,7 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  async confirmLogout() {
-    const alert = await this.alertController.create({
-      header: 'Conferma logout',
-      message: 'Sei sicuro di voler effettuare il logout?',
-      buttons: [
-        {
-          text: 'Annulla',
-          role: 'cancel'
-        }, {
-          text: 'Logout',
-          handler: () => {
-            this.logout();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-  logout() {
-    this.isLoading = true;
-
-    this.authService.logout().subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Logout error:', error);
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      }
-    });
-  }
-
-  private async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'top',
-      color: 'success'
-    });
-    toast.present();
+  onLogout() {
+    this.authService.logoutWithUI();
   }
 }

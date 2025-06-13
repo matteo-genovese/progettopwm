@@ -2,20 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-  IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons, AlertController, ToastController
+  IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import {
-  peopleOutline,
-  fitnessOutline,
-  statsChartOutline,
-  personOutline,
-  logOutOutline,
-  barbell,
+  peopleOutline,  fitnessOutline, statsChartOutline, personOutline, logOutOutline, barbell,
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
-
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,11 +30,10 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private adminService: AdminService,
     private router: Router,
-    private toastController: ToastController,
-    private alertController: AlertController,
   ) {
-    addIcons({ peopleOutline, fitnessOutline, statsChartOutline, personOutline, logOutOutline,barbell });
+    addIcons({ peopleOutline, fitnessOutline, statsChartOutline, personOutline, logOutOutline, barbell });
   }
 
   ngOnInit() {
@@ -48,7 +42,7 @@ export class DashboardPage implements OnInit {
   }
 
   loadCounts() {
-    this.authService.getAllTrainers().subscribe({
+    this.adminService.getAllTrainers().subscribe({
       next: (trainers) => {
         this.trainersCount = trainers.length;
       },
@@ -57,7 +51,7 @@ export class DashboardPage implements OnInit {
       }
     });
 
-    this.authService.getAllCustomers().subscribe({
+    this.adminService.getAllCustomers().subscribe({
       next: (customers) => {
         this.customersCount = customers.length;
       },
@@ -75,52 +69,7 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/admin/customers']);
   }
 
-   async confirmLogout() {
-    const alert = await this.alertController.create({
-      header: 'Conferma logout',
-      message: 'Sei sicuro di voler effettuare il logout?',
-      buttons: [
-        {
-          text: 'Annulla',
-          role: 'cancel'
-        }, {
-          text: 'Logout',
-          handler: () => {
-            this.logout();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+  onLogout() {
+    this.authService.logoutWithUI();
   }
-
-    logout() {
-    this.isLoading = true;
-
-    this.authService.logout().subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Logout error:', error);
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      }
-    });
-  }
-
-  private async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'top',
-      color: 'success'
-    });
-    toast.present();
-  }
-
 }

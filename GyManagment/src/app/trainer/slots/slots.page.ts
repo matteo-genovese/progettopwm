@@ -3,13 +3,11 @@ import { TrainerService } from '../../services/trainer.service';
 import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { 
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,  
   IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal, IonButtons, AlertController, ToastController 
+  IonIcon, IonModal, IonButtons, ToastController, IonCardTitle
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -23,11 +21,9 @@ import {
   styleUrls: ['./slots.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
+    CommonModule, FormsModule, IonButton, IonSpinner, 
     IonHeader, IonToolbar, IonTitle, IonContent, 
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-    IonButton, IonSpinner, 
     IonInput, IonDatetime, IonIcon, IonModal, IonButtons
   ]
 })
@@ -50,8 +46,6 @@ export class SlotsPage implements OnInit {
   constructor(
     private trainerService: TrainerService,
     private authService: AuthService,
-    private alertController: AlertController,
-    private router: Router,
     private toastController: ToastController,
     private dateTimeService: DateTimeService
   ) {
@@ -65,7 +59,6 @@ export class SlotsPage implements OnInit {
   ngOnInit() {
     // Inizializza con la data corrente
     this.slotDate = new Date().toISOString();
-    
     const now = new Date();
     this.startTime = now.toISOString();
     const end = new Date(now.getTime() + 60 * 60 * 1000); // aggiunge 1 ora
@@ -151,13 +144,11 @@ export class SlotsPage implements OnInit {
 
   onTimePickerDismiss(pickerType: 'start' | 'end') {
     if (pickerType === 'start') {
-      // Applica anche qui la correzione del fuso orario
       const date = new Date(this.startTimePicker);
       date.setHours(date.getHours());
       this.startTime = date.toISOString();
       this.showStartTimePicker = false;
     } else {
-      // Applica anche qui la correzione del fuso orario
       const date = new Date(this.endTimePicker);
       date.setHours(date.getHours());
       this.endTime = date.toISOString();
@@ -176,53 +167,7 @@ export class SlotsPage implements OnInit {
     toast.present();
   }
 
-
-async confirmLogout() {
-    const alert = await this.alertController.create({
-      header: 'Conferma logout',
-      message: 'Sei sicuro di voler effettuare il logout?',
-      buttons: [
-        {
-          text: 'Annulla',
-          role: 'cancel'
-        }, {
-          text: 'Logout',
-          handler: () => {
-            this.logout();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+  onLogout() {
+    this.authService.logoutWithUI();
   }
-
-    logout() {
-    this.isLoading = true;
-
-    this.authService.logout().subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Logout error:', error);
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      }
-    });
-  }
-
-  private async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'top',
-      color: 'success'
-    });
-    toast.present();
-  }
-
 }
