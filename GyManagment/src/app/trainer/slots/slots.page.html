@@ -8,59 +8,59 @@
   <ion-card class="create-slot-card">
     <ion-card-header>
       <ion-card-title>
-        <ion-icon name="add-circle-outline" color="primary" style="margin-right:8px;"></ion-icon>
+        <ion-icon name="add-circle-outline" color="danger"></ion-icon>
         Crea nuovo slot
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form (ngSubmit)="addSlot()">
-        <div class="slot-fields-row-centered">
-          <div class="slot-date-group">
-            <label class="slot-label">
-              <ion-icon name="calendar-outline" color="primary"></ion-icon>
-              Data slot
-            </label>
-            <ion-datetime
-              class="minimal-calendar"
-              presentation="date"
-              [(ngModel)]="slotDate"
-              name="slotDate"
-              required
-              [min]="minDate"
-              locale="it-IT"
-              showAdjacentDays="true"
-              firstDayOfWeek="1">
-            </ion-datetime>
-            
-            <!-- Orario inizio -->
-            <div class="time-field">
-              <div class="time-label">Orario Inizio:</div>
-              <div class="time-value" (click)="openStartTimePicker()">
-                {{ formatTime(startTime) }}
-              </div>
-            </div>
-            
-            <!-- Orario fine -->
-            <div class="time-field">
-              <div class="time-label">Orario Fine:</div>
-              <div class="time-value" (click)="openEndTimePicker()">
-                {{ formatTime(endTime) }}
-              </div>
+      <form (ngSubmit)="addSlot()" class="slot-form">
+        <!-- Data e orari -->
+        <div class="slot-date-container">
+          <label class="slot-label">
+            <ion-icon name="calendar-outline"></ion-icon>
+            Data slot
+          </label>
+          
+          <ion-datetime
+            class="minimal-calendar"
+            presentation="date"
+            [(ngModel)]="slotDate"
+            name="slotDate"
+            required
+            [min]="minDate">
+          </ion-datetime>
+          
+          <!-- Orario inizio -->
+          <div class="time-field">
+            <div class="time-label">Orario Inizio:</div>
+            <div class="time-value" (click)="openStartTimePicker()">
+              {{ formatTime(startTime) }}
             </div>
           </div>
+          
+          <!-- Orario fine -->
+          <div class="time-field">
+            <div class="time-label">Orario Fine:</div>
+            <div class="time-value" (click)="openEndTimePicker()">
+              {{ formatTime(endTime) }}
+            </div>
+          </div>
+          
+          <!-- Max clienti (spostato qui) -->
+          <div class="max-clients-field">
+            <div class="max-clients-label">
+              <ion-icon name="people-outline"></ion-icon>
+              Max clienti:
+            </div>
+            <ion-input
+              type="number"
+              [(ngModel)]="newSlot.max_clients"
+              name="max_clients"
+              min="1"
+              required>
+            </ion-input>
+          </div>
         </div>
-        
-        <ion-item lines="none" class="max-clienti-item">
-          <ion-icon name="people-outline" slot="start" color="tertiary"></ion-icon>
-          <ion-label position="stacked">Max clienti</ion-label>
-          <ion-input
-            type="number"
-            [(ngModel)]="newSlot.max_clients"
-            name="max_clients"
-            min="1"
-            required>
-          </ion-input>
-        </ion-item>
         
         <ion-button expand="block" type="submit" [disabled]="isLoading">
           <ion-icon name="add-outline" slot="start"></ion-icon>
