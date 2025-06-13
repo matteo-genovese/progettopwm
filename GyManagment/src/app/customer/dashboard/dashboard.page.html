@@ -1,8 +1,13 @@
 <!-- Header -->
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button style="opacity:0; pointer-events:none;">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Dashboard Cliente</ion-title>
-        <ion-buttons slot="end">
+    <ion-buttons slot="end">
       <ion-button color="tertiary" (click)="confirmLogout()">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>

@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
   IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal, IonButtons, AlertController, ToastController 
+  IonIcon, IonModal, IonButtons, IonBackButton, AlertController, ToastController 
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -28,7 +28,7 @@ import {
     IonHeader, IonToolbar, IonTitle, IonContent, 
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
     IonButton, IonSpinner, 
-    IonInput, IonDatetime, IonIcon, IonModal, IonButtons
+    IonInput, IonDatetime, IonIcon, IonModal, IonButtons, IonBackButton
   ]
 })
 export class SlotsPage implements OnInit {

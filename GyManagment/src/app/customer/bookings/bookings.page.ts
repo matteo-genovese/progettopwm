@@ -10,9 +10,10 @@ import {
   IonContent, IonHeader, IonTitle, IonToolbar,
   IonRefresher, IonRefresherContent, IonCardHeader, IonCardTitle, IonCardSubtitle, 
   IonCardContent, IonButton, IonSegment, IonSegmentButton, IonLabel, IonIcon, IonSpinner,
-  IonButtons, AlertController, ToastController
+  IonButtons, AlertController, ToastController, IonBackButton
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
+
 
 interface Booking {
   id: number;
@@ -35,7 +36,7 @@ interface Booking {
   imports: [
     CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, 
-    IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent,
+    IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent, IonBackButton,
     IonButtons
   ]
 })

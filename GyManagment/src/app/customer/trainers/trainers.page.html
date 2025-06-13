@@ -1,7 +1,10 @@
 <!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Trainers Disponibili</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Trainer Disponibili</ion-title>
     <ion-buttons slot="end">
       <ion-button color="tertiary" (click)="confirmLogout()">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>

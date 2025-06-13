@@ -1,6 +1,9 @@
 <!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
+    </ion-buttons>
     <ion-title>Profilo</ion-title>
     <ion-buttons slot="end">
       <ion-button color="tertiary" (click)="confirmLogout()">

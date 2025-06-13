@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, 
+  IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonCard, IonCardContent, IonButton, IonBackButton,IonIcon, 
   IonRefresher, IonRefresherContent, IonChip, IonLabel, IonSkeletonText, ModalController, IonButtons, AlertController, ToastController
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ import { AuthService } from '../../services/auth.service';
   imports: [
     CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, 
     IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, IonRefresher, 
-    IonRefresherContent, IonChip, IonLabel, IonSkeletonText, IonButtons
+    IonRefresherContent, IonChip, IonLabel, IonSkeletonText, IonButtons, IonBackButton
   ]
 })
 export class TrainersPage implements OnInit {
