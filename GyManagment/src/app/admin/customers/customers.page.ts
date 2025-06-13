@@ -9,6 +9,7 @@ import { fitnessOutline, mailOutline, callOutline, calendarOutline, barbell } fr
 import { AuthService } from '../../services/auth.service';
 import { AdminService } from '../../services/admin.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-customers',
@@ -18,7 +19,7 @@ import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-hea
   imports: [
     CommonModule,IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, 
     IonButton, IonIcon, IonSpinner, IonCard, IonCardContent, IonRefresher, IonRefresherContent,
-    AppHeaderComponent
+    AppHeaderComponent, LoadingSpinnerComponent
   ]
 })
 

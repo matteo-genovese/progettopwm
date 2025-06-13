@@ -11,6 +11,7 @@ import {
   IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonButtons, IonBackButton
 } from '@ionic/angular/standalone';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-sessions',
@@ -22,7 +23,7 @@ import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-hea
     IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCardContent,
     IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon,
     IonButton, IonCardHeader, IonCardSubtitle, RouterLink, IonButtons, IonBackButton,
-    AppHeaderComponent
+    AppHeaderComponent, LoadingSpinnerComponent
   ]
 })
 export class SessionsPage implements OnInit {

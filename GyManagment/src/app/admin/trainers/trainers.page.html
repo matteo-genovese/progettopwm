@@ -8,10 +8,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="loading-container" *ngIf="isLoading">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento trainers...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento trainers...'">
+  </app-loading-spinner>
 
   <ion-card *ngIf="error" class="error-card">
     <ion-card-content>

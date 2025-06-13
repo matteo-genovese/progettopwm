@@ -24,10 +24,10 @@
   </ion-segment>
 
   <!-- Mostrato durante il caricamento -->
-  <div *ngIf="isLoading" class="loading-container">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento allenamenti...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento allenamenti...'">
+  </app-loading-spinner>
 
   <!-- Mostrato in caso di errore -->
   <div *ngIf="error" class="empty-state">

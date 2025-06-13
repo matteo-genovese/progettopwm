@@ -15,6 +15,7 @@ import {
   addCircleOutline, closeOutline, chevronForward, chevronBack
 } from 'ionicons/icons';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
   
 @Component({
   selector: 'app-slots',
@@ -26,7 +27,7 @@ import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-hea
     IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
     IonInput, IonDatetime, IonIcon, IonModal, IonButtons,
-    AppHeaderComponent
+    AppHeaderComponent, LoadingSpinnerComponent
   ]
 })
 export class SlotsPage implements OnInit {

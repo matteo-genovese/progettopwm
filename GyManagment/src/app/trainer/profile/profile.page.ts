@@ -15,6 +15,7 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { TrainerService } from '../../services/trainer.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,8 @@ import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-hea
   imports: [
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
     IonCardTitle, IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, 
-    IonSpinner, IonAvatar, IonButtons, IonBackButton, AppHeaderComponent
+    IonSpinner, IonAvatar, IonButtons, IonBackButton, AppHeaderComponent, 
+    LoadingSpinnerComponent
   ]
 })
 export class ProfilePage implements OnInit {

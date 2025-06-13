@@ -21,10 +21,10 @@
   </ion-segment>
 
   <!-- Caricamento prenotazioni -->
-  <div *ngIf="isLoading" class="loading-container">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento prenotazioni...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento prenotazioni...'">
+  </app-loading-spinner>
 
   <div *ngIf="!isLoading" [ngSwitch]="selectedTab">
 

@@ -13,6 +13,7 @@ import {
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 interface Booking {
   id: number;
@@ -36,7 +37,7 @@ interface Booking {
     CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, 
     IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent, IonBackButton,
-    IonButtons, AppHeaderComponent
+    IonButtons, AppHeaderComponent, LoadingSpinnerComponent
   ]
 })
 export class BookingsPage implements OnInit {

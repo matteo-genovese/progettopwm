@@ -10,6 +10,7 @@ import {
   IonIcon, IonButtons, IonButton
 } from '@ionic/angular/standalone';
 import { AppHeaderComponent } from '../../shared/components/app-header/app-header.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,7 @@ import { AppHeaderComponent } from '../../shared/components/app-header/app-heade
     CommonModule, IonRefresher, IonRefresherContent, 
     IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle,
     IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink, IonButtons, IonButton,
-    AppHeaderComponent
+    AppHeaderComponent, LoadingSpinnerComponent
   ]
 })
 export class DashboardPage implements OnInit {

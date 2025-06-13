@@ -12,10 +12,10 @@
   </ion-refresher>
 
   <!-- Mostrato durante il caricamento -->
-  <div *ngIf="isLoading" class="loading-container ion-text-center">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Caricamento dashboard...</p>
-  </div>
+  <app-loading-spinner 
+    *ngIf="isLoading" 
+    [message]="'Caricamento dashboard...'">
+  </app-loading-spinner>
 
   <!-- Sezione benvenuto -->
   <div class="dashboard-wrapper" *ngIf="dashboardData">
@@ -129,7 +129,7 @@
 
     <!-- Collegamento a "Profilo" -->
     <ion-item button detail routerLink="../profile" class="action-item">
-      <ion-icon name="add-circle-outline" slot="start" color="primary"></ion-icon>
+      <ion-icon name="star-outline" slot="start" color="primary"></ion-icon>
       <ion-label class="ion-text-center">
         <h2>Visualizza recensioni</h2>
         <p>Tutte le recensioni ricevute dai clienti</p>
