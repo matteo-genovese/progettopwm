@@ -1,14 +1,13 @@
 // Stili base per la pagina
-ion-header ion-toolbar {
-  --background: var(--ion-color-primary);
-  color: #fff;
-}
-
-ion-header ion-title {
-  color: #fff;
-  text-align: center;
+ion-header ion-title, 
+ion-header ion-toolbar ion-title {
+  color: #fff !important;
+  text-align: center !important;
+  width: 100%;
   justify-content: center;
   display: flex;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 ion-content {
@@ -173,6 +172,7 @@ ion-button {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
   }
 }
+
 
 // Loading container
 .loading-container {

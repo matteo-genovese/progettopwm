@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCard, IonCardContent,
   IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton,
-  IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonButtons
+  IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonButtons, IonBackButton
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -20,7 +20,7 @@ import {
     IonRow, IonGrid, IonCol, IonCardTitle, CommonModule, FormsModule, IonCard,
     IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCardContent,
     IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon,
-    IonButton, IonCardHeader, IonCardSubtitle, RouterLink, IonButtons
+    IonButton, IonCardHeader, IonCardSubtitle, RouterLink, IonButtons, IonBackButton
   ]
 })
 export class SessionsPage implements OnInit {

@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { calendarOutline, timeOutline, closeCircleOutline, starOutline } from 'ionicons/icons';
 import {
-  IonContent, IonHeader, IonTitle, IonToolbar, IonButtons,
+  IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
   IonRefresher, IonRefresherContent, IonCardHeader, IonCardTitle, IonCardSubtitle,
   IonCardContent, IonButton, IonSegment, IonSegmentButton, IonLabel, IonIcon, IonSpinner
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
+
 
 interface Booking {
   id: number;
@@ -34,7 +35,7 @@ interface Booking {
   imports: [
     CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, 
-    IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent,
+    IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent, IonBackButton,
     IonButtons
   ]
 })

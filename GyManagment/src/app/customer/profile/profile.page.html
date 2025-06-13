@@ -1,6 +1,9 @@
 <!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
+    </ion-buttons>
     <ion-title>Profilo</ion-title>
     <ion-buttons slot="end">
       <ion-button color="tertiary" (click)="onLogout()">
@@ -28,6 +31,7 @@
           <ion-icon name="person-circle-outline" size="large"></ion-icon>
         </ion-avatar>
         <ion-card-title class="ion-text-center">{{ userData?.full_name }}</ion-card-title>
+        <div class="ion-text-center role-badge">Customer</div>
       </ion-card-header>
 
       <ion-card-content>

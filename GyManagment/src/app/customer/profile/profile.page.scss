@@ -169,3 +169,16 @@ ion-content {
     align-items: center;
   }
 }
+
+.role-badge {
+  background: var(--ion-color-primary);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0.5rem auto 1rem auto;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
