@@ -30,7 +30,6 @@ ion-card {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   border: 2px solid var(--ion-color-secondary-shade);
   transition: box-shadow 0.2s, transform 0.2s;
-  margin-bottom: 1.5rem;
   padding: 0 !important;
   overflow: hidden;
   margin: 0 auto 1.5rem;
@@ -48,22 +47,9 @@ ion-card-title {
   color: #111;
 }
 
-.role-badge {
-  background: var(--ion-color-primary);
-  color: #fff;
-  border-radius: 8px;
-  padding: 0.2rem 0.8rem;
-  font-size: 0.9rem;
-  margin: 0.5rem auto 1rem auto;
-  display: inline-block;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-}
-
 ion-item {
   --padding-start: 0;
-  --background: #ffffff !important;
+  --background: #ffffff;
   --border-color: #e0e0e0;
   --border-width: 1px;
   --border-radius: 8px;
@@ -84,18 +70,18 @@ ion-item {
   }
 
   p {
-    color: #111;
-    font-size: 0.9rem;
-    margin: 0;
-  }
-
-  h3 {
     color: var(--ion-color-primary);
     font-size: 0.75rem;
     margin-bottom: 4px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: #111;
   }
 
   ion-icon {
@@ -138,13 +124,13 @@ ion-list {
     --border-radius: 8px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    --box-shadow: 0 4px 8px rgba(var(--ion-color-danger-rgb), 0.25);
+    --box-shadow: 0 4px 8px rgba(var(--ion-color-primary-rgb), 0.25);
     transition: filter 0.3s;
     width: 50%;
     max-width: 250px;  
     
     &:hover {
-      --box-shadow: 0 6px 12px rgba(var(--ion-color-danger-rgb), 0.35);
+      --box-shadow: 0 6px 12px rgba(var(--ion-color-primary-rgb), 0.35);
       filter: brightness(1.05);
     }
   }
@@ -164,20 +150,17 @@ ion-list {
 }
 
 ion-header ion-toolbar {
-  --background: var(--ion-color-primary) !important;
-  background: var(--ion-color-primary) !important;
-  color: #fff !important;
+  --background: var(--ion-color-primary);
+  color: #fff;
 }
 
 ion-header ion-title,
 ion-header ion-toolbar ion-title {
-  color: #fff !important;
-  text-align: center !important;
+  color: #fff;
+  text-align: center;
   width: 100%;
   justify-content: center;
   display: flex;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
 }
 
 ion-content {
@@ -185,11 +168,6 @@ ion-content {
   background-color: #fff;
   background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
   background-size: 14px 14px;
-}
-
-.error-container {
-  margin: 2rem auto;
-  max-width: 80%;
 }
 
 @media (max-width: 768px) {
@@ -213,4 +191,17 @@ ion-content {
     flex-direction: column;
     align-items: center;
   }
+}
+
+.role-badge {
+  background: var(--ion-color-primary);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0.5rem auto 1rem auto;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }

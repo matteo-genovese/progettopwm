@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Trainers Disponibili</ion-title>
@@ -5,11 +6,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Refresher mobile -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="search-filter-container">
+  <div class="search-filter-container">`
+
+    <!-- Barra di ricerca -->
     <ion-searchbar
       placeholder="Cerca trainer"
       (ionInput)="onSearchChange($event)"
@@ -18,6 +23,7 @@
       showCancelButton="focus">
     </ion-searchbar>
     
+    <!-- Scelta speciallizzazione trainer -->
     <div class="specialization-filters">
       <ion-chip [color]="filters.specialization === 'all' ? 'primary' : 'medium'" (click)="setSpecializationFilter('all')">
         <ion-label>Tutti</ion-label>
@@ -42,13 +48,15 @@
       </ion-chip>
     </div>
   </div>
-
+`
+  <!-- Mostrato durante il caricamento -->
   <div class="loading-container" *ngIf="isLoading">
     <ion-skeleton-text animated style="width: 100%; height: 120px; margin-bottom: 20px;"></ion-skeleton-text>
     <ion-skeleton-text animated style="width: 100%; height: 120px; margin-bottom: 20px;"></ion-skeleton-text>
     <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
   </div>
 
+  <!-- Mostrato se non ci sono trainers -->
   <div class="empty-state" *ngIf="!isLoading && filteredTrainers.length === 0">
     <ion-icon name="fitness-outline" size="large"></ion-icon>
     <h3>Nessun trainer trovato</h3>
@@ -56,10 +64,16 @@
   </div>
 
   <div class="trainers-grid" *ngIf="!isLoading">
+
+    <!-- Mostrato se ci sono trainers -->
     <ion-card *ngFor="let trainer of filteredTrainers" class="trainer-card">
+
+      <!-- Avatar trainer -->
       <div class="trainer-avatar">
         <ion-icon name="person-outline" size="large"></ion-icon>
       </div>
+
+      <!-- Informazioni trainer -->
       <ion-card-content>
         <h2 class="trainer-name">{{ trainer.full_name }}</h2>
         
@@ -78,6 +92,9 @@
           Vedi disponibilità
         </ion-button>
       </ion-card-content>
+
     </ion-card>
+
   </div>
+  
 </ion-content>

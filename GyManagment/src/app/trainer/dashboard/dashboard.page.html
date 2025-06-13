@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Dashboard PT</ion-title>
@@ -5,46 +6,66 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <!-- Refresher mobile -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Mostrato durante il caricamento -->
   <div *ngIf="isLoading" class="loading-container ion-text-center">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Caricamento dashboard...</p>
   </div>
 
-  <!-- Box principale stile admin -->
+  <!-- Sezione benvenuto -->
   <div class="dashboard-wrapper" *ngIf="dashboardData">
     <ion-card class="welcome-card">
+
       <ion-card-header>
         <ion-card-title>Benvenuto, {{ dashboardData.trainer_info.full_name }}</ion-card-title>
       </ion-card-header>
+
       <ion-card-content>
         <div class="welcome-content">
+
           <div class="left-content">
+
             <div class="welcome-message">
               <ion-icon name="barbell" color="primary"></ion-icon>
               <span>Pronto a motivare i tuoi clienti oggi?</span>
             </div>
             <p class="trainer-role">Trainer • {{ dashboardData.trainer_info.specialization }}</p>
+
           </div>
           
           <div class="welcome-stats">
+
+            <!-- Slot futuri -->
             <div class="stat2">
               <ion-icon name="calendar-outline" color="danger"></ion-icon>
               <span>{{ dashboardData.upcoming_sessions.length }}</span>
               <p>Slot futuri</p>
             </div>
+
+            <!-- Media rating -->
             <div class="stat2">
               <ion-icon name="star-outline" color="danger"></ion-icon>
               <span>{{ calculateAverageRating(dashboardData) }}</span>
               <p>Media Ratings</p>
             </div>
+
           </div>
+
         </div>
       </ion-card-content>
+
     </ion-card>
   </div>
 
-  <!-- Prossimi allenamenti -->
+  <!-- Sezione prossimi allenamenti -->
   <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length > 0">
+
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="calendar-outline" color="primary"></ion-icon>
@@ -53,29 +74,43 @@
     </ion-card-header>
     
     <ion-card-content>
+
+      <!-- Mostrato se ci sono allenamenti futuri -->
       <div class="sessions-container tall" *ngIf="!isLoading && dashboardData.upcoming_sessions.length > 0">
         <div class="session-item" *ngFor="let slot of dashboardData.upcoming_sessions.slice(0, 9)">
+
           <h2>TRAINER {{ slot.trainer_id }}</h2>
+
+          <!-- Data -->
           <p>
             <ion-icon name="calendar-outline"></ion-icon>
             {{ slot.adjustedStartDate }}
           </p>
+
+          <!-- Orari -->
           <p>
             <ion-icon name="time-outline"></ion-icon>
             {{ slot.adjustedStartTimeOnly }} - {{ slot.adjustedEndTimeOnly }}
           </p>
+
+          <!-- Specializzazione -->
           <p>
             <ion-icon name="fitness-outline"></ion-icon>
             Fitness
           </p>
+
         </div>
       </div>
       
 
     </ion-card-content>
+
   </ion-card>
 
+  <!-- Collegamenti -->
   <div class="actions-row">
+
+    <!-- Collegamento ad "Allenamenti" -->
     <ion-item button detail routerLink="../sessions" class="action-item">
       <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
       <ion-label class="ion-text-center">
@@ -84,6 +119,7 @@
       </ion-label>
     </ion-item>
 
+    <!-- Collegamento a "Slots" -->
     <ion-item button detail routerLink="../slots" class="action-item">
       <ion-icon name="add-circle-outline" slot="start" color="primary"></ion-icon>
       <ion-label class="ion-text-center">
@@ -91,5 +127,7 @@
         <p>Aggiungi nuovi slot disponibili</p>
       </ion-label>
     </ion-item>
+
   </div>
+
 </ion-content>
