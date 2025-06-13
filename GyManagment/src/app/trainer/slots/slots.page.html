@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Slots</ion-title>
@@ -5,14 +6,18 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
   <ion-card class="create-slot-card">
+
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="add-circle-outline" color="danger"></ion-icon>
         Crea nuovo slot
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+
+    <ion-card-content>`
+    
       <form (ngSubmit)="addSlot()" class="slot-form">
         <!-- Data e orari -->
         <div class="slot-date-container">
@@ -71,7 +76,8 @@
         <ion-button expand="block" type="submit" [disabled]="isLoading">
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Aggiungi slot
-        </ion-button>
+        </ion-button>`
+
       </form>
     </ion-card-content>
   </ion-card>

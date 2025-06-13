@@ -6,20 +6,17 @@ ion-content {
 }
 
 ion-header ion-toolbar {
-  --background: var(--ion-color-primary) !important;
-  background: var(--ion-color-primary) !important;
-  color: #fff !important;
+  --background: var(--ion-color-primary);
+  color: #fff;
 }
 
 ion-header ion-title,
 ion-header ion-toolbar ion-title {
-  color: #fff !important;
-  text-align: center !important;
+  color: #fff;
+  text-align: center;
   width: 100%;
   justify-content: center;
   display: flex;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
 }
 
 .scrollable-slots-list {
@@ -240,7 +237,6 @@ ion-button {
   }
 }
 
-
 .past-sessions-container {
   display: flex;
   flex-wrap: wrap;
@@ -253,17 +249,17 @@ ion-button {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.past-session-card {
-  background-color: white !important;
-  border-radius: 10px !important;
-  margin: 0 !important;
-  width: calc(25% - 12px) !important; // 4 elementi per riga
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
-  border: 1.8px solid #5f5555 !important;
+ion-card.past-session-card {
+  background-color: white;
+  border-radius: 10px;
+  margin: 0;
+  width: calc(25% - 12px); // 4 elementi per riga
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border: 1.8px solid #5f5555;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   
   &:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px) scale(1.01);
   }
   

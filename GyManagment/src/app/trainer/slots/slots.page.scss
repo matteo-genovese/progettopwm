@@ -17,7 +17,6 @@ ion-content {
   background-size: 14px 14px;
 }
 
-
 .create-slot-card {
   background: var(--ion-color-secondary-tint);
   border-radius: 12px;
@@ -83,7 +82,6 @@ ion-content {
   background-color: white;
   padding: 12px;
   margin-top: 10px;
-  
   border-radius: 8px;
   border: 1.5px solid #5f5555;
 }
@@ -118,7 +116,6 @@ ion-content {
   }
 }
 
-
 .max-clients-field {
   display: flex;
   align-items: center;
@@ -126,7 +123,6 @@ ion-content {
   background-color: white;
   padding: 12px;
   margin-top: 10px;
-  
   border-radius: 8px;
   border: 1.5px solid #5f5555;
 
@@ -139,7 +135,6 @@ ion-content {
     padding: 0.5rem 0rem 0.5rem 0rem;
     min-width: 108px;
     max-width: 108px;
-
     
     ion-icon {
       margin-right: 4px;
@@ -159,17 +154,13 @@ ion-content {
     font-size: 1rem;
     min-width: 70px; 
     max-width: 70px;
-
-
     --highlight-color-valid: #dc3545;
-
     
     &:hover {
       --background: rgba(220, 53, 69, 0.2);
     }
   }
 }
-
 
 ion-button[type="submit"] {
   --background: var(--ion-color-primary);
@@ -189,14 +180,12 @@ ion-button[type="submit"] {
   }
 }
 
-
 .time-picker-modal {
   --width: 250px;
   --height: 250px;
   --border-radius: 12px;
   --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
-
 
 .centered-time-picker {
   --background: white;
@@ -213,7 +202,6 @@ ion-button[type="submit"] {
   }
 }
 
-
 .time-picker-footer {
   display: flex;
   justify-content: center;
@@ -224,7 +212,6 @@ ion-button[type="submit"] {
     font-weight: 600;
   }
 }
-
 
 .loading-container {
   display: flex;
@@ -245,7 +232,6 @@ ion-button[type="submit"] {
     margin: 1rem 0;
   }
 }
-
 
 ion-datetime.minimal-calendar {
   border: 2px solid #5f5555;
@@ -288,7 +274,6 @@ ion-datetime.minimal-calendar {
     color: #dc3545;
   }
 }
-
 
 @media (max-width: 768px) {
   .create-slot-card {
