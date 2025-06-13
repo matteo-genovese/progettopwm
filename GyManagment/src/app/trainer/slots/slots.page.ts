@@ -119,7 +119,7 @@ export class SlotsPage implements OnInit {
       message: message,
       duration: 2000,
       color: color,
-      position: 'bottom'
+      position: 'top'
     });
     toast.present();
   }
