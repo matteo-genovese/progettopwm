@@ -83,6 +83,7 @@ ion-content {
   background-color: white;
   padding: 12px;
   margin-top: 10px;
+  
   border-radius: 8px;
   border: 1.5px solid #5f5555;
 }
@@ -91,10 +92,18 @@ ion-content {
   color: #333;
   font-size: 1rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+
+    ion-icon {
+    margin-right: 4px; 
+    font-size: 1.1rem;
+    color: #dc3545;
+  }
 }
 
 .time-value {
-  color: #333;
+  color: #000000;
   font-size: 1rem;
   padding: 5px 10px;
   min-width: 70px;
@@ -113,12 +122,13 @@ ion-content {
 .max-clients-field {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: white;
   padding: 12px;
   margin-top: 10px;
+  
   border-radius: 8px;
   border: 1.5px solid #5f5555;
-  justify-content: space-between;
 
   .max-clients-label {
     display: flex;
@@ -126,10 +136,13 @@ ion-content {
     color: #333;
     font-size: 1rem;
     font-weight: 500;
+    padding: 0.5rem 0rem 0.5rem 0rem;
+    min-width: 108px;
+    max-width: 108px;
 
     
     ion-icon {
-      margin-right: 8px;
+      margin-right: 4px;
       font-size: 1.1rem;
       color: #dc3545;
     }
@@ -137,16 +150,17 @@ ion-content {
 
   ion-input {
     --padding-start: 10px;
+    --padding-end: 10px;
     --background: rgba(220, 53, 69, 0.1);
     --border-radius: 4px;
-    --padding-top: 5px;
-    --padding-bottom: 5px;
-    --padding-end: 10px;
     --color: #333;
     font-weight: 600;
     text-align: center;
+    font-size: 1rem;
+    min-width: 70px; 
     max-width: 70px;
-    min-width: 70px;
+
+
     --highlight-color-valid: #dc3545;
 
     
@@ -277,8 +291,12 @@ ion-datetime.minimal-calendar {
 
 
 @media (max-width: 768px) {
+  .create-slot-card {
+    width: 95%; 
+  }
+  
   ion-datetime.minimal-calendar {
-    margin: 5px 0;
+    margin: 5px auto;
     --padding-start: 8px;
     --padding-end: 8px;
   }
