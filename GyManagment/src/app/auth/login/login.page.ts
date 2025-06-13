@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import {
   IonContent, IonButton, IonItem, IonLabel, IonInput, IonIcon, IonSpinner, 
-  IonText, ToastController
+  IonText
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { fitnessOutline } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -32,8 +33,8 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private uiService: UiService
   ) {
     addIcons({ fitnessOutline });
   }
@@ -59,7 +60,7 @@ export class LoginPage implements OnInit {
             this.isLoading = false;
 
             if (response.data && response.status === 'success') {
-              await this.showSuccess('Login effettuato con successo!');
+              await this.uiService.showToast('Login effettuato con successo!', 2000, 'top', 'success');
 
               if (this.authService.isLoggedIn()) {
                 this.redirectBasedOnRole();
@@ -100,16 +101,6 @@ export class LoginPage implements OnInit {
     setTimeout(() => {
       this.errorMessage = '';
     }, 5000);
-  }
-
-  private async showSuccess(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      color: 'success',
-      position: 'top'
-    });
-    await toast.present();
   }
 
   private redirectBasedOnRole() {

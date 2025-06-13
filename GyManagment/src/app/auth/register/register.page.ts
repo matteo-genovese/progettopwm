@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonContent, IonButton, IonItem, IonLabel, IonInput, IonIcon, IonSpinner, 
-  IonText, IonSelect, IonSelectOption, IonList, ToastController, AlertController
+  IonText, IonSelect, IonSelectOption, IonList
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   personOutline, lockClosedOutline, mailOutline, callOutline, cardOutline, fitnessOutline
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+import { UiService } from 'src/app/services/ui.service';
 
 interface RegistrationData {
   username: string;
@@ -55,7 +56,7 @@ export class RegisterPage {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private alertController: AlertController
+    private uiService: UiService,
   ) {
     addIcons({
       personOutline, lockClosedOutline, mailOutline, callOutline, cardOutline, fitnessOutline
@@ -89,7 +90,7 @@ export class RegisterPage {
         next: async (response) => {
           this.isLoading = false;
 
-          await this.showSuccessAlert();
+          await this.uiService.showToast('Registrazione completata con successo', 2000, 'top', 'success');
           this.router.navigate(['/login']);
         },
         error: (error) => {
@@ -111,15 +112,6 @@ export class RegisterPage {
   }
 
   validateForm(): boolean {
-
-    /*
-    // Controllo se tutti i dati sono stati inseriti
-    if (!this.userData.username || !this.userData.password || !this.userData.email ||
-      !this.userData.full_name || !this.userData.phone) {
-      this.errorMessage = 'Tutti i campi sono obbligatori';
-      return false;
-    }
-    */
 
     // Controllo se le password sono corrette
     if (this.userData.password !== this.confirmPassword) {
@@ -145,15 +137,5 @@ export class RegisterPage {
 
   goToLogin() {
     this.router.navigate(['/login']);
-  }
-
-  private async showSuccessAlert() {
-    const alert = await this.alertController.create({
-      header: 'Registrazione completata',
-      message: 'Il tuo account è stato creato con successo. Ora puoi accedere con le tue credenziali.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
   }
 }
