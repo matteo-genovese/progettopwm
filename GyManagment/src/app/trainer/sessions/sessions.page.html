@@ -41,17 +41,14 @@
     <div *ngSwitchCase="'upcoming'">
 
       <!-- Mostrato se non ci sono allenamenti futuri -->
-      <div class="empty-state" *ngIf="upcomingSessions.length === 0">
-
-        <ion-icon name="calendar-outline" size="large"></ion-icon>
-        <h3>Nessun allenamento futuro</h3>
-        <p>Crea uno slot per visualizzarlo qui</p>
-
-        <ion-button expand="block" routerLink="../slots">
-          Crea slot
-        </ion-button>
-
-      </div>
+      <app-empty-state 
+        *ngIf="upcomingSessions.length === 0"
+        icon="calendar-outline"
+        title="Nessun allenamento futuro"
+        description="Crea uno slot per visualizzarlo qui"
+        buttonText="Crea slot"
+        buttonLink="../slots">
+      </app-empty-state>
       
       <!-- Mostrato se ci sono allenamenti futuri -->
       <ion-grid *ngIf="upcomingSessions.length > 0">

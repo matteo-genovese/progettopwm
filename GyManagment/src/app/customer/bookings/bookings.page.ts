@@ -14,6 +14,7 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
 
 interface Booking {
   id: number;
@@ -37,7 +38,7 @@ interface Booking {
     CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, 
     IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent, IonBackButton,
-    IonButtons, AppHeaderComponent, LoadingSpinnerComponent
+    IonButtons, AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })
 export class BookingsPage implements OnInit {

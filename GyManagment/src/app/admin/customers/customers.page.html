@@ -21,11 +21,11 @@
   </ion-card>
 
   <div *ngIf="!isLoading && !error">
-    <div *ngIf="customers.length === 0" class="empty-state">
-      <ion-icon name="person-outline"></ion-icon>
-      <h2>Nessun cliente disponibile</h2>
-      <p>Non ci sono clienti registrati nel sistema.</p>
-    </div>
+    <app-empty-state 
+      *ngIf="customers.length === 0"
+      icon="person-outline"
+      title="Nessun cliente disponibile">
+    </app-empty-state>
   
     <div class="customers-grid" *ngIf="customers.length > 0">
       <div class="customer-card" *ngFor="let customer of customers">
@@ -51,8 +51,5 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </ion-content>
