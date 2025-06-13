@@ -32,7 +32,10 @@
           
           <!-- Orario inizio -->
           <div class="time-field">
-            <div class="time-label">Orario Inizio:</div>
+            <div class="time-label">
+              <ion-icon name="time-outline" color="primary"></ion-icon>
+              Orario Inizio:
+            </div>
             <div class="time-value" (click)="openStartTimePicker()">
               {{ formatTime(startTime) }}
             </div>
@@ -40,7 +43,10 @@
           
           <!-- Orario fine -->
           <div class="time-field">
-            <div class="time-label">Orario Fine:</div>
+            <div class="time-label">
+              <ion-icon name="time-outline" color="primary"></ion-icon>
+              Orario Fine:
+            </div>
             <div class="time-value" (click)="openEndTimePicker()">
               {{ formatTime(endTime) }}
             </div>
