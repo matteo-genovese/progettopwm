@@ -6,13 +6,13 @@ export const trainerGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  console.log('TrainerGuard check - isTrainer:', authService.isTrainer());
+  // console.log('TrainerGuard check - isTrainer:', authService.isTrainer());
 
   if (authService.isLoggedIn() && authService.isTrainer()) {
-    console.log('TrainerGuard: allowing access to', state.url);
+    // console.log('TrainerGuard: allowing access to', state.url);
     return true;
   } else {
-    console.log('TrainerGuard: redirecting to home');
+    // console.log('TrainerGuard: redirecting to home');
 
     if (authService.isLoggedIn() && authService.isAdmin()) {
       router.navigate(['/admin/dashboard']);

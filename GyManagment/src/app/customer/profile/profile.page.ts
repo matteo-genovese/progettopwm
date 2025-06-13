@@ -2,31 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonItem,
-  IonLabel,
-  IonButton,
-  IonIcon,
-  IonList,
-  IonSpinner,
-  IonAvatar,
-  AlertController,
-  ToastController
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
+  IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, AlertController, ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
-  logOutOutline, 
-  personCircleOutline, 
-  mailOutline, 
-  callOutline,
-  idCardOutline 
+  logOutOutline, personCircleOutline, mailOutline, callOutline, idCardOutline 
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 import { CustomerService } from '../../services/customer.service';
@@ -37,22 +18,8 @@ import { CustomerService } from '../../services/customer.service';
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonItem,
-    IonLabel,
-    IonButton,
-    IonIcon,
-    IonList,
-    IonSpinner,
-    IonAvatar
+    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
+    IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar
   ]
 })
 export class ProfilePage implements OnInit {
@@ -65,14 +32,8 @@ export class ProfilePage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController
-  ) {
-    addIcons({
-      logOutOutline,
-      personCircleOutline,
-      mailOutline,
-      callOutline,
-      idCardOutline
-    });
+  ) { 
+    addIcons({ logOutOutline, personCircleOutline, mailOutline, callOutline, idCardOutline });
   }
 
   ngOnInit() {

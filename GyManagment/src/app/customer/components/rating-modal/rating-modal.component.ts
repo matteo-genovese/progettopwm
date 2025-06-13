@@ -2,10 +2,9 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
-  IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
+  IonHeader, IonToolbar, IonTitle, IonContent, IonButton, ModalController,
   IonButtons, IonItem, IonLabel, IonTextarea, IonIcon, ToastController
 } from '@ionic/angular/standalone';
-import { ModalController } from '@ionic/angular/standalone';
 import { CustomerService } from '../../../services/customer.service';
 import { addIcons } from 'ionicons';
 import { closeOutline, starOutline, star } from 'ionicons/icons';

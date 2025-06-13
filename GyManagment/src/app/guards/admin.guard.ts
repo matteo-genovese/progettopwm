@@ -6,13 +6,13 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  console.log('AdminGuard check - isAdmin:', authService.isAdmin());
+  // console.log('AdminGuard check - isAdmin:', authService.isAdmin());
 
   if (authService.isLoggedIn() && authService.isAdmin()) {
-    console.log('AdminGuard: allowing access to', state.url);
+    // console.log('AdminGuard: allowing access to', state.url);
     return true;
   } else {
-    console.log('AdminGuard: redirecting - user is not admin');
+    // console.log('AdminGuard: redirecting - user is not admin');
     
     if (authService.isLoggedIn()) {
       if (authService.isCustomer()) {

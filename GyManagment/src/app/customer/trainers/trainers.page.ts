@@ -1,30 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonSearchbar,
-  IonCard,
-  IonCardContent,
-  IonButton,
-  IonIcon,
-  IonRefresher,
-  IonRefresherContent,
-  IonChip,
-  IonLabel,
-  IonSkeletonText,
-  ModalController
+  IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, 
+  IonRefresher, IonRefresherContent, IonChip, IonLabel, IonSkeletonText, ModalController
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { 
-  fitnessOutline, 
-  starOutline, 
-  calendarOutline, 
-  personOutline,
-  searchOutline
+  fitnessOutline, starOutline, calendarOutline, personOutline, searchOutline
 } from 'ionicons/icons';
 import { CustomerService } from '../../services/customer.service';
 import { SlotsModalComponent } from '../components/slots-modal/slots-modal.component';
@@ -35,22 +18,9 @@ import { SlotsModalComponent } from '../components/slots-modal/slots-modal.compo
   styleUrls: ['./trainers.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonSearchbar,
-    IonCard,
-    IonCardContent,
-    IonButton,
-    IonIcon,
-    IonRefresher,
-    IonRefresherContent,
-    IonChip,
-    IonLabel,
-    IonSkeletonText
+    CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, 
+    IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, IonRefresher, 
+    IonRefresherContent, IonChip, IonLabel, IonSkeletonText
   ]
 })
 export class TrainersPage implements OnInit {

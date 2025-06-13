@@ -22,7 +22,6 @@ export class DashboardPage implements OnInit {
   userData: any = null;
   upcomingBookings: any[] = [];
   trainers: any[] = [];
-  myTrainer: any = null;
   isLoading = false;
 
   constructor(

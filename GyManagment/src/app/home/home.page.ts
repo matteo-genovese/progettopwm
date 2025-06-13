@@ -2,29 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import {
-  IonContent,
-  IonButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonList,
-  IonItem,
-  IonIcon,
-  IonLabel,
-  IonGrid,
-  IonRow,
-  IonCol
+  IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
+  IonList, IonItem, IonIcon, IonLabel, IonGrid, IonRow, IonCol
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
-  fitnessOutline,
-  personAddOutline,
-  shieldOutline,
-  calendarOutline,
-  peopleOutline
+  fitnessOutline, personAddOutline, shieldOutline, calendarOutline, peopleOutline
 } from 'ionicons/icons';
 import { AuthService } from '../services/auth.service';
 
@@ -34,22 +18,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonContent,
-    IonButton,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonList,
-    IonItem,
-    IonIcon,
-    IonLabel,
-    IonGrid,
-    IonRow,
-    IonCol,
-    CommonModule,
-    FormsModule,
-    RouterLink
+    IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, 
+    IonItem, IonIcon, IonLabel, IonGrid, IonRow, IonCol, CommonModule, FormsModule, RouterLink
   ]
 })
 export class HomePage implements OnInit {
@@ -59,11 +29,7 @@ export class HomePage implements OnInit {
     private router: Router
   ) {
     addIcons({
-      fitnessOutline,
-      personAddOutline,
-      shieldOutline,
-      calendarOutline,
-      peopleOutline
+      fitnessOutline, personAddOutline, shieldOutline, calendarOutline, peopleOutline
     });
   }
 

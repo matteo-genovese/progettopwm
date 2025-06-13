@@ -29,11 +29,8 @@ export class SlotsModalComponent implements OnInit {
   @Input() trainer: any;
   
   selectedDate: string = '';
-  minDate: string = '';
-  
   slotsByDate: { [date: string]: any[] } = {};
   allDates: string[] = [];
-  
   isLoading = false;
   
   constructor(
@@ -49,7 +46,6 @@ export class SlotsModalComponent implements OnInit {
     const today = new Date();
     
     this.selectedDate = today.toISOString();
-    this.minDate = today.toISOString();
     
     this.loadAllFutureSlots();
   }

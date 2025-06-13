@@ -20,8 +20,6 @@ interface Booking {
   end_time: string;
   specialization?: string;
   rated?: boolean;
-  adjustedStartTime?: string;
-  adjustedEndTime?: string;
   adjustedStartTimeOnly?: string;
   adjustedEndTimeOnly?: string;
   adjustedStartDate?: string;
@@ -33,14 +31,13 @@ interface Booking {
   styleUrls: ['./bookings.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher, IonRefresherContent,
-    IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, IonSegmentButton, 
-    IonLabel, IonIcon, IonSpinner
+    CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher,
+    IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, 
+    IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent
   ]
 })
 export class BookingsPage implements OnInit {
   isLoading = false;
-  allBookings: Booking[] = [];
   upcomingBookings: Booking[] = [];
   pastBookings: Booking[] = [];
   selectedTab = 'upcoming';
@@ -80,18 +77,14 @@ export class BookingsPage implements OnInit {
         
         // Sistemo gli orari del booking 
         this.upcomingBookings.forEach(booking => {
-          booking.adjustedStartTime = this.formatDateTime(booking.start_time);
           booking.adjustedStartDate = this.formatDate(booking.start_time);
           booking.adjustedStartTimeOnly = this.formatTime(booking.start_time);
-          booking.adjustedEndTime = this.formatDateTime(booking.end_time);
           booking.adjustedEndTimeOnly = this.formatTime(booking.end_time);
         });
         
         this.pastBookings.forEach(booking => {
-          booking.adjustedStartTime = this.formatDateTime(booking.start_time);
           booking.adjustedStartDate = this.formatDate(booking.start_time);
           booking.adjustedStartTimeOnly = this.formatTime(booking.start_time);
-          booking.adjustedEndTime = this.formatDateTime(booking.end_time);
           booking.adjustedEndTimeOnly = this.formatTime(booking.end_time);
         });
         
@@ -99,7 +92,6 @@ export class BookingsPage implements OnInit {
       },
       error: (error) => {
         console.error('Error loading bookings:', error);
-        this.allBookings = [];
         this.isLoading = false;
       }
     });
