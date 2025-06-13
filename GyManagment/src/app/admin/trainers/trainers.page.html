@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Tutti i Trainer</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="tertiary" (click)="confirmLogout()">
+      <ion-button color="tertiary" (click)="onLogout()">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -42,31 +42,6 @@
           <div class="trainer-header">
             <h2>{{ trainer.full_name || trainer.username }}</h2>
 
-            <!--
-            <div class="trainer-actions">
-              <ion-button color="medium" fill="outline" size="small" (click)="showCustomerList(trainer.id)">
-                <ion-icon slot="start" name="people-outline"></ion-icon>
-                Assegna Cliente
-              </ion-button>
-              <div 
-                class="trainer-dropdown" 
-                *ngIf="selectedTrainerId === trainer.id">
-                <div class="close-dropdown" (click)="hideCustomerList()">
-                  <span class="close-x"></span>
-                </div>
-                <ion-list>
-                  <ion-item 
-                    button 
-                    detail 
-                    (click)="assignTrainerToCustomer(trainer.id, customer)"
-                    *ngFor="let customer of customers">
-                    {{ customer.full_name || customer.username }}
-                  </ion-item>
-                </ion-list>
-              </div>
-            </div>
-          -->
-
           </div>
           <div class="trainer-details">
             <p>
@@ -82,22 +57,6 @@
               {{ trainer.specialization }}
             </p>
           </div>
-          <!--
-          <div class="trainer-stats">
-            <div class="stat">
-              <span class="value">{{ trainer.client_count || 0 }}</span>
-              <span class="label">
-                Clienti
-              </span>
-            </div>
-            <div class="stat">
-              <span class="value">{{ trainer.max_clients_per_slot || 0 }}</span>
-              <span class="label">
-                Max per slot
-              </span>
-            </div>
-          </div>
-          -->
         </div>
       </div>
     </div>

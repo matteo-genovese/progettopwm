@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, 
-  IonRefresher, IonRefresherContent, IonChip, IonLabel, IonSkeletonText, ModalController
+  IonRefresher, IonRefresherContent, IonChip, IonLabel, IonSkeletonText, ModalController, IonButtons, IonBackButton
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
@@ -11,6 +11,7 @@ import {
 } from 'ionicons/icons';
 import { CustomerService } from '../../services/customer.service';
 import { SlotsModalComponent } from '../components/slots-modal/slots-modal.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-trainers',
@@ -20,7 +21,7 @@ import { SlotsModalComponent } from '../components/slots-modal/slots-modal.compo
   imports: [
     CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, 
     IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, IonRefresher, 
-    IonRefresherContent, IonChip, IonLabel, IonSkeletonText
+    IonRefresherContent, IonChip, IonLabel, IonSkeletonText, IonButtons, IonBackButton
   ]
 })
 export class TrainersPage implements OnInit {
@@ -34,7 +35,8 @@ export class TrainersPage implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private authService: AuthService,
   ) {
     addIcons({ fitnessOutline, starOutline, calendarOutline, personOutline, searchOutline });
   }
@@ -97,5 +99,9 @@ export class TrainersPage implements OnInit {
     });
 
     await modal.present();
+  }
+
+  onLogout() {
+    this.authService.logoutWithUI();
   }
 }

@@ -1,27 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonItem,
-  IonLabel,
-  IonButton,
-  IonIcon,
-  IonList,
-  IonSpinner,
-  IonAvatar,
-  ToastController,
-  AlertController
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
+  IonCardTitle, IonCardContent, IonItem, IonLabel, IonButton, IonButtons, 
+  IonIcon, IonList, IonSpinner, IonAvatar, IonBackButton
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { logOutOutline, personCircleOutline, mailOutline, keyOutline, idCardOutline, fitnessOutline, peopleOutline } from 'ionicons/icons';
+import { 
+  logOutOutline, personCircleOutline, mailOutline, 
+  keyOutline, idCardOutline, fitnessOutline, peopleOutline 
+} from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 import { TrainerService } from '../../services/trainer.service';
 
@@ -31,22 +19,9 @@ import { TrainerService } from '../../services/trainer.service';
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonItem,
-    IonLabel,
-    IonButton,
-    IonIcon,
-    IonList,
-    IonSpinner,
-    IonAvatar
+    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
+    IonCardTitle, IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, 
+    IonSpinner, IonAvatar, IonButtons, IonBackButton
   ]
 })
 export class ProfilePage implements OnInit {
@@ -58,18 +33,10 @@ export class ProfilePage implements OnInit {
   constructor(
     private trainerService: TrainerService,
     private authService: AuthService,
-    private router: Router,
-    private toastController: ToastController,
-    private alertController: AlertController
   ) {
     addIcons({
-      logOutOutline,
-      personCircleOutline,
-      mailOutline,
-      keyOutline,
-      idCardOutline,
-      fitnessOutline,
-      peopleOutline
+      logOutOutline, personCircleOutline, mailOutline, keyOutline, 
+      idCardOutline, fitnessOutline, peopleOutline
     });
   }
 
@@ -103,51 +70,7 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  async confirmLogout() {
-    const alert = await this.alertController.create({
-      header: 'Conferma logout',
-      message: 'Sei sicuro di voler effettuare il logout?',
-      buttons: [
-        {
-          text: 'Annulla',
-          role: 'cancel'
-        }, {
-          text: 'Logout',
-          handler: () => {
-            this.logout();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-  logout() {
-    this.isLoading = true;
-
-    this.authService.logout().subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Logout error:', error);
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      }
-    });
-  }
-
-  private async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'top',
-      color: 'success'
-    });
-    toast.present();
+  onLogout() {
+    this.authService.logoutWithUI();
   }
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainerService } from '../../services/trainer.service';
-import { ToastController } from '@ionic/angular/standalone';
 import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { 
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
+  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,  
   IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal 
+  IonIcon, IonModal, IonButtons, ToastController, IonCardTitle, IonBackButton
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -21,12 +21,10 @@ import {
   styleUrls: ['./slots.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, 
+    CommonModule, FormsModule, IonButton, IonSpinner, 
+    IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-    IonButton, IonSpinner, 
-    IonInput, IonDatetime, IonIcon, IonModal
+    IonInput, IonDatetime, IonIcon, IonModal, IonButtons
   ]
 })
 export class SlotsPage implements OnInit {
@@ -47,6 +45,7 @@ export class SlotsPage implements OnInit {
 
   constructor(
     private trainerService: TrainerService,
+    private authService: AuthService,
     private toastController: ToastController,
     private dateTimeService: DateTimeService
   ) {
@@ -60,7 +59,6 @@ export class SlotsPage implements OnInit {
   ngOnInit() {
     // Inizializza con la data corrente
     this.slotDate = new Date().toISOString();
-    
     const now = new Date();
     this.startTime = now.toISOString();
     const end = new Date(now.getTime() + 60 * 60 * 1000); // aggiunge 1 ora
@@ -146,13 +144,11 @@ export class SlotsPage implements OnInit {
 
   onTimePickerDismiss(pickerType: 'start' | 'end') {
     if (pickerType === 'start') {
-      // Applica anche qui la correzione del fuso orario
       const date = new Date(this.startTimePicker);
       date.setHours(date.getHours());
       this.startTime = date.toISOString();
       this.showStartTimePicker = false;
     } else {
-      // Applica anche qui la correzione del fuso orario
       const date = new Date(this.endTimePicker);
       date.setHours(date.getHours());
       this.endTime = date.toISOString();
@@ -169,5 +165,9 @@ export class SlotsPage implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  onLogout() {
+    this.authService.logoutWithUI();
   }
 }

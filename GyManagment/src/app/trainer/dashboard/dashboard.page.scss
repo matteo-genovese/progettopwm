@@ -1,14 +1,13 @@
 // Stili base per la pagina
-ion-header ion-toolbar {
-  --background: var(--ion-color-primary);
-  color: #fff;
-}
-
-ion-header ion-title {
-  color: #fff;
-  text-align: center;
+ion-header ion-title, 
+ion-header ion-toolbar ion-title {
+  color: #fff !important;
+  text-align: center !important;
+  width: 100%;
   justify-content: center;
   display: flex;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 ion-content {
@@ -34,6 +33,22 @@ ion-card {
     transform: translateY(-4px) scale(1.01);
   }
 }
+
+ion-button[color="tertiary"] {
+  border-radius: 50% !important;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+
 
 // Welcome card
 .welcome-card {
@@ -150,7 +165,6 @@ ion-button {
   --padding-bottom: 10px;
   --padding-start: 16px;
   --padding-end: 16px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
 
   &:hover {
@@ -158,6 +172,7 @@ ion-button {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
   }
 }
+
 
 // Loading container
 .loading-container {

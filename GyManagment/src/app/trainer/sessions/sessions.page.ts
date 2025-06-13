@@ -4,9 +4,11 @@ import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCard, IonCardContent,
-  IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow
+  IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton,
+  IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonButtons, IonBackButton
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -14,11 +16,11 @@ import {
   templateUrl: './sessions.page.html',
   styleUrls: ['./sessions.page.scss'],
   standalone: true,
-  imports: [IonRow, IonGrid, IonCol, IonCardTitle, 
-    CommonModule,
-    FormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCard, IonCardContent,
-    IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton, IonCardHeader, IonCardSubtitle, RouterLink
+  imports: [
+    IonRow, IonGrid, IonCol, IonCardTitle, CommonModule, FormsModule, IonCard,
+    IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCardContent,
+    IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon,
+    IonButton, IonCardHeader, IonCardSubtitle, RouterLink, IonButtons, IonBackButton
   ]
 })
 export class SessionsPage implements OnInit {
@@ -33,7 +35,8 @@ export class SessionsPage implements OnInit {
 
   constructor(
     private trainerService: TrainerService,
-    private dateTimeService: DateTimeService
+    private dateTimeService: DateTimeService,
+    private authService: AuthService,  
   ) {}
 
   ngOnInit() {
@@ -105,4 +108,9 @@ export class SessionsPage implements OnInit {
       event.target.complete();
     }, 1000);
   }
+
+  onLogout() {
+    this.authService.logoutWithUI();
+  }
 }
+

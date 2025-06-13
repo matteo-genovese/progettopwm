@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, IonIcon, 
-  IonSpinner, IonCard, IonCardContent, IonRefresher, IonButton, IonRefresherContent, AlertController, ToastController
+  IonSpinner, IonCard, IonCardContent, IonRefresher, IonButton, IonRefresherContent
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { peopleOutline } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth.service';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-trainers',
@@ -26,12 +26,9 @@ export class TrainersPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private toastController: ToastController,
-    private alertController: AlertController,
+    private adminService: AdminService,
   ) {
     addIcons({ peopleOutline });
-    
   }
 
   ngOnInit() {
@@ -42,7 +39,7 @@ export class TrainersPage implements OnInit {
     this.isLoading = true;
     this.error = '';
     
-    this.authService.getAllTrainers().subscribe({
+    this.adminService.getAllTrainers().subscribe({
       next: (data) => {
         console.log('Trainers data received:', data);
         this.trainers = data;
@@ -62,54 +59,8 @@ export class TrainersPage implements OnInit {
       event.target.complete();
     }, 1000);
   }
-async confirmLogout() {
-    const alert = await this.alertController.create({
-      header: 'Conferma logout',
-      message: 'Sei sicuro di voler effettuare il logout?',
-      buttons: [
-        {
-          text: 'Annulla',
-          role: 'cancel'
-        }, {
-          text: 'Logout',
-          handler: () => {
-            this.logout();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+  
+  onLogout() {
+    this.authService.logoutWithUI();
   }
-
-    logout() {
-    this.isLoading = true;
-
-    this.authService.logout().subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Logout error:', error);
-        this.showToast('Logout effettuato con successo');
-        this.router.navigate(['/home'], { replaceUrl: true });
-      }
-    });
-  }
-
-  private async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'top',
-      color: 'success'
-    });
-    toast.present();
-  }
-
 }
-
-

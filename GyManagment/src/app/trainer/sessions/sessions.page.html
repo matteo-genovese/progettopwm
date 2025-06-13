@@ -1,7 +1,15 @@
 <!-- Header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/dashboard"></ion-back-button>
+    </ion-buttons>
     <ion-title>Allenamenti Trainer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="tertiary" (click)="onLogout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

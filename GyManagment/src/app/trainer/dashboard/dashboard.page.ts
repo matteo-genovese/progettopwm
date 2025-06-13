@@ -3,9 +3,11 @@ import { TrainerService } from '../../services/trainer.service';
 import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-  IonRefresher, IonRefresherContent, IonCardContent, IonItem, IonLabel, IonSpinner, IonIcon 
+  IonRefresher, IonRefresherContent, IonCardContent, IonItem, IonLabel, IonSpinner, 
+  IonIcon, IonButtons, IonButton
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -17,7 +19,8 @@ import {
     CommonModule,
     IonRefresher,
     IonRefresherContent, 
-    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink
+    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle,
+    IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink, IonButtons, IonButton
   ]
 })
 export class DashboardPage implements OnInit {
@@ -27,7 +30,8 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private trainerService: TrainerService,
-    private dateTimeService: DateTimeService
+    private dateTimeService: DateTimeService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -88,4 +92,9 @@ export class DashboardPage implements OnInit {
     const media = somma / ratings.length;
     return parseFloat(media.toFixed(1));
   }
+
+  onLogout() {
+    this.authService.logoutWithUI();
+  }
 }
+
