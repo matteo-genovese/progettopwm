@@ -89,36 +89,15 @@ export class BookingsPage implements OnInit {
     this.customerService.getCustomerDashboard().subscribe({
       next: (data) => {
         console.log('Dashboard data received:', data);
-        this.allBookings = [
-          ...(data.upcoming_bookings || []),
-          ...(data.past_bookings || [])
-        ];
-        this.filterBookings();
-        this.isLoading = false;
+        this.upcomingBookings = data.upcoming_bookings || [];
+        this.pastBookings = data.past_bookings || [];
       },
       error: (error) => {
         console.error('Error loading bookings:', error);
         this.allBookings = [];
-        this.filterBookings();
         this.isLoading = false;
       }
     });
-  }
-
-  filterBookings() {
-    const now = new Date();
-    
-    this.upcomingBookings = this.allBookings.filter(booking => 
-      new Date(booking.start_time) > now
-    ).sort((a, b) => 
-      new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
-    );
-    
-    this.pastBookings = this.allBookings.filter(booking => 
-      new Date(booking.start_time) <= now
-    ).sort((a, b) => 
-      new Date(b.start_time).getTime() - new Date(a.start_time).getTime()
-    );
   }
 
   segmentChanged() {

@@ -80,21 +80,13 @@ export class DashboardPage implements OnInit {
       next: (data) => {
         console.log('Dashboard data received:', data);
         
-        //filtro per escludere gli allenamenti passati 
-        const now = new Date();
-        this.upcomingBookings = (data.upcoming_bookings || [])
-          .filter((booking: any) => new Date(booking.start_time) > now)
-          .sort((a: any, b: any) => {
-            return new Date(a.start_time).getTime() - new Date(b.start_time).getTime();
-          });
+        this.upcomingBookings = (data.upcoming_bookings || []);
         
-        this.myTrainer = data.trainer || null;
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading dashboard data:', error);
         this.upcomingBookings = [];
-        this.myTrainer = null;
         this.isLoading = false;
       }
     });
