@@ -8,7 +8,9 @@ import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { 
   logOutOutline, personCircleOutline, mailOutline, 
-  keyOutline, idCardOutline, fitnessOutline, peopleOutline 
+  keyOutline, idCardOutline, fitnessOutline, peopleOutline, 
+  starOutline,
+  star
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 import { TrainerService } from '../../services/trainer.service';
@@ -36,7 +38,7 @@ export class ProfilePage implements OnInit {
   ) {
     addIcons({
       logOutOutline, personCircleOutline, mailOutline, keyOutline, 
-      idCardOutline, fitnessOutline, peopleOutline
+      idCardOutline, fitnessOutline, peopleOutline, starOutline, star
     });
   }
 
@@ -72,5 +74,26 @@ export class ProfilePage implements OnInit {
 
   onLogout() {
     this.authService.logoutWithUI();
+  }
+
+  generateStars(rating: number): { filled: boolean }[] {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push({ filled: i <= rating });
+    }
+    return stars;
+  }
+
+  formatDate(dateString: string): string {
+    if (!dateString) return 'Data non disponibile';
+    
+    const date = new Date(dateString);
+    return date.toLocaleDateString('it-IT', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   }
 }
