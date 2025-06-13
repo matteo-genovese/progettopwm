@@ -11,7 +11,7 @@
   </app-loading-spinner>
 
   <div *ngIf="error" class="error-container">
-    <ion-card color="danger">
+    <ion-card class="profile-card app-card secondary-border" color="danger">
       <ion-card-content>{{ error }}</ion-card-content>
     </ion-card>
     <ion-button expand="block" (click)="loadUserData()">Riprova</ion-button>
@@ -20,7 +20,7 @@
   <div *ngIf="!isLoading && !error">
 
     <!-- Sezione profilo -->
-    <ion-card>
+    <ion-card class="profile-card app-card secondary-border">
 
       <!-- Avatar e nome utente -->
       <ion-card-header>
@@ -67,7 +67,7 @@
     </ion-card>
 
     <!-- Sezione recensioni -->
-    <ion-card *ngIf="trainerData && trainerData.ratings">
+    <ion-card  class="profile-card app-card secondary-border" *ngIf="trainerData && trainerData.ratings">
       <ion-card-header>
         <ion-card-title>
           <ion-icon name="star-outline" color="danger"></ion-icon>
@@ -84,7 +84,7 @@
         </div>
 
         <!-- Lista delle recensioni -->
-        <div *ngIf="trainerData.ratings && trainerData.ratings.length > 0" class="reviews-list">
+        <div *ngIf="trainerData.ratings && trainerData.ratings.length > 0" class="reviews-list custom-scrollbar">
           <div class="review-card" *ngFor="let review of trainerData.ratings">
             <div class="review-header">
               <div class="customer-name"><strong>DA:</strong> {{ review.customer_name }}</div>

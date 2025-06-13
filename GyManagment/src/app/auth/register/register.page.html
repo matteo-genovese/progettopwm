@@ -136,14 +136,14 @@
             <div>
 
                 <!-- Tasto Registrati -->
-                <ion-button expand="block" color="primary" type="submit" [disabled]="!registerForm.valid || isLoading">
+                <ion-button class="app-button" expand="block" color="primary" type="submit" [disabled]="!registerForm.valid || isLoading">
                     <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
                     <span *ngIf="!isLoading">Registrati</span>
                     <span *ngIf="isLoading">Registrazione in corso...</span>
                 </ion-button>
 
                 <!-- Tasto Annulla -->
-                <ion-button expand="block" fill="clear" (click)="goBack()" [disabled]="isLoading">
+                <ion-button class="app-button" expand="block" fill="clear" (click)="goBack()" [disabled]="isLoading">
                 Annulla
                 </ion-button>
 
