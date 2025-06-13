@@ -132,8 +132,10 @@ ion-content {
 
 @media (max-width: 576px) {
   ion-item {
-    width: 100%;
+  width: calc(100% - 20px); 
     max-width: none;
+    margin: 6px 8px; 
+    box-sizing: border-box;
   }
   
   ion-list {

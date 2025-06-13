@@ -87,7 +87,7 @@
         <div *ngIf="trainerData.ratings && trainerData.ratings.length > 0" class="reviews-list">
           <div class="review-card" *ngFor="let review of trainerData.ratings">
             <div class="review-header">
-              <div class="customer-name"><strong>Cliente:</strong> {{ review.customer_name }}</div>
+              <div class="customer-name"><strong>DA:</strong> {{ review.customer_name }}</div>
               <div class="review-date">{{ formatDate(review.date) }}</div>
             </div>
             
