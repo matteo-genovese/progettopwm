@@ -14,7 +14,8 @@ import {
   IonItem,
   IonLabel,
   IonButtons,
-  AlertController
+  AlertController,
+  ToastController
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -55,11 +56,13 @@ export class DashboardPage implements OnInit {
   adminData: any;
   trainersCount: number = 0;
   customersCount: number = 0;
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private alertController: AlertController,
+    private toastController: ToastController
   ) {
     addIcons({ peopleOutline, fitnessOutline, statsChartOutline, personOutline, logOutOutline,barbell });
   }
@@ -99,31 +102,18 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/admin/customers']);
   }
 
-  async confirmLogout() {
+   async confirmLogout() {
     const alert = await this.alertController.create({
       header: 'Conferma logout',
       message: 'Sei sicuro di voler effettuare il logout?',
       buttons: [
         {
           text: 'Annulla',
-          role: 'cancel',
-          cssClass: 'secondary'
+          role: 'cancel'
         }, {
           text: 'Logout',
-          cssClass: 'danger',
           handler: () => {
-            // Esegui il logout tramite il servizio AuthService
-            this.authService.logout().subscribe({
-              next: () => {
-                // Naviga alla pagina di login
-                window.location.href = '/login';
-              },
-              error: (err) => {
-                console.error('Errore durante il logout:', err);
-                // In caso di errore, esegui comunque il logout lato client
-                window.location.href = '/login';
-              }
-            });
+            this.logout();
           }
         }
       ]
@@ -131,4 +121,33 @@ export class DashboardPage implements OnInit {
 
     await alert.present();
   }
+
+    logout() {
+    this.isLoading = true;
+
+    this.authService.logout().subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Logout error:', error);
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      }
+    });
+  }
+
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+      color: 'success'
+    });
+    toast.present();
+  }
+
 }
