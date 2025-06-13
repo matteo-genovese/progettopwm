@@ -2,6 +2,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Profilo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="tertiary" (click)="confirmLogout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -68,12 +73,6 @@
       </ion-card-content>
     </ion-card>
 
-    <!-- Pulsante di logout -->
-    <div class="logout-button-container">
-      <ion-button expand="block" color="danger" (click)="confirmLogout()">
-        <ion-icon slot="start" name="log-out-outline"></ion-icon>
-        Logout
-      </ion-button>
-    </div>
+
   </div>
 </ion-content>

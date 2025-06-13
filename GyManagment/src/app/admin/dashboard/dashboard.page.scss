@@ -206,6 +206,11 @@ ion-button[color="tertiary"] {
   display: flex;
   align-items: center;
   justify-content: center;
+
+}
+
+ion-toolbar ion-button[color="tertiary"] ion-icon {
+  color: var(--ion-color-tertiary) !important; 
 }
 
 

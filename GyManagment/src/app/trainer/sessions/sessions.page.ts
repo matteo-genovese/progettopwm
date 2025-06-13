@@ -4,9 +4,12 @@ import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCard, IonCardContent,
-  IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow
+  IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton,
+  IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonButtons, AlertController, ToastController
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -18,7 +21,8 @@ import {
     CommonModule,
     FormsModule,
     IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCard, IonCardContent,
-    IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton, IonCardHeader, IonCardSubtitle, RouterLink
+    IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon,
+    IonButton, IonCardHeader, IonCardSubtitle, RouterLink, IonButtons
   ]
 })
 export class SessionsPage implements OnInit {
@@ -33,7 +37,12 @@ export class SessionsPage implements OnInit {
 
   constructor(
     private trainerService: TrainerService,
-    private dateTimeService: DateTimeService
+    private dateTimeService: DateTimeService,
+    private authService: AuthService,
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private router: Router
+  
   ) {}
 
   ngOnInit() {
@@ -105,4 +114,55 @@ export class SessionsPage implements OnInit {
       event.target.complete();
     }, 1000);
   }
+
+
+async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Conferma logout',
+      message: 'Sei sicuro di voler effettuare il logout?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel'
+        }, {
+          text: 'Logout',
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+    logout() {
+    this.isLoading = true;
+
+    this.authService.logout().subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Logout error:', error);
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      }
+    });
+  }
+
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+      color: 'success'
+    });
+    toast.present();
+  }
+
 }
+

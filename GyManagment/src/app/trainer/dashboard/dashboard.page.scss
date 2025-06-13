@@ -35,6 +35,22 @@ ion-card {
   }
 }
 
+ion-button[color="tertiary"] {
+  border-radius: 50% !important;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+
+
 // Welcome card
 .welcome-card {
   margin-bottom: 24px;
@@ -150,7 +166,6 @@ ion-button {
   --padding-bottom: 10px;
   --padding-start: 16px;
   --padding-end: 16px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
 
   &:hover {

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainerService } from '../../services/trainer.service';
-import { ToastController } from '@ionic/angular/standalone';
 import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
   IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal 
+  IonIcon, IonModal, IonButtons, AlertController, ToastController 
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -26,7 +28,7 @@ import {
     IonHeader, IonToolbar, IonTitle, IonContent, 
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
     IonButton, IonSpinner, 
-    IonInput, IonDatetime, IonIcon, IonModal
+    IonInput, IonDatetime, IonIcon, IonModal, IonButtons
   ]
 })
 export class SlotsPage implements OnInit {
@@ -47,6 +49,9 @@ export class SlotsPage implements OnInit {
 
   constructor(
     private trainerService: TrainerService,
+    private authService: AuthService,
+    private alertController: AlertController,
+    private router: Router,
     private toastController: ToastController,
     private dateTimeService: DateTimeService
   ) {
@@ -170,4 +175,54 @@ export class SlotsPage implements OnInit {
     });
     toast.present();
   }
+
+
+async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Conferma logout',
+      message: 'Sei sicuro di voler effettuare il logout?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel'
+        }, {
+          text: 'Logout',
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+    logout() {
+    this.isLoading = true;
+
+    this.authService.logout().subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Logout error:', error);
+        this.showToast('Logout effettuato con successo');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      }
+    });
+  }
+
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+      color: 'success'
+    });
+    toast.present();
+  }
+
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-  IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, AlertController, ToastController
+  IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, AlertController, ToastController, IonButtons
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -19,7 +19,7 @@ import { CustomerService } from '../../services/customer.service';
   standalone: true,
   imports: [
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-    IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar
+    IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, IonButtons
   ]
 })
 export class ProfilePage implements OnInit {
