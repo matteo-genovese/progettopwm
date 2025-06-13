@@ -7,11 +7,12 @@ import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon,
   IonList, IonItem, IonLabel, IonDatetime, IonDatetimeButton, IonModal,
   IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  ModalController, ToastController
+  ModalController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, calendarOutline, timeOutline, star } from 'ionicons/icons';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-slots-modal',
@@ -38,8 +39,8 @@ export class SlotsModalComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private modalCtrl: ModalController,
-    private toastController: ToastController,
-    private dateTimeService: DateTimeService
+    private dateTimeService: DateTimeService,
+    private uiService: UiService
   ) {
     addIcons({ closeOutline, calendarOutline, timeOutline, star });
   }
@@ -127,7 +128,7 @@ export class SlotsModalComponent implements OnInit {
       error: (error) => {
         console.error('Error loading slots:', error);
         this.isLoading = false;
-        this.showToast('Impossibile caricare gli slot disponibili', 'danger');
+        this.uiService.showToast('Impossibile caricare gli slot disponibili', 2000, 'top', 'danger');
       }
     });
   }
@@ -143,7 +144,7 @@ export class SlotsModalComponent implements OnInit {
     this.customerService.bookSession(slotId).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.showToast('Prenotazione effettuata con successo!', 'success');
+        this.uiService.showToast('Prenotazione effettuata con successo!', 2000, 'top', 'success');
         this.loadAllFutureSlots(); // Ricarica gli slot per aggiornare la disponibilità
       },
       error: (error) => {
@@ -155,8 +156,8 @@ export class SlotsModalComponent implements OnInit {
         if (error.error && error.error.message) {
           errorMessage = error.error.message;
         }
-        
-        this.showToast(errorMessage, 'danger');
+
+        this.uiService.showToast(errorMessage, 2000, 'top', 'danger');
       }
     });
   }
@@ -164,15 +165,5 @@ export class SlotsModalComponent implements OnInit {
   // Utilizza il metodo del servizio
   formatDateForDisplay(dateString: string): string {
     return this.dateTimeService.formatDateForDisplay(dateString);
-  }
-
-  private async showToast(message: string, color: string = 'success') {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'top',
-      color: color
-    });
-    toast.present();
   }
 }
