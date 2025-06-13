@@ -78,4 +78,16 @@ export class RatingModalComponent {
   setRating(value: number) {
     this.rating = value;
   }
+
+  getRatingLabel(): string {
+    const labels = [
+      'Seleziona una valutazione',
+      'Scarso',
+      'Sufficiente', 
+      'Buono',
+      'Molto buono',
+      'Eccellente'
+    ];
+    return labels[this.rating] || labels[0];
+  }
 }
