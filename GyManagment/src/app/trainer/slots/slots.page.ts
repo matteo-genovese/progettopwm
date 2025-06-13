@@ -164,17 +164,15 @@ export class SlotsPage implements OnInit {
   }
 
   closeStartTimePicker() {
-    // Quando confermiamo la selezione, sottraiamo 2 ore per tornare all'orario corretto
     const date = new Date(this.startTimePicker);
-    date.setHours(date.getHours() - 2);
+    date.setHours(date.getHours());
     this.startTime = date.toISOString();
     this.showStartTimePicker = false;
   }
 
   closeEndTimePicker() {
-    // Quando confermiamo la selezione, sottraiamo 2 ore per tornare all'orario corretto
     const date = new Date(this.endTimePicker);
-    date.setHours(date.getHours() - 2);
+    date.setHours(date.getHours());
     this.endTime = date.toISOString();
     this.showEndTimePicker = false;
   }
