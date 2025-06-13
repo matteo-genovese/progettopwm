@@ -91,6 +91,7 @@ export class BookingsPage implements OnInit {
         console.log('Dashboard data received:', data);
         this.upcomingBookings = data.upcoming_bookings || [];
         this.pastBookings = data.past_bookings || [];
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading bookings:', error);

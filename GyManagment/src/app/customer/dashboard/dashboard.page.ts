@@ -79,9 +79,7 @@ export class DashboardPage implements OnInit {
     this.customerService.getCustomerDashboard().subscribe({
       next: (data) => {
         console.log('Dashboard data received:', data);
-        
         this.upcomingBookings = (data.upcoming_bookings || []);
-        
         this.isLoading = false;
       },
       error: (error) => {
