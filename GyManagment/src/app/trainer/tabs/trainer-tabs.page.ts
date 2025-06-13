@@ -14,7 +14,5 @@ export class TrainersTabsPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }
