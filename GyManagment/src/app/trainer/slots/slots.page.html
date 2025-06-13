@@ -16,8 +16,8 @@
       </ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>`
-    
+    <!-- Dati dello slot -->
+    <ion-card-content>
       <form (ngSubmit)="addSlot()" class="slot-form">
         <!-- Data e orari -->
         <div class="slot-date-container">
@@ -26,6 +26,7 @@
             Data slot
           </label>
           
+          <!-- Calendario interattivo -->
           <ion-datetime
             class="minimal-calendar"
             presentation="date"
@@ -37,32 +38,40 @@
           
           <!-- Orario inizio -->
           <div class="time-field">
+
             <div class="time-label">
               <ion-icon name="time-outline" color="primary"></ion-icon>
               Orario Inizio:
             </div>
+            
             <div class="time-value" (click)="openStartTimePicker()">
               {{ formatTimeLocal(startTime) }}
             </div>
+
           </div>
           
           <!-- Orario fine -->
           <div class="time-field">
+
             <div class="time-label">
               <ion-icon name="time-outline" color="primary"></ion-icon>
               Orario Fine:
             </div>
+
             <div class="time-value" (click)="openEndTimePicker()">
               {{ formatTimeLocal(endTime) }}
             </div>
+
           </div>
           
-          <!-- Max clienti (spostato qui) -->
+          <!-- Max clienti -->
           <div class="max-clients-field">
+
             <div class="max-clients-label">
               <ion-icon name="people-outline"></ion-icon>
               Max clienti:
             </div>
+
             <ion-input
               type="number"
               [(ngModel)]="newSlot.max_clients"
@@ -70,25 +79,28 @@
               min="1"
               required>
             </ion-input>
+
           </div>
+
         </div>
         
+        <!-- Tasto per aggiungere creare lo slot -->
         <ion-button expand="block" type="submit" [disabled]="isLoading">
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Aggiungi slot
-        </ion-button>`
+        </ion-button>
 
       </form>
     </ion-card-content>
+
   </ion-card>
 
+  <!-- Mostrato durante il caricamento -->
   <div *ngIf="isLoading" class="loading-container ion-text-center">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Caricamento slot...</p>
   </div>
 
-
-  
   <!-- Popup per selezionare l'orario di inizio -->
   <ion-modal 
     [isOpen]="showStartTimePicker" 
@@ -136,4 +148,5 @@
       </div>
     </ng-template>
   </ion-modal>
+
 </ion-content>
