@@ -83,3 +83,21 @@
 .loading-placeholder ion-skeleton-text {
   margin-bottom: 0.8rem;
 }
+
+.welcome-card {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .welcome-card {
+    width:80%;
+  }
+}
+
+@media (max-width: 576px) {
+  .welcome-card {
+    width:80%;
+  }
+}

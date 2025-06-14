@@ -15,6 +15,7 @@ import { AuthService } from '../../services/auth.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
+import { DetailCardComponent } from 'src/app/shared/components/detail-card/detail-card.component';
 
 interface Booking {
   id: number;
@@ -35,9 +36,8 @@ interface Booking {
   styleUrls: ['./bookings.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, FormsModule, IonContent, IonRefresher, IonSegment,
-    IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton,  
-    IonSegmentButton, IonLabel, IonIcon, IonRefresherContent, IonCard,
+    CommonModule, FormsModule, IonContent, IonRefresher, IonSegment, 
+    IonSegmentButton, IonLabel, IonRefresherContent, DetailCardComponent,
     AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })

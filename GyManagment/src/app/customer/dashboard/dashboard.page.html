@@ -1,3 +1,4 @@
+<!-- Header -->
 <app-header 
   title="Dashboard Cliente"
   [backHref]="'.'">
@@ -12,74 +13,66 @@
 
   <!-- Sezione di benvenuto -->
   @if (userData) {
-    <div class="welcome-section">
-      <h1>Benvenuto, {{ userData.full_name || userData.username }}</h1>
-      <p>Gestisci i tuoi allenamenti e monitora i tuoi progressi</p>
-    </div>
+    <ion-card class="ion-card-dashboard welcome-card">
+      <div class="welcome-section">
+        <h1>Benvenuto, {{ userData.full_name || userData.username }}</h1>
+        <p>Gestisci i tuoi allenamenti e monitora i tuoi progressi</p>
+      </div>
+    </ion-card>
   }
 
   <!-- Sezione Prossimi Allenamenti -->
-  <ion-card class="ion-card-dashboard">
+   @if(upcomingBookings.length === 0) {
+    <app-empty-state 
+    title="Nessun allenamento prenotato"
+    description="Prenota uno slot per iniziare."
+    buttonText="Prenota slot"
+    buttonLink="../trainers">
+    </app-empty-state>
+   }
+  @if(upcomingBookings.length > 0) {
+    <ion-card class="ion-card-dashboard">
 
-    <ion-card-header>
-      <ion-card-title>
-        <ion-icon name="calendar-outline" color="primary"></ion-icon>
-        Prossimi Allenamenti <small>(max 9)</small>
-      </ion-card-title>
-    </ion-card-header>
-    
-    <ion-card-content>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="calendar-outline" color="primary"></ion-icon>
+          Prossimi Allenamenti <small>(max 9)</small>
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
 
-      @if (isLoading) {
-        <div class="loading-placeholder">
-          <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
-        </div>
-      }
+        @if (isLoading) {
+          <div class="loading-placeholder">
+            <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
+          </div>
+        }
 
-      <!-- Mostrato se ci sono allenamenti prenotati -->
-      @if (!isLoading && upcomingBookings.length > 0) {
-        <div class="booking-container tall">
-          @for (booking of upcomingBookings.slice(0, 9); track booking.id) {
-            <div class="booking-item">
-              <h2>{{ booking.trainer_name }}</h2>
-              <p>
-                <ion-icon name="calendar-outline"></ion-icon>
-                {{ booking.adjustedStartDate }}
-              </p>
-              <p>
-                <ion-icon name="time-outline"></ion-icon>
-                {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
-              </p>
-              @if (booking.specialization) {
-                <p>
-                  <ion-icon name="fitness-outline"></ion-icon>
-                  {{ booking.specialization }}
-                </p>
-              }
-            </div>
-          }
-        </div>
-      }
+        <!-- Mostrato se ci sono allenamenti prenotati -->
+        @if (!isLoading && upcomingBookings.length > 0) {
+          <div class="sessions-container tall">
+            @for (booking of upcomingBookings.slice(0, 9); track booking.id) {
+              <detail-card
+                [title]="booking.trainer_name"
+                [rows]="[
+                  { icon: 'calendar-outline', description: booking.adjustedStartDate || 'Data non disponibile' },
+                  { icon: 'time-outline', description: booking.adjustedStartTimeOnly + ' - ' + booking.adjustedEndTimeOnly }
+                ].concat(booking.specialization ? [{ icon: 'fitness-outline', description: booking.specialization }] : [])">
+              </detail-card>
+            }
+          </div>
+        }
 
-      <!-- Mostrato se non ci sono allenamenti prenotati -->
-      @if (!isLoading && upcomingBookings.length === 0) {
-        <div class="empty-state">
-          <p>Non hai allenamenti programmati</p>
-          <ion-button expand="block" class="view-all" (click)="viewAllTrainers()">
-            Prenota uno slot da un trainer
+        @if (!isLoading && upcomingBookings.length > 0) {
+          <ion-button expand="block" class="view-all" (click)="viewAllBookings()">
+            Tutti gli allenamenti
           </ion-button>
-        </div>
-      }
+        }
 
-      @if (!isLoading && upcomingBookings.length > 0) {
-        <ion-button expand="block" fill="clear" class="view-all" (click)="viewAllBookings()">
-          Tutti gli allenamenti
-        </ion-button>
-      }
+      </ion-card-content>
 
-    </ion-card-content>
-
-  </ion-card>
+    </ion-card>
+  }
 
   <!-- Sezione trainers disponibili -->
   <ion-card class="ion-card-dashboard">
@@ -100,9 +93,18 @@
 
       <!-- Mostrato se ci sono trainers disponibili -->
       @if (!isLoading && trainers && trainers.length > 0) {
-        <div class="booking-container short">
+        <div class="sessions-container short">
           @for (trainer of trainers.slice(0, 6); track trainer.id) {
-            <div class="booking-item">
+
+            <detail-card
+                [title]="trainer.full_name"
+                [rows]="[
+                  { icon: 'fitness-outline', description: trainer.specialization || 'Data non disponibile' },
+                  { icon: 'star-outline', description: trainer.avg_rating ? (trainer.avg_rating | number:'1.1-1') : 'N/D' }
+                ]">
+              </detail-card>
+
+            <!-- <div class="booking-item">
               <h2>{{ trainer.full_name }}</h2>
               <p>
                 <ion-icon name="fitness-outline"></ion-icon>
@@ -112,7 +114,7 @@
                 <ion-icon name="star-outline"></ion-icon>
                 {{ trainer.avg_rating ? (trainer.avg_rating | number:'1.1-1') : 'N/D' }}
               </p>
-            </div>
+            </div> -->
           }
         </div>
       }

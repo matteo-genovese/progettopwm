@@ -81,7 +81,6 @@
         @if (!isLoading && dashboardData.upcoming_sessions.length > 0) {
         <div class="sessions-container tall custom-scrollbar">
             @for (slot of dashboardData.upcoming_sessions.slice(0, 9); track slot.id) {
-              
               <detail-card
               [title]='dashboardData.trainer_info.full_name'
               [rows]="[
@@ -90,30 +89,8 @@
                 { icon: 'fitness-outline', description: dashboardData.trainer_info.specialization}
               ]">
               </detail-card>
-                
-              
-
-              
-                <!-- <div class="session-item"></detail-card>
-                <h2>{{ dashboardData.trainer_info.full_name }}</h2>
-                <p>
-                  <ion-icon name="calendar-outline"></ion-icon>
-                  {{ slot.adjustedStartDate }}
-                </p>
-
-                <p>
-                  <ion-icon name="time-outline"></ion-icon>
-                  {{ slot.adjustedStartTimeOnly }} - {{ slot.adjustedEndTimeOnly }}
-                </p>
-
-                <p>
-                  <ion-icon name="fitness-outline"></ion-icon>
-                  {{ dashboardData.trainer_info.specialization }}
-                </p>
-
-              </div> -->
             }
-          </div>
+        </div>
         }
       </ion-card-content>
     </ion-card>

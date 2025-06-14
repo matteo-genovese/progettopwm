@@ -10,6 +10,8 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty-state.component';
+import { DetailCardComponent } from 'src/app/shared/components/detail-card/detail-card.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,7 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
   imports: [
     CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle,
     IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent,
-    AppHeaderComponent, LoadingSpinnerComponent
+    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent, DetailCardComponent
   ]
 })
 export class DashboardPage implements OnInit {
@@ -61,8 +63,9 @@ export class DashboardPage implements OnInit {
     
     this.customerService.getCustomerDashboard().subscribe({
       next: (data) => {
+        
+        this.userData = data.customer_info;
         console.log('Dashboard data received:', data);
-        this.userData = data.user_info;
         this.upcomingBookings = (data.upcoming_bookings || []);
         
         // Aggiungi le proprietà formattate per il fuso orario

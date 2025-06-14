@@ -46,6 +46,11 @@ ion-card:hover {
   height: 160px;
 }
 
+.sessions-container.short,
+.booking-container.short {
+  height: 140px;
+}
+
 .booking-container.short {
   height: 140px;
 }
@@ -235,6 +240,33 @@ ion-button.view-all:hover {
 @media (max-width: 576px) {
   .session-item,
   .booking-item {
+    flex: 0 0 100%;
+  }
+}
+
+detail-card {
+  flex: 0 0 calc(33.33% - 8px);
+  ::ng-deep ion-item::part(native) {
+    padding: 4px 8px !important; /* Riduce il padding orizzontale e verticale */
+  }
+  
+  ::ng-deep .rows-container {
+    margin-bottom: 6px; /* Riduce il margin sotto le righe */
+  }
+  
+  ::ng-deep .row-container {
+    margin-bottom: 4px; /* Riduce lo spazio tra le righe */
+  }
+}
+
+@media (max-width: 768px) {
+  detail-card {
+    flex: 0 0 calc(50% - 6px);
+  }
+}
+
+@media (max-width: 576px) {
+  detail-card {
     flex: 0 0 100%;
   }
 }

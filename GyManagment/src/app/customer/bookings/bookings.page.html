@@ -35,7 +35,6 @@
         @case ('upcoming') {
           <!-- Mostrato se non ci sono prenotazioni future -->
           @if (upcomingBookings.length === 0) {
-            <ion-card>
               <app-empty-state 
                 icon="calendar-outline"
                 title="Nessuna prenotazione futura"
@@ -43,34 +42,20 @@
                 buttonText="Trova un trainer"
                 (buttonClicked)="goToTrainers()">
               </app-empty-state>
-            </ion-card>
           }
 
           <!-- Mostrato se ci sono prenotazioni future -->
           @if (upcomingBookings.length > 0) {
             <div class="bookings-grid">
               @for (booking of upcomingBookings; track booking.id) {
-                <div class="booking-card">
-                  <!-- Card prenotazione -->
-                  <ion-card-header>
-                    <ion-card-title>{{ booking.trainer_name }}</ion-card-title>
-                    @if (booking.specialization) {
-                      <ion-card-subtitle>{{ booking.specialization }}</ion-card-subtitle>
-                    }
-                  </ion-card-header>
-                  <ion-card-content>
-                    <div class="booking-details">
-                      <p>
-                        <ion-icon name="calendar-outline"></ion-icon>
-                        {{ booking.start_time | date:'EEEE, d MMMM yyyy' }}
-                      </p>
-                      <p>
-                        <ion-icon name="time-outline"></ion-icon>
-                        {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
-                      </p>
-                    </div>
-                  </ion-card-content>
-                </div>
+
+                <detail-card
+                  [title]="booking.trainer_name"
+                  [rows]="[
+                    { icon: 'calendar-outline', description: (booking.start_time | date:'EEEE, d MMMM yyyy') || 'Data non disponibile' },
+                    { icon: 'time-outline', description: booking.adjustedStartTimeOnly + ' - ' + booking.adjustedEndTimeOnly }
+                  ].concat(booking.specialization ? [{ icon: 'fitness-outline', description: booking.specialization }] : [])">
+                </detail-card>
               }
             </div>
           }
@@ -80,48 +65,28 @@
         @case ('past') {
           <!-- Mostrato se non ci sono prenotazioni passate -->
           @if (pastBookings.length === 0) {
-            <ion-card>
               <app-empty-state 
                 icon="time-outline"
                 title="Nessuna prenotazione passata"
                 description="Le prenotazioni passate saranno visualizzate qui">
               </app-empty-state>
-            </ion-card>
           }
 
           <!-- Mostrato se ci sono prenotazioni passate -->
           @if (pastBookings.length > 0) {
             <div class="bookings-grid">
               @for (booking of pastBookings; track booking.id) {
-                <div class="booking-card">
-                  <!-- Card prenotazione -->
-                  <ion-card-header>
-                    <ion-card-title>{{ booking.trainer_name }}</ion-card-title>
-                    @if (booking.specialization) {
-                      <ion-card-subtitle>{{ booking.specialization }}</ion-card-subtitle>
-                    }
-                  </ion-card-header>
-                  <ion-card-content>
-                    <div class="booking-details">
-                      <p>
-                        <ion-icon name="calendar-outline"></ion-icon>
-                        {{ booking.start_time | date:'EEEE, d MMMM yyyy' }}
-                      </p>
-                      <p>
-                        <ion-icon name="time-outline"></ion-icon>
-                        {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
-                      </p>
-                    </div>
 
-                    <!-- Tasto valutazione -->
-                    @if (!booking.rated) {
-                      <ion-button expand="block" (click)="rateTrainer(booking.trainer_id)">
-                        <ion-icon name="star-outline" slot="start"></ion-icon>
-                        Valuta Trainer
-                      </ion-button>
-                    }
-                  </ion-card-content>
-                </div>
+                <detail-card
+                  [title]="booking.trainer_name"
+                  [rows]="[
+                    { icon: 'calendar-outline', description: (booking.start_time | date:'EEEE, d MMMM yyyy') || 'Data non disponibile' },
+                    { icon: 'time-outline', description: booking.adjustedStartTimeOnly + ' - ' + booking.adjustedEndTimeOnly }
+                  ].concat(booking.specialization ? [{ icon: 'fitness-outline', description: booking.specialization }] : [])"
+                  [buttonText]="!booking.rated ? 'Valuta Trainer' : ''"
+                  [buttonLink]="!booking.rated ? '#' : ''"
+                  (buttonClicked)="rateTrainer(booking.trainer_id)">
+                </detail-card>
               }
             </div>
           }
