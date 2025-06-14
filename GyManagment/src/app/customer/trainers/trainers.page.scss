@@ -34,7 +34,7 @@
 
 .trainers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   padding: 1rem 0;
   width: 95%;
@@ -155,11 +155,19 @@ ion-content {
   background-size: 14px 14px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .trainers-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .trainers-grid {
+
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    width: 95%;
   }
   
   .trainer-avatar {
@@ -170,9 +178,10 @@ ion-content {
 
 @media (max-width: 576px) {
   .trainers-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+
+    grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
-    width: 95%;
+    width: 90%;
   }
   
   .trainer-name {
