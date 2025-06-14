@@ -60,6 +60,10 @@ export class SessionsPage implements OnInit {
     return this.dateTimeService.formatTime(dateString);
   }
 
+  ionViewWillEnter() {
+    this.loadSessions();
+  }
+
   loadSessions() {
     this.isLoading = true;
     this.error = null;

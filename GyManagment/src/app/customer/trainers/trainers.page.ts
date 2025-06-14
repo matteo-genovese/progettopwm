@@ -48,6 +48,10 @@ export class TrainersPage implements OnInit {
     this.loadTrainers();
   }
 
+  ionViewWillEnter() {
+    this.loadTrainers();
+  }
+
   loadTrainers() {
     this.isLoading = true;
     this.customerService.getAvailableTrainers().subscribe({

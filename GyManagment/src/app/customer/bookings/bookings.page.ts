@@ -60,6 +60,10 @@ export class BookingsPage implements OnInit {
     this.loadBookings();
   }
 
+  ionViewWillEnter() {
+    this.loadBookings();
+  }
+
   loadBookings() {
     this.isLoading = true;
     

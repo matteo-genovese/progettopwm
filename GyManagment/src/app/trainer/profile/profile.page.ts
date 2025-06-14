@@ -53,6 +53,8 @@ export class ProfilePage implements OnInit {
     this.loadUserData();
   }
 
+  
+
   loadUserData() {
     this.isLoading = true;
     this.error = null;

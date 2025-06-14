@@ -40,6 +40,10 @@ export class CustomersPage implements OnInit {
     this.loadCustomers();
   }
 
+  ionViewWillEnter() {
+    this.loadCustomers();
+  }
+
   loadCustomers() {
     this.isLoading = true;
 
