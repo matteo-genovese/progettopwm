@@ -1,0 +1,237 @@
+// Sfondo comune per tutte le dashboard
+ion-content {
+  --background: none;
+  background-color: #fff;
+  background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+// Stile card comune
+.ion-card-dashboard {
+  background: var(--ion-color-secondary-tint);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid var(--ion-color-secondary-shade);
+  transition: box-shadow 0.3s, transform 0.3s;
+  margin-bottom: 1rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ion-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px) scale(1.01);
+}
+
+// Stile per i contenitori di sessioni/prenotazioni
+.sessions-container,
+.booking-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 15px;
+  background-color: #ffe9a6;
+  border-radius: 8px;
+  margin: 1rem 0;
+  overflow-y: auto;
+}
+
+// Varianti di altezza
+.sessions-container.tall,
+.booking-container.tall {
+  height: 160px;
+}
+
+.booking-container.short {
+  height: 140px;
+}
+
+// Scrollbar personalizzata
+.sessions-container::-webkit-scrollbar,
+.booking-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sessions-container::-webkit-scrollbar-thumb,
+.booking-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 0, 25, 0.815);
+  border-radius: 4px;
+}
+
+.sessions-container::-webkit-scrollbar-thumb:hover,
+.booking-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(220, 53, 69, 0.7);
+}
+
+.sessions-container::-webkit-scrollbar-track,
+.booking-container::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+// Stile per gli elementi all'interno dei container
+.session-item,
+.booking-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  flex: 0 0 calc(33.33% - 8px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 12px;
+  border: 1.8px solid #5f5555;
+}
+
+.session-item h2,
+.booking-item h2 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  color: #dc3545;
+  text-transform: uppercase;
+}
+
+.session-item p,
+.booking-item p {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: #333;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.session-item p ion-icon,
+.booking-item p ion-icon {
+  margin-right: 0.5rem;
+  color: var(--ion-color-primary);
+  font-size: 1.25rem;
+  min-width: 20px;
+}
+
+// Stile per il titolo della card con icona
+ion-card-title {
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.6rem 0.8rem 0;
+}
+
+ion-card-title ion-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--ion-color-primary);
+}
+
+// Stile per la card di statistica
+.stat2 {
+  background: var(--ion-color-secondary-tint);
+  border-radius: 8px;
+  padding: 6px;
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 90px;
+  max-width: 140px;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  border: 2px solid var(--ion-color-secondary-shade);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat2:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px) scale(1.01);
+  background-color: var(--ion-color-secondary-tint);
+}
+
+.stat2 ion-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.1rem;
+  color: #dc3545;
+}
+
+.stat2 span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.1;
+}
+
+.stat2 p {
+  color: #333;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.2rem;
+  text-align: center;
+  line-height: 1;
+}
+
+// Stile per il bottone "view-all"
+ion-button.view-all {
+  display: block;
+  margin: 1.5rem auto;
+  min-width: 220px;
+  max-width: 240px;
+  height: auto;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  --background: #dc3545;
+  --color: #ffffff;
+  --border-radius: 6px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  box-shadow: 0 3px 8px rgba(220, 53, 69, 0.3);
+  transition: all 0.2s ease;
+}
+
+ion-button.view-all:hover {
+  --background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(220, 53, 69, 0.4);
+}
+
+// Stile per il wrapper della dashboard
+.dashboard-wrapper {
+  width: 90%;
+  margin: 20px auto;
+  max-width: 700px;
+}
+
+// Media queries comuni
+@media (min-width: 768px) {
+  .dashboard-wrapper {
+    width: 60%;
+    margin: 24px auto;
+  }
+
+  .actions-row {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  ion-card {
+    width: 95%;
+  }
+
+  .session-item,
+  .booking-item {
+    flex: 0 0 calc(50% - 6px);
+  }
+}
+
+@media (max-width: 576px) {
+  .session-item,
+  .booking-item {
+    flex: 0 0 100%;
+  }
+}
