@@ -95,10 +95,6 @@ export class DashboardPage implements OnInit {
   viewAllTrainers() {
     this.router.navigate(['/customer/trainers']);
   }
-  
-  rateTrainer(trainerId: number) {
-    this.customerService.openRatingModal(trainerId);
-  }
 
   onLogout() {
     this.authService.logoutWithUI();
