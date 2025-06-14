@@ -39,6 +39,10 @@ export class DashboardPage implements OnInit {
     this.loadDashboard();
   }
 
+  ionViewWillEnter() {
+    this.loadDashboard();
+  }
+
   // Metodi wrapper che utilizzano il servizio
   formatDateTime(dateString: string): string {
     return this.dateTimeService.formatDateTime(dateString);

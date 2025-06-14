@@ -43,6 +43,11 @@ export class DashboardPage implements OnInit {
     this.loadCounts();
   }
 
+
+  ionViewWillEnter() {
+    this.loadCounts();
+  }
+  
   loadCounts() {
     this.adminService.getAllTrainers().subscribe({
       next: (trainers) => {
@@ -73,5 +78,12 @@ export class DashboardPage implements OnInit {
 
   onLogout() {
     this.authService.logoutWithUI();
+  }
+
+  doRefresh(event: any) {
+    this.loadCounts();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
 }
