@@ -1,9 +1,14 @@
-// Mantieni solo gli stili specifici del customer
+ @import '../../shared/theme/dashboard.shared.scss';
 
 // Stile sezione welcome (specifico del customer)
 .welcome-section {
   padding: 1.5rem 1.5rem 1rem;
   text-align: center;
+}
+
+:host ::ng-deep ion-back-button {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .welcome-section h1 {
