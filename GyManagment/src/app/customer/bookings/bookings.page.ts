@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { calendarOutline, timeOutline, closeCircleOutline, starOutline } from 'ionicons/icons';
 import {
-  IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
+  IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonCard,
   IonRefresher, IonRefresherContent, IonCardHeader, IonCardTitle, IonCardSubtitle,
   IonCardContent, IonButton, IonSegment, IonSegmentButton, IonLabel, IonIcon, IonSpinner
 } from '@ionic/angular/standalone';
@@ -38,7 +38,7 @@ interface Booking {
     CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, 
     IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent, IonBackButton,
-    IonButtons, AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
+    IonButtons, AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent, IonCard
   ]
 })
 export class BookingsPage implements OnInit {

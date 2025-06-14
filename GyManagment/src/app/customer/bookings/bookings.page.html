@@ -32,14 +32,16 @@
     <div *ngSwitchCase="'upcoming'">
 
       <!-- Mostrato se non ci sono prenotazioni future -->
-      <app-empty-state 
-        *ngIf="upcomingBookings.length === 0"
-        icon="calendar-outline"
-        title="Nessuna prenotazione futura"
-        description="Prenota una sessione con un trainer per visualizzarla qui"
-        buttonText="Trova un trainer"
-        (buttonClicked)="goToTrainers()">
-      </app-empty-state>
+      <ion-card *ngIf="upcomingBookings.length === 0">
+        <app-empty-state 
+          *ngIf="upcomingBookings.length === 0"
+          icon="calendar-outline"
+          title="Nessuna prenotazione futura"
+          description="Prenota una sessione con un trainer per visualizzarla qui"
+          buttonText="Trova un trainer"
+          (buttonClicked)="goToTrainers()">
+        </app-empty-state>
+      </ion-card>
 
       <!-- Mostrato se ci sono prenotazioni future -->
       <div class="bookings-grid" *ngIf="upcomingBookings.length > 0">
@@ -74,11 +76,13 @@
     <div *ngSwitchCase="'past'">
 
       <!-- Mostrato se non ci sono prenotazioni passate -->
-      <div class="empty-state" *ngIf="pastBookings.length === 0">
-        <ion-icon name="time-outline" size="large"></ion-icon>
-        <h3>Nessuna prenotazione passata</h3>
-        <p>Le prenotazioni passate saranno visualizzate qui</p>
-      </div>
+      <ion-card *ngIf="pastBookings.length === 0">
+        <app-empty-state 
+          icon="time-outline"
+          title="Nessuna prenotazione passata"
+          description="Le prenotazioni passate saranno visualizzate qui">
+        </app-empty-state>
+      </ion-card>
 
       <!-- Mostrato se ci sono prenotazioni passate -->
       <div class="bookings-grid" *ngIf="pastBookings.length > 0">
