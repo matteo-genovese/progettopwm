@@ -53,19 +53,6 @@ export class SlotsModalComponent implements OnInit {
     this.loadAllFutureSlots();
   }
 
-  // Metodi wrapper che utilizzano il servizio
-  formatDateTime(dateString: string): string {
-    return this.dateTimeService.formatDateTime(dateString);
-  }
-
-  formatDate(dateString: string): string {
-    return this.dateTimeService.formatDate(dateString);
-  }
-
-  formatTime(dateString: string): string {
-    return this.dateTimeService.formatTime(dateString);
-  }
-
   close() {
     this.modalCtrl.dismiss();
   }
@@ -107,11 +94,11 @@ export class SlotsModalComponent implements OnInit {
                 }
                 
                 // Aggiungi proprietà con orari corretti
-                slot.adjustedStartTime = this.formatDateTime(slot.start_time);
-                slot.adjustedStartTimeOnly = this.formatTime(slot.start_time);
-                slot.adjustedEndTime = this.formatDateTime(slot.end_time);
-                slot.adjustedEndTimeOnly = this.formatTime(slot.end_time);
-                
+                slot.adjustedStartTime = this.dateTimeService.formatDateTime(slot.start_time);
+                slot.adjustedStartTimeOnly = this.dateTimeService.formatTime(slot.start_time);
+                slot.adjustedEndTime = this.dateTimeService.formatDateTime(slot.end_time);
+                slot.adjustedEndTimeOnly = this.dateTimeService.formatTime(slot.end_time);
+
                 this.slotsByDate[slotDate].push(slot);
               }
             } catch (e) {
