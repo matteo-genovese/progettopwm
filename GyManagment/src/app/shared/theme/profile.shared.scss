@@ -14,13 +14,6 @@ ion-list {
   gap: 1%;
 }
 
-ion-content {
-  --background: none;
-  background-color: #fff;
-  background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
-}
-
 @media (max-width: 922px) {
   ion-card {
     width: 95%;
@@ -59,4 +52,51 @@ detail-card {
   detail-card {
     width: 100%; /* 1 card per riga su mobile */
   }
+}
+
+.profile-card {
+  background: var(--ion-color-secondary-tint) !important;
+  color: #111 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  margin: 0 auto 1.5rem !important;
+  width: 80% !important;
+}
+
+.profile-avatar {
+  margin: 20px auto;
+  width: 120px; 
+  height: 120px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ion-color-light);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  border: 3px solid #fff; 
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  ion-icon {
+    font-size: 68px;
+    color: var(--ion-color-primary); 
+  }
+}
+
+.role-badge {
+  background: var(--ion-color-primary);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0.5rem auto 1rem auto;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }

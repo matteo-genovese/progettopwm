@@ -66,13 +66,6 @@ ion-card-content ion-label {
   margin-bottom: 2px;
 }
 
-ion-content {
-  --background: none;
-  background-color: #fff;
-  background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
-}
-
 // --- Sfondo bianco per il testo su sfondo a puà rosso ---
 .highlight-text {
   background: rgba(255,255,255,0.95);

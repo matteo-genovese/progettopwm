@@ -1,11 +1,3 @@
-// Sfondo comune per tutte le dashboard
-ion-content {
-  --background: none;
-  background-color: #fff;
-  background-image: radial-gradient(#ffd3d3 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
-}
-
 // Stile card comune
 .ion-card-dashboard {
   background: var(--ion-color-secondary-tint);
@@ -25,8 +17,7 @@ ion-card:hover {
 }
 
 // Stile per i contenitori di sessioni/prenotazioni
-.sessions-container,
-.booking-container {
+.sessions-container {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -41,42 +32,15 @@ ion-card:hover {
 }
 
 // Varianti di altezza
-.sessions-container.tall,
-.booking-container.tall {
+.sessions-container.tall {
   height: 160px;
 }
 
-.sessions-container.short,
-.booking-container.short {
-  height: 140px;
-}
-
-.booking-container.short {
+.sessions-container.short {
   height: 140px;
 }
 
 // Scrollbar personalizzata
-.sessions-container::-webkit-scrollbar,
-.booking-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.sessions-container::-webkit-scrollbar-thumb,
-.booking-container::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 0, 25, 0.815);
-  border-radius: 4px;
-}
-
-.sessions-container::-webkit-scrollbar-thumb:hover,
-.booking-container::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(220, 53, 69, 0.7);
-}
-
-.sessions-container::-webkit-scrollbar-track,
-.booking-container::-webkit-scrollbar-track {
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 4px;
-}
 
 // Stile per gli elementi all'interno dei container
 .session-item,

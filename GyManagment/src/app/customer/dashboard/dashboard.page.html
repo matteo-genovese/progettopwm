@@ -4,7 +4,7 @@
   [backHref]="'.'">
 </app-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding dotted-background">
   
   <!-- Refresher mobile -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
@@ -50,7 +50,7 @@
 
         <!-- Mostrato se ci sono allenamenti prenotati -->
         @if (!isLoading && upcomingBookings.length > 0) {
-          <div class="sessions-container tall">
+          <div class="sessions-container tall  custom-scrollbar">
             @for (booking of upcomingBookings.slice(0, 9); track booking.id) {
               <detail-card
                 [title]="booking.trainer_name"
@@ -93,7 +93,7 @@
 
       <!-- Mostrato se ci sono trainers disponibili -->
       @if (!isLoading && trainers && trainers.length > 0) {
-        <div class="sessions-container short">
+        <div class="sessions-container short custom-scrollbar">
           @for (trainer of trainers.slice(0, 6); track trainer.id) {
 
             <detail-card
