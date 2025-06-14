@@ -135,13 +135,7 @@
               description="Gli allenamenti passati saranno visualizzati qui">
             </app-empty-state>
           }
-
-          <!-- <detail-card 
-            title="Specializzazione" 
-            [rows]="[
-              { icon: 'fitness-outline', description: trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' },
-            ]">
-          </detail-card> -->
+          
           <!-- Mostrato se ci sono allenamenti passati -->
           @if (pastSessions.length > 0) {
             <div class="past-sessions-container">

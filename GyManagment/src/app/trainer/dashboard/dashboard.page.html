@@ -96,6 +96,7 @@
     </ion-card>
   }
 
+  <!-- Mostrato se non ci sono allenamenti futuri -->
   @if (dashboardData && dashboardData.upcoming_sessions.length === 0) {
   <app-empty-state 
     title="Nessun allenamento programmato"
