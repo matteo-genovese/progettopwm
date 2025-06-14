@@ -38,32 +38,29 @@
 
         <ion-list lines="none">
 
-          <!-- Email -->
-          <ion-item>
-            <ion-icon name="person-circle-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <p>Username</p>
-              <h3>{{ userData?.username || 'Non disponibile' }}</h3>
-            </ion-label>
-          </ion-item>
+          <!-- Username -->
+           <detail-card 
+            title="Username" 
+            [rows]="[
+              { icon: 'person', description: userData?.username || 'Non disponibile' },
+            ]">
+          </detail-card>
 
-          <!-- N. telefono -->
-          <ion-item>
-            <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <p>Email</p>
-              <h3>{{ userData?.email || 'Non disponibile' }}</h3>
-            </ion-label>
-          </ion-item>
+          <!-- Email -->
+          <detail-card 
+            title="Email" 
+            [rows]="[
+              { icon: 'mail-outline', description: userData?.email || 'Non disponibile' },
+            ]">
+          </detail-card>
 
           <!-- Specializzazione -->
-          <ion-item>
-            <ion-icon name="fitness-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <p>Specializzazione</p>
-              <h3>{{ trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' }}</h3>
-            </ion-label>
-          </ion-item>
+          <detail-card 
+            title="Specializzazione" 
+            [rows]="[
+              { icon: 'fitness-outline', description: trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' },
+            ]">
+          </detail-card>
 
         </ion-list>
       </ion-card-content>

@@ -13,6 +13,7 @@ import {
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
+import { DetailCardComponent, } from "../../shared/components/detail-card/detail-card.component";
 
 @Component({
   selector: 'app-sessions',
@@ -24,8 +25,9 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
     IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCardContent,
     IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon,
     IonButton, IonCardHeader, IonCardSubtitle, RouterLink, IonButtons, IonBackButton,
-    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
-  ]
+    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent,
+    DetailCardComponent
+]
 })
 export class SessionsPage implements OnInit {
   isLoading = false;
@@ -120,5 +122,6 @@ export class SessionsPage implements OnInit {
   onLogout() {
     this.authService.logoutWithUI();
   }
+
 }
 

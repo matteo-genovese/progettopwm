@@ -16,6 +16,8 @@ import { AuthService } from '../../services/auth.service';
 import { TrainerService } from '../../services/trainer.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty-state.component';
+import { DetailCardComponent } from 'src/app/shared/components/detail-card/detail-card.component';
 
 @Component({
   selector: 'app-profile',
@@ -23,10 +25,11 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, 
-    IonCardTitle, IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, 
-    IonSpinner, IonAvatar, IonButtons, IonBackButton, AppHeaderComponent, 
-    LoadingSpinnerComponent
+    CommonModule, IonContent, IonCard, IonCardHeader, 
+    IonCardTitle, IonCardContent,
+    IonButton, IonIcon, IonList, IonAvatar, 
+    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent,
+    DetailCardComponent
   ]
 })
 export class ProfilePage implements OnInit {

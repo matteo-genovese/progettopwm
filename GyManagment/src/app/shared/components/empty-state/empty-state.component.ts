@@ -37,7 +37,6 @@ import { RouterLink } from '@angular/router';
       text-align: center;
       padding: 2rem 1rem;
       margin: 1rem auto;
-      max-width: 500px;
     }
     
     ion-icon {
