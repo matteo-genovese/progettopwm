@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
-  IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, IonIcon,
-  IonSpinner, IonCard, IonCardContent, IonRefresher, IonButton, IonRefresherContent
+  IonContent, IonIcon, IonButton, IonRefresherContent,
+ IonCard, IonCardContent, IonRefresher
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { fitnessOutline, mailOutline, callOutline, calendarOutline, barbell } from 'ionicons/icons';
@@ -18,8 +18,8 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
   styleUrls: ['./customers.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, 
-    IonButton, IonIcon, IonSpinner, IonCard, IonCardContent, IonRefresher, IonRefresherContent,
+    CommonModule, IonContent, IonCardContent, IonRefresher, 
+    IonButton, IonIcon, IonCard, IonRefresherContent,
     AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })

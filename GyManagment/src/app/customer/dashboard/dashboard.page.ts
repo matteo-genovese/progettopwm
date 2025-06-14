@@ -4,9 +4,8 @@ import { DateTimeService } from '../../services/date-time.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
-  IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
-  IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText, 
-  IonButtons
+  IonContent, IonCard, IonCardHeader, IonCardTitle,
+  IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
@@ -18,8 +17,8 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,
-    IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent, IonSkeletonText, IonButtons,
+    CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle,
+    IonCardContent, IonButton, IonIcon, IonRefresher, IonRefresherContent,
     AppHeaderComponent, LoadingSpinnerComponent
   ]
 })

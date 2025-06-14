@@ -5,9 +5,9 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-  IonRefresher, IonRefresherContent, IonCardContent, IonItem, IonLabel, IonSpinner, 
-  IonIcon, IonButtons, IonButton
+  IonContent, IonCard, IonCardHeader, IonCardTitle, 
+  IonRefresher, IonRefresherContent, IonCardContent,   
+  IonIcon, IonItem, IonLabel
 } from '@ionic/angular/standalone';
 import { AppHeaderComponent } from '../../shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
@@ -19,8 +19,8 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
   standalone: true,
   imports: [IonIcon, 
     CommonModule, IonRefresher, IonRefresherContent, 
-    IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle,
-    IonCardContent, IonItem, IonLabel, IonSpinner, RouterLink, IonButtons, IonButton,
+    IonContent, IonCard, IonCardHeader, IonCardTitle,
+    IonCardContent, IonItem, IonLabel, RouterLink, 
     AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })

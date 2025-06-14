@@ -7,9 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { calendarOutline, timeOutline, closeCircleOutline, starOutline } from 'ionicons/icons';
 import {
-  IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonCard,
-  IonRefresher, IonRefresherContent, IonCardHeader, IonCardTitle, IonCardSubtitle,
-  IonCardContent, IonButton, IonSegment, IonSegmentButton, IonLabel, IonIcon, IonSpinner
+  IonContent, IonCard, IonCardSubtitle, IonLabel,
+  IonRefresher, IonRefresherContent, IonCardHeader, IonCardTitle, 
+  IonCardContent, IonButton, IonSegment, IonSegmentButton, IonIcon
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../services/auth.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
@@ -35,10 +35,10 @@ interface Booking {
   styleUrls: ['./bookings.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonRefresher,
-    IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonSegment, 
-    IonSegmentButton, IonLabel, IonIcon, IonSpinner, IonRefresherContent, IonBackButton,
-    IonButtons, AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent, IonCard
+    CommonModule, FormsModule, IonContent, IonRefresher, IonSegment,
+    IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton,  
+    IonSegmentButton, IonLabel, IonIcon, IonRefresherContent, IonCard,
+    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })
 export class BookingsPage implements OnInit {

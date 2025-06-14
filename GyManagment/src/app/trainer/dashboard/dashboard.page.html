@@ -83,7 +83,7 @@
             @for (slot of dashboardData.upcoming_sessions.slice(0, 9); track slot.id) {
               <div class="session-item">
 
-                <h2>TRAINER {{ slot.trainer_id }}</h2>
+                <h2>{{ dashboardData.trainer_info.full_name }}</h2>
 
                 <!-- Data -->
                 <p>

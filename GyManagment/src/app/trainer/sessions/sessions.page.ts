@@ -3,12 +3,11 @@ import { TrainerService } from '../../services/trainer.service';
 import { DateTimeService } from '../../services/date-time.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCard, IonCardContent,
-  IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, IonButton,
-  IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonButtons, IonBackButton
+  IonContent, IonLabel, IonSegmentButton,
+  IonRefresher, IonRefresherContent, IonSegment,
+  IonIcon, IonCol, IonGrid, IonRow
 } from '@ionic/angular/standalone';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
@@ -21,10 +20,9 @@ import { DetailCardComponent, } from "../../shared/components/detail-card/detail
   styleUrls: ['./sessions.page.scss'],
   standalone: true,
   imports: [
-    IonRow, IonGrid, IonCol, IonCardTitle, CommonModule, FormsModule, IonCard,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonSpinner, IonCardContent,
-    IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon,
-    IonButton, IonCardHeader, IonCardSubtitle, RouterLink, IonButtons, IonBackButton,
+    IonRow, IonGrid, IonCol, CommonModule, FormsModule,
+    IonContent, IonLabel, 
+    IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonIcon, 
     AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent,
     DetailCardComponent
 ]

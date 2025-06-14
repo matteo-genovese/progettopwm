@@ -1,4 +1,4 @@
- @import '../../shared/theme/dashboard.shared.scss';
+@use '../../shared/theme/dashboard.shared.scss' as *;
 
 // Stile sezione welcome (specifico del customer)
 .welcome-section {

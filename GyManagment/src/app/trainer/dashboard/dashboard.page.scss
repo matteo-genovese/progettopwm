@@ -1,4 +1,4 @@
- @import '../../shared/theme/dashboard.shared.scss';
+@use '../../shared/theme/dashboard.shared.scss' as *;
 
 :host ::ng-deep ion-back-button {
   opacity: 0;

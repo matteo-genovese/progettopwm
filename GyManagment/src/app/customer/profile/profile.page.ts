@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-  IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, IonBackButton, IonButtons
+  IonContent, IonCard, IonCardHeader, IonCardTitle,  
+  IonCardContent, IonIcon, IonList, IonAvatar
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -20,8 +20,8 @@ import { DetailCardComponent } from 'src/app/shared/components/detail-card/detai
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, AppHeaderComponent,
-    IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, IonButtons, IonBackButton,
+    CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, 
+    IonCardContent, IonIcon, IonList, IonAvatar, AppHeaderComponent,
     LoadingSpinnerComponent, DetailCardComponent
   ]
 })

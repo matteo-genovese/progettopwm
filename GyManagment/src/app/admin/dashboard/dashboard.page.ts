@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, 
-  IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons
+  IonContent, IonCard, IonCardHeader, IonCardTitle, 
+  IonCardContent, IonIcon, IonItem, IonLabel
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
@@ -19,8 +19,8 @@ import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-hea
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,
-    IonCardTitle, IonCardContent, IonButton, IonIcon, IonItem, IonLabel, IonButtons,
+    CommonModule, IonContent, IonCard, IonCardHeader,
+    IonCardTitle, IonCardContent, IonIcon, IonItem, IonLabel,
     AppHeaderComponent
   ]
 })

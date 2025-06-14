@@ -5,9 +5,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { 
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,  
-  IonCardContent, IonButton, IonSpinner, IonInput, IonDatetime, 
-  IonIcon, IonModal, IonButtons, IonCardTitle, IonBackButton
+  IonContent, IonCard, IonCardHeader,  
+  IonCardContent, IonButton, IonInput, IonDatetime, 
+  IonIcon, IonModal, IonCardTitle
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -24,10 +24,9 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./slots.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, FormsModule, IonButton, IonSpinner, 
-    IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton,
+    CommonModule, FormsModule, IonButton, IonContent,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent, 
-    IonInput, IonDatetime, IonIcon, IonModal, IonButtons,
+    IonInput, IonDatetime, IonIcon, IonModal, 
     AppHeaderComponent, LoadingSpinnerComponent
   ]
 })

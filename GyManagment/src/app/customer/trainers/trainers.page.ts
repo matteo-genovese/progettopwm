@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, 
-  IonRefresher, IonRefresherContent, IonChip, IonLabel, IonSkeletonText, ModalController, IonButtons, IonBackButton
+  IonContent, IonSearchbar, IonCard, IonCardContent, IonButton,  
+  IonRefresher, IonRefresherContent, IonChip, IonLabel, 
+  ModalController, IonIcon
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
@@ -21,9 +22,9 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
   styleUrls: ['./trainers.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, 
-    IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, IonRefresher, 
-    IonRefresherContent, IonChip, IonLabel, IonSkeletonText, IonButtons, IonBackButton,
+    CommonModule, FormsModule, IonContent, IonRefresher, 
+    IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, 
+    IonRefresherContent, IonChip, IonLabel,
     AppHeaderComponent, LoadingSpinnerComponent
   ]
 })

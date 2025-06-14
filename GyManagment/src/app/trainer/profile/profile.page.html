@@ -66,6 +66,14 @@
       </ion-card-content>
     </ion-card>
 
+    @if (trainerData.ratings.length === 0) {
+      <app-empty-state 
+        icon="time-outline"
+        title="Nessuna recensione"
+        description="Le tue recensioni saranno visualizzate qui">
+      </app-empty-state>
+    }
+
     <!-- Sezione recensioni -->
     @if (trainerData && trainerData.ratings) {
       <ion-card class="profile-card app-card secondary-border">
