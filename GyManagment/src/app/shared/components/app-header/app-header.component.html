@@ -2,7 +2,8 @@
   <ion-toolbar>
     @if (showBackButton) {
       <ion-buttons slot="start">
-        <ion-back-button class="button" [defaultHref]="backHref"></ion-back-button>
+        <ion-back-button class="button" [defaultHref]="backHref"icon="home" text="" [class.invisible-button]="hideBackButtonVisually">
+        </ion-back-button>
       </ion-buttons>
     }
     <ion-title>{{ title }}</ion-title>

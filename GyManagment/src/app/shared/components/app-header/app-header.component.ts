@@ -18,6 +18,7 @@ export class AppHeaderComponent {
   @Input() showBackButton = true;
   @Input() backHref = '/';
   @Input() showLogout = true;
+  @Input() hideBackButtonVisually: boolean = false;
 
   constructor(private authService: AuthService) {}
 
