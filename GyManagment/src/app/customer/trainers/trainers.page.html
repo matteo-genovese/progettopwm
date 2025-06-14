@@ -55,11 +55,11 @@
 
   <!-- Mostrato se non ci sono trainers -->
   @if (!isLoading && filteredTrainers.length === 0) {
-    <div class="empty-state">
-      <ion-icon name="fitness-outline" size="large"></ion-icon>
-      <h3>Nessun trainer trovato</h3>
-      <p>Prova a modificare i filtri di ricerca</p>
-    </div>
+   <app-empty-state
+      icon="person-outline"
+      title="Nessun trainer disponibile"
+      description="Prova a modificare i filtri o la ricerca per trovare un trainer adatto a te.">
+    </app-empty-state>
   }
 
   @if (!isLoading) {

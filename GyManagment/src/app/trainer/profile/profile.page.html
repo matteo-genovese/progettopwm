@@ -75,7 +75,7 @@
     }
 
     <!-- Sezione recensioni -->
-    @if (trainerData && trainerData.ratings) {
+    @if (trainerData && trainerData.ratings && trainerData.ratings.length > 0) {
       <ion-card class="profile-card app-card secondary-border">
         <ion-card-header>
           <ion-card-title>
@@ -85,17 +85,7 @@
         </ion-card-header>
 
         <ion-card-content>
-          <!-- Mostrato se non ci sono recensioni -->
-          @if (!trainerData.ratings || trainerData.ratings.length === 0) {
-            <div class="empty-reviews">
-              <ion-icon name="star-outline" size="large"></ion-icon>
-              <h3>Nessuna recensione</h3>
-              <p>Non hai ancora ricevuto recensioni dai tuoi clienti.</p>
-            </div>
-          }
-
           <!-- Lista delle recensioni -->
-          @if (trainerData.ratings && trainerData.ratings.length > 0) {
             <div class="reviews-list custom-scrollbar">
               @for (review of trainerData.ratings; track $index) {
                 <div class="review-card">
@@ -124,8 +114,8 @@
                 </div>
               }
             </div>
-          }
-        </ion-card-content>
+          </ion-card-content>
+        
       </ion-card>
     }
 

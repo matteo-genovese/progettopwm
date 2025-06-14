@@ -25,15 +25,20 @@ export interface DetailRow {
             </div>
             
             <!-- Bottone spostato dentro ion-label -->
-            <div class="button-container" *ngIf="buttonText && buttonLink">
-              <ion-button 
-                class="app-button"
-                expand="block" 
-                [routerLink]="buttonLink"
-                (click)="onButtonClick()">
-                {{ buttonText }}
-              </ion-button>
-            </div>
+            @if (buttonText && buttonLink) { 
+              <div class="button-container">
+                <ion-button 
+                  class="app-button"
+                  expand="block" 
+                  [routerLink]="buttonLink"
+                  (click)="onButtonClick()">
+                  @if (buttonIcon) {
+                    <ion-icon [name]="buttonIcon" color="white" size="small"></ion-icon>
+                  }
+                  {{ buttonText }}
+                </ion-button>
+              </div>
+          }
         </ion-label>
     </ion-item>
   `,
@@ -41,8 +46,8 @@ export interface DetailRow {
     ion-item {
       --padding-start: 0;
       --background: #ffffff;
-      --border-color: transparent;
-      --border-width: 0;
+      --border-color: transparent !important;
+      --border-width: 0 !important;
       --border-radius: 8px;
       --min-height: auto;
       --ripple-color: transparent;
@@ -134,6 +139,7 @@ export class DetailCardComponent {
   @Input() rows: DetailRow[] = [];
   @Input() buttonText = '';
   @Input() buttonLink = '';
+  @Input() buttonIcon = '';
   @Output() buttonClicked = new EventEmitter<void>();
 
   onButtonClick() {
