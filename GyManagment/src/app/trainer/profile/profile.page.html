@@ -35,25 +35,28 @@
 
         <ion-list lines="none">
 
-          <!-- Email -->
+          <!-- Username -->
            <detail-card 
-            icon="person-circle-outline"
             title="Username" 
-            description="{{ userData?.username || 'Non disponibile' }}">
+            [rows]="[
+              { icon: 'person', description: userData?.username || 'Non disponibile' },
+            ]">
           </detail-card>
 
-          <!-- N. telefono -->
+          <!--Email -->
           <detail-card 
-            icon="mail-outline"
             title="Email" 
-            description="{{ userData?.email || 'Non disponibile' }}">
+            [rows]="[
+              { icon: 'mail-outline', description: userData?.email || 'Non disponibile' },
+            ]">
           </detail-card>
 
           <!-- Specializzazione -->
-          <detail-card 
-            icon="fitness-outline"
+           <detail-card 
             title="Specializzazione" 
-            description="{{ trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' }}">
+            [rows]="[
+              { icon: 'fitness-outline', description: trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' },
+            ]">
           </detail-card>
 
         </ion-list>

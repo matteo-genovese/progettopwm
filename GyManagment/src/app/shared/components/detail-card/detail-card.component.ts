@@ -1,16 +1,25 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonIcon, IonButton, IonItem, IonLabel } from '@ionic/angular/standalone';
-import { RouterLink } from '@angular/router';
+import { IonIcon, IonItem, IonLabel } from '@ionic/angular/standalone';
+
+export interface DetailRow {
+  icon: string;
+  description: string;
+  iconColor?: string; // Opzionale: colore personalizzato per l'icona
+}
 
 @Component({
   selector: 'detail-card',
   template: `
     <ion-item>
-        <ion-icon name="{{ icon }}" slot="start" color="primary"></ion-icon>
         <ion-label>
             <p>{{ title }}</p>
-            <h3>{{ description }}</h3>
+            <div class="rows-container">
+              <div *ngFor="let row of rows" class="row-container">
+                <ion-icon [name]="row.icon" color="primary" class="row-icon"></ion-icon>
+                <h3>{{ row.description }}</h3>
+              </div>
+            </div>
         </ion-label>
     </ion-item>
   `,
@@ -26,8 +35,6 @@ import { RouterLink } from '@angular/router';
   margin: 8px 0; 
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  min-width: 140px; 
-  max-width: 320px; 
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1.8px solid #5f5555;
 
@@ -68,6 +75,29 @@ import { RouterLink } from '@angular/router';
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   }
 }
+
+.rows-container {
+      display: flex;
+      flex-direction: column;
+}
+
+.row-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.row-container:last-child {
+  margin-bottom: 0;
+}
+    
+.row-icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+  color: var(--ion-color-primary);
+  flex-shrink: 0;
+}
+
   `],
   standalone: true,
   imports: [CommonModule, IonIcon, IonItem, IonLabel]
@@ -76,4 +106,5 @@ export class DetailCardComponent {
   @Input() icon = 'information-circle-outline';
   @Input() title = '';
   @Input() description = '';
+  @Input() rows: DetailRow[] = [];
 }

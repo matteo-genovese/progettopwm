@@ -11,6 +11,7 @@ ion-list {
   flex-wrap: wrap;
   justify-content: center; 
   width: 100%;
+  gap: 1%;
 }
 
 ion-content {
@@ -32,12 +33,6 @@ ion-content {
 }
 
 @media (max-width: 576px) {
-  ion-item {
-  width: calc(100% - 20px); 
-    max-width: none;
-    margin: 6px 8px; 
-    box-sizing: border-box;
-  }
   
   ion-list {
     flex-direction: column;
@@ -52,4 +47,16 @@ ion-content {
 
 detail-card {
   width: 28%;
+}
+
+@media (max-width: 922px) {
+  detail-card {
+    width: 48%; /* 2 card per riga su tablet */
+  }
+}
+
+@media (max-width: 576px) {
+  detail-card {
+    width: 100%; /* 1 card per riga su mobile */
+  }
 }
