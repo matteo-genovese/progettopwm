@@ -115,11 +115,6 @@ ion-content {
 }
 
 @media (max-width: 576px) {
-  .rating-container {
-    margin: 0.5rem;
-    padding: 1.5rem 1rem;
-  }
-  
   .button-container ion-button {
     width: 100% !important;
     min-width: unset !important;

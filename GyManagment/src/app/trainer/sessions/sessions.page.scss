@@ -10,31 +10,10 @@ ion-segment {
   align-items: center;
   color: #333;
   
-
   ion-icon {
     margin-right: 0.5rem;
     font-size: 1.2rem;
     color: var(--ion-color-primary);
-  }
-}
-
-.booking-details {
-  margin: 0.5rem 0;
-
-  p {
-    display: flex;
-    align-items: center;
-    margin: 0.4rem 0;
-    color: #333;
-    font-size: 1rem;
-    font-weight: 500;
-    
-    ion-icon {
-      margin-right: 0.5rem;
-      color: var(--ion-color-primary);
-      font-size: 1.2rem;
-      min-width: 20px;
-    }
   }
 }
 
@@ -43,7 +22,7 @@ ion-segment {
   flex-direction: column;
   background: var(--ion-color-secondary-tint);
   border-radius: 12px;
-  padding: 0.3rem 1.5rem 1rem 0.5rem;
+  padding: 1rem;
   border: 2px solid var(--ion-color-secondary-shade);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   margin-bottom: 1rem;
@@ -56,16 +35,6 @@ ion-col {
 ion-row {
   --ion-grid-column-padding: 3px;
   align-items: flex-start; 
-}
-
-.empty-column-state {
-  padding: 1rem;
-  text-align: center;
-  color: var(--ion-color-medium);
-  background: #fff;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 // Stile per card di sessione
@@ -116,7 +85,7 @@ ion-row {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  padding: 1rem 0.4rem 1rem 1rem;
+  padding: 1rem;
   background-color: var(--ion-color-secondary-tint);
   border-radius: 10px;
   margin: 1rem 0;
@@ -152,7 +121,7 @@ detail-card.past {
   }
   
   .session-column {
-    padding: 10px 22px 10px 3px;
+    padding: 10px;
   }
   
   ion-card {
@@ -163,9 +132,5 @@ detail-card.past {
 @media (max-width: 480px) {
   .session-category-title {
     font-size: 1rem;
-  }
-  
-  .booking-details p {
-    font-size: 0.9rem;
   }
 }
