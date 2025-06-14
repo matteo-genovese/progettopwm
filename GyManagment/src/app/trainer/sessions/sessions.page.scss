@@ -119,8 +119,6 @@ ion-row {
   --ion-grid-column-padding: 3px; 
 }
 
-// Stile bottoni
-
 .past-sessions-container {
   display: flex;
   flex-wrap: wrap;
@@ -133,46 +131,6 @@ ion-row {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-// ion-card.past-session-card {
-//   background-color: white;
-//   border-radius: 10px;
-//   margin: 0;
-//   width: calc(25% - 12px); // 4 elementi per riga
-//   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-//   border: 1.8px solid #5f5555;
-//   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-//   &:hover {
-//     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-//     transform: translateY(-2px) scale(1.01);
-//   }
-  
-//   ion-card-header {
-//     padding: 12px 12px 0;
-    
-//     ion-card-title {
-//       font-size: 0.9rem;
-//       color: #dc3545;
-//     }
-    
-//     ion-card-subtitle {
-//       font-size: 0.8rem;
-//     }
-//   }
-  
-//   ion-card-content {
-//     padding: 8px 12px;
-//   }
-  
-//   .booking-details p {
-//     margin: 2px 0;
-//     font-size: 0.85rem;
-    
-//     ion-icon {
-//       font-size: 1rem;
-//     }
-//   }
-// }
 detail-card.past {
     width: calc(25% - 12px);
   }

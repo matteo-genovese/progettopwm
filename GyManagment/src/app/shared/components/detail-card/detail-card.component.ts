@@ -41,8 +41,8 @@ export interface DetailRow {
     ion-item {
       --padding-start: 0;
       --background: #ffffff;
-      --border-color: #e0e0e0;
-      --border-width: 1px;
+      --border-color: transparent;
+      --border-width: 0;
       --border-radius: 8px;
       --min-height: auto;
       --ripple-color: transparent;

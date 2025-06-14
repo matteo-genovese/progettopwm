@@ -79,31 +79,39 @@
 
         <!-- Mostrato se ci sono allenamenti futuri -->
         @if (!isLoading && dashboardData.upcoming_sessions.length > 0) {
-          <div class="sessions-container tall">
+        <div class="sessions-container tall custom-scrollbar">
             @for (slot of dashboardData.upcoming_sessions.slice(0, 9); track slot.id) {
-              <div class="session-item">
+              
+              <detail-card
+              [title]='dashboardData.trainer_info.full_name'
+              [rows]="[
+                { icon: 'calendar-outline', description: (slot.start_time | date:'dd/MM/yyyy') || 'Data non disponibile' },
+                { icon: 'time-outline', description: slot.adjustedStartTimeOnly + ' - ' + slot.adjustedEndTimeOnly },
+                { icon: 'fitness-outline', description: dashboardData.trainer_info.specialization}
+              ]">
+              </detail-card>
+                
+              
 
+              
+                <!-- <div class="session-item"></detail-card>
                 <h2>{{ dashboardData.trainer_info.full_name }}</h2>
-
-                <!-- Data -->
                 <p>
                   <ion-icon name="calendar-outline"></ion-icon>
                   {{ slot.adjustedStartDate }}
                 </p>
 
-                <!-- Orari -->
                 <p>
                   <ion-icon name="time-outline"></ion-icon>
                   {{ slot.adjustedStartTimeOnly }} - {{ slot.adjustedEndTimeOnly }}
                 </p>
 
-                <!-- Specializzazione -->
                 <p>
                   <ion-icon name="fitness-outline"></ion-icon>
-                  Fitness
+                  {{ dashboardData.trainer_info.specialization }}
                 </p>
 
-              </div>
+              </div> -->
             }
           </div>
         }
@@ -112,12 +120,12 @@
   }
 
   @if (dashboardData && dashboardData.upcoming_sessions.length === 0) {
-    <ion-card>
-      <app-empty-state 
-        message="Nessun allenamento programmato"
-        description="Non hai allenamenti futuri programmati. Crea un nuovo slot per iniziare.">
-      </app-empty-state>
-    </ion-card>
+  <app-empty-state 
+    title="Nessun allenamento programmato"
+    description="Crea uno slot per iniziare."
+    buttonText="Crea slot"
+    buttonLink="../slots">
+  </app-empty-state>
   }
 
   <!-- Collegamenti -->

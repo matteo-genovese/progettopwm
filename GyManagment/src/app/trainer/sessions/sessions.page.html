@@ -136,6 +136,12 @@
             </app-empty-state>
           }
 
+          <!-- <detail-card 
+            title="Specializzazione" 
+            [rows]="[
+              { icon: 'fitness-outline', description: trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' },
+            ]">
+          </detail-card> -->
           <!-- Mostrato se ci sono allenamenti passati -->
           @if (pastSessions.length > 0) {
             <div class="past-sessions-container">
@@ -143,12 +149,12 @@
                 <detail-card
                   class="past"
                   [title]="session.client_names || 'Nessun cliente'"
-                  [rows]="(session.specialization ? [{ icon: 'fitness-outline', description: session.specialization }] : []).concat([
-                    { icon: 'calendar-outline', description: (session.start_time | date:'dd/MM/yyyy') },
+                  [rows]="[
+                    { icon: 'calendar-outline', description: (session.start_time | date:'dd/MM/yyyy') || 'Data non disponibile' },
                     { icon: 'time-outline', description: session.adjustedStartTimeOnly + ' - ' + session.adjustedEndTimeOnly },
                     { icon: 'people-outline', description: 'Max: ' + session.max_clients },
                     { icon: 'person-add-outline', description: 'Prenotati: ' + session.booked_clients }
-                  ])">
+                  ]">
                 </detail-card>
               }
             </div>
