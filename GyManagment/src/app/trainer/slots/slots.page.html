@@ -94,10 +94,11 @@
   </ion-card>
 
   <!-- Mostrato durante il caricamento -->
-  <app-loading-spinner 
-    *ngIf="isLoading" 
-    [message]="'Caricamento slot...'">
-  </app-loading-spinner>
+  @if (isLoading) {
+    <app-loading-spinner 
+      [message]="'Caricamento slot...'">
+    </app-loading-spinner>
+  }
 
   <!-- Popup per selezionare l'orario di inizio -->
   <ion-modal 

@@ -8,49 +8,61 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <app-loading-spinner 
-    *ngIf="isLoading" 
-    [message]="'Caricamento trainers...'">
-  </app-loading-spinner>
+  @if (isLoading) {
+    <app-loading-spinner 
+      [message]="'Caricamento trainers...'">
+    </app-loading-spinner>
+  }
 
-  <ion-card *ngIf="error" class="error-card">
-    <ion-card-content>
-      <p>{{ error }}</p>
-      <ion-button fill="clear" (click)="loadTrainers()">Riprova</ion-button>
-    </ion-card-content>
-  </ion-card>
+  @if (error) {
+    <ion-card class="error-card">
+      <ion-card-content>
+        <p>{{ error }}</p>
+        <ion-button fill="clear" (click)="loadTrainers()">Riprova</ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
 
-  <div *ngIf="!isLoading && !error">
-    <div *ngIf="trainers.length === 0" class="empty-state">
-      <ion-icon name="fitness-outline"></ion-icon>
-      <h2>Nessun trainer disponibile</h2>
-      <p>Non ci sono trainer registrati nel sistema.</p>
-    </div>
-
-    <div class="trainers-grid" *ngIf="trainers.length > 0">
-      <div class="trainer-card" *ngFor="let trainer of trainers">
-        <div class="trainer-content">
-          <div class="trainer-header">
-            <h2>{{ trainer.full_name || trainer.username }}</h2>
-
-          </div>
-          <div class="trainer-details">
-            <p>
-              <ion-icon name="mail-outline"></ion-icon>
-              {{ trainer.email }}
-            </p>
-            <p *ngIf="trainer.phone">
-              <ion-icon name="call-outline"></ion-icon>
-              {{ trainer.phone }}
-            </p>
-            <p *ngIf="trainer.specialization">
-              <ion-icon name="fitness-outline"></ion-icon>
-              {{ trainer.specialization }}
-            </p>
-          </div>
-        </div>
+  @if (!isLoading && !error) {
+    @if (trainers.length === 0) {
+      <div class="empty-state">
+        <ion-icon name="fitness-outline"></ion-icon>
+        <h2>Nessun trainer disponibile</h2>
+        <p>Non ci sono trainer registrati nel sistema.</p>
       </div>
-    </div>
-  </div>
+    }
+
+    @if (trainers.length > 0) {
+      <div class="trainers-grid">
+        @for (trainer of trainers; track trainer.id) {
+          <div class="trainer-card">
+            <div class="trainer-content">
+              <div class="trainer-header">
+                <h2>{{ trainer.full_name || trainer.username }}</h2>
+              </div>
+              <div class="trainer-details">
+                <p>
+                  <ion-icon name="mail-outline"></ion-icon>
+                  {{ trainer.email }}
+                </p>
+                @if (trainer.phone) {
+                  <p>
+                    <ion-icon name="call-outline"></ion-icon>
+                    {{ trainer.phone }}
+                  </p>
+                }
+                @if (trainer.specialization) {
+                  <p>
+                    <ion-icon name="fitness-outline"></ion-icon>
+                    {{ trainer.specialization }}
+                  </p>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
 </ion-content>
 

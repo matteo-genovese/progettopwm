@@ -11,7 +11,6 @@
   </ion-refresher>
 
   <div class="search-filter-container">
-
     <!-- Barra di ricerca -->
     <ion-searchbar
       placeholder="Cerca trainer"
@@ -48,59 +47,62 @@
   </div>
 
   <!-- Nota: questo caso è speciale perché usa skeleton text invece di spinner -->
-  <app-loading-spinner 
-    *ngIf="isLoading" 
-    [message]="'Caricamento trainer...'">
-  </app-loading-spinner>
+  @if (isLoading) {
+    <app-loading-spinner 
+      [message]="'Caricamento trainer...'">
+    </app-loading-spinner>
+  }
 
   <!-- Mostrato se non ci sono trainers -->
-  <div class="empty-state" *ngIf="!isLoading && filteredTrainers.length === 0">
-    <ion-icon name="fitness-outline" size="large"></ion-icon>
-    <h3>Nessun trainer trovato</h3>
-    <p>Prova a modificare i filtri di ricerca</p>
-  </div>
+  @if (!isLoading && filteredTrainers.length === 0) {
+    <div class="empty-state">
+      <ion-icon name="fitness-outline" size="large"></ion-icon>
+      <h3>Nessun trainer trovato</h3>
+      <p>Prova a modificare i filtri di ricerca</p>
+    </div>
+  }
 
-  <div class="trainers-grid" *ngIf="!isLoading">
+  @if (!isLoading) {
+    <div class="trainers-grid">
+      <!-- Mostrato se ci sono trainers -->
+      @for (trainer of filteredTrainers; track trainer.id) {
+        <ion-card class="trainer-card">
+          <!-- Avatar trainer -->
+          <div class="trainer-avatar">
+            <ion-icon name="person-outline" size="large"></ion-icon>
+          </div>
 
-    <!-- Mostrato se ci sono trainers -->
-    <ion-card *ngFor="let trainer of filteredTrainers" class="trainer-card">
-
-      <!-- Avatar trainer -->
-      <div class="trainer-avatar">
-        <ion-icon name="person-outline" size="large"></ion-icon>
-      </div>
-
-      <!-- Informazioni trainer -->
-      <ion-card-content>
-        <h2 class="trainer-name">{{ trainer.full_name }}</h2>
-        
-        <div class="trainer-specialization">
-          <ion-icon name="fitness-outline"></ion-icon>
-          <span>{{ trainer.specialization }}</span>
-        </div>
-        
-        <div class="trainer-rating">
-          <ion-icon name="star-outline" color="tertiary"></ion-icon>
-          <span>
-            {{
-              trainer.avg_rating
-                ? (trainer.avg_rating % 1 === 0
-                    ? trainer.avg_rating
-                    : (trainer.avg_rating | number:'1.1-1'))
-                : 'N/D'
-            }}
-            {{ trainer.avg_rating ? '/ 5' : '' }}
-          </span>
-        </div>
-        
-        <ion-button expand="block" size="small" class="view-slots-btn" (click)="$event.stopPropagation(); openSlotsModal(trainer)">
-          <ion-icon name="calendar-outline" slot="start"></ion-icon>
-          Vedi disponibilità
-        </ion-button>
-      </ion-card-content>
-
-    </ion-card>
-
-  </div>
+          <!-- Informazioni trainer -->
+          <ion-card-content>
+            <h2 class="trainer-name">{{ trainer.full_name }}</h2>
+            
+            <div class="trainer-specialization">
+              <ion-icon name="fitness-outline"></ion-icon>
+              <span>{{ trainer.specialization }}</span>
+            </div>
+            
+            <div class="trainer-rating">
+              <ion-icon name="star-outline" color="tertiary"></ion-icon>
+              <span>
+                {{
+                  trainer.avg_rating
+                    ? (trainer.avg_rating % 1 === 0
+                        ? trainer.avg_rating
+                        : (trainer.avg_rating | number:'1.1-1'))
+                    : 'N/D'
+                }}
+                {{ trainer.avg_rating ? '/ 5' : '' }}
+              </span>
+            </div>
+            
+            <ion-button expand="block" size="small" class="view-slots-btn" (click)="$event.stopPropagation(); openSlotsModal(trainer)">
+              <ion-icon name="calendar-outline" slot="start"></ion-icon>
+              Vedi disponibilità
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      }
+    </div>
+  }
   
 </ion-content>

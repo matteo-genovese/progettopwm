@@ -1,6 +1,5 @@
 <ion-content [fullscreen]="true" class="ion-padding">
     <div class="container-register">
-
         <!-- Sezione logo -->
         <div class="sezione-logo">
             <ion-icon name="barbell" size="large"></ion-icon>
@@ -12,7 +11,6 @@
             <h4>Dati account</h4>
             <div class="colonne-form">
                 <ion-list>
-
                     <!-- Username -->
                     <ion-item>
                         <ion-label position="stacked">Username</ion-label>
@@ -36,10 +34,8 @@
                             [disabled]="isLoading">
                         </ion-input>
                     </ion-item>
-                    
                 </ion-list>
                 <ion-list>
-
                     <!-- Email -->
                     <ion-item>
                         <ion-label position="stacked">Email</ion-label>
@@ -61,85 +57,84 @@
                         <ion-input type="tel" [(ngModel)]="userData.phone" name="phone" required [disabled]="isLoading">
                         </ion-input>
                     </ion-item>
-
                 </ion-list>
             </div>
             
-                <!-- CAMPI AGGIUNTIVI PER TRAINER -->
-                <ng-container *ngIf="userData.role === 'trainer'">
-                    <div class="informazioni">
-                        <h4>Informazioni trainer</h4>
-
-                        <div class="fields-row">
-                            
-                            <!-- Scelta ruolo (per trainer)-->
-                             <ion-item>
-                                <ion-label position="stacked">Ruolo</ion-label>
-                                <ion-select [(ngModel)]="userData.role" interface="alert" 
-                                okText="Conferma"
-                                cancelText="Annulla"
-                                name="role" [disabled]="isLoading">
-                                    <ion-select-option value="customer">Cliente</ion-select-option>
-                                    <ion-select-option value="trainer">Trainer</ion-select-option>
-                                </ion-select>
-                            </ion-item>
-
-                            <!-- Specializzazione -->
-                            <ion-item>
-                                <ion-label position="stacked">Specializzazione</ion-label>
-                                <ion-select [(ngModel)]="userData.specialization" interface="alert"
-                                okText="Conferma"
-                                cancelText="Annulla" 
-                                name="specialization" [disabled]="isLoading">
-                                    <ion-select-option value="Fitness">Fitness</ion-select-option>
-                                    <ion-select-option value="Bodybuilding">Bodybuilding</ion-select-option>
-                                    <ion-select-option value="Yoga">Yoga</ion-select-option>
-                                    <ion-select-option value="Pilates">Pilates</ion-select-option>
-                                    <ion-select-option value="Cardio">Cardio</ion-select-option>
-                                    <ion-select-option value="Crossfit">Crossfit</ion-select-option>
-                                </ion-select>
-                            </ion-item>
-
-                        </div>
-                    </div>
-                </ng-container>
-                
-                <!-- CAMPI AGGIUNTIVI PER CLIENTE -->
-                <ng-container *ngIf="userData.role === 'customer'">
-
-                    <div class="informazioni">
-                        <h4>Informazioni cliente</h4>
-                        <ion-item>
+            <!-- CAMPI AGGIUNTIVI PER TRAINER -->
+            @if (userData.role === 'trainer') {
+                <div class="informazioni">
+                    <h4>Informazioni trainer</h4>
+                    <div class="fields-row">
+                        
+                        <!-- Scelta ruolo (per trainer)-->
+                         <ion-item>
                             <ion-label position="stacked">Ruolo</ion-label>
-
-                            <!-- Scelta ruolo (per cliente)-->
                             <ion-select [(ngModel)]="userData.role" interface="alert" 
-                                okText="Conferma"
-                                cancelText="Annulla"
-                                name="role" [disabled]="isLoading">
+                            okText="Conferma"
+                            cancelText="Annulla"
+                            name="role" [disabled]="isLoading">
                                 <ion-select-option value="customer">Cliente</ion-select-option>
                                 <ion-select-option value="trainer">Trainer</ion-select-option>
                             </ion-select>
-
+                        </ion-item>
+                        <!-- Specializzazione -->
+                        <ion-item>
+                            <ion-label position="stacked">Specializzazione</ion-label>
+                            <ion-select [(ngModel)]="userData.specialization" interface="alert"
+                            okText="Conferma"
+                            cancelText="Annulla" 
+                            name="specialization" [disabled]="isLoading">
+                                <ion-select-option value="Fitness">Fitness</ion-select-option>
+                                <ion-select-option value="Bodybuilding">Bodybuilding</ion-select-option>
+                                <ion-select-option value="Yoga">Yoga</ion-select-option>
+                                <ion-select-option value="Pilates">Pilates</ion-select-option>
+                                <ion-select-option value="Cardio">Cardio</ion-select-option>
+                                <ion-select-option value="Crossfit">Crossfit</ion-select-option>
+                            </ion-select>
                         </ion-item>
                     </div>
-
-                </ng-container>
+                </div>
+            }
+            
+            <!-- CAMPI AGGIUNTIVI PER CLIENTE -->
+            @if (userData.role === 'customer') {
+                <div class="informazioni">
+                    <h4>Informazioni cliente</h4>
+                    <ion-item>
+                        <ion-label position="stacked">Ruolo</ion-label>
+                        <!-- Scelta ruolo (per cliente)-->
+                        <ion-select [(ngModel)]="userData.role" interface="alert" 
+                            okText="Conferma"
+                            cancelText="Annulla"
+                            name="role" [disabled]="isLoading">
+                            <ion-select-option value="customer">Cliente</ion-select-option>
+                            <ion-select-option value="trainer">Trainer</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </div>
+            }
 
             <!-- Messaggio di errore -->
-            <div class="errore" *ngIf="errorMessage">
-                <ion-text color="danger">
-                    <p>{{ errorMessage }}</p>
-                </ion-text>
-            </div>
+            @if (errorMessage) {
+                <div class="errore">
+                    <ion-text color="danger">
+                        <p>{{ errorMessage }}</p>
+                    </ion-text>
+                </div>
+            }
 
             <div>
-
                 <!-- Tasto Registrati -->
                 <ion-button class="app-button" expand="block" color="primary" type="submit" [disabled]="!registerForm.valid || isLoading">
-                    <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
-                    <span *ngIf="!isLoading">Registrati</span>
-                    <span *ngIf="isLoading">Registrazione in corso...</span>
+                    @if (isLoading) {
+                        <ion-spinner name="crescent"></ion-spinner>
+                    }
+                    @if (!isLoading) {
+                        <span>Registrati</span>
+                    }
+                    @if (isLoading) {
+                        <span>Registrazione in corso...</span>
+                    }
                 </ion-button>
 
                 <!-- Tasto Annulla -->
@@ -151,9 +146,7 @@
                 <div class="testo-login">
                     <p>Hai già un account? <a (click)="goToLogin()">Accedi</a></p>
                 </div>
-                
             </div>
-
         </form>
     </div>
 </ion-content>

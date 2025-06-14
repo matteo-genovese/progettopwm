@@ -43,19 +43,6 @@ export class DashboardPage implements OnInit {
     this.loadDashboard();
   }
 
-  // Metodi wrapper che utilizzano il servizio
-  formatDateTime(dateString: string): string {
-    return this.dateTimeService.formatDateTime(dateString);
-  }
-
-  formatDate(dateString: string): string {
-    return this.dateTimeService.formatDate(dateString);
-  }
-
-  formatTime(dateString: string): string {
-    return this.dateTimeService.formatTime(dateString);
-  }
-
   loadDashboard() {
     this.isLoading = true;
     this.trainerService.getDashboard().subscribe({
@@ -65,11 +52,11 @@ export class DashboardPage implements OnInit {
         // Aggiungi proprietà formattate per tutte le sessioni
         if (this.dashboardData && this.dashboardData.upcoming_sessions) {
           this.dashboardData.upcoming_sessions.forEach((session: any) => {
-            session.adjustedStartTime = this.formatDateTime(session.start_time);
-            session.adjustedStartDate = this.formatDate(session.start_time);
-            session.adjustedStartTimeOnly = this.formatTime(session.start_time);
-            session.adjustedEndTime = this.formatDateTime(session.end_time);
-            session.adjustedEndTimeOnly = this.formatTime(session.end_time);
+            session.adjustedStartTime = this.dateTimeService.formatDateTime(session.start_time);
+            session.adjustedStartDate = this.dateTimeService.formatDate(session.start_time);
+            session.adjustedStartTimeOnly = this.dateTimeService.formatTime(session.start_time);
+            session.adjustedEndTime = this.dateTimeService.formatDateTime(session.end_time);
+            session.adjustedEndTimeOnly = this.dateTimeService.formatTime(session.end_time);
           });
         }
         

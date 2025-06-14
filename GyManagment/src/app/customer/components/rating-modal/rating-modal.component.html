@@ -11,18 +11,19 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
   <!-- Container rating -->
   <div class="rating-container">
     <h2>Come valuteresti la tua esperienza?</h2>
     
     <!-- Scelta n. di stelle -->
     <div class="stars-container">
-      <div class="star" *ngFor="let star of getStars()" (click)="setRating(star.value)">
-        <span class="star-symbol" [ngClass]="{'filled': star.filled}">
-          {{ star.filled ? '★' : '☆' }}
-        </span>
-      </div>
+      @for (star of getStars(); track star.value) {
+        <div class="star" (click)="setRating(star.value)">
+          <span class="star-symbol" [ngClass]="{'filled': star.filled}">
+            {{ star.filled ? '★' : '☆' }}
+          </span>
+        </div>
+      }
     </div>
     
     <p class="rating-label">{{ getRatingLabel() }}</p>
@@ -43,6 +44,5 @@
         Invia valutazione
       </ion-button>
     </div>
-
   </div>
 </ion-content>

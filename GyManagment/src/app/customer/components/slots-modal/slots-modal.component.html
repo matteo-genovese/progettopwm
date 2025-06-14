@@ -12,10 +12,12 @@
 
 <ion-content class="ion-padding">
   <!-- Informazioni sul trainer -->
-  <div class="trainer-info" *ngIf="trainer">
-    <h2>{{ trainer.full_name }}</h2>
-    <p>{{ trainer.specialization }}</p>
-  </div>
+  @if (trainer) {
+    <div class="trainer-info">
+      <h2>{{ trainer.full_name }}</h2>
+      <p>{{ trainer.specialization }}</p>
+    </div>
+  }
 
   <!-- Selettore di data di inizio -->
   <div class="date-selector">
@@ -43,58 +45,57 @@
     <h3>Slot disponibili a partire dal {{ selectedDate | date:'dd/MM/yyyy' }}</h3>
     
     <!-- Mostrato durante il caricamento -->
-    <app-loading-spinner 
-      *ngIf="isLoading" 
-      [message]="'Caricamento slot disponibili...'">
-    </app-loading-spinner>
+    @if (isLoading) {
+      <app-loading-spinner 
+        [message]="'Caricamento slot disponibili...'">
+      </app-loading-spinner>
+    }
     
     <!-- Mostrato se non ci sono slot disponibili -->
-    <div class="empty-slots" *ngIf="!isLoading && allDates.length === 0">
-      <ion-text color="medium">
-        <p>Nessuno slot disponibile a partire dalla data selezionata</p>
-      </ion-text>
-    </div>
+    @if (!isLoading && allDates.length === 0) {
+      <div class="empty-slots">
+        <ion-text color="medium">
+          <p>Nessuno slot disponibile a partire dalla data selezionata</p>
+        </ion-text>
+      </div>
+    }
     
     <!-- Mostrato se ci sono slot disponibili -->
-    <div *ngIf="!isLoading && allDates.length > 0">
-      <ion-card *ngFor="let date of allDates" class="date-card">
-
-        <!-- Data slot -->
-        <ion-card-header>
-          <ion-card-title>{{ formatDateForDisplay(date) }}</ion-card-title>
-        </ion-card-header>
-        
-        <!-- Informazioni slot -->
-        <ion-card-content>
-          <ion-list>
-
-            <ion-item *ngFor="let slot of slotsByDate[date]" class="slot-item">
-
-              <div class="slot-info">
-
-                <!-- Orario -->
-                <div class="slot-time">
-                  <ion-icon name="time-outline"></ion-icon>
-                  <span>{{ slot.adjustedStartTimeOnly }} - {{ slot.adjustedEndTimeOnly }}</span>
-                </div>
-                
-                <!-- Disponibilità -->
-                <div class="slot-availability">
-                  <span>Posti disponibili: {{ slot.available_spots }} / {{ slot.max_clients }}</span>
-                </div>
-              </div>
-              
-              <ion-button slot="end" [disabled]="slot.available_spots === 0" (click)="bookSlot(slot.id)">
-                Prenota
-              </ion-button>
-
-            </ion-item>
-
-          </ion-list>
-        </ion-card-content>
-
-      </ion-card>
-    </div>
+    @if (!isLoading && allDates.length > 0) {
+      @for (date of allDates; track $index) {
+        <ion-card class="date-card">
+          <!-- Data slot -->
+          <ion-card-header>
+            <ion-card-title>{{ formatDateForDisplay(date) }}</ion-card-title>
+          </ion-card-header>
+          
+          <!-- Informazioni slot -->
+          <ion-card-content>
+            <ion-list>
+              @for (slot of slotsByDate[date]; track slot.id) {
+                <ion-item class="slot-item">
+                  <div class="slot-info">
+                    <!-- Orario -->
+                    <div class="slot-time">
+                      <ion-icon name="time-outline"></ion-icon>
+                      <span>{{ slot.adjustedStartTimeOnly }} - {{ slot.adjustedEndTimeOnly }}</span>
+                    </div>
+                    
+                    <!-- Disponibilità -->
+                    <div class="slot-availability">
+                      <span>Posti disponibili: {{ slot.available_spots }} / {{ slot.max_clients }}</span>
+                    </div>
+                  </div>
+                  
+                  <ion-button slot="end" [disabled]="slot.available_spots === 0" (click)="bookSlot(slot.id)">
+                    Prenota
+                  </ion-button>
+                </ion-item>
+              }
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      }
+    }
   </div>
-
 </ion-content>

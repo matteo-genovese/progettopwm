@@ -11,21 +11,21 @@ import { RouterLink } from '@angular/router';
       <h3>{{ title }}</h3>
       <p>{{ description }}</p>
       
-      <!-- Bottone con routerLink se specificato -->
-      <ion-button 
-        *ngIf="buttonText && buttonLink" 
-        expand="block" 
-        [routerLink]="buttonLink">
-        {{ buttonText }}
-      </ion-button>
+      @if (buttonText && buttonLink) {
+        <ion-button 
+          expand="block" 
+          [routerLink]="buttonLink">
+          {{ buttonText }}
+        </ion-button>
+      }
       
-      <!-- Bottone con event handler se non c'è link ma c'è un handler -->
-      <ion-button 
-        *ngIf="buttonText && !buttonLink" 
-        expand="block" 
-        (click)="onButtonClick()">
-        {{ buttonText }}
-      </ion-button>
+      @if (buttonText && !buttonLink) {
+        <ion-button 
+          expand="block" 
+          (click)="onButtonClick()">
+          {{ buttonText }}
+        </ion-button>
+      }
     </div>
   `,
   styles: [`

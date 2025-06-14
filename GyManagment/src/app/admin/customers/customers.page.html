@@ -8,48 +8,59 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <app-loading-spinner 
-    *ngIf="isLoading" 
-    [message]="'Caricamento clienti...'">
-  </app-loading-spinner>
+  @if (isLoading) {
+    <app-loading-spinner 
+      [message]="'Caricamento clienti...'">
+    </app-loading-spinner>
+  }
 
-  <ion-card *ngIf="error" class="error-card">
-    <ion-card-content>
-      <p>{{ error }}</p>
-      <ion-button fill="clear" (click)="loadCustomers()">Riprova</ion-button>
-    </ion-card-content>
-  </ion-card>
+  @if (error) {
+    <ion-card class="error-card">
+      <ion-card-content>
+        <p>{{ error }}</p>
+        <ion-button fill="clear" (click)="loadCustomers()">Riprova</ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
 
-  <div *ngIf="!isLoading && !error">
-    <app-empty-state 
-      *ngIf="customers.length === 0"
-      icon="person-outline"
-      title="Nessun cliente disponibile">
-    </app-empty-state>
-  
-    <div class="customers-grid" *ngIf="customers.length > 0">
-      <div class="customer-card" *ngFor="let customer of customers">
-        <div class="customer-content">
-          <div class="customer-header">
-            <h2>{{ customer.full_name || customer.username }}</h2>
+  @if (!isLoading && !error) {
+    @if (customers.length === 0) {
+      <app-empty-state 
+        icon="person-outline"
+        title="Nessun cliente disponibile">
+      </app-empty-state>
+    }
 
+    @if (customers.length > 0) {
+      <div class="customers-grid">
+        @for (customer of customers; track customer.id) {
+          <div class="customer-card">
+            <div class="customer-content">
+              <div class="customer-header">
+                <h2>{{ customer.full_name || customer.username }}</h2>
+              </div>
+              <div class="customer-details">
+                <p>
+                  <ion-icon name="mail-outline"></ion-icon>
+                  {{ customer.email }}
+                </p>
+                @if (customer.phone) {
+                  <p>
+                    <ion-icon name="call-outline"></ion-icon>
+                    {{ customer.phone }}
+                  </p>
+                }
+                @if (customer.join_date) {
+                  <p>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    Iscritto il: {{ customer.join_date | date:'dd/MM/yyyy' }}
+                  </p>
+                }
+              </div>
+            </div>
           </div>
-          <div class="customer-details">
-            <p>
-              <ion-icon name="mail-outline"></ion-icon>
-              {{ customer.email }}
-            </p>
-            <p *ngIf="customer.phone">
-              <ion-icon name="call-outline"></ion-icon>
-              {{ customer.phone }}
-            </p>
-            <p *ngIf="customer.join_date">
-              <ion-icon name="calendar-outline"></ion-icon>
-              Iscritto il: {{ customer.join_date | date:'dd/MM/yyyy' }}
-            </p>
-          </div>
-        </div>
+        }
       </div>
-    </div>
-  </div>
+    }
+  }
 </ion-content>

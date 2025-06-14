@@ -9,7 +9,6 @@
     </div>
 
     <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-
       <!-- Username -->
       <ion-item>
         <ion-label position="stacked">Username</ion-label>
@@ -25,18 +24,26 @@
       </ion-item>
 
       <!-- Messaggio di errore -->
-      <div class="errore" *ngIf="errorMessage">
-        <ion-text color="danger">
-          <p>{{ errorMessage }}</p>
-        </ion-text>
-      </div>
+      @if (errorMessage) {
+        <div class="errore">
+          <ion-text color="danger">
+            <p>{{ errorMessage }}</p>
+          </ion-text>
+        </div>
+      }
 
       <div>
         <!-- Tasto Accedi -->
         <ion-button class="app-button" expand="block" color="primary" type="submit" [disabled]="!loginForm.valid || isLoading">
-          <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
-          <span *ngIf="!isLoading">Accedi</span>
-          <span *ngIf="isLoading">Accesso in corso...</span>
+          @if (isLoading) {
+            <ion-spinner name="crescent"></ion-spinner>
+          }
+          @if (!isLoading) {
+            <span>Accedi</span>
+          }
+          @if (isLoading) {
+            <span>Accesso in corso...</span>
+          }
         </ion-button>
 
         <!-- Tasto Annulla -->
@@ -49,8 +56,6 @@
           <p>Non hai un account? <a [routerLink]="['/register']">Registrati</a></p>
         </div>
       </div>
-
     </form>
-
   </div>
 </ion-content>

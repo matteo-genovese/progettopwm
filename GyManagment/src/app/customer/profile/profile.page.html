@@ -5,13 +5,13 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <app-loading-spinner 
-    *ngIf="isLoading" 
-    [message]="'Caricamento...'">
-  </app-loading-spinner>
+  @if (isLoading) {
+    <app-loading-spinner 
+      [message]="'Caricamento...'">
+    </app-loading-spinner>
+  }
 
-  <div *ngIf="!isLoading">
-
+  @if (!isLoading) {
     <!-- Sezione profilo -->
     <ion-card class="profile-card app-card secondary-border">
 
@@ -49,8 +49,6 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
-
-    
-  </div>
+  }
 
 </ion-content>

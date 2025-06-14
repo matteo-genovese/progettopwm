@@ -12,102 +12,113 @@
   </ion-refresher>
 
   <!-- Mostrato durante il caricamento -->
-  <app-loading-spinner 
-    *ngIf="isLoading" 
-    [message]="'Caricamento dashboard...'">
-  </app-loading-spinner>
+  @if (isLoading) {
+    <app-loading-spinner 
+      [message]="'Caricamento dashboard...'">
+    </app-loading-spinner>
+  }
 
   <!-- Sezione benvenuto -->
-  <div class="dashboard-wrapper" *ngIf="dashboardData">
-    <ion-card class="welcome-card">
+  @if (dashboardData) {
+    <div class="dashboard-wrapper">
+      <ion-card class="welcome-card">
 
-      <ion-card-header>
-        <ion-card-title>Benvenuto, {{ dashboardData.trainer_info.full_name }}</ion-card-title>
-      </ion-card-header>
+        <ion-card-header>
+          <ion-card-title>Benvenuto, {{ dashboardData.trainer_info.full_name }}</ion-card-title>
+        </ion-card-header>
 
-      <ion-card-content>
-        <div class="welcome-content">
+        <ion-card-content>
+          <div class="welcome-content">
 
-          <div class="left-content">
+            <div class="left-content">
 
-            <div class="welcome-message">
-              <ion-icon name="barbell" color="primary"></ion-icon>
-              <span>Pronto a motivare i tuoi clienti oggi?</span>
+              <div class="welcome-message">
+                <ion-icon name="barbell" color="primary"></ion-icon>
+                <span>Pronto a motivare i tuoi clienti oggi?</span>
+              </div>
+              <p class="trainer-role">Trainer • {{ dashboardData.trainer_info.specialization }}</p>
+
             </div>
-            <p class="trainer-role">Trainer • {{ dashboardData.trainer_info.specialization }}</p>
+            
+            <div class="welcome-stats">
+
+              <!-- Slot futuri -->
+              <div class="stat2">
+                <ion-icon name="calendar-outline" color="danger"></ion-icon>
+                <span>{{ dashboardData.upcoming_sessions.length }}</span>
+                <p>Slot futuri</p>
+              </div>
+
+              <!-- Media rating -->
+              <div class="stat2">
+                <ion-icon name="star-outline" color="danger"></ion-icon>
+                <span>{{ calculateAverageRating(dashboardData) }}</span>
+                <p>Media Ratings</p>
+              </div>
+
+            </div>
 
           </div>
-          
-          <div class="welcome-stats">
+        </ion-card-content>
 
-            <!-- Slot futuri -->
-            <div class="stat2">
-              <ion-icon name="calendar-outline" color="danger"></ion-icon>
-              <span>{{ dashboardData.upcoming_sessions.length }}</span>
-              <p>Slot futuri</p>
-            </div>
-
-            <!-- Media rating -->
-            <div class="stat2">
-              <ion-icon name="star-outline" color="danger"></ion-icon>
-              <span>{{ calculateAverageRating(dashboardData) }}</span>
-              <p>Media Ratings</p>
-            </div>
-
-          </div>
-
-        </div>
-      </ion-card-content>
-
-    </ion-card>
-  </div>
+      </ion-card>
+    </div>
+  }
 
   <!-- Sezione prossimi allenamenti -->
-  <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length > 0" class="ion-card-dashboard">
-    <ion-card-header>
-      <ion-card-title>
-        <ion-icon name="calendar-outline" color="primary"></ion-icon>
-        Prossimi Allenamenti <small>(max 9)</small>
-      </ion-card-title>
-    </ion-card-header>
-    
-    <ion-card-content>
+  @if (dashboardData && dashboardData.upcoming_sessions.length > 0) {
+    <ion-card class="ion-card-dashboard">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="calendar-outline" color="primary"></ion-icon>
+          Prossimi Allenamenti <small>(max 9)</small>
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
 
-      <!-- Mostrato se ci sono allenamenti futuri -->
-      <div class="sessions-container tall" *ngIf="!isLoading && dashboardData.upcoming_sessions.length > 0">
-        <div class="session-item" *ngFor="let slot of dashboardData.upcoming_sessions.slice(0, 9)">
+        <!-- Mostrato se ci sono allenamenti futuri -->
+        @if (!isLoading && dashboardData.upcoming_sessions.length > 0) {
+          <div class="sessions-container tall">
+            @for (slot of dashboardData.upcoming_sessions.slice(0, 9); track slot.id) {
+              <div class="session-item">
 
-          <h2>TRAINER {{ slot.trainer_id }}</h2>
+                <h2>TRAINER {{ slot.trainer_id }}</h2>
 
-          <!-- Data -->
-          <p>
-            <ion-icon name="calendar-outline"></ion-icon>
-            {{ slot.adjustedStartDate }}
-          </p>
+                <!-- Data -->
+                <p>
+                  <ion-icon name="calendar-outline"></ion-icon>
+                  {{ slot.adjustedStartDate }}
+                </p>
 
-          <!-- Orari -->
-          <p>
-            <ion-icon name="time-outline"></ion-icon>
-            {{ slot.adjustedStartTimeOnly }} - {{ slot.adjustedEndTimeOnly }}
-          </p>
+                <!-- Orari -->
+                <p>
+                  <ion-icon name="time-outline"></ion-icon>
+                  {{ slot.adjustedStartTimeOnly }} - {{ slot.adjustedEndTimeOnly }}
+                </p>
 
-          <!-- Specializzazione -->
-          <p>
-            <ion-icon name="fitness-outline"></ion-icon>
-            Fitness
-          </p>
+                <!-- Specializzazione -->
+                <p>
+                  <ion-icon name="fitness-outline"></ion-icon>
+                  Fitness
+                </p>
 
-        </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
+              </div>
+            }
+          </div>
+        }
+      </ion-card-content>
+    </ion-card>
+  }
 
-  <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length === 0">
-    <app-empty-state 
-      message="Nessun allenamento programmato"
-      description="Non hai allenamenti futuri programmati. Crea un nuovo slot per iniziare.">
-    </app-empty-state>
-  </ion-card>
+  @if (dashboardData && dashboardData.upcoming_sessions.length === 0) {
+    <ion-card>
+      <app-empty-state 
+        message="Nessun allenamento programmato"
+        description="Non hai allenamenti futuri programmati. Crea un nuovo slot per iniziare.">
+      </app-empty-state>
+    </ion-card>
+  }
 
   <!-- Collegamenti -->
   <div class="actions-row">

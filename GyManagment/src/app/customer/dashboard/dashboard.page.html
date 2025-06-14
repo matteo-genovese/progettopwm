@@ -11,10 +11,12 @@
   </ion-refresher>
 
   <!-- Sezione di benvenuto -->
-  <div class="welcome-section" *ngIf="userData">
-    <h1>Benvenuto, {{ userData.full_name || userData.username }}</h1>
-    <p>Gestisci i tuoi allenamenti e monitora i tuoi progressi</p>
-  </div>
+  @if (userData) {
+    <div class="welcome-section">
+      <h1>Benvenuto, {{ userData.full_name || userData.username }}</h1>
+      <p>Gestisci i tuoi allenamenti e monitora i tuoi progressi</p>
+    </div>
+  }
 
   <!-- Sezione Prossimi Allenamenti -->
   <ion-card class="ion-card-dashboard">
@@ -28,40 +30,52 @@
     
     <ion-card-content>
 
-      <div class="loading-placeholder" *ngIf="isLoading">
-        <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
-      </div>
+      @if (isLoading) {
+        <div class="loading-placeholder">
+          <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
+        </div>
+      }
 
       <!-- Mostrato se ci sono allenamenti prenotati -->
-      <div class="booking-container tall" *ngIf="!isLoading && upcomingBookings.length > 0">
-        <div class="booking-item" *ngFor="let booking of upcomingBookings.slice(0, 9)">
-          <h2>{{ booking.trainer_name }}</h2>
-          <p>
-            <ion-icon name="calendar-outline"></ion-icon>
-            {{ booking.adjustedStartDate }}
-          </p>
-          <p>
-            <ion-icon name="time-outline"></ion-icon>
-            {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
-          </p>
-          <p *ngIf="booking.specialization">
-            <ion-icon name="fitness-outline"></ion-icon>
-            {{ booking.specialization }}
-          </p>
+      @if (!isLoading && upcomingBookings.length > 0) {
+        <div class="booking-container tall">
+          @for (booking of upcomingBookings.slice(0, 9); track booking.id) {
+            <div class="booking-item">
+              <h2>{{ booking.trainer_name }}</h2>
+              <p>
+                <ion-icon name="calendar-outline"></ion-icon>
+                {{ booking.adjustedStartDate }}
+              </p>
+              <p>
+                <ion-icon name="time-outline"></ion-icon>
+                {{ booking.adjustedStartTimeOnly }} - {{ booking.adjustedEndTimeOnly }}
+              </p>
+              @if (booking.specialization) {
+                <p>
+                  <ion-icon name="fitness-outline"></ion-icon>
+                  {{ booking.specialization }}
+                </p>
+              }
+            </div>
+          }
         </div>
-      </div>
+      }
 
       <!-- Mostrato se non ci sono allenamenti prenotati -->
-      <div class="empty-state" *ngIf="!isLoading && upcomingBookings.length === 0">
-        <p>Non hai allenamenti programmati</p>
-        <ion-button expand="block" class="view-all" (click)="viewAllTrainers()">
-          Prenota uno slot da un trainer
-        </ion-button>
-      </div>
+      @if (!isLoading && upcomingBookings.length === 0) {
+        <div class="empty-state">
+          <p>Non hai allenamenti programmati</p>
+          <ion-button expand="block" class="view-all" (click)="viewAllTrainers()">
+            Prenota uno slot da un trainer
+          </ion-button>
+        </div>
+      }
 
-      <ion-button expand="block" fill="clear" class="view-all" *ngIf="!isLoading && upcomingBookings.length > 0" (click)="viewAllBookings()">
-        Tutti gli allenamenti
-      </ion-button>
+      @if (!isLoading && upcomingBookings.length > 0) {
+        <ion-button expand="block" fill="clear" class="view-all" (click)="viewAllBookings()">
+          Tutti gli allenamenti
+        </ion-button>
+      }
 
     </ion-card-content>
 
@@ -78,29 +92,37 @@
     </ion-card-header>
 
     <ion-card-content>
-      <div class="loading-placeholder" *ngIf="isLoading">
-        <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
-      </div>
+      @if (isLoading) {
+        <div class="loading-placeholder">
+          <app-loading-spinner [message]="'Caricamento dashboard...'"></app-loading-spinner>
+        </div>
+      }
 
       <!-- Mostrato se ci sono trainers disponibili -->
-      <div class="booking-container short" *ngIf="!isLoading && trainers && trainers.length > 0">
-        <div class="booking-item" *ngFor="let trainer of trainers.slice(0, 6)">
-          <h2>{{ trainer.full_name }}</h2>
-          <p>
-            <ion-icon name="fitness-outline"></ion-icon>
-            {{ trainer.specialization }}
-          </p>
-          <p>
-            <ion-icon name="star-outline"></ion-icon>
-            {{ trainer.avg_rating ? (trainer.avg_rating | number:'1.1-1') : 'N/D' }}
-          </p>
+      @if (!isLoading && trainers && trainers.length > 0) {
+        <div class="booking-container short">
+          @for (trainer of trainers.slice(0, 6); track trainer.id) {
+            <div class="booking-item">
+              <h2>{{ trainer.full_name }}</h2>
+              <p>
+                <ion-icon name="fitness-outline"></ion-icon>
+                {{ trainer.specialization }}
+              </p>
+              <p>
+                <ion-icon name="star-outline"></ion-icon>
+                {{ trainer.avg_rating ? (trainer.avg_rating | number:'1.1-1') : 'N/D' }}
+              </p>
+            </div>
+          }
         </div>
-      </div>
+      }
 
       <!-- Mostrato se non ci sono trainers disponibili -->
-      <div class="empty-state" *ngIf="!isLoading && (!trainers || trainers.length === 0)">
-        <p>Nessun trainer disponibile</p>
-      </div>
+      @if (!isLoading && (!trainers || trainers.length === 0)) {
+        <div class="empty-state">
+          <p>Nessun trainer disponibile</p>
+        </div>
+      }
       
       <ion-button expand="block" class="view-all" (click)="viewAllTrainers()">
           Sfoglia tutti i trainers

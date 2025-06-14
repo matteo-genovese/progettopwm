@@ -24,246 +24,264 @@
   </ion-segment>
 
   <!-- Mostrato durante il caricamento -->
-  <app-loading-spinner 
-    *ngIf="isLoading" 
-    [message]="'Caricamento allenamenti...'">
-  </app-loading-spinner>
+  @if (isLoading) {
+    <app-loading-spinner 
+      [message]="'Caricamento allenamenti...'">
+    </app-loading-spinner>
+  }
 
   <!-- Mostrato in caso di errore -->
-  <app-empty-state 
-    *ngIf="error"
-    icon="alert-circle-outline"
-    title="{{ error }}"
-    description="Riprova a caricare gli allenamenti"
-    buttonText="Riprova"
-    (buttonClicked)="loadSessions()">
-  </app-empty-state>
+  @if (error) {
+    <app-empty-state 
+      icon="alert-circle-outline"
+      title="{{ error }}"
+      description="Riprova a caricare gli allenamenti"
+      buttonText="Riprova"
+      (buttonClicked)="loadSessions()">
+    </app-empty-state>
+  }
 
-  <div *ngIf="!isLoading" [ngSwitch]="selectedTab">
+  @if (!isLoading) {
+    <div [ngSwitch]="selectedTab">
 
-    <!-- Prossimi allenamenti -->
-    <div *ngSwitchCase="'upcoming'">
-
-      <!-- Mostrato se non ci sono allenamenti futuri -->
-      <ion-card *ngIf="upcomingSessions.length === 0"> 
-        <app-empty-state 
-          *ngIf="upcomingSessions.length === 0"
-          icon="calendar-outline"
-          title="Nessun allenamento futuro"
-          description="Crea uno slot per visualizzarlo qui"
-          buttonText="Crea slot"
-          buttonLink="../slots">
-        </app-empty-state>
-      </ion-card>
-      <!-- Mostrato se ci sono allenamenti futuri -->
-      <ion-grid *ngIf="upcomingSessions.length > 0">
-        <ion-row>
-
-          <!-- Colonna sinistra: allenamenti con posti disponibili -->
-          <ion-col size="12" size-md="6">
-            <div class="session-column">
-
-              <h4 class="session-category-title">
-                <ion-icon name="people-outline" color="primary"></ion-icon>
-                Allenamenti con posti disponibili
-              </h4>
-              
-              <!-- Mostrato se non ci sono allenamenti futuri con posti disponibili -->
-              <app-empty-state
-                *ngIf="upcomingAvailableSessions.length === 0"
+      <!-- Prossimi allenamenti -->
+      @switch (selectedTab) {
+        @case ('upcoming') {
+          <!-- Mostrato se non ci sono allenamenti futuri -->
+          @if (upcomingSessions.length === 0) {
+            <ion-card> 
+              <app-empty-state 
                 icon="calendar-outline"
-                title="Nessun allenamento con posti disponibili"
+                title="Nessun allenamento futuro"
                 description="Crea uno slot per visualizzarlo qui"
                 buttonText="Crea slot"
                 buttonLink="../slots">
               </app-empty-state>
-              
-              <!-- Mostra tutti gli allenamenti futuri con posti disponibili -->
-              <ion-card *ngFor="let session of upcomingAvailableSessions">
+            </ion-card>
+          }
 
-                <!-- Clienti -->
-                <ion-card-header>
-                  <ion-card-title>
-                    {{ session.client_names || 'Nessun cliente' }}
-                  </ion-card-title>
-                  <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
-                </ion-card-header>
+          <!-- Mostrato se ci sono allenamenti futuri -->
+          @if (upcomingSessions.length > 0) {
+            <ion-grid>
+              <ion-row>
 
-                <!-- Dettagli allenamento -->
-                <ion-card-content>
+                <!-- Colonna sinistra: allenamenti con posti disponibili -->
+                <ion-col size="12" size-md="6">
+                  <div class="session-column">
 
-                  <div class="booking-details">
+                    <h4 class="session-category-title">
+                      <ion-icon name="people-outline" color="primary"></ion-icon>
+                      Allenamenti con posti disponibili
+                    </h4>
+                    
+                    <!-- Mostrato se non ci sono allenamenti futuri con posti disponibili -->
+                    @if (upcomingAvailableSessions.length === 0) {
+                      <app-empty-state
+                        icon="calendar-outline"
+                        title="Nessun allenamento con posti disponibili"
+                        description="Crea uno slot per visualizzarlo qui"
+                        buttonText="Crea slot"
+                        buttonLink="../slots">
+                      </app-empty-state>
+                    }
+                    
+                    <!-- Mostra tutti gli allenamenti futuri con posti disponibili -->
+                    @for (session of upcomingAvailableSessions; track session.id) {
+                      <ion-card>
 
-                    <!-- Data -->
-                    <p>
-                      <ion-icon name="calendar-outline"></ion-icon>
-                      {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
-                    </p>
+                        <!-- Clienti -->
+                        <ion-card-header>
+                          <ion-card-title>
+                            {{ session.client_names || 'Nessun cliente' }}
+                          </ion-card-title>
+                          @if (session.specialization) {
+                            <ion-card-subtitle>{{ session.specialization }}</ion-card-subtitle>
+                          }
+                        </ion-card-header>
 
-                    <!-- Orario -->
-                    <p>
-                      <ion-icon name="time-outline"></ion-icon>
-                      {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
-                    </p>
+                        <!-- Dettagli allenamento -->
+                        <ion-card-content>
 
-                    <!-- Max clienti -->
-                    <p>
-                      <ion-icon name="people-outline"></ion-icon>
-                      Max clienti: {{ session.max_clients }}
-                    </p>
+                          <div class="booking-details">
 
-                    <!-- N. prenotati -->
-                    <p>
-                      <ion-icon name="person-add-outline"></ion-icon>
-                      Prenotati: {{ session.booked_clients }}
-                    </p>
+                            <!-- Data -->
+                            <p>
+                              <ion-icon name="calendar-outline"></ion-icon>
+                              {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
+                            </p>
+
+                            <!-- Orario -->
+                            <p>
+                              <ion-icon name="time-outline"></ion-icon>
+                              {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
+                            </p>
+
+                            <!-- Max clienti -->
+                            <p>
+                              <ion-icon name="people-outline"></ion-icon>
+                              Max clienti: {{ session.max_clients }}
+                            </p>
+
+                            <!-- N. prenotati -->
+                            <p>
+                              <ion-icon name="person-add-outline"></ion-icon>
+                              Prenotati: {{ session.booked_clients }}
+                            </p>
+
+                          </div>
+
+                        </ion-card-content>
+
+                      </ion-card>
+                    }
 
                   </div>
+                </ion-col>
+                
+                <!-- Colonna destra: Allenamenti al completo -->
+                <ion-col size="12" size-md="6">
+                  <div class="session-column">
+                    
+                    <h4 class="session-category-title">
+                      <ion-icon name="checkmark-done-circle" color="success"></ion-icon>
+                      Allenamenti al completo
+                    </h4>
+                    
+                    <!-- Mostrato se non ci sono allenamenti futuri al completo -->
+                    @if (upcomingFullSessions.length === 0) {
+                      <app-empty-state
+                        icon="calendar-outline"
+                        title="Nessun allenamento al completo">
+                      </app-empty-state>
+                    }
 
-                </ion-card-content>
+                    <!-- Mostra tutti gli allenamenti futuri al completo -->
+                    @for (session of upcomingFullSessions; track session.id) {
+                      <ion-card>
 
-              </ion-card>
+                        <ion-card-header>
+                          <ion-card-title>
+                            {{ session.client_names || 'Nessun cliente' }}
+                          </ion-card-title>
+                          @if (session.specialization) {
+                            <ion-card-subtitle>{{ session.specialization }}</ion-card-subtitle>
+                          }
+                        </ion-card-header>
 
-            </div>
-          </ion-col>
-          
-          <!-- Colonna destra: Allenamenti al completo -->
-          <ion-col size="12" size-md="6">
-            <div class="session-column">
-              
-              <h4 class="session-category-title">
-                <ion-icon name="checkmark-done-circle" color="success"></ion-icon>
-                Allenamenti al completo
-              </h4>
-              
-              <!-- Mostrato se non ci sono allenamenti futuri al completo -->
-              <app-empty-state
-                *ngIf="upcomingFullSessions.length === 0"
-                icon="calendar-outline"
-                title="Nessun allenamento al completo">
+                        <!-- Dettagli allenamento -->
+                        <ion-card-content>
+
+                          <div class="booking-details">
+
+                            <!-- Data -->
+                            <p>
+                              <ion-icon name="calendar-outline"></ion-icon>
+                              {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
+                            </p>
+
+                            <!-- Orario -->
+                            <p>
+                              <ion-icon name="time-outline"></ion-icon>
+                              {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
+                            </p>
+
+                            <!-- Max clienti -->
+                            <p>
+                              <ion-icon name="people-outline"></ion-icon>
+                              Max clienti: {{ session.max_clients }}
+                            </p>
+
+                            <!-- N. prenotati -->
+                            <p>
+                              <ion-icon name="person-add-outline"></ion-icon>
+                              Prenotati: {{ session.booked_clients }}
+                            </p>
+
+                          </div>
+
+                        </ion-card-content>
+
+                      </ion-card>
+                    }
+
+                  </div>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+          }
+        }
+
+        <!-- Allenamenti passati -->
+        @case ('past') {
+
+          <!-- Mostrato se non ci sono allenamenti passati -->
+          @if (pastSessions.length === 0) {
+            <ion-card>
+              <app-empty-state 
+                icon="time-outline"
+                title="Nessun allenamento passato"
+                description="Gli allenamenti passati saranno visualizzati qui">
               </app-empty-state>
+            </ion-card>
+          }
 
-              <!-- Mostra tutti gli allenamenti futuri al completo -->
-              <ion-card *ngFor="let session of upcomingFullSessions">
+          <!-- Mostrato se ci sono allenamenti passati -->
+          @if (pastSessions.length > 0) {
+            <div class="past-sessions-container">
+              <!-- Mostra tutti gli allenamenti passati -->
+              @for (session of pastSessions; track session.id) {
+                <ion-card class="past-session-card">
 
-                <ion-card-header>
-                  <ion-card-title>
-                    {{ session.client_names || 'Nessun cliente' }}
-                  </ion-card-title>
-                  <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
-                </ion-card-header>
+                  <ion-card-header>
+                    <ion-card-title>
+                      {{ session.client_names || 'Nessun cliente' }}
+                    </ion-card-title>
+                    @if (session.specialization) {
+                      <ion-card-subtitle>{{ session.specialization }}</ion-card-subtitle>
+                    }
+                  </ion-card-header>
 
-                <!-- Dettagli allenamento -->
-                <ion-card-content>
+                  <!-- Dettagli allenamento -->
+                  <ion-card-content>
 
-                  <div class="booking-details">
+                    <div class="booking-details">
 
-                    <!-- Data -->
-                    <p>
-                      <ion-icon name="calendar-outline"></ion-icon>
-                      {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
-                    </p>
+                      <!-- Data -->
+                      <p>
+                        <ion-icon name="calendar-outline" color="danger"></ion-icon>
+                        {{ session.start_time | date:'dd/MM/yyyy' }}
+                      </p>
 
-                    <!-- Orario -->
-                    <p>
-                      <ion-icon name="time-outline"></ion-icon>
-                      {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
-                    </p>
+                      <!-- Orario -->
+                      <p>
+                        <ion-icon name="time-outline" color="danger"></ion-icon>
+                        {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
+                      </p>
 
-                    <!-- Max clienti -->
-                    <p>
-                      <ion-icon name="people-outline"></ion-icon>
-                      Max clienti: {{ session.max_clients }}
-                    </p>
+                      <!-- Max clienti -->
+                      <p>
+                        <ion-icon name="people-outline" color="danger"></ion-icon>
+                        Max: {{ session.max_clients }}
+                      </p>
 
-                    <!-- N. prenotati -->
-                    <p>
-                      <ion-icon name="person-add-outline"></ion-icon>
-                      Prenotati: {{ session.booked_clients }}
-                    </p>
+                      <!-- N. prenotati -->
+                      <p>
+                        <ion-icon name="person-add-outline" color="danger"></ion-icon>
+                        Prenotati: {{ session.booked_clients }}
+                      </p>
 
-                  </div>
+                    </div>
 
-                </ion-card-content>
+                  </ion-card-content>
 
-              </ion-card>
-
+                </ion-card>
+              }
             </div>
-          </ion-col>
-
-        </ion-row>
-      </ion-grid>
-
+          }
+        }
+      }
     </div>
-
-    <!-- Allenamenti passati -->
-    <div *ngSwitchCase="'past'">
-
-      <!-- Mostrato se non ci sono allenamenti passati -->
-      <ion-card *ngIf="pastSessions.length === 0">
-        <app-empty-state 
-          icon="time-outline"
-          title="Nessun allenamento passato"
-          description="Gli allenamenti passati saranno visualizzati qui">
-        </app-empty-state>
-      </ion-card>
-
-      <!-- Mostrato se ci sono allenamenti passati -->
-      <div *ngIf="pastSessions.length > 0">
-
-
-        <div class="past-sessions-container">
-          <!-- Mostra tutti gli allenamenti passati -->
-          <ion-card class="past-session-card" *ngFor="let session of pastSessions">
-
-            <ion-card-header>
-              <ion-card-title>
-                {{ session.client_names || 'Nessun cliente' }}
-              </ion-card-title>
-              <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
-            </ion-card-header>
-
-            <!-- Dettagli allenamento -->
-            <ion-card-content>
-
-              <div class="booking-details">
-
-                <!-- Data -->
-                <p>
-                  <ion-icon name="calendar-outline" color="danger"></ion-icon>
-                  {{ session.start_time | date:'dd/MM/yyyy' }}
-                </p>
-
-                <!-- Orario -->
-                <p>
-                  <ion-icon name="time-outline" color="danger"></ion-icon>
-                  {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
-                </p>
-
-                <!-- Max clienti -->
-                <p>
-                  <ion-icon name="people-outline" color="danger"></ion-icon>
-                  Max: {{ session.max_clients }}
-                </p>
-
-                <!-- N. prenotati -->
-                <p>
-                  <ion-icon name="person-add-outline" color="danger"></ion-icon>
-                  Prenotati: {{ session.booked_clients }}
-                </p>
-
-              </div>
-
-            </ion-card-content>
-
-          </ion-card>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+  }
 
 </ion-content>
