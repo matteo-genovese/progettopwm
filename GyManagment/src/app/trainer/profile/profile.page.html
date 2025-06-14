@@ -36,79 +36,77 @@
         <ion-list lines="none">
 
           <!-- Email -->
-          <ion-item>
-            <ion-icon name="person-circle-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <p>Username</p>
-              <h3>{{ userData?.username || 'Non disponibile' }}</h3>
-            </ion-label>
-          </ion-item>
+           <detail-card 
+            icon="person-circle-outline"
+            title="Username" 
+            description="{{ userData?.username || 'Non disponibile' }}">
+          </detail-card>
 
           <!-- N. telefono -->
-          <ion-item>
-            <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <p>Email</p>
-              <h3>{{ userData?.email || 'Non disponibile' }}</h3>
-            </ion-label>
-          </ion-item>
+          <detail-card 
+            icon="mail-outline"
+            title="Email" 
+            description="{{ userData?.email || 'Non disponibile' }}">
+          </detail-card>
 
           <!-- Specializzazione -->
-          <ion-item>
-            <ion-icon name="fitness-outline" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <p>Specializzazione</p>
-              <h3>{{ trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' }}</h3>
-            </ion-label>
-          </ion-item>
+          <detail-card 
+            icon="fitness-outline"
+            title="Specializzazione" 
+            description="{{ trainerData?.trainer_info?.specialization || userData?.specialization || 'Non disponibile' }}">
+          </detail-card>
 
         </ion-list>
       </ion-card-content>
     </ion-card>
 
-    <!-- Sezione recensioni -->
-    <ion-card  class="profile-card app-card secondary-border" *ngIf="trainerData && trainerData.ratings">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="star-outline" color="danger"></ion-icon>
-          Le tue recensioni
-        </ion-card-title>
-      </ion-card-header>
 
-      <ion-card-content>
-        <!-- Mostrato se non ci sono recensioni -->
-        <div *ngIf="!trainerData.ratings || trainerData.ratings.length === 0" class="empty-reviews">
-          <ion-icon name="star-outline" size="large"></ion-icon>
-          <h3>Nessuna recensione</h3>
-          <p>Non hai ancora ricevuto recensioni dai tuoi clienti.</p>
-        </div>
+    <!-- Component empty state per quando non ci sono recensioni -->
+    <app-empty-state 
+      *ngIf="trainerData.ratings.length === 0"
+      icon="time-outline"
+      title="Nessuna recensione"
+      description="Le tue recensioni saranno visualizzate qui">
+    </app-empty-state>
 
-        <!-- Lista delle recensioni -->
-        <div *ngIf="trainerData.ratings && trainerData.ratings.length > 0" class="reviews-list custom-scrollbar">
-          <div class="review-card" *ngFor="let review of trainerData.ratings">
-            <div class="review-header">
-              <div class="customer-name"><strong>DA:</strong> {{ review.customer_name }}</div>
-              <div class="review-date">{{ formatDate(review.date) }}</div>
-            </div>
-            
-            <div class="rating">
-              <div class="stars">
-                <ion-icon *ngFor="let star of generateStars(review.rating)" 
-                          [name]="star.filled ? 'star' : 'star-outline'" 
-                          color="warning">
-                </ion-icon>
+    <!-- Mostrato se ci sono recensioni -->
+    <div *ngIf="trainerData.ratings.length > 0">
+      <ion-card class="profile-card app-card secondary-border" *ngIf="trainerData && trainerData.ratings">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="star-outline" color="danger"></ion-icon>
+            Le tue recensioni
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+
+          <!-- Lista delle recensioni -->
+          <div *ngIf="trainerData.ratings && trainerData.ratings.length > 0" class="reviews-list custom-scrollbar">
+            <div class="review-card" *ngFor="let review of trainerData.ratings">
+              <div class="review-header">
+                <div class="customer-name"><strong>DA:</strong> {{ review.customer_name }}</div>
+                <div class="review-date">{{ formatDate(review.date) }}</div>
               </div>
-              <span class="rating-text"><strong>Rating:</strong> {{ review.rating }}/5</span>
-            </div>
-            
-            <div class="review-comment" *ngIf="review.review">
-              <p><strong>Review:</strong> {{ review.review }}</p>
+              
+              <div class="rating">
+                <div class="stars">
+                  <ion-icon *ngFor="let star of generateStars(review.rating)" 
+                            [name]="star.filled ? 'star' : 'star-outline'" 
+                            color="warning">
+                  </ion-icon>
+                </div>
+                <span class="rating-text"><strong>Rating:</strong> {{ review.rating }}/5</span>
+              </div>
+              
+              <div class="review-comment" *ngIf="review.review">
+                <p><strong>Review:</strong> {{ review.review }}</p>
+              </div>
             </div>
           </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
+        </ion-card-content>
+      </ion-card>
+    </div>
 
   </div>
 </ion-content>

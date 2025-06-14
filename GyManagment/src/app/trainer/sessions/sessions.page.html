@@ -45,16 +45,14 @@
     <div *ngSwitchCase="'upcoming'">
 
       <!-- Mostrato se non ci sono allenamenti futuri -->
-      <ion-card *ngIf="upcomingSessions.length === 0"> 
-        <app-empty-state 
-          *ngIf="upcomingSessions.length === 0"
-          icon="calendar-outline"
-          title="Nessun allenamento futuro"
-          description="Crea uno slot per visualizzarlo qui"
-          buttonText="Crea slot"
-          buttonLink="../slots">
-        </app-empty-state>
-      </ion-card>
+      <app-empty-state 
+        *ngIf="upcomingSessions.length === 0"
+        icon="calendar-outline"
+        title="Nessun allenamento futuro"
+        description="Crea uno slot per visualizzarlo qui"
+        buttonText="Crea slot"
+        buttonLink="../slots">
+      </app-empty-state>
       <!-- Mostrato se ci sono allenamenti futuri -->
       <ion-grid *ngIf="upcomingSessions.length > 0">
         <ion-row>
@@ -200,13 +198,12 @@
     <div *ngSwitchCase="'past'">
 
       <!-- Mostrato se non ci sono allenamenti passati -->
-      <ion-card *ngIf="pastSessions.length === 0">
         <app-empty-state 
+          *ngIf="upcomingAvailableSessions.length === 0"
           icon="time-outline"
           title="Nessun allenamento passato"
           description="Gli allenamenti passati saranno visualizzati qui">
         </app-empty-state>
-      </ion-card>
 
       <!-- Mostrato se ci sono allenamenti passati -->
       <div *ngIf="pastSessions.length > 0">

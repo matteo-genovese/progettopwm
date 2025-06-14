@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
       
       <!-- Bottone con routerLink se specificato -->
       <ion-button 
+        class= "app-button"
         *ngIf="buttonText && buttonLink" 
         expand="block" 
         [routerLink]="buttonLink">
@@ -20,7 +21,8 @@ import { RouterLink } from '@angular/router';
       </ion-button>
       
       <!-- Bottone con event handler se non c'è link ma c'è un handler -->
-      <ion-button 
+      <ion-button
+        class= "app-button" 
         *ngIf="buttonText && !buttonLink" 
         expand="block" 
         (click)="onButtonClick()">
@@ -37,7 +39,6 @@ import { RouterLink } from '@angular/router';
       text-align: center;
       padding: 2rem 1rem;
       margin: 1rem auto;
-      max-width: 500px;
     }
     
     ion-icon {

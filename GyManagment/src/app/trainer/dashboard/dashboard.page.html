@@ -102,12 +102,13 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="dashboardData && dashboardData.upcoming_sessions.length === 0">
-    <app-empty-state 
-      message="Nessun allenamento programmato"
-      description="Non hai allenamenti futuri programmati. Crea un nuovo slot per iniziare.">
-    </app-empty-state>
-  </ion-card>
+  <app-empty-state 
+    *ngIf="dashboardData && dashboardData.upcoming_sessions.length === 0"
+    title="Nessun allenamento programmato"
+    description="Crea uno slot per iniziare."
+    buttonText="Crea slot"
+    buttonLink="../slots">
+  </app-empty-state>
 
   <!-- Collegamenti -->
   <div class="actions-row">
