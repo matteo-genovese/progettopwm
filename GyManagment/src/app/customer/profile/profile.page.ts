@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { CustomerService } from '../../services/customer.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { DetailCardComponent } from 'src/app/shared/components/detail-card/detail-card.component';
 
 @Component({
   selector: 'app-profile',
@@ -21,11 +22,12 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
   imports: [
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, AppHeaderComponent,
     IonCardContent, IonItem, IonLabel, IonButton, IonIcon, IonList, IonSpinner, IonAvatar, IonButtons, IonBackButton,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent, DetailCardComponent
   ]
 })
 export class ProfilePage implements OnInit {
   userData: any = null;
+  customerData: any = null;
   isLoading = false;
 
   constructor(
@@ -44,9 +46,11 @@ export class ProfilePage implements OnInit {
   }
 
   loadUserData() {
+    this.userData = this.authService.getUser();
+    
     this.customerService.getCustomerDashboard().subscribe({
       next: (data) => {
-        this.userData = data.customer_info;
+        this.customerData = data.customer_info;
       },
       error: (err) => {
         console.error('Error loading profile data:', err);

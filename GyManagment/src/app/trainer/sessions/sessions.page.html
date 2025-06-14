@@ -70,58 +70,21 @@
               <app-empty-state
                 *ngIf="upcomingAvailableSessions.length === 0"
                 icon="calendar-outline"
-                title="Nessun allenamento con posti disponibili"
-                description="Crea uno slot per visualizzarlo qui"
-                buttonText="Crea slot"
-                buttonLink="../slots">
+                title="Nessun allenamento con posti disponibili">
               </app-empty-state>
               
               <!-- Mostra tutti gli allenamenti futuri con posti disponibili -->
-              <ion-card *ngFor="let session of upcomingAvailableSessions">
-
-                <!-- Clienti -->
-                <ion-card-header>
-                  <ion-card-title>
-                    {{ session.client_names || 'Nessun cliente' }}
-                  </ion-card-title>
-                  <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
-                </ion-card-header>
-
-                <!-- Dettagli allenamento -->
-                <ion-card-content>
-
-                  <div class="booking-details">
-
-                    <!-- Data -->
-                    <p>
-                      <ion-icon name="calendar-outline"></ion-icon>
-                      {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
-                    </p>
-
-                    <!-- Orario -->
-                    <p>
-                      <ion-icon name="time-outline"></ion-icon>
-                      {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
-                    </p>
-
-                    <!-- Max clienti -->
-                    <p>
-                      <ion-icon name="people-outline"></ion-icon>
-                      Max clienti: {{ session.max_clients }}
-                    </p>
-
-                    <!-- N. prenotati -->
-                    <p>
-                      <ion-icon name="person-add-outline"></ion-icon>
-                      Prenotati: {{ session.booked_clients }}
-                    </p>
-
-                  </div>
-
-                </ion-card-content>
-
-              </ion-card>
-
+              @for (session of upcomingAvailableSessions; track session) {
+                <detail-card
+                  [title]="session.client_names || 'Nessun cliente'"
+                  [rows]="(session.specialization ? [{ icon: 'fitness-outline', description: session.specialization }] : []).concat([
+                    { icon: 'calendar-outline', description: (session.start_time | date:'dd/MM/yyyy') },
+                    { icon: 'time-outline', description: session.adjustedStartTimeOnly + ' - ' + session.adjustedEndTimeOnly },
+                    { icon: 'people-outline', description: 'Max: ' + session.max_clients },
+                    { icon: 'person-add-outline', description: 'Prenotati: ' + session.booked_clients }
+                  ])">
+                </detail-card>
+              }
             </div>
           </ion-col>
           
@@ -142,49 +105,17 @@
               </app-empty-state>
 
               <!-- Mostra tutti gli allenamenti futuri al completo -->
-              <ion-card *ngFor="let session of upcomingFullSessions">
-
-                <ion-card-header>
-                  <ion-card-title>
-                    {{ session.client_names || 'Nessun cliente' }}
-                  </ion-card-title>
-                  <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
-                </ion-card-header>
-
-                <!-- Dettagli allenamento -->
-                <ion-card-content>
-
-                  <div class="booking-details">
-
-                    <!-- Data -->
-                    <p>
-                      <ion-icon name="calendar-outline"></ion-icon>
-                      {{ session.start_time | date:'EEEE, d MMMM yyyy' }}
-                    </p>
-
-                    <!-- Orario -->
-                    <p>
-                      <ion-icon name="time-outline"></ion-icon>
-                      {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
-                    </p>
-
-                    <!-- Max clienti -->
-                    <p>
-                      <ion-icon name="people-outline"></ion-icon>
-                      Max clienti: {{ session.max_clients }}
-                    </p>
-
-                    <!-- N. prenotati -->
-                    <p>
-                      <ion-icon name="person-add-outline"></ion-icon>
-                      Prenotati: {{ session.booked_clients }}
-                    </p>
-
-                  </div>
-
-                </ion-card-content>
-
-              </ion-card>
+               @for (session of upcomingFullSessions; track session) {
+                <detail-card
+                  [title]="session.client_names || 'Nessun cliente'"
+                  [rows]="(session.specialization ? [{ icon: 'fitness-outline', description: session.specialization }] : []).concat([
+                    { icon: 'calendar-outline', description: (session.start_time | date:'dd/MM/yyyy') },
+                    { icon: 'time-outline', description: session.adjustedStartTimeOnly + ' - ' + session.adjustedEndTimeOnly },
+                    { icon: 'people-outline', description: 'Max: ' + session.max_clients },
+                    { icon: 'person-add-outline', description: 'Prenotati: ' + session.booked_clients }
+                  ])">
+                </detail-card>
+              }
 
             </div>
           </ion-col>
@@ -199,7 +130,7 @@
 
       <!-- Mostrato se non ci sono allenamenti passati -->
         <app-empty-state 
-          *ngIf="upcomingAvailableSessions.length === 0"
+          *ngIf="pastSessions.length === 0"
           icon="time-outline"
           title="Nessun allenamento passato"
           description="Gli allenamenti passati saranno visualizzati qui">
@@ -210,50 +141,18 @@
 
 
         <div class="past-sessions-container">
-          <!-- Mostra tutti gli allenamenti passati -->
-          <ion-card class="past-session-card" *ngFor="let session of pastSessions">
-
-            <ion-card-header>
-              <ion-card-title>
-                {{ session.client_names || 'Nessun cliente' }}
-              </ion-card-title>
-              <ion-card-subtitle *ngIf="session.specialization">{{ session.specialization }}</ion-card-subtitle>
-            </ion-card-header>
-
-            <!-- Dettagli allenamento -->
-            <ion-card-content>
-
-              <div class="booking-details">
-
-                <!-- Data -->
-                <p>
-                  <ion-icon name="calendar-outline" color="danger"></ion-icon>
-                  {{ session.start_time | date:'dd/MM/yyyy' }}
-                </p>
-
-                <!-- Orario -->
-                <p>
-                  <ion-icon name="time-outline" color="danger"></ion-icon>
-                  {{ session.adjustedStartTimeOnly }} - {{ session.adjustedEndTimeOnly }}
-                </p>
-
-                <!-- Max clienti -->
-                <p>
-                  <ion-icon name="people-outline" color="danger"></ion-icon>
-                  Max: {{ session.max_clients }}
-                </p>
-
-                <!-- N. prenotati -->
-                <p>
-                  <ion-icon name="person-add-outline" color="danger"></ion-icon>
-                  Prenotati: {{ session.booked_clients }}
-                </p>
-
-              </div>
-
-            </ion-card-content>
-
-          </ion-card>
+          @for (session of pastSessions; track session) {
+            <detail-card
+              class="past"
+              [title]="session.client_names || 'Nessun cliente'"
+              [rows]="(session.specialization ? [{ icon: 'fitness-outline', description: session.specialization }] : []).concat([
+                { icon: 'calendar-outline', description: (session.start_time | date:'dd/MM/yyyy') },
+                { icon: 'time-outline', description: session.adjustedStartTimeOnly + ' - ' + session.adjustedEndTimeOnly },
+                { icon: 'people-outline', description: 'Max: ' + session.max_clients },
+                { icon: 'person-add-outline', description: 'Prenotati: ' + session.booked_clients }
+              ])">
+            </detail-card>
+          }
 
         </div>
 
