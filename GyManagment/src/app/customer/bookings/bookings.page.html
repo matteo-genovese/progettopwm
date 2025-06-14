@@ -83,6 +83,7 @@
                     { icon: 'calendar-outline', description: (booking.start_time | date:'EEEE, d MMMM yyyy') || 'Data non disponibile' },
                     { icon: 'time-outline', description: booking.adjustedStartTimeOnly + ' - ' + booking.adjustedEndTimeOnly }
                   ].concat(booking.specialization ? [{ icon: 'fitness-outline', description: booking.specialization }] : [])"
+                  [buttonIcon]="!booking.rated ? 'star-outline' : ''"
                   [buttonText]="!booking.rated ? 'Valuta Trainer' : ''"
                   [buttonLink]="!booking.rated ? '#' : ''"
                   (buttonClicked)="rateTrainer(booking.trainer_id)">

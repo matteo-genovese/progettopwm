@@ -15,6 +15,7 @@ import { SlotsModalComponent } from '../components/slots-modal/slots-modal.compo
 import { AuthService } from '../../services/auth.service';
 import { AppHeaderComponent } from 'src/app/shared/components/app-header/app-header.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-trainers',
@@ -25,7 +26,7 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
     CommonModule, FormsModule, IonContent, IonRefresher, 
     IonSearchbar, IonCard, IonCardContent, IonButton, IonIcon, 
     IonRefresherContent, IonChip, IonLabel,
-    AppHeaderComponent, LoadingSpinnerComponent
+    AppHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent
   ]
 })
 export class TrainersPage implements OnInit {
