@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular/standalone';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { UiService } from './ui.service';
@@ -20,7 +19,6 @@ interface LoginResponse {
   status?: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +30,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private alertController: AlertController,
     private uiService: UiService
   ) {
     // Controlla se c'è un token salvato nel localStorage
@@ -133,24 +130,10 @@ export class AuthService {
   }
   
   private async confirmLogout(): Promise<boolean> {
-    return new Promise(async (resolve) => {
-      const alert = await this.alertController.create({
-        header: 'Conferma logout',
-        message: 'Sei sicuro di voler effettuare il logout?',
-        buttons: [
-          {
-            text: 'Annulla',
-            role: 'cancel',
-            handler: () => resolve(false)
-          }, {
-            text: 'Logout',
-            handler: () => resolve(true)
-          }
-        ]
-      });
-  
-      await alert.present();
-    });
+    return this.uiService.showConfirmation(
+      'Conferma logout',
+      'Sei sicuro di voler effettuare il logout?'
+    );
   }
   
   private performLogout(): void {

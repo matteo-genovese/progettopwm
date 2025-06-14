@@ -45,19 +45,6 @@ export class DashboardPage implements OnInit {
     this.loadDashboardData();
   }
 
-  // Metodi wrapper che utilizzano il servizio
-  formatDateTime(dateString: string): string {
-    return this.dateTimeService.formatDateTime(dateString);
-  }
-
-  formatDate(dateString: string): string {
-    return this.dateTimeService.formatDate(dateString);
-  }
-
-  formatTime(dateString: string): string {
-    return this.dateTimeService.formatTime(dateString);
-  }
-
   loadDashboardData() {
     this.isLoading = true;
     
@@ -70,11 +57,11 @@ export class DashboardPage implements OnInit {
         
         // Aggiungi le proprietà formattate per il fuso orario
         this.upcomingBookings.forEach(booking => {
-          booking.adjustedStartTime = this.formatDateTime(booking.start_time);
-          booking.adjustedStartDate = this.formatDate(booking.start_time);
-          booking.adjustedStartTimeOnly = this.formatTime(booking.start_time);
-          booking.adjustedEndTime = this.formatDateTime(booking.end_time);
-          booking.adjustedEndTimeOnly = this.formatTime(booking.end_time);
+          booking.adjustedStartTime = this.dateTimeService.formatDateTime(booking.start_time);
+          booking.adjustedStartDate = this.dateTimeService.formatDate(booking.start_time);
+          booking.adjustedStartTimeOnly = this.dateTimeService.formatTime(booking.start_time);
+          booking.adjustedEndTime = this.dateTimeService.formatDateTime(booking.end_time);
+          booking.adjustedEndTimeOnly = this.dateTimeService.formatTime(booking.end_time);
         });
         
         this.isLoading = false;
@@ -110,10 +97,6 @@ export class DashboardPage implements OnInit {
 
   viewAllTrainers() {
     this.router.navigate(['/customer/trainers']);
-  }
-  
-  rateTrainer(trainerId: number) {
-    this.customerService.openRatingModal(trainerId);
   }
 
   onLogout() {
